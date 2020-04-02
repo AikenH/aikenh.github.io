@@ -16,10 +16,8 @@ Aiken H
 沉着冷静 盲目无趣 崇尚科学 追逐理想
 
 ```
-
 把未完成的交给未来，把已知的沉进夜海；  
 让情绪在深色泛滥，把听众用浅色彩排  
-
 ```
 
 ---
@@ -32,4 +30,4 @@ Working on Deep Learning | CV <br>
 ### Contact me
 
 [h.aiken.970@gmail.com](mailto:h.aiken.970@gmail.com)  
-STEAM: 与科研无关的事情不要说  
+STEAM: 和科研无关的事情不要说  
