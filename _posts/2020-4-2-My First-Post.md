@@ -2,7 +2,6 @@
 layout: post
 title: Outline
 ---
-
  <center>穿过大街，追逐黎明<br>Cross the street and chase dawn </center>
 
 ---
@@ -12,7 +11,13 @@ title: Outline
 初步决定这个博客将用来记录一些我的学习历程，including：<br>
 >- 一些启发性的文章（触类旁通）
 >- 一些简单的想法，或者一些小技巧
->- 一些其他的知识
+>- 一些其他的知识,重点理论
+>- 一些调研和整理  
+
+---
+SOME RULES：
+- 照片存储命名规则：/images/Pn-num
+- To be added
 
 
 还有用来书写一些心得体会，或者思考等等非学术性的个人文章把<br>
@@ -22,4 +27,4 @@ title: Outline
 <p align="right">Written by Aiken Hong </p>
 <p align="right">2020-04-02</p>  
 
-![imageeveryday](/images/v1.jpg)
+![imageeveryday](/images/p1-1.jpg)
