@@ -9,11 +9,10 @@ title: （Pytorch） Colab Tensorboard
 ## How to lunch TensorBoard on Colab
 
 对Tensorboard的编写参数的输入啥的**不需要另外改变**<br>
-只是在lunch Tensorboard 的时候输入如下👇的命令：
-```
-%load_ext tensorboard
-%tensorboard --logdir './runs'
-```
+只是在lunch Tensorboard 的时候输入如下👇的命令：<br>
+`%load_ext tensorboard  `  
+`%tensorboard --logdir './runs'`
+<br>
 就能在输出栏中看到代码输出的Tensorboard了<br>
 
 ~~当然挂载GoogleDrive后，将Tensorboard的Log下载到本地再执行tensorboard，也没人拦着23333~~
