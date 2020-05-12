@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Emotional Essay
----  
-<center>穿过大街，追逐黎明<br>Cross the street and chase dawn </center>
+​---  
+<center>穿过大街，追逐黎明<br>
+Cross the street and chase dawn </center>
 
 ---
 
@@ -23,7 +24,6 @@ title: Emotional Essay
 再慢点起航，打上补丁，加满油，做该做的所有；<br>
 就这样启航，载着苦难与伤痛，向更远方；
 </center>
-
 ---
 路漫漫其修远兮，吾将上下而求索。<br>
 牢骚*1  
