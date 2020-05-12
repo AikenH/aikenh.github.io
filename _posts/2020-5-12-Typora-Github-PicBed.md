@@ -1,8 +1,9 @@
 ---
 layout: post
-title: Typora PicBed（Github）
-​---  
-<center>路漫漫其修远兮，吾将上下而求索<br>The road ahead will be long ,Our climb will be steep. </center>
+title: Typora-PicBed-Github
+---
+
+ <center>路漫漫其修远兮，吾将上下而求索<br>The road ahead will be long ,Our climb will be steep. </center>
 
 ---
 初步了解：有待补充<br>Preliminary understanding: to be added
