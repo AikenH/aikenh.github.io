@@ -11,10 +11,11 @@ title: Typora PicBed（Github）
 ​	用markdown记笔记的时候，图片往往是一个麻烦的步骤，想要结合Typora和github云同步的话，笔者在这里使用两种方式解决：
 
 - [使用PicGo-Core（command line）设置github图床，自动转义url](#Pic-Bed)
-- [插入自动复制图片，使用git上传github](Git)
+- [插入自动复制图片，使用git上传github](#Git)
+
 
 ## Pic-Bed
-
+<span id="Pic-Bed">
 ### 基本部署：
 
 1. 在偏好设置中的图像，进行如下设置👇： 下载或更新PicGo-Cord(command line)
@@ -52,8 +53,9 @@ title: Typora PicBed（Github）
 
 用GIthub做图床的话，上传不是十分的稳定（可能需要依赖科学上网技术。请八仙过海，各显神通）。可以用其他的服务器作图床，大体过程应该也差不多，后续个人有更换的话在进行补充。
 
-## Git
 
+## Git
+<span id="Git">
 这里其实没什么说的，就是再上图设置中，将设置改为复制到本地，或者复制到相对文件夹，设置优先使用相对路径，然后后续用git将笔记和图片一起上传github即可。
 
 Have Fun That‘s All！
