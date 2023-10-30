@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>SQL Chapter3 查询命令 - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="该章节介绍SQL中的查询命令，根据廖雪峰网站进行一步步的测试和学习即可。  其中–为sql语言中的注释符号。 关键词不区分大小写  基本查询查询表中的所有数据主要使用关键词SELECT 1SELECT * FROM &amp;lt;表名&amp;gt;  SELECT表明要执行查询 *代表“所有列” FROM表明要从哪个表查询  当指定特定列名的时候（也就是所谓的投影查询）格式如下： 12SELECT &amp;lt;K"><meta property="og:type" content="blog"><meta property="og:title" content="SQL Chapter3 查询命令"><meta property="og:url" content="http://aikenh.cn/cn/SQL3/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="该章节介绍SQL中的查询命令，根据廖雪峰网站进行一步步的测试和学习即可。  其中–为sql语言中的注释符号。 关键词不区分大小写  基本查询查询表中的所有数据主要使用关键词SELECT 1SELECT * FROM &amp;lt;表名&amp;gt;  SELECT表明要执行查询 *代表“所有列” FROM表明要从哪个表查询  当指定特定列名的时候（也就是所谓的投影查询）格式如下： 12SELECT &amp;lt;K"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg11.jpg"><meta property="article:published_time" content="2022-08-04T06:40:00.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.606Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Langs"><meta property="article:tag" content="SQL"><meta property="article:tag" content="Database"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg11.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/SQL3/"},"headline":"SQL Chapter3 查询命令","image":["http://aikenh.cn/img/header_img/lml_bg11.jpg"],"datePublished":"2022-08-04T06:40:00.000Z","dateModified":"2023-10-30T09:27:38.606Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"该章节介绍SQL中的查询命令，根据廖雪峰网站进行一步步的测试和学习即可。  其中–为sql语言中的注释符号。 关键词不区分大小写  基本查询查询表中的所有数据主要使用关键词SELECT 1SELECT * FROM &lt;表名&gt;  SELECT表明要执行查询 *代表“所有列” FROM表明要从哪个表查询  当指定特定列名的时候（也就是所谓的投影查询）格式如下： 12SELECT &lt;K"}</script><link rel="canonical" href="http://aikenh.cn/cn/SQL3/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg11.jpg" alt="SQL Chapter3 查询命令"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>SQL Chapter3 查询命令</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2022-08-04T06:40:00.000Z" title="2022-08-04T06:40:00.000Z">2022-08-04</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.606Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Langs/">Langs</a><span> / </span><a class="link-muted" href="/categories/Langs/SQL/">SQL</a></span><span class="level-item">12 minutes read (About 1848 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><p>该章节介绍SQL中的查询命令，根据<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1177760294764384/1179610888796448">廖雪峰网站</a>进行一步步的测试和学习即可。</p>
+<ul>
+<li>其中<code>–</code>为sql语言中的注释符号。</li>
+<li>关键词不区分大小写</li>
+</ul>
+<h2 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h2><p>查询表中的所有数据主要使用关键词<code>SELECT</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>SELECT</code>表明要执行查询</li>
+<li><code>*</code>代表“所有列”</li>
+<li><code>FROM</code>表明要从哪个表查询</li>
+</ul>
+<p>当指定特定列名的时候（也就是所谓的<strong>投影查询</strong>）格式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">&lt;</span>KEY1<span class="hljs-operator">&gt;</span>,<span class="hljs-operator">&lt;</span>KEY2<span class="hljs-operator">&gt;</span>, <span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span><br><span class="hljs-comment">-- 注释</span><br></code></pre></td></tr></table></figure>
+<p>此外，许多工具会使用<code>SELECT 1;</code>来测试数据库链接的有效性；<code>SELECT 100+200</code>也可以用来做简单的计算。</p>
+<span id="more"></span>
+<h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><p><strong>条件查询详细资料</strong>：<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_between">sql</a>，通过官方网站可以找到更完整的条件语句和用法</p>
+<p>在<code>SELECT</code>命令中添加<code>WHERE</code>关键词进行条件查询</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-operator">&lt;</span>条件表达式<span class="hljs-operator">&gt;</span><br><span class="hljs-comment">-- 一个典型的例子如下</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">WHERE</span> score<span class="hljs-operator">&gt;</span><span class="hljs-number">80</span> <span class="hljs-keyword">AND</span> gender<span class="hljs-operator">=</span><span class="hljs-string">&#x27;M&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>在sql中主要的条件语句关键字为：<code>AND</code>，<code>OR</code>，<code>NOT</code></p>
+<p>可以使用<code>()</code>来组合条件语句（3个或或者更多条件常用）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">WHERE</span> (score <span class="hljs-operator">&lt;</span> <span class="hljs-number">80</span> <span class="hljs-keyword">OR</span> score <span class="hljs-operator">&gt;</span> <span class="hljs-number">90</span>) <span class="hljs-keyword">AND</span> gender <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;M&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p>如果不使用括号组合的话，就按照传统的条件语句的优先级来执行即<code>NOT</code>，<code>AND</code>，<code>OR</code></p>
+<p>还有一些其他的规则如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>表达式举例1</th>
+<th>表达式举例2</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>score=80</td>
+<td>name=’abc‘</td>
+<td>字符串需要用单引号括起来</td>
+</tr>
+<tr>
+<td>&lt;&gt;判断不相等</td>
+<td>score&lt;&gt;80</td>
+<td>name&lt;&gt;‘abc’</td>
+<td></td>
+</tr>
+<tr>
+<td>使用LIKE判断相似</td>
+<td>name LIKE ’ab%‘</td>
+<td>name like ’%ab%</td>
+<td>%表示任意数量的任意字符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="基于排序显示结果"><a href="#基于排序显示结果" class="headerlink" title="基于排序显示结果"></a>基于排序显示结果</h2><p>使用<code>SELECT</code>查询时，结果通常按照<code>id</code>进行排序，也就是按照主键进行排序，这也是默认的做法，如果我们希望结果按照某些特定的条件来排序可以使用：<code>ORDER BY</code>语句。</p>
+<p>例如我们希望按照成绩从低到高显示结果：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id, name, gender, score <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> score;<br></code></pre></td></tr></table></figure>
+<p>从高到低的话则加入<code>DESC</code>关键词来使用倒序的输出，（默认的升序ASC可以省略）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id, name, gender, score <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> score <span class="hljs-keyword">DESC</span>;<br></code></pre></td></tr></table></figure>
+<p> 考虑到单项排序可能出现值相同的情况，可以加入第二关键词，当score相同的时候就用gender排序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id, name, gender, score <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> score <span class="hljs-keyword">DESC</span>, gender;<br></code></pre></td></tr></table></figure>
+<p>如果在基于排序的情况下还要使用条件语句的话，需要将<code>WHERE</code>子句放在<code>ORDER BY</code>子句前面。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id, name, gender, score<br><span class="hljs-keyword">FROM</span> students<br><span class="hljs-keyword">WHERE</span> class_id <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> score <span class="hljs-keyword">DESC</span>;<br></code></pre></td></tr></table></figure>
+<h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><p>使用<code>SELECT</code>查询时，如果结果数据量很大，一页显示的话数据量太大，我们最好分页显示，实现的代码如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id, name, gender, score<br><span class="hljs-keyword">FROM</span> students<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> score <span class="hljs-keyword">DESC</span><br>LIMIT <span class="hljs-number">100</span> <span class="hljs-keyword">OFFSET</span> <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+<p><code>LIMIT</code>表示最多取几条，<code>OFFSET</code>表示从第几条开始，第二页就是`LIMIT 100, OFFSET 100.</p>
+<ul>
+<li><code>LIMIT</code>总是设定为<code>pageSize</code></li>
+<li><code>OFFSET</code>计算公式为<code>pageSize * (pageIndex-1)</code></li>
+</ul>
+<p>如果<code>OFFSET</code>超过了最大的数量，会得到空的结果集，该命令可以简写为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">LIMIT <span class="hljs-number">100</span>,<span class="hljs-number">100</span><br></code></pre></td></tr></table></figure>
+<h2 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h2><p>SQL提供了聚合函数来针对查询结果进一步的统计分析，使用聚合函数进行查询就是聚合查询，它可以快速的获得结果。</p>
+<p>比如计数，通过聚合函数就不需要一个个去数了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">FROM</span> students;<br></code></pre></td></tr></table></figure>
+<p><code>COUNT(*)</code>表示查询所有列的行数，要注意聚合的计算结果虽然是一个数字，但查询的结果仍然是一个二维表，只是这个二维表只有一行一列，并且列名是<code>COUNT(*)</code>，因此我们应该给该参数设置一个名字（变量名）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) num <span class="hljs-keyword">FROM</span> students;<br></code></pre></td></tr></table></figure>
+<p>这样列名就是num了。</p>
+<p>此外聚合查询，支持<code>WHERE</code>等语句，还有其他的聚合函数如下（更多可以上官网等去查询）：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SUM</td>
+<td>合计值，必须为数值类型</td>
+</tr>
+<tr>
+<td>AVG</td>
+<td>平均值，必须为数值类型</td>
+</tr>
+<tr>
+<td>MAX</td>
+<td>计算某一列的最大值，字符类型会返回排序最后的</td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>计算某一列的最大值，字符类型会返回排序最前的</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>要特别注意：如果聚合查询的<code>WHERE</code>条件没有匹配到任何行，<code>COUNT()</code>会返回0，而<code>SUM()</code>、<code>AVG()</code>、<code>MAX()</code>和<code>MIN()</code>会返回<code>NULL</code>：</p>
+<h3 id="分组聚合"><a href="#分组聚合" class="headerlink" title="分组聚合"></a>分组聚合</h3><p>如果我们要统计一班的学生数量，我们知道，可以用<code>SELECT COUNT(*) num FROM students WHERE class_id = 1;</code>。如果要继续统计二班、三班的学生数量，难道必须不断修改<code>WHERE</code>条件来执行<code>SELECT</code>语句吗？</p>
+<p>对于聚合查询，SQL还提供了“分组聚合”的功能。我们使用下列的聚合查询方法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) num <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> class_id;<br></code></pre></td></tr></table></figure>
+<p>实现值和变量的相互对应，我们可以将二维表每行的名称加上：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> class_id, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) num <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> class_id;<br></code></pre></td></tr></table></figure>
+<p>更进一步的，如果我们希望得到每个班的男女人数可以使用：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> class_id, gender, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) num <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> class_id, gender;<br></code></pre></td></tr></table></figure>
+<p>练习：</p>
+<ol>
+<li><p>查询查出每个班级的平均分：</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> class_id, <span class="hljs-built_in">AVG</span>(score) avgs <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> class_id;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查出每个班级的男女生的平均分</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> class_id, gender, <span class="hljs-built_in">AVG</span>(score) avgs <span class="hljs-keyword">FROM</span> students <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> class_id, gender;<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p>由于不止存在一张表，当我们需要从多张表查询数据的时候，语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> students, classes;<br></code></pre></td></tr></table></figure>
+<p>查询结果会显示两张表的乘积，也就是暴力累加起来，具体而言：</p>
+<ul>
+<li>列数为两表的列数之和</li>
+<li>行数为两表的行数之积</li>
+</ul>
+<p>这种粗暴叠加，没有什么实际存在的意义，也<strong>容易产生列名歧义</strong>和<strong>数据爆炸</strong>。针对列名重复的问题，可以通过设置列名Alias来缓解：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- set alias:</span><br><span class="hljs-keyword">SELECT</span><br>    students.id sid,<br>    students.name,<br>    students.gender,<br>    students.score,<br>    classes.id cid,<br>    classes.name cname<br><span class="hljs-keyword">FROM</span> students, classes;<br></code></pre></td></tr></table></figure>
+<p>为了简化该操作，避免大量的编写students和classes，sql存在如下的操作：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- set table alias as the same time</span><br><span class="hljs-keyword">SELECT</span> <br>	s.id sid,<br>	s.name,<br>	s.gender,<br>	s.score,<br>	c.id cid,<br>	c.name cname<br><span class="hljs-keyword">FROM</span> students s, classes c;<br></code></pre></td></tr></table></figure>
+<p>同样别名的设置不影响条件语句的使用。</p>
+<h2 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h2><h3 id="内联"><a href="#内联" class="headerlink" title="内联"></a>内联</h3><p>和多表查询相对应的，我们真正需要的是将主表中（部分）链接的次表数据链接到主表中，为此我们需要采用连接查询的内联语法将其中的数据取出来。具体的语法表示如下，主要包括：</p>
+<ul>
+<li>使用Alias避免重名（非必须）</li>
+<li>定义所内联的表格<code>inner join</code></li>
+<li>选择内联的列<code>on</code></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> s.id, s.name, s.class_id, c.name class_name, s.gender, s.score<br><span class="hljs-keyword">from</span> students s<br><span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> classes c<br><span class="hljs-keyword">on</span> s.class_id <span class="hljs-operator">=</span> c.id;<br></code></pre></td></tr></table></figure>
+<p>同样可以选择加入Where或者Order by字段。</p>
+<h3 id="外联"><a href="#外联" class="headerlink" title="外联"></a>外联</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> s.id, s.name, s.class_id, c.name class_name, s.gender, s.score<br><span class="hljs-keyword">FROM</span> students s<br><span class="hljs-keyword">RIGHT</span> <span class="hljs-keyword">OUTER</span> <span class="hljs-keyword">JOIN</span> classes c<br><span class="hljs-keyword">ON</span> s.class_id <span class="hljs-operator">=</span> c.id;<br></code></pre></td></tr></table></figure>
+<p>有RIGHT OUTER JOIN，就有LEFT OUTER JOIN，以及FULL OUTER JOIN。它们的区别是：</p>
+<p>INNER JOIN只返回同时存在于两张表的行数据，由于<code>students</code>表的<code>class_id</code>包含1，2，3，<code>classes</code>表的<code>id</code>包含1，2，3，4，所以，INNER JOIN根据条件<code>s.class_id = c.id</code>返回的结果集仅包含1，2，3。</p>
+<p>RIGHT OUTER JOIN返回右表都存在的行。如果某一行仅在右表存在，那么结果集就会以<code>NULL</code>填充剩下的字段。</p>
+<p>LEFT OUTER JOIN则返回左表都存在的行。如果我们给students表增加一行，并添加class_id=5，由于classes表并不存在id=5的行，所以，LEFT OUTER JOIN的结果会增加一行，对应的<code>class_name</code>是<code>NULL</code>：</p>
+<p>FULL OUTER JOIN，它会把两张表的所有记录全部选择出来，并且，自动把对方不存在的列填充为NULL：</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/image-20220805150740235.png" alt="image-20220805150740235"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>SQL Chapter3 查询命令</p><p><a href="http://aikenh.cn/cn/SQL3/">http://aikenh.cn/cn/SQL3/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-08-04</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Langs/">Langs, </a><a class="link-muted" rel="tag" href="/tags/SQL/">SQL, </a><a class="link-muted" rel="tag" href="/tags/Database/">Database </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/SQL4/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">SQL Chapter4  增删改相关操作</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/SQL2/"><span class="level-item">SQL Chapter2 安装和基本概念</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/SQL3/';
+            this.page.identifier = 'cn/SQL3/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">128</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">42</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">96</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#基本查询"><span class="level-left"><span class="level-item">1</span><span class="level-item">基本查询</span></span></a></li><li><a class="level is-mobile" href="#条件查询"><span class="level-left"><span class="level-item">2</span><span class="level-item">条件查询</span></span></a></li><li><a class="level is-mobile" href="#基于排序显示结果"><span class="level-left"><span class="level-item">3</span><span class="level-item">基于排序显示结果</span></span></a></li><li><a class="level is-mobile" href="#分页查询"><span class="level-left"><span class="level-item">4</span><span class="level-item">分页查询</span></span></a></li><li><a class="level is-mobile" href="#聚合查询"><span class="level-left"><span class="level-item">5</span><span class="level-item">聚合查询</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#分组聚合"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">分组聚合</span></span></a></li></ul></li><li><a class="level is-mobile" href="#多表查询"><span class="level-left"><span class="level-item">6</span><span class="level-item">多表查询</span></span></a></li><li><a class="level is-mobile" href="#连接查询"><span class="level-left"><span class="level-item">7</span><span class="level-item">连接查询</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#内联"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">内联</span></span></a></li><li><a class="level is-mobile" href="#外联"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">外联</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/Flashcard_template/"><img src="/img/header_img/lml_bg35.jpg" alt="Obsidian使用 Spaced Repetition 制作闪念卡片"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-27T16:39:59.000Z">2023-10-28</time></p><p class="title"><a href="/cn/Flashcard_template/">Obsidian使用 Spaced Repetition 制作闪念卡片</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Obsidian/">Obsidian</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/vsocde_regexp/"><img src="/img/header_img/lml_bg31.jpg" alt="VsCode&#039;s RegExp Catch 正则捕获"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-19T08:53:03.000Z">2023-10-19</time></p><p class="title"><a href="/cn/vsocde_regexp/">VsCode&#039;s RegExp Catch 正则捕获</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Vscode/">Vscode</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/GoMetis00_INTRO/"><img src="/img/header_img/lml_bg11.jpg" alt="GoMetis00_INTRO"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-08T09:58:57.000Z">2023-10-08</time></p><p class="title"><a href="/cn/GoMetis00_INTRO/">GoMetis00_INTRO</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/TaskPhoto00_Xs20_Recipes/"><img src="/img/header_img/lml_bg4.jpg" alt="Photography00 XS20_Recipes"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-04T16:41:43.000Z">2023-10-05</time></p><p class="title"><a href="/cn/TaskPhoto00_Xs20_Recipes/">Photography00 XS20_Recipes</a></p><p class="categories"><a href="/categories/Photography/">Photography</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/HomeAssistant_Init/"><img src="/img/header_img/lml_bg40.jpg" alt="HomeAssistant01 入门基础篇"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-08-12T09:24:50.000Z">2023-08-12</time></p><p class="title"><a href="/cn/HomeAssistant_Init/">HomeAssistant01 入门基础篇</a></p><p class="categories"><a href="/categories/NAS/">NAS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2023 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

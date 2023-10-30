@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>FSL前期调研 - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="主要是limited labels &amp;amp; Few Samples &amp;amp; Data programing Weakly supervised learningsemi-supervised in video fieldif we can recoding this work?多指标下降（LOSS的耦合或者循环的选择）、相关的CV最新论文等等会在后续关注元学习、浅层神经网络的概念等等  s"><meta property="og:type" content="blog"><meta property="og:title" content="FSL前期调研"><meta property="og:url" content="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="主要是limited labels &amp;amp; Few Samples &amp;amp; Data programing Weakly supervised learningsemi-supervised in video fieldif we can recoding this work?多指标下降（LOSS的耦合或者循环的选择）、相关的CV最新论文等等会在后续关注元学习、浅层神经网络的概念等等  s"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg38.jpg"><meta property="article:published_time" content="2021-11-29T05:12:05.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.625Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Machine Learning"><meta property="article:tag" content="Survey"><meta property="article:tag" content="FSL"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg38.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"},"headline":"FSL前期调研","image":["http://aikenh.cn/img/header_img/lml_bg38.jpg"],"datePublished":"2021-11-29T05:12:05.000Z","dateModified":"2023-10-30T09:27:38.625Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"主要是limited labels &amp; Few Samples &amp; Data programing Weakly supervised learningsemi-supervised in video fieldif we can recoding this work?多指标下降（LOSS的耦合或者循环的选择）、相关的CV最新论文等等会在后续关注元学习、浅层神经网络的概念等等  s"}</script><link rel="canonical" href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg38.jpg" alt="FSL前期调研"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>FSL前期调研</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2021-11-29T05:12:05.000Z" title="2021-11-29T05:12:05.000Z">2021-11-29</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.625Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Machine-Learning/">Machine Learning</a></span><span class="level-item">21 minutes read (About 3220 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><h2 id="主要是limited-labels-amp-Few-Samples-amp-Data-programing"><a href="#主要是limited-labels-amp-Few-Samples-amp-Data-programing" class="headerlink" title="主要是limited labels &amp; Few Samples &amp; Data programing"></a>主要是limited labels &amp; Few Samples &amp; Data programing</h2><hr>
+<p><del>Weakly supervised learning</del><br><del>semi-supervised in video field</del><br>if we can recoding this work?<br><del>多指标下降（LOSS的耦合或者循环的选择）、相关的CV最新论文等等会在后续关注</del><br><del>元学习、浅层神经网络的概念等等</del>  <del>semi-supervised</del> </p>
+<hr>
+<h3 id="PART1-Limited-Labels-（base-on-LiFeiFei‘s-reference）"><a href="#PART1-Limited-Labels-（base-on-LiFeiFei‘s-reference）" class="headerlink" title="PART1 Limited Labels （base on LiFeiFei‘s reference）"></a>PART1 Limited Labels （base on LiFeiFei‘s reference）</h3><p><em>in this part we may list the paper which is useful for my recoding.</em><br>    还有一些其他重要的可能在对论文进行重新精读的时候要记得注意reference：就比如说在loss变换和决策树生成那一块。<br><em>distant supervision(it’s kind of early) can be another baseline for our method, we need to understand how this method work for that situation</em><br>    distant supervisor到底是什么机制可以去CSDN什么的看一下  </p>
+<hr>
+<p>Transfer Learning\label propagation算法也是这一块重要的baseline<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.11622">Baseline</a>：scene graph prediction with limited labels  </p>
+<hr>
+<p><strong>reference：</strong>  </p>
+<blockquote>
+<ul>
+<li><del>×<a target="_blank" rel="noopener" href="https://www.semanticscholar.org/paper/Induction-of-decision-trees-Quinlan/058bb096ce1507cd65b91e341317a8ab11a675de">Induction of decision trees</a></del><br><del>if want download, try google it</del> </li>
+<li><a target="_blank" rel="noopener" href="https://www.semanticscholar.org/paper/01e2ed7202e357209c855927d23352b0f882c0a0">Pattern Learning for Relation Extraction with a Hierarchical Topic Model</a><br>maybe we’ll need this paper,when we try to recoding.<br>nope.当我们写论文需要理论基础的时候可能需要，  </li>
+<li><p>√<a target="_blank" rel="noopener" href="https://www.semanticscholar.org/paper/37acbbbcfe9d8eb89e5b01da28dac6d44c3903ee">Data Programming: Creating Large Training Sets, Quickly</a><br>it’s important to see if this article have same idea with me?</p>
+<span id="more"></span>
+<p>it’s kind of learning paradigm,<br>是一种构建数据集中，标注数据的范式，通过这样的method可以对多种labeling function进行整合，同时减少标注的误差和overlap情况的解决。后续我们实现方法的时候可以参考一下这个的数学理论，帮助在实际中进行应用。<br>（本文中对这里的noise-aware的损失函数进行了应用，使其适应概率标签从而抑制噪声。）<br><strong>严重怀疑这是snorkel算法中的引文，直接引用过来</strong>  </p>
+</li>
+<li><p>×<a target="_blank" rel="noopener" href="https://www.semanticscholar.org/paper/d48edf9e81653f4c3da716b037b0b50d54c5b034">Knowledge-Based Weak Supervision for Information Extraction of Overlapping Relations</a><br>figure out how can knowledge-based benefit weakly supervised learning ?<br>nope. NIP method. 运用语言结构，类似于发的东西，来对文本进行补全。如果我们需要了解基础知识怎么使用，可以尝试参考。</p>
+</li>
+<li><p>※<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1804.09170.pdf">Realistic Evaluation of DeepSemi-Supervised Learning Algorithms</a>NIPS 2018<br>深度半监督学习的现实性评估：公布了统一的重新实现和评估的平台（方式？），（针对于算法在生产现实之中的适用性发布的一个标准。）<br>based on analysis of image algorithm：半监督的方法通过对未标注的数据中的结构范式进行学习，从而降低了对标注数据的需求，也就是说输入的数据是大部分未标注和少量标注数据，就可以逼近完全标记数据集的表现效果。[32,50,39]，这几个针对于图像情况的方法。<br>分析后发现，他们评估算法的方式并不适用于将算法推广到实际的生产领域中，于是我们对于评估ssl算法的方式提出了一些新的看法。<br>说的就是以前这些ssl在算法的效果上可能作弊的一些方面，如果使用这样统一的标准对算法进行评估的话，才能使得算法得到一个好的效果，此外他也提出了一些ssl在训练过程中的一些棉铃的问题：比如说假如我们把其他类别的数据，混入其中的话，那么所有这些ssl的算法的效果都会受到极大的影响。</p>
+</li>
+<li><del>×<a target="_blank" rel="noopener" href="https://www.semanticscholar.org/paper/71a6896c98672fc9f41f48b7c10688d06d56437b">Learning from labeled and unlabeled data with label propagation</a></del><br><del>这是一个很重要的方法，但是没想到这个竟然这么早？（math or algorithm？）（2002）（最近读的另一篇论文好像就借鉴的这个思路）<br>将数据从标记的高密度区域向未标记的数据区域进行传播，这一篇论文的话，主要存在一些数学推导，我建议从19的那一篇新的标签传播开始阅读，通过这篇来补全需要的数学基础，如果另一边已经讲述的很完备了就不需要这篇的内容了</del></li>
+</ul>
+<hr>
+<h3 id="PART2-key-words-searching（such-as-few-samples-etc-）"><a href="#PART2-key-words-searching（such-as-few-samples-etc-）" class="headerlink" title="PART2 key words searching（such as few samples etc.）"></a>PART2 key words searching（such as few samples etc.）</h3><p><strong>limited labels on github：</strong></p>
+<ul>
+<li><p><strong>※microsoft’s work:<a target="_blank" rel="noopener" href="https://github.com/microsoft/metric-transfer.pytorch">github</a>|<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1812.08781">paper</a></strong><br>i think it’ll be important one，we‘ll need to think carefully about this.seems like they have already make it great.<br>思路上可以给我们启发：提出了一个针对few samples的通用框架（通过度度量传播来进行的label propagation方法），来解决无论是transfer、semi-supervised、few-shot这样解决的问题，并有了一个巨大的提升。<br>将少量标记的label propagation到大量的未标注数据上，从而创建训练数据。主要贡献：用于传播的相似性度量从其他相关域转移时，这样的标签传播方法非常有效。<br><strong>这个算法框架可以细读一下，后续关照一下具体的思路和实现</strong> </p>
+</li>
+<li><p>※The Limited Multi-Label Projection Layer:<a target="_blank" rel="noopener" href="https://github.com/locuslab/lml">github</a>|<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1906.08707">paper</a>CVPR19<br>LML projection Layer 是一种几何的K类预测，用来再<strong>多类别少样本</strong>的情况下<strong>取代softmax</strong>的一个映射函数，这一篇主要是数学理论，在最后实现的话，要进行一定的参考和学习。</p>
+</li>
+<li>※Learning Classifiers for Target Domain with Limited or No Labels<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1901.09079v2">paper</a>ICML2019<br>从所有的训练数据中学习一个混杂（mixture）的“原型”，然后将原型撕裂成一个个part/part-type（用attention机制来实现）、 然后通过多个part的概率组合来表示一个new instance。（use MACNN）。（即将变成低维的概率向量组成的编码=低维视觉属性LDVA）到时候找个图把这些方法全都对比一下。md花样太多了，玩晕了。</li>
+<li>Hand and Face Segmentation with Deep Convolutional Networks using Limited Labelled Data(论文还没出)<a target="_blank" rel="noopener" href="https://github.com/au-cvml-lab/Hand-and-Face-Segmentation-With-Limited-Data">github</a>  </li>
+<li>一些奇奇怪怪的github项目<a target="_blank" rel="noopener" href="https://github.com/UdayaSameer/DeepSiameseNetwork">github1</a></li>
+</ul>
+<hr>
+<p><strong>limited labels on google scholar：</strong></p>
+<ul>
+<li>√<a target="_blank" rel="noopener" href="https://dl.acm.org/citation.cfm?id=3098159">Large Scale Sentiment Learning with Limited Labels</a>SIGKDD2017<br>他是通过对tweet的表情数据进行标注，建立的数据集，使用了<strong>self-learning</strong>和<strong>co-training</strong>两种WSL的方法，来对未标注的数据进行标注两种方法的具体注解我已经放在pdf上了</li>
+<li><del>×<a href="google it">Large-Scale Video Understanding with Limited Training Labels</a></del><br><del>这尼玛是本综述的书，吓老子一跳</del>  </li>
+</ul>
+<hr>
+<p><strong>few samples on google scholar：</strong>  </p>
+<ul>
+<li><del>×<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/6706969">Learning Convolutional nerual networks from few samples</a>2013<br>this paper use the method of pre-trained (transfer learning instead nowadays) to get a satisfatory result.<br>这篇文章太早了，需要的话再重新说吧。先不看</del></li>
+<li><strong>※※<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.04043">Few-Shot Learning with Graph Neural Networks</a></strong>（two-version）（2017）（2018ICLR）<br>using graph network to implement semi-supervised. this research prove that the graph method perform well on ‘relathinal’ tasks.<br>定义了一种图模型的网络框架来实现few-shot等few samples的任务，表明这样的图网络架构能够很好的实现关系这样的处理，也很容易在这样的情境下进行拓展，这也是一个框架设计的任务。但是我们能够从中学习一下图模型如何针对关系网络进行学习和训练的，以及探讨一下图网络的优势。这一篇文章也探讨了度量学习和元学习的一些东西，这一篇可以给一个高的阅读优先级。</li>
+</ul>
+<hr>
+<p><strong>data programing:</strong></p>
+<h2 id="end"><a href="#end" class="headerlink" title="- end"></a>- end</h2></blockquote>
+<p><strong>Label propagation:</strong></p>
+<blockquote>
+<ul>
+<li>※<a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007/978-3-642-33715-4_36">Active Frame Selection for Label Propagation in Videos</a>ECCV2012<br>decide how many frames we’ll need to mark by human for the best result .<br>文章通过动态规划来选定视频中的k个frame，作为key frame，通过这几个frame的人工标记，能够最大的降低算法在label propagation中的标记误差，（其中num of k和误差的权衡还不是特别清楚）取代了以往这个key frame选择的随机性，带来更好的性能。<br>此外这个方法还关注于帧数选择的动态性，由于视频的独立性，所以固定帧数的选择不一定是合适的，应该根据视频本身的特性来选择才是更好的。（但是不知道时空复杂度怎么说）<br>值得一提的是，文中还提到了一些辅助人工标注的算法，这些算法有时间的话可以通过CSDN去调研一下。（防撞车）</li>
+<li>√<a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_iccv_2013/html/Wang_Dynamic_Label_Propagation_2013_ICCV_paper.html">Dynamic Label Propagation for Semi-Supervised Multi-class Multi-label Classification</a>ICCV2013<br>是一个基于图的方法，和eccv2012一致的地方在于，都认为视频任务的标注任务中，动态规划的part是需要的，上一篇用动态规划来实现keyframe的选择，这篇文章这是完全的semi-supervised的任务，他用dynamic的办法，动态的对多标签和多类信心进行拟合，从而动态的去更新相似性的度量，使用KNN来保留数据的固有结构。</li>
+<li>※※<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/7447818">Label Propagation via Teaching-to-Learn and Learning-to-Teach</a>2016TNNLS<br>一个迭代的label propagation方法，结合了一定self-learning 的机制，从dataset中迭代的选出易于分类的部分，然后通过不断的对这种易于标注的数据中去self-learning，从而提高分类器的性能，然后逐步的去针对模糊边界进行propagate。感觉是一个好方法<br>intro中简要的对比介绍了这之前的一些label propagation方法，包括DLP。<br>based on the sota LPmethod，所以之前的一些可能可以不用看了，</li>
+<li>※※※<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1805.10002">Learning to Propagate Labels: Transductive Propagation Network for Few-shot Learning</a>ICLR2019<br>结合了meta-learning/label propagation/transductive inference的方法，细看细看，这一篇一定要细看。太强了兄弟。intro里面也包含了很多的东西。  </li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="PART3-few-shot-learning-etc-（including-one-shot-learning"><a href="#PART3-few-shot-learning-etc-（including-one-shot-learning" class="headerlink" title="PART3 few-shot learning  etc.（including one-shot learning)"></a>PART3 few-shot learning  etc.（including one-shot learning)</h3><p>淦淦淦，这尼玛比的定义能不能统一一哈</p>
+<p><strong>Few-Shot Learning:</strong></p>
+<blockquote>
+<ul>
+<li>√<a target="_blank" rel="noopener" href="http://papers.nips.cc/paper/6996-prototypical-networks-for-few-shot-learning">Prototypical Networks for Few-shot Learning</a>2017\NIPS<br>思路上好像和19年的cvpr那片有点像，先学习一个overall 再通过度量空间对newdata进行适应性的分配和训练。通过intro，我认为更像是一个简单的embedding的办法，将sample聚集到embedding space的一个原型上，在对其进行近邻标签传播算法把。<br>但是里面有一些数学推导，可能是关于距离的，在我们后续需要划分指标的时候可以来看看这篇到底说了啥。（原型网络的数学推导。）</li>
+<li>√<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1803.00676">Meta-Learning for Semi-Supervised Few-Shot Classification</a>2018、ICLR<br>正好是上面那片原型网络的升级方法，这也太巧了把。重开一个新的课题，设置环境成为一个wild的环境，存在干扰项，将未标注的data也混杂进原型的训练中。</li>
+<li><del>×<a target="_blank" rel="noopener" href="https://openreview.net/forum?id=SkMjFKJwG">Conditional Networks for Few-Shot Semantic Segmentation</a>2018\ICLRworkshop track<br>貌似有点弟弟，没提出什么有用的东西</del></li>
+<li>※<a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_ICCV_2019/html/Kang_Few-Shot_Object_Detection_via_Feature_Reweighting_ICCV_2019_paper.html">Few-Shot Object Detection via Feature Reweighting</a>2019/ICCV<br>在一个base class 的dataset上进行meta training，然后通过 reweighting 操作，adapt to novel classes。<br>global原型，meta的场景学习策略，transfer的reweighting操作，以及在few-shot问题种加入了很多算法并没有考虑的localization问题。<br>这篇论文看起来还行。  </li>
+<li>※※<a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_CVPR_2019/html/Sun_Meta-Transfer_Learning_for_Few-Shot_Learning_CVPR_2019_paper.html">Meta-Transfer Learning for Few-Shot Learning</a>2019\CVPR<br>通过多次的meta学习，来找到参数相对于原DNN网络（普通的meta都是用的浅层网络）而言的scaling和shifting，感觉和上一篇reweighting方法存在一定的相似性。 同时我们也知道基本的meta-learning 方法和场景图应用的方法存在极大的相似性。<br>此外在训练策略上，采用了一个HTmini-batch的变体策略。（figure1有简要说明，结合后面的策略观看）</li>
+<li><del>×<a target="_blank" rel="noopener" href="http://104.211.88.42:8080/handle/2005/4275">Deep Learning Models for Few-shot and Metric Learning</a><br>这一篇看不了</del>  </li>
+<li>√<a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_cvpr_2018/html/Sung_Learning_to_Compare_CVPR_2018_paper.html">Learning to Compare: Relation Network for Few-Shot Learning</a>2018\CVPR<br>meta-learning 中的query 和support 不要搞混了。<br>（前面还有一步是通过embedding来学习一个合适的feature）<br>感觉上是一个基础的meta-learning框架，通过训练过程中对metric distance的学习，得到一个模型框架，然后通过模型将support data在metric space中与query data进行distance的衡量，从中选择shortest one作为classification的指标。</li>
+<li>※<a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_cvpr_2018/html/Gidaris_Dynamic_Few-Shot_Visual_CVPR_2018_paper.html">Dynamic Few-Shot Visual Learning Without Forgetting</a>2018\CVPR<br>为了使得模型在学习新的类别的时候，对旧的类别的识别能力依旧能保留下来，提出了两个策略，一个是基于attention 的分类权重生成器，二是对ConvNet进行重新设计，使其提取出feature的表征向量和分类权重向量之间的余弦相似性。？具体的还没看。但我认为主要努力的方向好像不是很对。</li>
+<li><a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_ECCV_2018/html/Liangyan_Gui_Few-Shot_Human_Motion_ECCV_2018_paper.html">Few-Shot Human Motion Prediction via Meta-Learning</a>2018\CVPR<br>是一种结合了MAML、MRN、Meta-Learning的策略，本质还是一个few-shot的工作，没有提到怎么把这样的工作适应到真实的应用上，<br>这一篇论文非常需要机器详细的阅读，不然的话不知道他到底是怎么操作的。  </li>
+</ul>
+</blockquote>
+<p>最终我们可以提出一个framework，通过对弱监督方法的嵌入，使得标注的任务变成一个人机交互的loop，通过我们对算法的干预，他将从标签的概率预测变成一个确定的指标预测，然后执行self-learning的方法，让自己逐渐变得更好，设定一个drop out，可以计算一个算法的最终所求时间。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>FSL前期调研</p><p><a href="http://aikenh.cn/cn/FSL前期调研/">http://aikenh.cn/cn/FSL前期调研/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-11-29</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Machine-Learning/">Machine Learning, </a><a class="link-muted" rel="tag" href="/tags/Survey/">Survey, </a><a class="link-muted" rel="tag" href="/tags/FSL/">FSL </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/Cpp/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Cherno的cpp教程笔记</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/FSL-Collection/"><span class="level-item">Survey for Few-Shot Learning</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/';
+            this.page.identifier = 'cn/FSL前期调研/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">128</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">42</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">96</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#主要是limited-labels-amp-Few-Samples-amp-Data-programing"><span class="level-left"><span class="level-item">1</span><span class="level-item">主要是limited labels &amp; Few Samples &amp; Data programing</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#PART1-Limited-Labels-（base-on-LiFeiFei‘s-reference）"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">PART1 Limited Labels （base on LiFeiFei‘s reference）</span></span></a></li><li><a class="level is-mobile" href="#PART2-key-words-searching（such-as-few-samples-etc-）"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">PART2 key words searching（such as few samples etc.）</span></span></a></li></ul></li><li><a class="level is-mobile" href="#end"><span class="level-left"><span class="level-item">2</span><span class="level-item">- end</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#PART3-few-shot-learning-etc-（including-one-shot-learning"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">PART3 few-shot learning  etc.（including one-shot learning)</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/Flashcard_template/"><img src="/img/header_img/lml_bg35.jpg" alt="Obsidian使用 Spaced Repetition 制作闪念卡片"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-27T16:39:59.000Z">2023-10-28</time></p><p class="title"><a href="/cn/Flashcard_template/">Obsidian使用 Spaced Repetition 制作闪念卡片</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Obsidian/">Obsidian</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/vsocde_regexp/"><img src="/img/header_img/lml_bg31.jpg" alt="VsCode&#039;s RegExp Catch 正则捕获"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-19T08:53:03.000Z">2023-10-19</time></p><p class="title"><a href="/cn/vsocde_regexp/">VsCode&#039;s RegExp Catch 正则捕获</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Vscode/">Vscode</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/GoMetis00_INTRO/"><img src="/img/header_img/lml_bg11.jpg" alt="GoMetis00_INTRO"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-08T09:58:57.000Z">2023-10-08</time></p><p class="title"><a href="/cn/GoMetis00_INTRO/">GoMetis00_INTRO</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/TaskPhoto00_Xs20_Recipes/"><img src="/img/header_img/lml_bg4.jpg" alt="Photography00 XS20_Recipes"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-04T16:41:43.000Z">2023-10-05</time></p><p class="title"><a href="/cn/TaskPhoto00_Xs20_Recipes/">Photography00 XS20_Recipes</a></p><p class="categories"><a href="/categories/Photography/">Photography</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/HomeAssistant_Init/"><img src="/img/header_img/lml_bg40.jpg" alt="HomeAssistant01 入门基础篇"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-08-12T09:24:50.000Z">2023-08-12</time></p><p class="title"><a href="/cn/HomeAssistant_Init/">HomeAssistant01 入门基础篇</a></p><p class="categories"><a href="/categories/NAS/">NAS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2023 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

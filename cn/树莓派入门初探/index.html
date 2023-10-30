@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>树莓派00 组装和亮机篇 - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="最近入手了树莓派 4B，打算基于树莓派做一些有趣&amp;amp;有用的项目，该系列笔记来记录个人树莓派学习和开发的历程。  连载确认！该系列文章将会从装机开始，介绍树莓派用于以下几个项目的开发和部署过程：  [x] 基于 Docker 的家庭服务器 [x] 智能家居控制中枢 [x] 影音中心 &amp;amp; 电视机顶盒 [ ] 物联网 or AI 的衍生应用实践  本篇首先介绍亮机和开发环境设置过程，包含"><meta property="og:type" content="blog"><meta property="og:title" content="树莓派00 组装和亮机篇"><meta property="og:url" content="http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E5%88%9D%E6%8E%A2/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="最近入手了树莓派 4B，打算基于树莓派做一些有趣&amp;amp;有用的项目，该系列笔记来记录个人树莓派学习和开发的历程。  连载确认！该系列文章将会从装机开始，介绍树莓派用于以下几个项目的开发和部署过程：  [x] 基于 Docker 的家庭服务器 [x] 智能家居控制中枢 [x] 影音中心 &amp;amp; 电视机顶盒 [ ] 物联网 or AI 的衍生应用实践  本篇首先介绍亮机和开发环境设置过程，包含"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg25.jpg"><meta property="article:published_time" content="2023-06-20T14:38:15.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.576Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Dev"><meta property="article:tag" content="Raspberry-Pie"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg25.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E5%88%9D%E6%8E%A2/"},"headline":"树莓派00 组装和亮机篇","image":["http://aikenh.cn/img/header_img/lml_bg25.jpg"],"datePublished":"2023-06-20T14:38:15.000Z","dateModified":"2023-10-30T09:27:38.576Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"最近入手了树莓派 4B，打算基于树莓派做一些有趣&amp;有用的项目，该系列笔记来记录个人树莓派学习和开发的历程。  连载确认！该系列文章将会从装机开始，介绍树莓派用于以下几个项目的开发和部署过程：  [x] 基于 Docker 的家庭服务器 [x] 智能家居控制中枢 [x] 影音中心 &amp; 电视机顶盒 [ ] 物联网 or AI 的衍生应用实践  本篇首先介绍亮机和开发环境设置过程，包含"}</script><link rel="canonical" href="http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E5%88%9D%E6%8E%A2/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg25.jpg" alt="树莓派00 组装和亮机篇"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>树莓派00 组装和亮机篇</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2023-06-20T14:38:15.000Z" title="2023-06-20T14:38:15.000Z">2023-06-20</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.576Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Dev/">Dev</a><span> / </span><a class="link-muted" href="/categories/Dev/Raspberry-pie/">Raspberry-pie</a></span><span class="level-item">10 minutes read (About 1505 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><blockquote>
+<p>最近入手了树莓派 4B，打算基于树莓派做一些有趣&amp;有用的项目，该系列笔记来记录个人树莓派学习和开发的历程。</p>
+</blockquote>
+<p>连载确认！该系列文章将会从装机开始，介绍树莓派用于以下几个项目的开发和部署过程：</p>
+<ul>
+<li>[x] 基于 Docker 的家庭服务器</li>
+<li>[x] 智能家居控制中枢</li>
+<li>[x] 影音中心 &amp; 电视机顶盒</li>
+<li>[ ] 物联网 or AI 的衍生应用实践</li>
+</ul>
+<p>本篇首先介绍亮机和开发环境设置过程，包含：组装、系统安装、远程开发环境设置（SSH、XRDP）</p>
+<h2 id="树莓派组装"><a href="#树莓派组装" class="headerlink" title="树莓派组装"></a>树莓派组装</h2><p>树莓派组装上比较防呆接口，唯一需要注意的是散热块和风扇的安装：</p>
+<ul>
+<li>在 CPU 和缓存等模块上装上散热片</li>
+<li>风扇的固定位置在外壳上，接线如下图所示</li>
+<li>SD 卡的安装位置在背面</li>
+</ul>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230626091027.jpg" alt="微信图片_20230626091027.jpg"></p>
+<h2 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h2><blockquote>
+<p>该部分仅介绍我使用的系统安装和烧录软件，系统的选择需要根据自己所拥有的设备，以及目的去选择。</p>
+</blockquote>
+<p>硬件准备：SD 卡，读卡器，一台正常运行的 PC，可外接的屏幕。</p>
+<span id="more"></span>
+<h3 id="系统烧录软件安装"><a href="#系统烧录软件安装" class="headerlink" title="系统烧录软件安装"></a>系统烧录软件安装</h3><p><a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry-Software</a> : 安装 Raspberry Pi Image 系统烧录软件</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230625171352.png" alt="image.png"></p>
+<h3 id="系统选择和安装"><a href="#系统选择和安装" class="headerlink" title="系统选择和安装"></a>系统选择和安装</h3><p>使用读卡器将 SD 卡连接至电脑，即可通过烧录软件选择系统进行安装：</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230625172206.png" alt="image.png"></p>
+<p>耐心等待即可。</p>
+<h2 id="远程开发环境设置"><a href="#远程开发环境设置" class="headerlink" title="远程开发环境设置"></a>远程开发环境设置</h2><p>开发环境主要需要注意的是以下几项设置，实现了如下的设置之后就可以在没有显示器的条件下实现对树莓派的开发和控制。</p>
+<ul>
+<li>SSH 开放远程连接，实现远程开发环境</li>
+<li>Proxy 设置，这里使用 Ubuntu 读取局域网代理服务器的方案。</li>
+<li>Docker 项目部署和实现</li>
+<li>【optional】XRDP、VNC 远程桌面连接</li>
+<li>【optional】Zerotier 等方案实现内网穿透</li>
+<li>【optional】文件同步（rsync）、共享（smb）方案</li>
+</ul>
+<p>SSH 的部分参考 [[SSH]] 一文中的远程权限开放设置，以及免密登陆配置，方便对树莓派的远程连接，这里就不再赘述。</p>
+<p>Proxy 部分可以参考本文的解决方案，基于 ubuntu 系统设置全局的网络代理服务器，减少在终端环境中需要为多个不同 CLI 工具设置代理的压力，需要注意的是，Docker 的代理设置还是需要独立进行配置，参考下面的 docker 一文。</p>
+<p>Docker 安装的部分参考 [[Docker01_linux]] 一文进行 Linux 环境下的 Docker 和对应的 Dashboard：portainer 的安装和测试。</p>
+<h3 id="XRDP、VNC-设置"><a href="#XRDP、VNC-设置" class="headerlink" title="XRDP、VNC 设置"></a>XRDP、VNC 设置</h3><p>这里推荐 XRDP 做 Windows 和 Linux 之间的远程桌面连接，GUI 界面首选，我这里只简单介绍以下 XRDP 远程连接的方式。</p>
+<p>参考连接：<a target="_blank" rel="noopener" href="https://www.myfreax.com/how-to-install-xrdp-on-ubuntu-20-04/">如何在Ubuntu 20.04上安装Xrdp服务器 | myfreax</a></p>
+<blockquote>
+<p>Xrdp 是 Microsoft 远程桌面协议（RDP）的开源实现</p>
+</blockquote>
+<h3 id="安装-Xrdp-以及验证"><a href="#安装-Xrdp-以及验证" class="headerlink" title="安装 Xrdp 以及验证"></a>安装 Xrdp 以及验证</h3><p>直接使用 apt 安装xrdp</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install xrdp<br></code></pre></td></tr></table></figure>
+<p>安装完成后，服务应该会自动启动，可以输入下列的内容进行验证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo systemctl status xrdp<br></code></pre></td></tr></table></figure>
+<p>输出将如下所示，则服务已经运行了：</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230625174518.png" alt="image.png"></p>
+<p>如果服务还未运行，尝试将 xrdp 用户添加到 ssl-cert 组，然后重启服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo adduser xrdp ssl-cert<br>sudo systemctl restart xrdp<br></code></pre></td></tr></table></figure>
+<p>至此已经安装完成了，其默认监听 3389 端口，如果系统上配备了防火墙，则需要打开其监听的端口，同时要允许从指定的 IP 地址和 IP 范围来访问其服务器。可以运行以下的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ufw allow from 192.168.33.0/24 to any port 3389<br></code></pre></td></tr></table></figure>
+<p>xrdp 服务运行起来以后需要添加对应的用户用来登录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo adduser aiken<br></code></pre></td></tr></table></figure>
+<p>这里可能会遇到使用 windows 远程登录之后，输入密码以后<strong>蓝屏没有进入主界面</strong>的现象，这可能是由于 <a target="_blank" rel="noopener" href="https://www.reddit.com/r/raspberry_pi/comments/qw1cdw/raspberry_pi_4_xrdp_windows_10_remote_desktop/">Root 用户远程登录的默认问题</a>，有以下两种方式可以解决：</p>
+<ol>
+<li>可以通过使用别的账户进行登录即可。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo adduser others<br></code></pre></td></tr></table></figure>
+<ol>
+<li>（推荐）修改远程连接的配置，实现主用户可正常登录远程桌面</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo adduser xrdp ssl-cert<br>sudo vim /etc/X11/xrdp/xorg.conf<br></code></pre></td></tr></table></figure>
+<p>找到 Option DRMDevice 行，并将其选项修改为如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs conf"> Option &quot;DRMDevice&quot; &quot;&quot;<br></code></pre></td></tr></table></figure>
+<p>重启树莓派，即可实现远程桌面的正常连接。</p>
+<h3 id="Windows-连接远程桌面"><a href="#Windows-连接远程桌面" class="headerlink" title="Windows 连接远程桌面"></a>Windows 连接远程桌面</h3><ul>
+<li>Win+S+’mstsc’| 远程桌面连接<br>输入指定的 IP 即可打开对应的远程连接页面，输入 Ubuntu 的对应密码即可进入远程桌面。</li>
+</ul>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230625175728.png" alt="image.png"></p>
+<h3 id="内网穿透方案"><a href="#内网穿透方案" class="headerlink" title="内网穿透方案"></a>内网穿透方案</h3><p>使用 zerotier 执行初步的内网穿透方案，可以参考 [[NAT穿透]]一文</p>
+<h3 id="文件同步-amp-共享方案"><a href="#文件同步-amp-共享方案" class="headerlink" title="文件同步&amp;共享方案"></a>文件同步&amp;共享方案</h3><p>该部分实际上主要介绍两种方案：RSYNC 文件夹同步 &amp; SMB 文件共享</p>
+<p>【不推荐】<strong>基于 RSYNC 和 SSH 免密登陆和计划任务</strong>，来进行文件夹的同步：这样会在两个系统上存有同个文件的备份，也可以选择同步删除和上传，保持文件夹的一致性。</p>
+<p>但是该方案实际上不太符合树莓派的使用场景：除非需要做备份，否则通常仅有少量的文件传输场景，便于环境配置，因此跑计划任务算是比较多余的一件事。</p>
+<p>如果有相关需求的话可以参考该文 [[Transfer-Sync-Files]]</p>
+<p>【推荐】<strong>使用 SMB 进行文件的共享</strong>：这种方案实际上就是 Windows 的共享文件夹策略，方便局域网内的各个设备进行访问。</p>
+<p>windows 共享文件的设置和 Ubuntu 上访问共享文件夹的方式可以参考[[局域网共享]]进行配置</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>树莓派00 组装和亮机篇</p><p><a href="http://aikenh.cn/cn/树莓派入门初探/">http://aikenh.cn/cn/树莓派入门初探/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-06-20</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Dev/">Dev, </a><a class="link-muted" rel="tag" href="/tags/Raspberry-Pie/">Raspberry-Pie </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/Docker01_linux/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Docker Configuration01 Install on Linux</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/LinuxZellij/"><span class="level-item">Terminal multiplexer Zellij</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E5%88%9D%E6%8E%A2/';
+            this.page.identifier = 'cn/树莓派入门初探/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">128</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">42</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">96</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#树莓派组装"><span class="level-left"><span class="level-item">1</span><span class="level-item">树莓派组装</span></span></a></li><li><a class="level is-mobile" href="#系统安装"><span class="level-left"><span class="level-item">2</span><span class="level-item">系统安装</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#系统烧录软件安装"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">系统烧录软件安装</span></span></a></li><li><a class="level is-mobile" href="#系统选择和安装"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">系统选择和安装</span></span></a></li></ul></li><li><a class="level is-mobile" href="#远程开发环境设置"><span class="level-left"><span class="level-item">3</span><span class="level-item">远程开发环境设置</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#XRDP、VNC-设置"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">XRDP、VNC 设置</span></span></a></li><li><a class="level is-mobile" href="#安装-Xrdp-以及验证"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">安装 Xrdp 以及验证</span></span></a></li><li><a class="level is-mobile" href="#Windows-连接远程桌面"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">Windows 连接远程桌面</span></span></a></li><li><a class="level is-mobile" href="#内网穿透方案"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">内网穿透方案</span></span></a></li><li><a class="level is-mobile" href="#文件同步-amp-共享方案"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">文件同步&amp;共享方案</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/Flashcard_template/"><img src="/img/header_img/lml_bg35.jpg" alt="Obsidian使用 Spaced Repetition 制作闪念卡片"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-27T16:39:59.000Z">2023-10-28</time></p><p class="title"><a href="/cn/Flashcard_template/">Obsidian使用 Spaced Repetition 制作闪念卡片</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Obsidian/">Obsidian</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/vsocde_regexp/"><img src="/img/header_img/lml_bg31.jpg" alt="VsCode&#039;s RegExp Catch 正则捕获"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-19T08:53:03.000Z">2023-10-19</time></p><p class="title"><a href="/cn/vsocde_regexp/">VsCode&#039;s RegExp Catch 正则捕获</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Vscode/">Vscode</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/GoMetis00_INTRO/"><img src="/img/header_img/lml_bg11.jpg" alt="GoMetis00_INTRO"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-08T09:58:57.000Z">2023-10-08</time></p><p class="title"><a href="/cn/GoMetis00_INTRO/">GoMetis00_INTRO</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/TaskPhoto00_Xs20_Recipes/"><img src="/img/header_img/lml_bg4.jpg" alt="Photography00 XS20_Recipes"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-04T16:41:43.000Z">2023-10-05</time></p><p class="title"><a href="/cn/TaskPhoto00_Xs20_Recipes/">Photography00 XS20_Recipes</a></p><p class="categories"><a href="/categories/Photography/">Photography</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/HomeAssistant_Init/"><img src="/img/header_img/lml_bg40.jpg" alt="HomeAssistant01 入门基础篇"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-08-12T09:24:50.000Z">2023-08-12</time></p><p class="title"><a href="/cn/HomeAssistant_Init/">HomeAssistant01 入门基础篇</a></p><p class="categories"><a href="/categories/NAS/">NAS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2023 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

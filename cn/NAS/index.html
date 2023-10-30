@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>NAS - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="“NAS本质上就是一个可以开启文件共享的具有大存储的系统：无论是Windows，Linux或其他一切可基于诸如SMB、Internet提供文件共享或访问功能的系统都可以作为NAS的系统使用。” 不出意外，针对该应用场景，也有针对性的一些简化OS，故而在构建NAS之前，首先分析对NAS存储的需求，进而选择一个合适的系统去构建。 个人NAS需求分析就像NAS：Network Attached Stor"><meta property="og:type" content="blog"><meta property="og:title" content="NAS"><meta property="og:url" content="http://aikenh.cn/cn/NAS/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="“NAS本质上就是一个可以开启文件共享的具有大存储的系统：无论是Windows，Linux或其他一切可基于诸如SMB、Internet提供文件共享或访问功能的系统都可以作为NAS的系统使用。” 不出意外，针对该应用场景，也有针对性的一些简化OS，故而在构建NAS之前，首先分析对NAS存储的需求，进而选择一个合适的系统去构建。 个人NAS需求分析就像NAS：Network Attached Stor"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg30.jpg"><meta property="article:published_time" content="2022-07-27T15:30:00.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.578Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="NAS"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg30.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/NAS/"},"headline":"NAS","image":["http://aikenh.cn/img/header_img/lml_bg30.jpg"],"datePublished":"2022-07-27T15:30:00.000Z","dateModified":"2023-10-30T09:27:38.578Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"“NAS本质上就是一个可以开启文件共享的具有大存储的系统：无论是Windows，Linux或其他一切可基于诸如SMB、Internet提供文件共享或访问功能的系统都可以作为NAS的系统使用。” 不出意外，针对该应用场景，也有针对性的一些简化OS，故而在构建NAS之前，首先分析对NAS存储的需求，进而选择一个合适的系统去构建。 个人NAS需求分析就像NAS：Network Attached Stor"}</script><link rel="canonical" href="http://aikenh.cn/cn/NAS/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg30.jpg" alt="NAS"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>NAS</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2022-07-27T15:30:00.000Z" title="2022-07-27T15:30:00.000Z">2022-07-27</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.578Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/NAS/">NAS</a></span><span class="level-item">6 minutes read (About 839 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><p>“NAS本质上就是一个可以开启文件共享的具有大存储的系统：无论是Windows，Linux或其他一切可基于诸如SMB、Internet提供文件共享或访问功能的系统都可以作为NAS的系统使用。”</p>
+<p>不出意外，针对该应用场景，也有针对性的一些简化OS，故而在构建NAS之前，首先分析对NAS存储的需求，进而选择一个合适的系统去构建。</p>
+<h2 id="个人NAS需求分析"><a href="#个人NAS需求分析" class="headerlink" title="个人NAS需求分析"></a>个人NAS需求分析</h2><p>就像NAS：Network Attached Storage所说，NAS最基本的需求是“存储”与“共享”（随时存取），实际也是一个私有网盘（支持更多功能？），本文便基于该脉络分析需求。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>存储/功能类型</th>
+<th>使用场景说明</th>
+<th>需求程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>图片、文件归档</td>
+<td>存储，预览（基于AI识别分类，时间线，照片墙）</td>
+<td>-</td>
+</tr>
+<tr>
+<td>大文件</td>
+<td>内网快速传输</td>
+<td>-</td>
+</tr>
+<tr>
+<td>电影</td>
+<td>流媒体服务器：多设备在线观看、封面集归纳和整理（PLEX）</td>
+<td>-</td>
+</tr>
+<tr>
+<td>工作文档</td>
+<td>历史版本，协作编辑</td>
+<td>Option</td>
+</tr>
+<tr>
+<td>下载功能</td>
+<td>看到想看的电影的时候可以直接让他开始下载</td>
+<td>-</td>
+</tr>
+<tr>
+<td>支持docker扩充功能</td>
+<td>可以使用Docker下载并部署一些其他的乱七八糟的功能</td>
+<td>Core</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>在支持基本功能的基础之上，通过配置的选择来，尽量减少功耗，从而减少长时间启动带来的电费消耗，如果可以的话使用软件或者硬件来记录NAS每个月的耗电量。</p>
+<ul>
+<li><p>此外，还需要考虑数据的稳定性，好像叫做《阵列》？（<strong>后续进行补充了解</strong>）</p>
+</li>
+<li><p>断电自动重启</p>
+</li>
+<li>文件共享服务：SMB、FTP‘</li>
+<li>加密和数据安全性</li>
+</ul>
+<p>不需要显示器，只需要网络和SSH进行远程登陆和控制之类的。</p>
+<span id="more"></span>
+<h2 id="NAS-OS"><a href="#NAS-OS" class="headerlink" title="NAS-OS"></a>NAS-OS</h2><blockquote>
+<p>主要的一些NAS系统有：FreeNas、nas4free（xigmaNAS）、<strong>unraid（收费）</strong>、<strong>TrueNas Scale/Core</strong>、<strong>omv</strong>、EasyNAS黑群晖</p>
+<p>基于完整OS搭建：</p>
+<ul>
+<li>Debian/Ubuntu（server）+（samba+syncthing+Docker）</li>
+<li>windows（server）</li>
+</ul>
+<p>好像可以搭配软路由（OpenWrt）一起搭建家用存储系统。</p>
+</blockquote>
+<p>主要考虑Unraid、TrueNas、Omv，由于Unraid收费，考虑使用TrueNas、OMV是否足够满足需要，如果需要的话就不在考虑其他。</p>
+<h3 id="基于Docker的软件部署"><a href="#基于Docker的软件部署" class="headerlink" title="基于Docker的软件部署"></a>基于Docker的软件部署</h3><ul>
+<li>jellyfin或Plex进行视频资源管理</li>
+<li>运行虚拟机基于黑群晖进行图像管理？</li>
+<li>下载工具</li>
+<li></li>
+</ul>
+<h3 id="部署可于外网访问（虚拟内网构建"><a href="#部署可于外网访问（虚拟内网构建" class="headerlink" title="部署可于外网访问（虚拟内网构建"></a>部署可于外网访问（虚拟内网构建</h3><ul>
+<li>zerotier内网穿透？</li>
+<li></li>
+</ul>
+<h2 id="配置分析"><a href="#配置分析" class="headerlink" title="配置分析"></a>配置分析</h2><p>实际上就是组装一台不带屏幕的电脑，故而基于现有的多余硬件来组建NAS。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>设备名称</th>
+<th>预算-&gt;具体型号</th>
+<th>功率</th>
+<th>FI？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机箱</td>
+<td>x</td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>机箱风扇</td>
+<td>x</td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>x</td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>CPU（带集显支持硬解）+自带散热</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>256-ssd（系统）</td>
+<td>200-300</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Hard-Drive（存储空间4T+4T+4T+4T）</td>
+<td>1k</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>电源（基于设备需求进行购买）</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>仍需考虑</strong>的问题：</p>
+<ul>
+<li>[ ] 机箱缺少侧板，且机箱过大，过于占地方，是否考虑重新购买小机箱，或者NAS专用机箱等。</li>
+<li>[ ] 考虑供电和放置的位置</li>
+</ul>
+<h3 id="数据安全（Raid）"><a href="#数据安全（Raid）" class="headerlink" title="数据安全（Raid）"></a>数据安全（Raid）</h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/480452743">没那么靠谱</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21359049">Some Function Support</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/834081">OS选择总说纷纭</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/news/684142">5款NAS系统横评</a></p>
+</li>
+<li><a target="_blank" rel="noopener" href="https://einverne.github.io/post/2020/02/nas-operating-system-choice.html">NAS评价大全集</a></li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>NAS</p><p><a href="http://aikenh.cn/cn/NAS/">http://aikenh.cn/cn/NAS/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-07-27</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/NAS/">NAS </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/WindowsTerminal/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Windows Configuration02 Terminal</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/MarkovJunior/"><span class="level-item">Markov Junior</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/NAS/';
+            this.page.identifier = 'cn/NAS/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">128</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">42</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">96</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#个人NAS需求分析"><span class="level-left"><span class="level-item">1</span><span class="level-item">个人NAS需求分析</span></span></a></li><li><a class="level is-mobile" href="#NAS-OS"><span class="level-left"><span class="level-item">2</span><span class="level-item">NAS-OS</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基于Docker的软件部署"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">基于Docker的软件部署</span></span></a></li><li><a class="level is-mobile" href="#部署可于外网访问（虚拟内网构建"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">部署可于外网访问（虚拟内网构建</span></span></a></li></ul></li><li><a class="level is-mobile" href="#配置分析"><span class="level-left"><span class="level-item">3</span><span class="level-item">配置分析</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数据安全（Raid）"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">数据安全（Raid）</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Reference"><span class="level-left"><span class="level-item">4</span><span class="level-item">Reference</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/Flashcard_template/"><img src="/img/header_img/lml_bg35.jpg" alt="Obsidian使用 Spaced Repetition 制作闪念卡片"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-27T16:39:59.000Z">2023-10-28</time></p><p class="title"><a href="/cn/Flashcard_template/">Obsidian使用 Spaced Repetition 制作闪念卡片</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Obsidian/">Obsidian</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/vsocde_regexp/"><img src="/img/header_img/lml_bg31.jpg" alt="VsCode&#039;s RegExp Catch 正则捕获"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-19T08:53:03.000Z">2023-10-19</time></p><p class="title"><a href="/cn/vsocde_regexp/">VsCode&#039;s RegExp Catch 正则捕获</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Vscode/">Vscode</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/GoMetis00_INTRO/"><img src="/img/header_img/lml_bg11.jpg" alt="GoMetis00_INTRO"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-08T09:58:57.000Z">2023-10-08</time></p><p class="title"><a href="/cn/GoMetis00_INTRO/">GoMetis00_INTRO</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/TaskPhoto00_Xs20_Recipes/"><img src="/img/header_img/lml_bg4.jpg" alt="Photography00 XS20_Recipes"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-04T16:41:43.000Z">2023-10-05</time></p><p class="title"><a href="/cn/TaskPhoto00_Xs20_Recipes/">Photography00 XS20_Recipes</a></p><p class="categories"><a href="/categories/Photography/">Photography</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/HomeAssistant_Init/"><img src="/img/header_img/lml_bg40.jpg" alt="HomeAssistant01 入门基础篇"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-08-12T09:24:50.000Z">2023-08-12</time></p><p class="title"><a href="/cn/HomeAssistant_Init/">HomeAssistant01 入门基础篇</a></p><p class="categories"><a href="/categories/NAS/">NAS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2023 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

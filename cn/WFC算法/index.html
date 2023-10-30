@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Wave Function Collapse - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="@Reference: Github-Mxgmn | zhihu 概念简介和复习本质上该方法的底层思想就是条件概率的启发式随机生成算法。 波函数坍塌在介绍算法之前首先需要明确几个概念，第一个就是“波函数坍塌”（名字的来源是量子力学中的概念），参考“薛定谔的猫”，可以理解成：在一系列的不确定像素（存在多种可能）的基础之上，通过确定的规则、相关关系，随机的将所有的像素变成确定的状态。（可以通过给定种子"><meta property="og:type" content="blog"><meta property="og:title" content="Wave Function Collapse"><meta property="og:url" content="http://aikenh.cn/cn/WFC%E7%AE%97%E6%B3%95/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="@Reference: Github-Mxgmn | zhihu 概念简介和复习本质上该方法的底层思想就是条件概率的启发式随机生成算法。 波函数坍塌在介绍算法之前首先需要明确几个概念，第一个就是“波函数坍塌”（名字的来源是量子力学中的概念），参考“薛定谔的猫”，可以理解成：在一系列的不确定像素（存在多种可能）的基础之上，通过确定的规则、相关关系，随机的将所有的像素变成确定的状态。（可以通过给定种子"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg1.jpg"><meta property="article:published_time" content="2022-07-10T01:42:50.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.603Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Algorithm"><meta property="article:tag" content="Game"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg1.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/WFC%E7%AE%97%E6%B3%95/"},"headline":"Wave Function Collapse","image":["http://aikenh.cn/img/header_img/lml_bg1.jpg"],"datePublished":"2022-07-10T01:42:50.000Z","dateModified":"2023-10-30T09:27:38.603Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"@Reference: Github-Mxgmn | zhihu 概念简介和复习本质上该方法的底层思想就是条件概率的启发式随机生成算法。 波函数坍塌在介绍算法之前首先需要明确几个概念，第一个就是“波函数坍塌”（名字的来源是量子力学中的概念），参考“薛定谔的猫”，可以理解成：在一系列的不确定像素（存在多种可能）的基础之上，通过确定的规则、相关关系，随机的将所有的像素变成确定的状态。（可以通过给定种子"}</script><link rel="canonical" href="http://aikenh.cn/cn/WFC%E7%AE%97%E6%B3%95/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg1.jpg" alt="Wave Function Collapse"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>Wave Function Collapse</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2022-07-10T01:42:50.000Z" title="2022-07-10T01:42:50.000Z">2022-07-10</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.603Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Algorithm/">Algorithm</a><span> / </span><a class="link-muted" href="/categories/Algorithm/Game-Generate/">Game Generate</a></span><span class="level-item">6 minutes read (About 870 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><p>@Reference: <a target="_blank" rel="noopener" href="https://github.com/mxgmn/WaveFunctionCollapse">Github-Mxgmn</a> | <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/66416593">zhihu</a></p>
+<h2 id="概念简介和复习"><a href="#概念简介和复习" class="headerlink" title="概念简介和复习"></a>概念简介和复习</h2><p>本质上该方法的底层思想就是条件概率的启发式随机生成算法。</p>
+<h3 id="波函数坍塌"><a href="#波函数坍塌" class="headerlink" title="波函数坍塌"></a>波函数坍塌</h3><p>在介绍算法之前首先需要明确几个概念，第一个就是<strong>“波函数坍塌”</strong>（名字的来源是量子力学中的概念），参考<strong>“薛定谔的猫”</strong>，可以理解成：在一系列的不确定像素（存在多种可能）的基础之上，通过<strong>确定的规则</strong>、<strong>相关关系</strong>，随机的将所有的像素变成确定的状态。（可以通过给定种子来启动，也可以通过随机规则来启动），实现在一定规则或者模式下的随机生成。</p>
+<span id="more"></span>
+<h3 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h3><p><strong>熵</strong>作为热力学中，表示物理状态的参量，其含义在于表示物质的<strong>混乱程度</strong>（正相关）。在当前的场景下，使用信息熵（而非热熵）来衡量变量的<strong>不确定程度</strong>（完全随机，或者有限随机，或者二选一等等）。</p>
+<script type="math/tex; mode=display">
+H(X) = \sum_{x\in X}p(x)log p(x)</script><p>式中描述的是信息熵的计算公式，在实际应用中，可以使用任何表示状态不确定程度的度量来进行一下的计算。</p>
+<h2 id="算法原理-流程"><a href="#算法原理-流程" class="headerlink" title="算法原理-流程"></a>算法原理-流程</h2><p>动态地使可选的范围越来越小，直到最后整体都是确定的状态。而缩小范围的方法核心可以总结为（数独）：</p>
+<ul>
+<li><p><strong>约束规则</strong>、<strong>状态传播</strong>、<strong>回溯</strong></p>
+</li>
+<li><p>从最小熵的单位开始坍缩，保证最小概率的坍缩失败，从而<strong>减少大量的回溯</strong>过程，来减少计算量。</p>
+</li>
+</ul>
+<p>以<strong>地图生成</strong>为例：</p>
+<p><strong>约束规则</strong>：（选择一个熵最小的slot开始）针对于每个slot的坍缩，是在ModuleSet（可选模块集合）中随机取一个概率最高的模块，进行合成，而这个概率受我们制定的<strong>规则</strong>，<strong>周边的Slot</strong>的状态影响。<br><strong>状态传播</strong>：模块确定后就将该状态和规则传递到相邻的moduleset中，删除不匹配的模块等。<br><strong>回溯</strong>：当坍缩陷入矛盾（与规则相互矛盾，坍缩失效），就对状态进行回溯（Backtrack）重新进行状态搜索和回溯。</p>
+<blockquote>
+<ol>
+<li>Read the input bitmap and count NxN patterns.<ol>
+<li>(optional) Augment pattern data with rotations and reflections.</li>
+</ol>
+</li>
+<li>Create an array with the dimensions of the output (called “wave” in the source). Each element of this array represents a state of an NxN region in the output. A state of an NxN region is a superposition of NxN patterns of the input with boolean coefficients (so a state of a pixel in the output is a superposition of input colors with real coefficients). False coefficient means that the corresponding pattern is forbidden, true coefficient means that the corresponding pattern is not yet forbidden.</li>
+<li>Initialize the wave in the completely unobserved state, i.e. with all the boolean coefficients being true.</li>
+<li>Repeat the following steps:<ol>
+<li>Observation:<ol>
+<li>Find a wave element with the minimal nonzero entropy. If there is no such elements (if all elements have zero or undefined entropy) then break the cycle (4) and go to step (5).</li>
+<li>Collapse this element into a definite state according to its coefficients and the distribution of NxN patterns in the input.</li>
+</ol>
+</li>
+<li>Propagation: propagate information gained on the previous observation step.</li>
+</ol>
+</li>
+<li>By now all the wave elements are either in a completely observed state (all the coefficients except one being zero) or in the contradictory state (all the coefficients being zero). In the first case return the output. In the second case finish the work without returning anything.</li>
+</ol>
+</blockquote>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>官方仓库中有诸多样例和各种代码版本的实现，可以参考并实现部分版本。</p>
+<h3 id="样例解读"><a href="#样例解读" class="headerlink" title="样例解读"></a>样例解读</h3><h3 id="样例实现"><a href="#样例实现" class="headerlink" title="样例实现"></a>样例实现</h3></div><div class="article-licensing box"><div class="licensing-title"><p>Wave Function Collapse</p><p><a href="http://aikenh.cn/cn/WFC算法/">http://aikenh.cn/cn/WFC算法/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-07-10</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Algorithm/">Algorithm, </a><a class="link-muted" rel="tag" href="/tags/Game/">Game </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/MarkovJunior/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Markov Junior</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/Z_Jumper/"><span class="level-item">Z Jumper for Linux</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/WFC%E7%AE%97%E6%B3%95/';
+            this.page.identifier = 'cn/WFC算法/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">128</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">42</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">96</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#概念简介和复习"><span class="level-left"><span class="level-item">1</span><span class="level-item">概念简介和复习</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#波函数坍塌"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">波函数坍塌</span></span></a></li><li><a class="level is-mobile" href="#熵"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">熵</span></span></a></li></ul></li><li><a class="level is-mobile" href="#算法原理-流程"><span class="level-left"><span class="level-item">2</span><span class="level-item">算法原理-流程</span></span></a></li><li><a class="level is-mobile" href="#Code"><span class="level-left"><span class="level-item">3</span><span class="level-item">Code</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#样例解读"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">样例解读</span></span></a></li><li><a class="level is-mobile" href="#样例实现"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">样例实现</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/Flashcard_template/"><img src="/img/header_img/lml_bg35.jpg" alt="Obsidian使用 Spaced Repetition 制作闪念卡片"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-27T16:39:59.000Z">2023-10-28</time></p><p class="title"><a href="/cn/Flashcard_template/">Obsidian使用 Spaced Repetition 制作闪念卡片</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Obsidian/">Obsidian</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/vsocde_regexp/"><img src="/img/header_img/lml_bg31.jpg" alt="VsCode&#039;s RegExp Catch 正则捕获"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-19T08:53:03.000Z">2023-10-19</time></p><p class="title"><a href="/cn/vsocde_regexp/">VsCode&#039;s RegExp Catch 正则捕获</a></p><p class="categories"><a href="/categories/Editor/">Editor</a> / <a href="/categories/Editor/Vscode/">Vscode</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/GoMetis00_INTRO/"><img src="/img/header_img/lml_bg11.jpg" alt="GoMetis00_INTRO"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-08T09:58:57.000Z">2023-10-08</time></p><p class="title"><a href="/cn/GoMetis00_INTRO/">GoMetis00_INTRO</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/TaskPhoto00_Xs20_Recipes/"><img src="/img/header_img/lml_bg4.jpg" alt="Photography00 XS20_Recipes"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-10-04T16:41:43.000Z">2023-10-05</time></p><p class="title"><a href="/cn/TaskPhoto00_Xs20_Recipes/">Photography00 XS20_Recipes</a></p><p class="categories"><a href="/categories/Photography/">Photography</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/HomeAssistant_Init/"><img src="/img/header_img/lml_bg40.jpg" alt="HomeAssistant01 入门基础篇"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-08-12T09:24:50.000Z">2023-08-12</time></p><p class="title"><a href="/cn/HomeAssistant_Init/">HomeAssistant01 入门基础篇</a></p><p class="categories"><a href="/categories/NAS/">NAS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2023 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
