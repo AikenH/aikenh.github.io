@@ -6,7 +6,7 @@
   <link href="http://aikenh.cn/atom.xml" rel="self"/>
   
   <link href="http://aikenh.cn/"/>
-  <updated>2023-11-07T16:45:02.954Z</updated>
+  <updated>2023-11-08T00:45:33.507Z</updated>
   <id>http://aikenh.cn/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Ipv6部署服务03 DDNS-go 动态域名解析</title>
+    <link href="http://aikenh.cn/cn/deploy_server_byipv6_03_ddnsgo/"/>
+    <id>http://aikenh.cn/cn/deploy_server_byipv6_03_ddnsgo/</id>
+    <published>2023-11-07T05:40:13.000Z</published>
+    <updated>2023-11-08T00:45:33.507Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;本系列主要介绍通过公网的 ipv6 访问局域网设备并部署自己的服务供公网访问；本篇是其中的第三篇，以 DDNS-go 开源项目为例，部署动态域名解析服务，自动更新主机记录值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="NAS" scheme="http://aikenh.cn/categories/NAS/"/>
+    
+    
+    <category term="NAS" scheme="http://aikenh.cn/tags/NAS/"/>
+    
+    <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Ipv6部署服务02 Nginx和Https</title>
