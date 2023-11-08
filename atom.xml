@@ -128,13 +128,57 @@
     <link href="http://aikenh.cn/cn/deploy_server_byipv6/"/>
     <id>http://aikenh.cn/cn/deploy_server_byipv6/</id>
     <published>2023-11-05T11:23:17.000Z</published>
-    <updated>2023-11-06T00:40:46.188Z</updated>
+    <updated>2023-11-08T01:06:09.892Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;本系列主要介绍通过公网的 ipv6 访问局域网设备并部署自己的服务供公网访问；本篇是其中的第一篇，以电信宽带为例，说明如何开启 ipv6 服务和外网访问放行。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;开启 IPV6 服务主要需要修改两个地方的配置：&lt;strong&gt;光猫开启桥接模式和 IPV6 &lt;/strong&gt;、&lt;strong&gt;路由器修改为 pppoe 拨号模式以及防火墙设置&lt;/strong&gt;；这里以本人的电信光猫和小米路由器为例：&lt;/p&gt;
+&lt;h2 id=&quot;背景介绍&quot;&gt;&lt;a href=&quot;#背景介绍&quot; class=&quot;headerlink&quot; title=&quot;背景介绍&quot;&gt;&lt;/a&gt;背景介绍&lt;/h2&gt;&lt;p&gt;需要在外网访问部署于家庭内网的一些服务，考虑了以下的几个方案，决定使用 ipv6作为核心&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;方案&lt;/th&gt;
+&lt;th&gt;简要说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;内网穿透&lt;/td&gt;
+&lt;td&gt;Zerotier&lt;/td&gt;
+&lt;td&gt;免费，需要注册账户，支持移动端，国内速度极慢，且不稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;内网穿透&lt;/td&gt;
+&lt;td&gt;Tailscale（备用）&lt;/td&gt;
+&lt;td&gt;免费，需要注册账号，支持移动端，国内速度一版，稳定性相 Zetotier 较好，但仍不够稳定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;内网穿透&lt;/td&gt;
+&lt;td&gt;frp&lt;/td&gt;
+&lt;td&gt;申请一个有公网的服务器，使用 frp 自己作为内网穿透的中转，贵，较为麻烦&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;公网 IP&lt;/td&gt;
+&lt;td&gt;Ipv4&lt;/td&gt;
+&lt;td&gt;难以申请，其他都好&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;公网 IP&lt;/td&gt;
+&lt;td&gt;Ipv6（主力）&lt;/td&gt;
+&lt;td&gt;获取简单，需要配置一下光猫使用，一劳永逸，快，稳定，多，有暴露公网的危险，需要设置防火墙&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;其他&lt;/td&gt;
+&lt;td&gt;Cloudflare Zerotrust&lt;/td&gt;
+&lt;td&gt;简单，免费，可以绑定域名，但是网站根本登不进去配置页面，速度不快&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
 &lt;h2 id=&quot;光猫设置&quot;&gt;&lt;a href=&quot;#光猫设置&quot; class=&quot;headerlink&quot; title=&quot;光猫设置&quot;&gt;&lt;/a&gt;光猫设置&lt;/h2&gt;&lt;p&gt;查看光猫背面的管理员 url，进入光猫管理界面，登录&lt;strong&gt;超级管理员账户&lt;/strong&gt;（非普通账户，会跳转到更详细的管理页面，大部分同地区的超级管理员账户应该是一致的，不对可以询问下宽带师傅）&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;管理地址通常为：192.168.1.1&lt;/li&gt;
@@ -275,7 +319,7 @@
     <link href="http://aikenh.cn/cn/HomeAssistant_Init/"/>
     <id>http://aikenh.cn/cn/HomeAssistant_Init/</id>
     <published>2023-08-12T09:24:50.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-11-08T00:53:10.503Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -288,8 +332,12 @@
 &lt;h3 id=&quot;HA&quot;&gt;&lt;a href=&quot;#HA&quot; class=&quot;headerlink&quot; title=&quot;HA&quot;&gt;&lt;/a&gt;HA&lt;/h3&gt;&lt;p&gt;安装过程主要参考 &lt;a href=&quot;https://www.home-assistant.io/installation/raspberrypi&quot;&gt;Raspberry Pi - Home Assistant &lt;/a&gt; 中 Install Home Assistant Container 的章节，如果为其他的 OS 也可以在官网找到类似的指引，不过 docker 版本的差异应该不会特别的大，个人的 Docker Compose File 也已经上传到 &lt;a href=&quot;https://github.com/AikenH/aikenh-DockerComposeYML/blob/master/HomeAssistant/docker-compose.yml&quot;&gt;GITHUB&lt;/a&gt; 可自行取用。&lt;/p&gt;
 &lt;p&gt;修改完 &lt;code&gt;-v&lt;/code&gt; 的挂载目录以后（将数据保存在本地的目录）和 &lt;code&gt;-e&lt;/code&gt; 的时区后，即可执行拉取和安装 docker，这里-v 挂载的本地目录要记得，后面有用。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs bash&quot;&gt;docker compose up -d &lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;安装完后基于 Host 模式的 HA 会运行在 &lt;a href=&quot;http://localhost:8123&quot;&gt;http://localhost:8123&lt;/a&gt; 中，localhost 也可以用 ip 替代。安装完后随着&lt;a href=&quot;https://www.home-assistant.io/getting-started/onboarding/&quot;&gt;指引&lt;/a&gt;完成一些基础的设置，设置好默认的账号密码即可重启 docker 进入 HA 的界面。&lt;/p&gt;
-&lt;h3 id=&quot;HACS&quot;&gt;&lt;a href=&quot;#HACS&quot; class=&quot;headerlink&quot; title=&quot;HACS&quot;&gt;&lt;/a&gt;HACS&lt;/h3&gt;&lt;p&gt;各种不同版本的安装方式可以参考&lt;a href=&quot;https://hacs.xyz/docs/setup/download&quot;&gt;官方网页&lt;/a&gt;，以下只介绍基于 Container 的安装方式，官方提供了安装脚本，因此现在下载已经相对简单，具体如下：&lt;/p&gt;
+&lt;p&gt;安装完后基于 Host 模式的 HA 会运行在 &lt;a href=&quot;http://localhost:8123&quot;&gt;http://localhost:8123&lt;/a&gt; 中，localhost 也可以用 ip 替代。安装完后随着&lt;a href=&quot;https://www.home-assistant.io/getting-started/onboarding/&quot;&gt;指引&lt;/a&gt;完成一些基础的设置，设置好默认的账号密码即可重启 docker 进入 HA 的界面；&lt;/p&gt;
+&lt;p&gt;到这里已经可以做一些基础的使用了，但是为了支持更多智能家具产品，往往需要安装第三方用户商店 HACS ，从中去下载对于其他智能家具产品的支持。&lt;/p&gt;
+&lt;h3 id=&quot;HACS&quot;&gt;&lt;a href=&quot;#HACS&quot; class=&quot;headerlink&quot; title=&quot;HACS&quot;&gt;&lt;/a&gt;HACS&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Home Assistant Community Store 第三方用户商店，便于下载各种各样的集成实现对于各个不同智能家具品牌和产品的支持。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;各种不同版本的安装方式可以参考&lt;a href=&quot;https://hacs.xyz/docs/setup/download&quot;&gt;官方网页&lt;/a&gt;，以下只介绍基于 Container 的安装方式，官方提供了安装脚本，因此现在下载已经相对简单，具体如下：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;进入挂载的本地目录，执行下面命令，即包含了下载和执行。&lt;/li&gt;
 &lt;/ul&gt;
@@ -297,7 +345,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;如果下不下来也可以直接打开网页复制进.Sh 脚本中；也可以去我的仓库中拉下来&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;安装完重启 HA，在集成页面添加集成，搜索 HACS，搜索到了进行安装，跟随配置进行安装，并打开 GITHUB 进行登录和授权即可。&lt;/p&gt;</summary>
+&lt;p&gt;安装完重启 HA，在集成页面添加集成，搜索 HACS，搜索到直接进行安装，跟随配置进行安装，并打开 GITHUB 进行登录和授权即可。&lt;/p&gt;</summary>
     
     
     
@@ -2215,9 +2263,9 @@ f(x)=
     <category term="Git" scheme="http://aikenh.cn/categories/Dev/Git/"/>
     
     
-    <category term="Git" scheme="http://aikenh.cn/tags/Git/"/>
-    
     <category term="Github" scheme="http://aikenh.cn/tags/Github/"/>
+    
+    <category term="Git" scheme="http://aikenh.cn/tags/Git/"/>
     
   </entry>
   
@@ -2671,6 +2719,29 @@ p_i = &#92;left&#92;{
   </entry>
   
   <entry>
+    <title>FSL前期调研</title>
+    <link href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"/>
+    <id>http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/</id>
+    <published>2021-11-29T05:12:05.000Z</published>
+    <updated>2023-10-31T00:06:43.838Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Survey for Few-Shot Learning</title>
     <link href="http://aikenh.cn/cn/FSL-Collection/"/>
     <id>http://aikenh.cn/cn/FSL-Collection/</id>
@@ -2692,29 +2763,6 @@ p_i = &#92;left&#92;{
 &lt;/ol&gt;
 &lt;p&gt;现阶段针对FSL提出的一些相关的机器学习方法：&lt;br&gt;&lt;code&gt;meta-learning;&lt;/code&gt; &lt;code&gt;embedding learning;&lt;/code&gt;  &lt;code&gt;generative modeling etc.&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;本文的主要工作：&lt;/strong&gt;&lt;br&gt;</summary>
-    
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
-    <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FSL前期调研</title>
-    <link href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"/>
-    <id>http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/</id>
-    <published>2021-11-29T05:12:05.000Z</published>
-    <updated>2023-10-31T00:06:43.838Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
     
     
     

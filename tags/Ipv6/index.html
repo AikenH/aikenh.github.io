@@ -70,10 +70,54 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo docker cp nginx:/etc/nginx/conf.d/default.conf /home/username/docker-file/nginx/conf.d/default.conf<br>sudo docker cp nginx:/etc/nginx/nginx.conf /home/username/docker-file/nginx/conf.d/nginx.conf<br>sudo docker cp nginx:/etc/nginx/mime.types /home/username/docker-file/nginx/conf.d/mime.types<br></code></pre></td></tr></table></figure>
 <p>基于原始的配置文件挂载后查看 nginx 是否正常运行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo docker rm -f nginx<br>sudo docker run --name nginx -p 80:80 -p 443:443 -v /home/username/docker-file/nginx/conf.d/nginx.conf:/etc/nginx/nginx.conf -v /home/username/docker-file/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf -v /home/username/docker-file/nginx/conf.d/mime.types:/etc/nginx/mime.types -v /home/username/docker-file/nginx/cert:/etc/nginx/cert -d nginx<br></code></pre></td></tr></table></figure>
-<p>参考资料：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Aamir-Ye/p/16823739.html">使用docker部署nginx并配置https - 逊老头 - 博客园 (cnblogs.com)</a></p></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/NAS/">NAS, </a><a class="link-muted" rel="tag" href="/tags/Ipv6/">Ipv6, </a><a class="link-muted" rel="tag" href="/tags/Web/">Web </a></div><a class="article-more button is-small is-size-7" href="/cn/deploy_server_byipv6_02_nginx/#more"><i class="fas fa-book-reader has-text-grey"></i>  Read more</a></div></article></div><div class="card"><div class="card-image"><a class="image is-7by3" href="/cn/deploy_server_byipv6/"><img class="fill" src="/img/header_img/lml_bg10.jpg" alt="使用Ipv6部署服务01 IPV6开启和设置"></a></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><a class="has-link-black-ter" href="/cn/deploy_server_byipv6/"><i class="fas fa-angle-double-right"></i>使用Ipv6部署服务01 IPV6开启和设置</a></h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2023-11-05T11:23:17.000Z" title="2023-11-05T11:23:17.000Z">2023-11-05</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-11-06T00:40:46.188Z" title="2023/11/6 08:40:46">2023-11-06</time></span><span class="level-item"><a class="link-muted" href="/categories/NAS/">NAS</a></span><span class="level-item">6 minutes read (About 941 words)</span></div></div><div class="content"><blockquote>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Aamir-Ye/p/16823739.html">使用docker部署nginx并配置https - 逊老头 - 博客园 (cnblogs.com)</a></p></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/NAS/">NAS, </a><a class="link-muted" rel="tag" href="/tags/Ipv6/">Ipv6, </a><a class="link-muted" rel="tag" href="/tags/Web/">Web </a></div><a class="article-more button is-small is-size-7" href="/cn/deploy_server_byipv6_02_nginx/#more"><i class="fas fa-book-reader has-text-grey"></i>  Read more</a></div></article></div><div class="card"><div class="card-image"><a class="image is-7by3" href="/cn/deploy_server_byipv6/"><img class="fill" src="/img/header_img/lml_bg10.jpg" alt="使用Ipv6部署服务01 IPV6开启和设置"></a></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><a class="has-link-black-ter" href="/cn/deploy_server_byipv6/"><i class="fas fa-angle-double-right"></i>使用Ipv6部署服务01 IPV6开启和设置</a></h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2023-11-05T11:23:17.000Z" title="2023-11-05T11:23:17.000Z">2023-11-05</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-11-08T01:06:09.892Z" title="2023/11/8 09:06:09">2023-11-08</time></span><span class="level-item"><a class="link-muted" href="/categories/NAS/">NAS</a></span><span class="level-item">8 minutes read (About 1206 words)</span></div></div><div class="content"><blockquote>
 <p>本系列主要介绍通过公网的 ipv6 访问局域网设备并部署自己的服务供公网访问；本篇是其中的第一篇，以电信宽带为例，说明如何开启 ipv6 服务和外网访问放行。</p>
 </blockquote>
 <p>开启 IPV6 服务主要需要修改两个地方的配置：<strong>光猫开启桥接模式和 IPV6 </strong>、<strong>路由器修改为 pppoe 拨号模式以及防火墙设置</strong>；这里以本人的电信光猫和小米路由器为例：</p>
+<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>需要在外网访问部署于家庭内网的一些服务，考虑了以下的几个方案，决定使用 ipv6作为核心</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>方案</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内网穿透</td>
+<td>Zerotier</td>
+<td>免费，需要注册账户，支持移动端，国内速度极慢，且不稳定</td>
+</tr>
+<tr>
+<td>内网穿透</td>
+<td>Tailscale（备用）</td>
+<td>免费，需要注册账号，支持移动端，国内速度一版，稳定性相 Zetotier 较好，但仍不够稳定</td>
+</tr>
+<tr>
+<td>内网穿透</td>
+<td>frp</td>
+<td>申请一个有公网的服务器，使用 frp 自己作为内网穿透的中转，贵，较为麻烦</td>
+</tr>
+<tr>
+<td>公网 IP</td>
+<td>Ipv4</td>
+<td>难以申请，其他都好</td>
+</tr>
+<tr>
+<td>公网 IP</td>
+<td>Ipv6（主力）</td>
+<td>获取简单，需要配置一下光猫使用，一劳永逸，快，稳定，多，有暴露公网的危险，需要设置防火墙</td>
+</tr>
+<tr>
+<td>其他</td>
+<td>Cloudflare Zerotrust</td>
+<td>简单，免费，可以绑定域名，但是网站根本登不进去配置页面，速度不快</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="光猫设置"><a href="#光猫设置" class="headerlink" title="光猫设置"></a>光猫设置</h2><p>查看光猫背面的管理员 url，进入光猫管理界面，登录<strong>超级管理员账户</strong>（非普通账户，会跳转到更详细的管理页面，大部分同地区的超级管理员账户应该是一致的，不对可以询问下宽带师傅）</p>
 <ul>
 <li>管理地址通常为：192.168.1.1</li>
