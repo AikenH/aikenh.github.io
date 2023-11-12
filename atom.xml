@@ -6,7 +6,7 @@
   <link href="http://aikenh.cn/atom.xml" rel="self"/>
   
   <link href="http://aikenh.cn/"/>
-  <updated>2023-11-08T00:45:33.507Z</updated>
+  <updated>2023-11-11T06:54:29.000Z</updated>
   <id>http://aikenh.cn/</id>
   
   <author>
@@ -15,6 +15,85 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>树莓派家庭影音中心2</title>
+    <link href="http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/"/>
+    <id>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/</id>
+    <published>2023-11-11T04:08:37.000Z</published>
+    <updated>2023-11-11T06:54:29.000Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;禁止屏幕休眠显示作为-Dashboard-显示&quot;&gt;&lt;a href=&quot;#禁止屏幕休眠显示作为-Dashboard-显示&quot; class=&quot;headerlink&quot; title=&quot;禁止屏幕休眠显示作为 Dashboard 显示&quot;&gt;&lt;/a&gt;禁止屏幕休眠显示作为 Dashboard 显示&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;树莓派官方的 Raspbian 系统使用的是 lightdm 桌面显示管理器，可以设置 xservice 桌面交互显示来达到屏幕常亮的目的，也就是修改桌面配置文件 lightdm.Conf&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;参考资料：&lt;a href=&quot;http://www.raspi.cc/read-10-1.html&quot;&gt;树莓派设置禁止让屏幕休眠，显示器保持常亮状态-树莓派基础学习入门-树莓派极客,raspi.cc - Powered by raspi&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs shell&quot;&gt;sudo vim /etc/lightdm/lightdm.conf&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;找到 x-server-command 取消注释并在后面加 &lt;code&gt;-s 0-dpms&lt;/code&gt;，添加完后重启即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20231111132731.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参数里的：-s 参数：设置屏幕保护不启动，0 数字零，-dpms 参数：关闭电源节能管理。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Dev" scheme="http://aikenh.cn/categories/Dev/"/>
+    
+    <category term="Raspberry-pie" scheme="http://aikenh.cn/categories/Dev/Raspberry-pie/"/>
+    
+    
+    <category term="Dev" scheme="http://aikenh.cn/tags/Dev/"/>
+    
+    <category term="Raspberry-Pie" scheme="http://aikenh.cn/tags/Raspberry-Pie/"/>
+    
+    <category term="Kodi" scheme="http://aikenh.cn/tags/Kodi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>破解本地自托管Emby服务</title>
+    <link href="http://aikenh.cn/cn/emby_localhost_crack_by_nginx/"/>
+    <id>http://aikenh.cn/cn/emby_localhost_crack_by_nginx/</id>
+    <published>2023-11-10T06:05:15.000Z</published>
+    <updated>2023-11-12T02:53:50.813Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Intro-问题描述&quot;&gt;&lt;a href=&quot;#Intro-问题描述&quot; class=&quot;headerlink&quot; title=&quot;Intro 问题描述&quot;&gt;&lt;/a&gt;Intro 问题描述&lt;/h2&gt;&lt;p&gt;以 emby 为例，学习如何对这种自托管的服务，请求验证网站的软件进行破解，破解的整体思路分为以下的两类：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一种是改客户端，一种是改服务端。两种方式的最终原理一样，都是搭建仿冒认证服务器，客户端访问伪服务器拿到授权信息；【3】&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因此无论是那种方法我们都需要搭建伪验证服务器：所以以下的操作是必须的：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;抓取定位到验证服务器的地址，并获取验证服务器返回的验证信息格式；&lt;/li&gt;
+&lt;li&gt;使用 Nginx 搭建虚拟的验证服务器，使其返回激活/验证信息；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果是&lt;strong&gt;修改客户端&lt;/strong&gt;，则在搭建完验证站后需要：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修改 Host 文件，将请求验证服务器的请求劫持到本地搭建的服务上；&lt;/li&gt;
+&lt;li&gt;需要伪服务器和客户端都要安装自签名证书&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果是&lt;strong&gt;修改服务端&lt;/strong&gt;，则后续需要：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修改服务端源文件，将默认的认证服务器 mb3admin.com 地址直接改成伪服务器&lt;/li&gt;
+&lt;li&gt;这样就&lt;strong&gt;不需要安装自签名证书&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果是使用 Docker 进行部署的 emby 可以使用别人修改好的服务端的镜像进行部署安装（like 开心版）&lt;/p&gt;
+&lt;p&gt;本文主要介绍验证服务器的搭建、修改客户端的方法，以及一些其他的注意事项；&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="NAS" scheme="http://aikenh.cn/categories/NAS/"/>
+    
+    
+    <category term="NAS" scheme="http://aikenh.cn/tags/NAS/"/>
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="nginx" scheme="http://aikenh.cn/tags/nginx/"/>
+    
+    <category term="emby" scheme="http://aikenh.cn/tags/emby/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Ipv6部署服务03 DDNS-go 动态域名解析</title>
@@ -53,7 +132,7 @@
     <link href="http://aikenh.cn/cn/deploy_server_byipv6_02_nginx/"/>
     <id>http://aikenh.cn/cn/deploy_server_byipv6_02_nginx/</id>
     <published>2023-11-06T12:49:16.000Z</published>
-    <updated>2023-11-07T16:45:02.954Z</updated>
+    <updated>2023-11-12T02:44:11.719Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -91,6 +170,8 @@
     <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
     
     <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="nginx" scheme="http://aikenh.cn/tags/nginx/"/>
     
   </entry>
   
@@ -2263,9 +2344,9 @@ f(x)=
     <category term="Git" scheme="http://aikenh.cn/categories/Dev/Git/"/>
     
     
-    <category term="Github" scheme="http://aikenh.cn/tags/Github/"/>
-    
     <category term="Git" scheme="http://aikenh.cn/tags/Git/"/>
+    
+    <category term="Github" scheme="http://aikenh.cn/tags/Github/"/>
     
   </entry>
   
@@ -2719,29 +2800,6 @@ p_i = &#92;left&#92;{
   </entry>
   
   <entry>
-    <title>FSL前期调研</title>
-    <link href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"/>
-    <id>http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/</id>
-    <published>2021-11-29T05:12:05.000Z</published>
-    <updated>2023-10-31T00:06:43.838Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
-    <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Survey for Few-Shot Learning</title>
     <link href="http://aikenh.cn/cn/FSL-Collection/"/>
     <id>http://aikenh.cn/cn/FSL-Collection/</id>
@@ -2763,6 +2821,29 @@ p_i = &#92;left&#92;{
 &lt;/ol&gt;
 &lt;p&gt;现阶段针对FSL提出的一些相关的机器学习方法：&lt;br&gt;&lt;code&gt;meta-learning;&lt;/code&gt; &lt;code&gt;embedding learning;&lt;/code&gt;  &lt;code&gt;generative modeling etc.&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;本文的主要工作：&lt;/strong&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FSL前期调研</title>
+    <link href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"/>
+    <id>http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/</id>
+    <published>2021-11-29T05:12:05.000Z</published>
+    <updated>2023-10-31T00:06:43.838Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
     
     
     
@@ -3845,7 +3926,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/WSL2/"/>
     <id>http://aikenh.cn/cn/WSL2/</id>
     <published>2021-09-27T18:17:39.000Z</published>
-    <updated>2023-10-31T00:29:51.298Z</updated>
+    <updated>2023-11-12T02:44:11.690Z</updated>
     
     
     <summary type="html">&lt;p&gt;WSL（Windows Subsystem Linux） 将 Linux 环境部署在 Windows 中，Linux 环境在补全了 Windows 开发上的不足之外（Bash 等），还有以下的几个特性极大的便利开发和日常使用，因此强烈推荐启用并安装。&lt;/p&gt;
@@ -4572,9 +4653,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Emotion" scheme="http://aikenh.cn/tags/Emotion/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="Emotion" scheme="http://aikenh.cn/tags/Emotion/"/>
     
   </entry>
   
