@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/</loc>
+    
+    <lastmod>2023-11-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://aikenh.cn/cn/emby_localhost_crack_by_nginx/</loc>
     
     <lastmod>2023-11-13</lastmod>
@@ -41,15 +50,6 @@
     <loc>http://aikenh.cn/cn/WSL2/</loc>
     
     <lastmod>2023-11-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/</loc>
-    
-    <lastmod>2023-11-11</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -326,6 +326,15 @@
   </url>
   
   <url>
+    <loc>http://aikenh.cn/cn/Cpp/</loc>
+    
+    <lastmod>2023-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://aikenh.cn/cn/DataAugmentation/</loc>
     
     <lastmod>2023-10-30</lastmod>
@@ -344,15 +353,6 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/DualSystemUbuntu/</loc>
-    
-    <lastmod>2023-10-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://aikenh.cn/cn/Docker01_linux/</loc>
     
     <lastmod>2023-10-30</lastmod>
@@ -362,7 +362,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/EfficientNet/</loc>
+    <loc>http://aikenh.cn/cn/DualSystemUbuntu/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -371,7 +371,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/Cpp/</loc>
+    <loc>http://aikenh.cn/cn/EfficientNet/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -488,15 +488,6 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/IL-MgSvF/</loc>
-    
-    <lastmod>2023-10-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://aikenh.cn/cn/IL-WYZ/</loc>
     
     <lastmod>2023-10-30</lastmod>
@@ -507,6 +498,15 @@
   
   <url>
     <loc>http://aikenh.cn/cn/Immich_backup/</loc>
+    
+    <lastmod>2023-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://aikenh.cn/cn/IL-MgSvF/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -533,7 +533,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/KnowledgeEvolution/</loc>
+    <loc>http://aikenh.cn/cn/Latex_testing/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -542,7 +542,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/Latex_testing/</loc>
+    <loc>http://aikenh.cn/cn/KnowledgeEvolution/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -560,7 +560,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/LinuxZellij/</loc>
+    <loc>http://aikenh.cn/cn/LinuxCLI_Download/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -569,7 +569,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/LinuxCLI_Download/</loc>
+    <loc>http://aikenh.cn/cn/LinuxZellij/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -686,7 +686,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/NAT%E7%A9%BF%E9%80%8F/</loc>
+    <loc>http://aikenh.cn/cn/NAS/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -695,7 +695,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/NAS/</loc>
+    <loc>http://aikenh.cn/cn/NAT%E7%A9%BF%E9%80%8F/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -785,7 +785,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/PythonTips/</loc>
+    <loc>http://aikenh.cn/cn/RL-DouZero/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -803,7 +803,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/RL-DouZero/</loc>
+    <loc>http://aikenh.cn/cn/PythonTips/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -821,15 +821,6 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/SQL1/</loc>
-    
-    <lastmod>2023-10-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://aikenh.cn/cn/SQL2/</loc>
     
     <lastmod>2023-10-30</lastmod>
@@ -839,7 +830,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/SQL5/</loc>
+    <loc>http://aikenh.cn/cn/SQL1/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -866,6 +857,24 @@
   </url>
   
   <url>
+    <loc>http://aikenh.cn/cn/SQL5/</loc>
+    
+    <lastmod>2023-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://aikenh.cn/cn/SS_OD_SoftTeacher/</loc>
+    
+    <lastmod>2023-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://aikenh.cn/cn/SSL-MoCov3/</loc>
     
     <lastmod>2023-10-30</lastmod>
@@ -876,15 +885,6 @@
   
   <url>
     <loc>http://aikenh.cn/cn/Shell/</loc>
-    
-    <lastmod>2023-10-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://aikenh.cn/cn/SS_OD_SoftTeacher/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -938,15 +938,6 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/TaskPhoto00_Xs20_Recipes/</loc>
-    
-    <lastmod>2023-10-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://aikenh.cn/cn/StableDiffusionPrompt/</loc>
     
     <lastmod>2023-10-30</lastmod>
@@ -965,7 +956,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/Transformer/</loc>
+    <loc>http://aikenh.cn/cn/TaskPhoto00_Xs20_Recipes/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -975,6 +966,15 @@
   
   <url>
     <loc>http://aikenh.cn/cn/Transfer-Sync-Files/</loc>
+    
+    <lastmod>2023-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://aikenh.cn/cn/Transformer/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -1010,7 +1010,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/VimConfigDf/</loc>
+    <loc>http://aikenh.cn/cn/VimOperation/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -1019,7 +1019,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/VimOperation/</loc>
+    <loc>http://aikenh.cn/cn/VimConfigDf/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -1055,6 +1055,15 @@
   </url>
   
   <url>
+    <loc>http://aikenh.cn/cn/Windows/</loc>
+    
+    <lastmod>2023-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://aikenh.cn/cn/WindowsCudaCudnn/</loc>
     
     <lastmod>2023-10-30</lastmod>
@@ -1064,7 +1073,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/Windows/</loc>
+    <loc>http://aikenh.cn/cn/WindowsTerminal/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -1082,7 +1091,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/WindowsTerminal/</loc>
+    <loc>http://aikenh.cn/cn/Z_Jumper/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -1109,15 +1118,6 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/Z_Jumper/</loc>
-    
-    <lastmod>2023-10-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://aikenh.cn/cn/fluent_python/</loc>
     
     <lastmod>2023-10-30</lastmod>
@@ -1136,15 +1136,6 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/powershell/</loc>
-    
-    <lastmod>2023-10-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://aikenh.cn/cn/macos_bash_config/</loc>
     
     <lastmod>2023-10-30</lastmod>
@@ -1154,7 +1145,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/cn/%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BB%A3%E7%90%86%E5%85%B1%E4%BA%AB/</loc>
+    <loc>http://aikenh.cn/cn/powershell/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -1173,6 +1164,15 @@
   
   <url>
     <loc>http://aikenh.cn/cn/%E5%B9%B6%E8%A1%8C%E8%AE%AD%E7%BB%83%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
+    
+    <lastmod>2023-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://aikenh.cn/cn/%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BB%A3%E7%90%86%E5%85%B1%E4%BA%AB/</loc>
     
     <lastmod>2023-10-30</lastmod>
     
@@ -1309,20 +1309,6 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/tags/Augmentation/</loc>
-    <lastmod>2023-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://aikenh.cn/tags/Pytorch/</loc>
-    <lastmod>2023-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://aikenh.cn/tags/Blog/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -1331,6 +1317,20 @@
   
   <url>
     <loc>http://aikenh.cn/tags/Hexo/</loc>
+    <lastmod>2023-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://aikenh.cn/tags/Augmentation/</loc>
+    <lastmod>2023-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://aikenh.cn/tags/Pytorch/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1351,6 +1351,13 @@
   </url>
   
   <url>
+    <loc>http://aikenh.cn/tags/Portainer/</loc>
+    <lastmod>2023-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://aikenh.cn/tags/DualSystem/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -1359,13 +1366,6 @@
   
   <url>
     <loc>http://aikenh.cn/tags/Ubuntu/</loc>
-    <lastmod>2023-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://aikenh.cn/tags/Portainer/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1456,6 +1456,13 @@
   </url>
   
   <url>
+    <loc>http://aikenh.cn/tags/NotDone/</loc>
+    <lastmod>2023-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://aikenh.cn/tags/Colab/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -1464,13 +1471,6 @@
   
   <url>
     <loc>http://aikenh.cn/tags/Gpu/</loc>
-    <lastmod>2023-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://aikenh.cn/tags/NotDone/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1820,6 +1820,13 @@
   </url>
   
   <url>
+    <loc>http://aikenh.cn/tags/Tool/</loc>
+    <lastmod>2023-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://aikenh.cn/tags/Iptv/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -1849,13 +1856,6 @@
   
   <url>
     <loc>http://aikenh.cn/tags/Web/</loc>
-    <lastmod>2023-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://aikenh.cn/tags/Tool/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1911,6 +1911,13 @@
   </url>
   
   <url>
+    <loc>http://aikenh.cn/tags/Tobefinnish/</loc>
+    <lastmod>2023-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://aikenh.cn/tags/Clash/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -1926,13 +1933,6 @@
   
   <url>
     <loc>http://aikenh.cn/tags/Proxy/</loc>
-    <lastmod>2023-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://aikenh.cn/tags/Tobefinnish/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1990,13 +1990,6 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/categories/Windows/</loc>
-    <lastmod>2023-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://aikenh.cn/categories/Langs/Cpp/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -2004,7 +1997,7 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/categories/Machine-Learning/Dataset/</loc>
+    <loc>http://aikenh.cn/categories/Windows/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2018,14 +2011,14 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/categories/Editor/</loc>
+    <loc>http://aikenh.cn/categories/Machine-Learning/Dataset/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://aikenh.cn/categories/Windows/Dual-System/</loc>
+    <loc>http://aikenh.cn/categories/Editor/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2053,6 +2046,13 @@
   </url>
   
   <url>
+    <loc>http://aikenh.cn/categories/Windows/Dual-System/</loc>
+    <lastmod>2023-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://aikenh.cn/categories/NAS/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -2067,14 +2067,14 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/categories/Docker/Containers/</loc>
+    <loc>http://aikenh.cn/categories/Dev/Git/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://aikenh.cn/categories/Dev/Git/</loc>
+    <loc>http://aikenh.cn/categories/Docker/Containers/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2096,6 +2096,13 @@
   
   <url>
     <loc>http://aikenh.cn/categories/MacOS/</loc>
+    <lastmod>2023-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://aikenh.cn/categories/Linux/CLI/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2124,13 +2131,6 @@
   
   <url>
     <loc>http://aikenh.cn/categories/NAS/NAT/</loc>
-    <lastmod>2023-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://aikenh.cn/categories/Linux/CLI/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2235,14 +2235,14 @@
   </url>
   
   <url>
-    <loc>http://aikenh.cn/categories/Dev/Raspberry-pie/</loc>
+    <loc>http://aikenh.cn/categories/Frontend/Vue/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://aikenh.cn/categories/Frontend/Vue/</loc>
+    <loc>http://aikenh.cn/categories/Dev/Raspberry-pie/</loc>
     <lastmod>2023-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
