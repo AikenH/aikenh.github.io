@@ -6,7 +6,7 @@
   <link href="http://aikenh.cn/atom.xml" rel="self"/>
   
   <link href="http://aikenh.cn/"/>
-  <updated>2023-11-13T11:27:42.784Z</updated>
+  <updated>2023-12-26T05:50:31.957Z</updated>
   <id>http://aikenh.cn/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>家庭服务器整体方案</title>
+    <link href="http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/"/>
+    <id>http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/</id>
+    <published>2023-12-09T00:24:36.000Z</published>
+    <updated>2023-12-26T05:50:31.957Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;本文主要介绍笔者的家庭服务器设计方案 V1。该方案中中涵盖影视、图像、图书&amp;amp;文献、博客、智能家居管理、密码管理服务，以及公网上内容分发的初步设计和选择的考量。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;整体架构&quot;&gt;&lt;a href=&quot;#整体架构&quot; class=&quot;headerlink&quot; title=&quot;整体架构&quot;&gt;&lt;/a&gt;整体架构&lt;/h2&gt;&lt;p&gt;整个服务中心在设计的时候主要考虑以下的几个方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;💻操作设备&amp;amp;系统(OS)和内容存储方案：如何&lt;strong&gt;经济实惠&lt;/strong&gt;的选择合适的设备和系统&lt;/li&gt;
+&lt;li&gt;🌦️服务需求：需要搭建&lt;strong&gt;哪些服务&lt;/strong&gt;，应该选择&lt;strong&gt;哪个服务&lt;/strong&gt;进行自托管&lt;/li&gt;
+&lt;li&gt;🌍部署方案：如何保证在局域网+&lt;strong&gt;公网&lt;/strong&gt;都能顺利且&lt;strong&gt;安全的访问&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;📱访问策略：各个平台上的访问方式的选择&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此外，并非所有服务都需要在公网上进行部署，这里的部分服务可以仅用于局域网，由于仅开放了 Nginx 端口，因此从公网中访问不到未分发的内容，因此，部分存储与敏感信息相关的服务可以仅保留在局域网中进行访问。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!note]+&lt;br&gt; 在这种情况下如果希望能够使用一致的域名访问方式，是否可以考虑使用 Nginx 鉴权限制访问 ip 为内网 ip，其他公网访问直接丢弃？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;初版家庭服务中心的架构图如下，(这里并非列出所有的服务组件)，该架构图中所有的应用都是为了方便日常生活中的各项活动，下面会对架构图自底向上的做一些简单的说明。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20231209082421.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="NAS" scheme="http://aikenh.cn/categories/NAS/"/>
+    
+    
+    <category term="NAS" scheme="http://aikenh.cn/tags/NAS/"/>
+    
+    <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
+    
+  </entry>
   
   <entry>
     <title>树莓派家庭影音中心2</title>
@@ -2800,6 +2836,29 @@ p_i = &#92;left&#92;{
   </entry>
   
   <entry>
+    <title>FSL前期调研</title>
+    <link href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"/>
+    <id>http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/</id>
+    <published>2021-11-29T05:12:05.000Z</published>
+    <updated>2023-10-31T00:06:43.838Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Survey for Few-Shot Learning</title>
     <link href="http://aikenh.cn/cn/FSL-Collection/"/>
     <id>http://aikenh.cn/cn/FSL-Collection/</id>
@@ -2821,29 +2880,6 @@ p_i = &#92;left&#92;{
 &lt;/ol&gt;
 &lt;p&gt;现阶段针对FSL提出的一些相关的机器学习方法：&lt;br&gt;&lt;code&gt;meta-learning;&lt;/code&gt; &lt;code&gt;embedding learning;&lt;/code&gt;  &lt;code&gt;generative modeling etc.&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;本文的主要工作：&lt;/strong&gt;&lt;br&gt;</summary>
-    
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
-    <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FSL前期调研</title>
-    <link href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"/>
-    <id>http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/</id>
-    <published>2021-11-29T05:12:05.000Z</published>
-    <updated>2023-10-31T00:06:43.838Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
     
     
     
