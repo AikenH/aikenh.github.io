@@ -53,6 +53,137 @@
   </entry>
   
   <entry>
+    <title>家庭服务器的备份工具选择</title>
+    <link href="http://aikenh.cn/cn/BackupToolsForHomeServer/"/>
+    <id>http://aikenh.cn/cn/BackupToolsForHomeServer/</id>
+    <published>2023-12-09T00:04:06.000Z</published>
+    <updated>2023-12-30T00:02:51.457Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;在搭建了 Immich 服务之后，考虑到数据本身的重要性，又对硬盘本身的寿命和各种数据安全的场景有所顾虑，对加密备份的需求就浮出水面了，希望能有一个备份的预案来对抗各种数据风险，因此有本篇文章，对各种备份工具做简单调研和选择。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20231229113137.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;👾Intro-调研对象介绍&quot;&gt;&lt;a href=&quot;#👾Intro-调研对象介绍&quot; class=&quot;headerlink&quot; title=&quot;👾Intro 调研对象介绍&quot;&gt;&lt;/a&gt;👾Intro 调研对象介绍&lt;/h2&gt;&lt;p&gt;👍出场选手介绍，节选来自以下网站的备份方案：&lt;a href=&quot;https://github.com/awesome-foss/awesome-sysadmin#backups&quot;&gt;awesome-sysadmin-backup&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://kopia.io/&quot;&gt;kopia&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.urbackup.org/&quot;&gt;urBackUp&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://restic.net/&quot;&gt;restic&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://rclone.org/&quot;&gt;rclone&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://duplicity.gitlab.io/&quot;&gt;duplicity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.duplicati.com/&quot;&gt;Duplicati&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://duplicacy.com/&quot;&gt;Duplicacy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;脚本实现简单的备份和上传：Crontab+自动 tar 加密+Webdav 接口进行上传&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为了备份大量包含隐私的图像信息，这里最基础的需求有以下几点：&lt;strong&gt;加密&lt;/strong&gt;，&lt;strong&gt;支持云端存储&lt;/strong&gt;服务/Webdav，&lt;strong&gt;增量备份&lt;/strong&gt;，&lt;strong&gt;免费&lt;/strong&gt;；&lt;/p&gt;
+&lt;p&gt;额外如果能够支持以下的需求则额外加分：&lt;strong&gt;压缩&lt;/strong&gt;，&lt;strong&gt;去重&lt;/strong&gt;，&lt;strong&gt;平台一致性&lt;/strong&gt;，&lt;strong&gt;用户界面友好&lt;/strong&gt;（备份状态检查等）&lt;/p&gt;
+&lt;h2 id=&quot;🏓Compare-特性对比&quot;&gt;&lt;a href=&quot;#🏓Compare-特性对比&quot; class=&quot;headerlink&quot; title=&quot;🏓Compare 特性对比&quot;&gt;&lt;/a&gt;🏓Compare 特性对比&lt;/h2&gt;&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;PSWD&lt;/th&gt;
+&lt;th&gt;Zip&lt;/th&gt;
+&lt;th&gt;Webdav&lt;/th&gt;
+&lt;th&gt;Add&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;ui&lt;/th&gt;
+&lt;th&gt;Consis&lt;/th&gt;
+&lt;th&gt;free&lt;/th&gt;
+&lt;th&gt;rate&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;kopia&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;🔥🔥🔥🔥🔥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;urbackup&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;C/S&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;🔥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;restic&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;r/o&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;CLI&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;🔥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;duplicity&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;CLI&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;🔥🔥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;duplicati&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;n&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;🔥🔥🔥🔥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;duplicacy&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;td&gt;y-&lt;/td&gt;
+&lt;td&gt;y&lt;/td&gt;
+&lt;td&gt;y-&lt;/td&gt;
+&lt;td&gt;🔥🔥🔥🔥🔥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;</summary>
+    
+    
+    
+    <category term="NAS" scheme="http://aikenh.cn/categories/NAS/"/>
+    
+    
+    <category term="NAS" scheme="http://aikenh.cn/tags/NAS/"/>
+    
+    <category term="CLI" scheme="http://aikenh.cn/tags/CLI/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+  </entry>
+  
+  <entry>
     <title>树莓派家庭影音中心2</title>
     <link href="http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/"/>
     <id>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/</id>
@@ -469,9 +600,9 @@
     <category term="NAS" scheme="http://aikenh.cn/categories/NAS/"/>
     
     
-    <category term="Raspberry Pie" scheme="http://aikenh.cn/tags/Raspberry-Pie/"/>
-    
     <category term="NAS" scheme="http://aikenh.cn/tags/NAS/"/>
+    
+    <category term="Raspberry Pie" scheme="http://aikenh.cn/tags/Raspberry-Pie/"/>
     
     <category term="HomeAssistant" scheme="http://aikenh.cn/tags/HomeAssistant/"/>
     
@@ -509,9 +640,9 @@
     <category term="CLI" scheme="http://aikenh.cn/categories/Linux/CLI/"/>
     
     
-    <category term="Linux" scheme="http://aikenh.cn/tags/Linux/"/>
-    
     <category term="CLI" scheme="http://aikenh.cn/tags/CLI/"/>
+    
+    <category term="Linux" scheme="http://aikenh.cn/tags/Linux/"/>
     
   </entry>
   
@@ -769,9 +900,9 @@
     <category term="CLI" scheme="http://aikenh.cn/categories/Linux/CLI/"/>
     
     
-    <category term="Linux" scheme="http://aikenh.cn/tags/Linux/"/>
-    
     <category term="CLI" scheme="http://aikenh.cn/tags/CLI/"/>
+    
+    <category term="Linux" scheme="http://aikenh.cn/tags/Linux/"/>
     
     <category term="Terminal multiplexer" scheme="http://aikenh.cn/tags/Terminal-multiplexer/"/>
     
@@ -2836,29 +2967,6 @@ p_i = &#92;left&#92;{
   </entry>
   
   <entry>
-    <title>FSL前期调研</title>
-    <link href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"/>
-    <id>http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/</id>
-    <published>2021-11-29T05:12:05.000Z</published>
-    <updated>2023-10-31T00:06:43.838Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
-    <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Survey for Few-Shot Learning</title>
     <link href="http://aikenh.cn/cn/FSL-Collection/"/>
     <id>http://aikenh.cn/cn/FSL-Collection/</id>
@@ -2880,6 +2988,29 @@ p_i = &#92;left&#92;{
 &lt;/ol&gt;
 &lt;p&gt;现阶段针对FSL提出的一些相关的机器学习方法：&lt;br&gt;&lt;code&gt;meta-learning;&lt;/code&gt; &lt;code&gt;embedding learning;&lt;/code&gt;  &lt;code&gt;generative modeling etc.&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;本文的主要工作：&lt;/strong&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FSL前期调研</title>
+    <link href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"/>
+    <id>http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/</id>
+    <published>2021-11-29T05:12:05.000Z</published>
+    <updated>2023-10-31T00:06:43.838Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
     
     
     
@@ -3387,9 +3518,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     
     <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
     
-    <category term="CV" scheme="http://aikenh.cn/tags/CV/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="CV" scheme="http://aikenh.cn/tags/CV/"/>
     
     <category term="Open World Learning" scheme="http://aikenh.cn/tags/Open-World-Learning/"/>
     
@@ -4689,9 +4820,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Emotion" scheme="http://aikenh.cn/tags/Emotion/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="Emotion" scheme="http://aikenh.cn/tags/Emotion/"/>
     
   </entry>
   
