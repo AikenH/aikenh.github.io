@@ -184,6 +184,56 @@
   </entry>
   
   <entry>
+    <title>StableDiffusionWebUI鉴权设计</title>
+    <link href="http://aikenh.cn/cn/StableDiffusionWebUI%E9%89%B4%E6%9D%83%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://aikenh.cn/cn/StableDiffusionWebUI%E9%89%B4%E6%9D%83%E8%AE%BE%E8%AE%A1/</id>
+    <published>2023-12-08T07:42:36.000Z</published>
+    <updated>2024-01-27T09:13:23.751Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;[&amp;gt; [!summary]+&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;this article purpose is to build an authority page for stable diffusion webui using nginx &amp;amp; python/js. Which can publish my personal stable diffusion server. Wrote by GPT(try).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20240127161828.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h3&gt;&lt;p&gt;In the digital age, the security and user-friendliness of web services are not just conveniences; they are necessities. Balancing robust security protocols with an engaging user experience is key to maintaining both the integrity and popularity of any online service. This blog post dives into the intricacies of securing web services using Nginx for authentication, coupled with designing an appealing frontend. Our journey begins with a practical scenario: publishing a stable diffusion webUI service, accessible only to an authenticated audience.&lt;/p&gt;
+&lt;h3 id=&quot;Setting-Up-Nginx-for-Secure-Authentication&quot;&gt;&lt;a href=&quot;#Setting-Up-Nginx-for-Secure-Authentication&quot; class=&quot;headerlink&quot; title=&quot;Setting Up Nginx for Secure Authentication&quot;&gt;&lt;/a&gt;Setting Up Nginx for Secure Authentication&lt;/h3&gt;&lt;p&gt;Nginx excels in serving web pages and as a reverse proxy, providing enhanced security through authentication mechanisms. Let’s explore a typical Nginx configuration for secure authentication:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;/verify_token&lt;/strong&gt;: This block forwards authentication requests to a dedicated server. By excluding the request body and focusing on essential headers, it ensures that only valid, authenticated requests proceed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location = /verify_token &amp;#123;&lt;br&gt;    proxy_pass http://&amp;#123;your_auth_server&amp;#125;:2424;&lt;br&gt;    proxy_pass_request_body off;&lt;br&gt;    proxy_set_header Content-Length &amp;quot;&amp;quot;;&lt;br&gt;    proxy_set_header X-Original-URI $request_uri;&lt;br&gt;    proxy_set_header X-Original-Remote-Addr $remote_addr;&lt;br&gt;    proxy_set_header X-Original-Host $host;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;/login&lt;/strong&gt;: Catering to login requests, this configuration forwards the necessary details to the authentication server, preserving crucial information about the request’s origin.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location /login &amp;#123;&lt;br&gt;    proxy_pass http://&amp;#123;your_auth_server&amp;#125;:2424;&lt;br&gt;    proxy_set_header Host $host;&lt;br&gt;    proxy_set_header X-Real-IP $remote_addr;&lt;br&gt;    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&lt;br&gt;    proxy_set_header X-Forwarded-Proto $scheme;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Error Handling (@error401)&lt;/strong&gt;: A clever redirect mechanism that guides unauthenticated users to the login page, keeping the original URL intact.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location @error401 &amp;#123;&lt;br&gt;    return 302 &amp;#123;your_domain&amp;#125;/login;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Root Location (/)&lt;/strong&gt;: The gateway to your service, which rigorously checks each request for authentication, granting access only to verified users.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location / &amp;#123;&lt;br&gt;    auth_request /verify_token;&lt;br&gt;    error_page 401 = @error401;&lt;br&gt;    proxy_pass http://&amp;#123;your_server&amp;#125;:2323/;&lt;br&gt;    proxy_http_version 1.1;&lt;br&gt;    proxy_set_header Upgrade $http_upgrade;&lt;br&gt;    proxy_set_header Connection &amp;#x27;upgrade&amp;#x27;;&lt;br&gt;    proxy_set_header Host $host;&lt;br&gt;    proxy_cache_bypass $http_upgrade;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;This setup not only fortifies your service against unauthorized access but also maintains a seamless user experience, redirecting unauthenticated users without hassle.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
+    
+    <category term="AIGC" scheme="http://aikenh.cn/categories/Machine-Learning/AIGC/"/>
+    
+    
+    <category term="AI" scheme="http://aikenh.cn/tags/AI/"/>
+    
+    <category term="AIGC" scheme="http://aikenh.cn/tags/AIGC/"/>
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="Flask" scheme="http://aikenh.cn/tags/Flask/"/>
+    
+  </entry>
+  
+  <entry>
     <title>树莓派家庭影音中心2</title>
     <link href="http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/"/>
     <id>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/</id>
@@ -288,9 +338,9 @@
     
     <category term="NAS" scheme="http://aikenh.cn/tags/NAS/"/>
     
-    <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
-    
     <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
     
   </entry>
   
@@ -334,9 +384,9 @@
     
     <category term="NAS" scheme="http://aikenh.cn/tags/NAS/"/>
     
-    <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
-    
     <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
     
     <category term="nginx" scheme="http://aikenh.cn/tags/nginx/"/>
     
@@ -453,9 +503,9 @@
     
     <category term="NAS" scheme="http://aikenh.cn/tags/NAS/"/>
     
-    <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
-    
     <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
     
   </entry>
   
@@ -1895,9 +1945,9 @@
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
-    
     <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
+    
+    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
     
     <category term="VsCode" scheme="http://aikenh.cn/tags/VsCode/"/>
     
@@ -2587,9 +2637,9 @@ f(x)=
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
     
     <category term="Incremental Learning" scheme="http://aikenh.cn/tags/Incremental-Learning/"/>
     
@@ -2623,9 +2673,9 @@ f(x)=
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
     
     <category term="Incremental Learning" scheme="http://aikenh.cn/tags/Incremental-Learning/"/>
     
@@ -2657,9 +2707,9 @@ f(x)=
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
     
     <category term="Long-Tailed Learning" scheme="http://aikenh.cn/tags/Long-Tailed-Learning/"/>
     
@@ -2994,9 +3044,9 @@ p_i = &#92;left&#92;{
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
     
     <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
     
@@ -3017,9 +3067,9 @@ p_i = &#92;left&#92;{
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
     
     <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
     
@@ -3116,9 +3166,9 @@ p_i = &#92;left&#92;{
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
-    
     <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
+    
+    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
     
   </entry>
   
@@ -3182,9 +3232,9 @@ p_i = &#92;left&#92;{
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
-    
     <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
+    
+    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
     
   </entry>
   
@@ -3516,9 +3566,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
     
     <category term="CV" scheme="http://aikenh.cn/tags/CV/"/>
     
@@ -3565,9 +3615,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
-    
     <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
+    
+    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
     
   </entry>
   
@@ -3604,9 +3654,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
-    
     <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
+    
+    <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
     
   </entry>
   
@@ -4465,9 +4515,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     
     <category term="Cpp" scheme="http://aikenh.cn/tags/Cpp/"/>
     
-    <category term="Leetcode" scheme="http://aikenh.cn/tags/Leetcode/"/>
-    
     <category term="Job" scheme="http://aikenh.cn/tags/Job/"/>
+    
+    <category term="Leetcode" scheme="http://aikenh.cn/tags/Leetcode/"/>
     
   </entry>
   
@@ -4500,9 +4550,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
     <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
     
     <category term="Pooling" scheme="http://aikenh.cn/tags/Pooling/"/>
     
@@ -4743,9 +4793,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     
     <category term="Cpp" scheme="http://aikenh.cn/tags/Cpp/"/>
     
-    <category term="Leetcode" scheme="http://aikenh.cn/tags/Leetcode/"/>
-    
     <category term="Job" scheme="http://aikenh.cn/tags/Job/"/>
+    
+    <category term="Leetcode" scheme="http://aikenh.cn/tags/Leetcode/"/>
     
   </entry>
   
