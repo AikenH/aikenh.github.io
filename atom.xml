@@ -6,7 +6,7 @@
   <link href="http://aikenh.cn/atom.xml" rel="self"/>
   
   <link href="http://aikenh.cn/"/>
-  <updated>2023-12-30T01:19:02.948Z</updated>
+  <updated>2024-01-28T08:53:32.048Z</updated>
   <id>http://aikenh.cn/</id>
   
   <author>
@@ -17,11 +17,96 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Windows Powershell 01 后台任务</title>
+    <link href="http://aikenh.cn/cn/pwsh_BgTask/"/>
+    <id>http://aikenh.cn/cn/pwsh_BgTask/</id>
+    <published>2024-01-28T07:44:25.000Z</published>
+    <updated>2024-01-28T08:53:32.048Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;有一些希望能在后台运行的任务，例如 nohup,tmux,screen 可实现的一些功能，简单介绍以下 powershell 中的类似用法和功能。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To run a Command Prompt (cmd.exe) command in the background from PowerShell and retrieve it later, similar to sessions in &lt;code&gt;tmux&lt;/code&gt;, you can use PowerShell Jobs. PowerShell Jobs allow you to start a command or script in the background and then retrieve the results later. Here’s how you can do it:&lt;/p&gt;
+&lt;p&gt;从 PowerShell 在后台运行命令提示符 (cmd.exe) 命令并稍后检索它（与 &lt;code&gt;tmux&lt;/code&gt; 中的会话类似），可以使用 PowerShell Jobs。 PowerShell Jobs 允许在后台启动命令或脚本，然后稍后检索结果。&lt;/p&gt;
+&lt;p&gt;具体的一些操作如下：&lt;/p&gt;
+&lt;h3 id=&quot;Start-a-Job-in-the-background&quot;&gt;&lt;a href=&quot;#Start-a-Job-in-the-background&quot; class=&quot;headerlink&quot; title=&quot;Start a Job in the background&quot;&gt;&lt;/a&gt;Start a Job in the background&lt;/h3&gt;&lt;p&gt;使用 Start-Job 和 ScriptBlock 参数执行选定的命令&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs powershell&quot;&gt;&lt;span class=&quot;hljs-variable&quot;&gt;$job&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;Start-Job&lt;/span&gt; &lt;span class=&quot;hljs-literal&quot;&gt;-ScriptBlock&lt;/span&gt; &amp;#123; pwsh.exe /c &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;your_command_here&amp;quot;&lt;/span&gt; &amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里将 &lt;code&gt;your_command_here&lt;/code&gt; 改为自己需要执行的命令，例如启动局域网内可访问的 Stable-Diffusion Webui：&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs powershell&quot;&gt;&lt;span class=&quot;hljs-variable&quot;&gt;$job&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;Start-Job&lt;/span&gt; &lt;span class=&quot;hljs-literal&quot;&gt;-ScriptBlock&lt;/span&gt; &amp;#123; pwsh.exe /c &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;.&#92;webui.bat --xformers --listen&amp;quot;&lt;/span&gt; &amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果需要同时执行多条命令（例如执行 python 命令之前需要切换环境，默认为 base 环境）可以使用 &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs powershell&quot;&gt;&lt;span class=&quot;hljs-variable&quot;&gt;$job&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;Start-Job&lt;/span&gt; &lt;span class=&quot;hljs-literal&quot;&gt;-ScriptBlock&lt;/span&gt; &amp;#123; pwsh.exe /c &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;conda activate flask &amp;amp;&amp;amp; python .&#92;app.py&amp;quot;&lt;/span&gt; &amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Windows" scheme="http://aikenh.cn/categories/Windows/"/>
+    
+    <category term="Powershell" scheme="http://aikenh.cn/categories/Windows/Powershell/"/>
+    
+    
+    <category term="Windows" scheme="http://aikenh.cn/tags/Windows/"/>
+    
+    <category term="Powershell" scheme="http://aikenh.cn/tags/Powershell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>StableDiffusionWebUI鉴权设计</title>
+    <link href="http://aikenh.cn/cn/StableDiffusionWebUI%E9%89%B4%E6%9D%83%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://aikenh.cn/cn/StableDiffusionWebUI%E9%89%B4%E6%9D%83%E8%AE%BE%E8%AE%A1/</id>
+    <published>2024-01-27T07:42:36.000Z</published>
+    <updated>2024-01-28T08:45:06.836Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;[&amp;gt; [!summary]+&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;this article purpose is to build an authority page for stable diffusion webui using nginx &amp;amp; python/js. Which can publish my personal stable diffusion server. Wrote by GPT(try).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20240127161828.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h3&gt;&lt;p&gt;In the digital age, the security and user-friendliness of web services are not just conveniences; they are necessities. Balancing robust security protocols with an engaging user experience is key to maintaining both the integrity and popularity of any online service. This blog post dives into the intricacies of securing web services using Nginx for authentication, coupled with designing an appealing frontend. Our journey begins with a practical scenario:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;publishing a stable diffusion webUI service, accessible only to an authenticated audience.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Setting-Up-Nginx-for-Secure-Authentication&quot;&gt;&lt;a href=&quot;#Setting-Up-Nginx-for-Secure-Authentication&quot; class=&quot;headerlink&quot; title=&quot;Setting Up Nginx for Secure Authentication&quot;&gt;&lt;/a&gt;Setting Up Nginx for Secure Authentication&lt;/h3&gt;&lt;p&gt;Nginx excels in serving web pages and as a reverse proxy, providing enhanced security through authentication mechanisms. Let’s explore a typical Nginx configuration for secure authentication:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;/verify_token&lt;/strong&gt;: This block forwards authentication requests to a dedicated server. By excluding the request body and focusing on essential headers, it ensures that only valid, authenticated requests proceed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location = /verify_token &amp;#123;&lt;br&gt;    proxy_pass http://&amp;#123;your_auth_server&amp;#125;:2424;&lt;br&gt;    proxy_pass_request_body off;&lt;br&gt;    proxy_set_header Content-Length &amp;quot;&amp;quot;;&lt;br&gt;    proxy_set_header X-Original-URI $request_uri;&lt;br&gt;    proxy_set_header X-Original-Remote-Addr $remote_addr;&lt;br&gt;    proxy_set_header X-Original-Host $host;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;/login&lt;/strong&gt;: Catering to login requests, this configuration forwards the necessary details to the authentication server, preserving crucial information about the request’s origin.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location /login &amp;#123;&lt;br&gt;    proxy_pass http://&amp;#123;your_auth_server&amp;#125;:2424;&lt;br&gt;    proxy_set_header Host $host;&lt;br&gt;    proxy_set_header X-Real-IP $remote_addr;&lt;br&gt;    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&lt;br&gt;    proxy_set_header X-Forwarded-Proto $scheme;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Error Handling (@error401)&lt;/strong&gt;: A clever redirect mechanism that guides unauthenticated users to the login page, keeping the original URL intact.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location @error401 &amp;#123;&lt;br&gt;    return 302 &amp;#123;your_domain&amp;#125;/login;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Root Location (/)&lt;/strong&gt;: The gateway to your service, which rigorously checks each request for authentication, granting access only to verified users.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location / &amp;#123;&lt;br&gt;    auth_request /verify_token;&lt;br&gt;    error_page 401 = @error401;&lt;br&gt;    proxy_pass http://&amp;#123;your_server&amp;#125;:2323/;&lt;br&gt;    proxy_http_version 1.1;&lt;br&gt;    proxy_set_header Upgrade $http_upgrade;&lt;br&gt;    proxy_set_header Connection &amp;#x27;upgrade&amp;#x27;;&lt;br&gt;    proxy_set_header Host $host;&lt;br&gt;    proxy_cache_bypass $http_upgrade;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;This setup not only fortifies your service against unauthorized access but also maintains a seamless user experience, redirecting unauthenticated users without hassle.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
+    
+    <category term="AIGC" scheme="http://aikenh.cn/categories/Machine-Learning/AIGC/"/>
+    
+    
+    <category term="AI" scheme="http://aikenh.cn/tags/AI/"/>
+    
+    <category term="AIGC" scheme="http://aikenh.cn/tags/AIGC/"/>
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="Flask" scheme="http://aikenh.cn/tags/Flask/"/>
+    
+  </entry>
+  
+  <entry>
     <title>家庭服务器的备份工具选择</title>
     <link href="http://aikenh.cn/cn/BackupToolsForHomeServer/"/>
     <id>http://aikenh.cn/cn/BackupToolsForHomeServer/</id>
     <published>2023-12-29T00:04:06.000Z</published>
-    <updated>2023-12-30T01:19:02.948Z</updated>
+    <updated>2024-01-28T08:45:06.815Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -152,7 +237,7 @@
     <link href="http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/"/>
     <id>http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/</id>
     <published>2023-12-20T00:24:36.000Z</published>
-    <updated>2023-12-30T01:19:10.378Z</updated>
+    <updated>2024-01-28T08:45:06.825Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -180,56 +265,6 @@
     <category term="NAS" scheme="http://aikenh.cn/tags/NAS/"/>
     
     <category term="Ipv6" scheme="http://aikenh.cn/tags/Ipv6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>StableDiffusionWebUI鉴权设计</title>
-    <link href="http://aikenh.cn/cn/StableDiffusionWebUI%E9%89%B4%E6%9D%83%E8%AE%BE%E8%AE%A1/"/>
-    <id>http://aikenh.cn/cn/StableDiffusionWebUI%E9%89%B4%E6%9D%83%E8%AE%BE%E8%AE%A1/</id>
-    <published>2023-12-08T07:42:36.000Z</published>
-    <updated>2024-01-27T09:13:23.751Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;[&amp;gt; [!summary]+&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;this article purpose is to build an authority page for stable diffusion webui using nginx &amp;amp; python/js. Which can publish my personal stable diffusion server. Wrote by GPT(try).&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20240127161828.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h3&gt;&lt;p&gt;In the digital age, the security and user-friendliness of web services are not just conveniences; they are necessities. Balancing robust security protocols with an engaging user experience is key to maintaining both the integrity and popularity of any online service. This blog post dives into the intricacies of securing web services using Nginx for authentication, coupled with designing an appealing frontend. Our journey begins with a practical scenario: publishing a stable diffusion webUI service, accessible only to an authenticated audience.&lt;/p&gt;
-&lt;h3 id=&quot;Setting-Up-Nginx-for-Secure-Authentication&quot;&gt;&lt;a href=&quot;#Setting-Up-Nginx-for-Secure-Authentication&quot; class=&quot;headerlink&quot; title=&quot;Setting Up Nginx for Secure Authentication&quot;&gt;&lt;/a&gt;Setting Up Nginx for Secure Authentication&lt;/h3&gt;&lt;p&gt;Nginx excels in serving web pages and as a reverse proxy, providing enhanced security through authentication mechanisms. Let’s explore a typical Nginx configuration for secure authentication:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;/verify_token&lt;/strong&gt;: This block forwards authentication requests to a dedicated server. By excluding the request body and focusing on essential headers, it ensures that only valid, authenticated requests proceed.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location = /verify_token &amp;#123;&lt;br&gt;    proxy_pass http://&amp;#123;your_auth_server&amp;#125;:2424;&lt;br&gt;    proxy_pass_request_body off;&lt;br&gt;    proxy_set_header Content-Length &amp;quot;&amp;quot;;&lt;br&gt;    proxy_set_header X-Original-URI $request_uri;&lt;br&gt;    proxy_set_header X-Original-Remote-Addr $remote_addr;&lt;br&gt;    proxy_set_header X-Original-Host $host;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;/login&lt;/strong&gt;: Catering to login requests, this configuration forwards the necessary details to the authentication server, preserving crucial information about the request’s origin.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location /login &amp;#123;&lt;br&gt;    proxy_pass http://&amp;#123;your_auth_server&amp;#125;:2424;&lt;br&gt;    proxy_set_header Host $host;&lt;br&gt;    proxy_set_header X-Real-IP $remote_addr;&lt;br&gt;    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&lt;br&gt;    proxy_set_header X-Forwarded-Proto $scheme;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Error Handling (@error401)&lt;/strong&gt;: A clever redirect mechanism that guides unauthenticated users to the login page, keeping the original URL intact.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location @error401 &amp;#123;&lt;br&gt;    return 302 &amp;#123;your_domain&amp;#125;/login;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Root Location (/)&lt;/strong&gt;: The gateway to your service, which rigorously checks each request for authentication, granting access only to verified users.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs conf&quot;&gt;location / &amp;#123;&lt;br&gt;    auth_request /verify_token;&lt;br&gt;    error_page 401 = @error401;&lt;br&gt;    proxy_pass http://&amp;#123;your_server&amp;#125;:2323/;&lt;br&gt;    proxy_http_version 1.1;&lt;br&gt;    proxy_set_header Upgrade $http_upgrade;&lt;br&gt;    proxy_set_header Connection &amp;#x27;upgrade&amp;#x27;;&lt;br&gt;    proxy_set_header Host $host;&lt;br&gt;    proxy_cache_bypass $http_upgrade;&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;This setup not only fortifies your service against unauthorized access but also maintains a seamless user experience, redirecting unauthenticated users without hassle.&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
-    
-    <category term="AIGC" scheme="http://aikenh.cn/categories/Machine-Learning/AIGC/"/>
-    
-    
-    <category term="AI" scheme="http://aikenh.cn/tags/AI/"/>
-    
-    <category term="AIGC" scheme="http://aikenh.cn/tags/AIGC/"/>
-    
-    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
-    
-    <category term="Flask" scheme="http://aikenh.cn/tags/Flask/"/>
     
   </entry>
   
@@ -272,7 +307,7 @@
     <link href="http://aikenh.cn/cn/emby_localhost_crack_by_nginx/"/>
     <id>http://aikenh.cn/cn/emby_localhost_crack_by_nginx/</id>
     <published>2023-11-10T06:05:15.000Z</published>
-    <updated>2023-11-17T05:56:52.857Z</updated>
+    <updated>2024-01-28T08:45:06.795Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Intro-问题描述&quot;&gt;&lt;a href=&quot;#Intro-问题描述&quot; class=&quot;headerlink&quot; title=&quot;Intro 问题描述&quot;&gt;&lt;/a&gt;Intro 问题描述&lt;/h2&gt;&lt;p&gt;以 emby 为例，学习如何对这种自托管的服务，请求验证网站的软件进行破解，破解的整体思路分为以下的两类：&lt;/p&gt;
@@ -426,7 +461,7 @@
     <link href="http://aikenh.cn/cn/deploy_server_byipv6/"/>
     <id>http://aikenh.cn/cn/deploy_server_byipv6/</id>
     <published>2023-11-05T11:23:17.000Z</published>
-    <updated>2023-11-18T08:46:59.875Z</updated>
+    <updated>2024-01-28T08:45:06.805Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1630,11 +1665,11 @@
   </entry>
   
   <entry>
-    <title>Windows Powershell 00</title>
+    <title>Windows Powershell 00 Install and Config</title>
     <link href="http://aikenh.cn/cn/powershell/"/>
     <id>http://aikenh.cn/cn/powershell/</id>
     <published>2023-03-05T01:59:40.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2024-01-28T08:45:06.846Z</updated>
     
     
     <summary type="html">&lt;p&gt;Update:@20230214&lt;/p&gt;
@@ -1945,9 +1980,9 @@
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
-    
     <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
+    
+    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
     
     <category term="VsCode" scheme="http://aikenh.cn/tags/VsCode/"/>
     
@@ -2637,9 +2672,9 @@ f(x)=
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
     <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
     
     <category term="Incremental Learning" scheme="http://aikenh.cn/tags/Incremental-Learning/"/>
     
@@ -2673,9 +2708,9 @@ f(x)=
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
     <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
     
     <category term="Incremental Learning" scheme="http://aikenh.cn/tags/Incremental-Learning/"/>
     
@@ -2707,9 +2742,9 @@ f(x)=
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
     <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
     
     <category term="Long-Tailed Learning" scheme="http://aikenh.cn/tags/Long-Tailed-Learning/"/>
     
@@ -3044,9 +3079,9 @@ p_i = &#92;left&#92;{
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
     <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
     
     <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
     
@@ -3067,9 +3102,9 @@ p_i = &#92;left&#92;{
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
     <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
     
     <category term="FSL" scheme="http://aikenh.cn/tags/FSL/"/>
     
@@ -3166,9 +3201,9 @@ p_i = &#92;left&#92;{
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
-    
     <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
+    
+    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
     
   </entry>
   
@@ -3232,9 +3267,9 @@ p_i = &#92;left&#92;{
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
-    
     <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
+    
+    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
     
   </entry>
   
@@ -3566,9 +3601,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
     <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
     
     <category term="CV" scheme="http://aikenh.cn/tags/CV/"/>
     
@@ -3615,9 +3650,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
-    
     <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
+    
+    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
     
   </entry>
   
@@ -3654,9 +3689,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Python" scheme="http://aikenh.cn/categories/Langs/Python/"/>
     
     
-    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
-    
     <category term="Python" scheme="http://aikenh.cn/tags/Python/"/>
+    
+    <category term="Langs" scheme="http://aikenh.cn/tags/Langs/"/>
     
   </entry>
   
@@ -4515,9 +4550,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     
     <category term="Cpp" scheme="http://aikenh.cn/tags/Cpp/"/>
     
-    <category term="Job" scheme="http://aikenh.cn/tags/Job/"/>
-    
     <category term="Leetcode" scheme="http://aikenh.cn/tags/Leetcode/"/>
+    
+    <category term="Job" scheme="http://aikenh.cn/tags/Job/"/>
     
   </entry>
   
@@ -4550,9 +4585,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
     
     
-    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
-    
     <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
+    
+    <category term="Survey" scheme="http://aikenh.cn/tags/Survey/"/>
     
     <category term="Pooling" scheme="http://aikenh.cn/tags/Pooling/"/>
     
@@ -4793,9 +4828,9 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     
     <category term="Cpp" scheme="http://aikenh.cn/tags/Cpp/"/>
     
-    <category term="Job" scheme="http://aikenh.cn/tags/Job/"/>
-    
     <category term="Leetcode" scheme="http://aikenh.cn/tags/Leetcode/"/>
+    
+    <category term="Job" scheme="http://aikenh.cn/tags/Job/"/>
     
   </entry>
   
@@ -4907,27 +4942,6 @@ f(&#92;int q(x) &#92;frac{p(x)}{q(x)} dx) = f(1) = 0&lt;/script&gt;&lt;p&gt;显�
     <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
     
     <category term="GAN" scheme="http://aikenh.cn/tags/GAN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Using Judgment Instead of Annotation</title>
-    <link href="http://aikenh.cn/cn/Using_Judgment_Instead_of_Annotation/"/>
-    <id>http://aikenh.cn/cn/Using_Judgment_Instead_of_Annotation/</id>
-    <published>2020-09-22T16:46:30.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/categories/Machine-Learning/"/>
-    
-    
-    <category term="Machine Learning" scheme="http://aikenh.cn/tags/Machine-Learning/"/>
-    
-    <category term="Draft" scheme="http://aikenh.cn/tags/Draft/"/>
     
   </entry>
   
