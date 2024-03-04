@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>LearnWeb00-Web入门 - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="[!summary]+Web 前端开发者路线学习，基本的目的是能够为自己想做的项目搭建前端界面，从 web 开始再到各个移动设备的前端 UI，基于 Mdn 课程，Roadmap 具体项目逐步推进对各个知识点的学习。  根据下面的课程、Roadmap、搭建自己的知识架构，在搭建过程中结合具体的项目，包括自己部署的界面去逐步实践，完善和熟悉整个知识体系和技术栈，并通过和现代 AI 辅助工具的合作，建"><meta property="og:type" content="blog"><meta property="og:title" content="LearnWeb00-Web入门"><meta property="og:url" content="http://aikenh.cn/cn/LearnWeb00-Web%E5%85%A5%E9%97%A8/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="[!summary]+Web 前端开发者路线学习，基本的目的是能够为自己想做的项目搭建前端界面，从 web 开始再到各个移动设备的前端 UI，基于 Mdn 课程，Roadmap 具体项目逐步推进对各个知识点的学习。  根据下面的课程、Roadmap、搭建自己的知识架构，在搭建过程中结合具体的项目，包括自己部署的界面去逐步实践，完善和熟悉整个知识体系和技术栈，并通过和现代 AI 辅助工具的合作，建"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg1.jpg"><meta property="article:published_time" content="2024-01-28T13:25:30.000Z"><meta property="article:modified_time" content="2024-03-04T08:45:34.179Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Web"><meta property="article:tag" content="HTML"><meta property="article:tag" content="CSS"><meta property="article:tag" content="JS"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg1.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/LearnWeb00-Web%E5%85%A5%E9%97%A8/"},"headline":"LearnWeb00-Web入门","image":["http://aikenh.cn/img/header_img/lml_bg1.jpg"],"datePublished":"2024-01-28T13:25:30.000Z","dateModified":"2024-03-04T08:45:34.179Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"[!summary]+Web 前端开发者路线学习，基本的目的是能够为自己想做的项目搭建前端界面，从 web 开始再到各个移动设备的前端 UI，基于 Mdn 课程，Roadmap 具体项目逐步推进对各个知识点的学习。  根据下面的课程、Roadmap、搭建自己的知识架构，在搭建过程中结合具体的项目，包括自己部署的界面去逐步实践，完善和熟悉整个知识体系和技术栈，并通过和现代 AI 辅助工具的合作，建"}</script><link rel="canonical" href="http://aikenh.cn/cn/LearnWeb00-Web%E5%85%A5%E9%97%A8/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg1.jpg" alt="LearnWeb00-Web入门"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>LearnWeb00-Web入门</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2024-01-28T13:25:30.000Z" title="2024-01-28T13:25:30.000Z">2024-01-28</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-03-04T08:45:34.179Z" title="2024/3/4 16:45:34">2024-03-04</time></span><span class="level-item"><a class="link-muted" href="/categories/Web/">Web</a></span><span class="level-item">23 minutes read (About 3404 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><blockquote>
+<p>[!summary]+<br>Web 前端开发者路线学习，基本的目的是能够为自己想做的项目搭建前端界面，从 web 开始再到各个移动设备的前端 UI，基于 Mdn 课程，Roadmap 具体项目逐步推进对各个知识点的学习。</p>
+</blockquote>
+<p>根据下面的课程、Roadmap、搭建自己的知识架构，在搭建过程中结合具体的项目，包括自己部署的界面去逐步实践，完善和熟悉整个知识体系和技术栈，并通过和现代 AI 辅助工具的合作，建立自己独立的前端开发流。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://metisy.cool/library/library/46/series/398/manga/1714?incognitoMode=false">Roadmap For Beginner</a></li>
+<li><a target="_blank" rel="noopener" href="https://metisy.cool/library/library/46/series/397/pdf/1712?incognitoMode=false">Roadmap For All</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/Front-end_web_developer">Mdn Web Tutor</a></li>
+</ul>
+<h2 id="Be-Ready-准备以及基础了解"><a href="#Be-Ready-准备以及基础了解" class="headerlink" title="Be Ready 准备以及基础了解"></a>Be Ready 准备以及基础了解</h2><p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20240128213825.png" alt="image.png"></p>
+<ul>
+<li>基础：开发环境准备、页面设计、文件架构规划（由于网站需要包含多种代码、文本、素材、因此如何组织文件是相当重要的）</li>
+<li>语言：HTML 、CSS、JS 三驾马车为一个网页必不可少的要素，通过结合各自不同的功能来实现多样化的页面设计。</li>
+</ul>
+<h2 id="What’s-WEB"><a href="#What’s-WEB" class="headerlink" title="What’s WEB"></a>What’s WEB</h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=O_GWbkXIqEY&amp;list=PLo3w8EB99pqLEopnunz-dOOBJ8t-Wgt2g&amp;index=1">What’s WEB?</a> 通过 URL 统一资源定位符向服务器请求 HTML，HTML 通过包含的信息告诉 Browse 需要额外的信息来呈现该页面，因此基于 HTML 提供的信息 web browser 继续请求资源、CSS、JS 等文件，并将这些文件按照 HTML 的描述进行组合最终呈现完整的页面。</p>
+<span id="more"></span> 
+<iframe width="560" height="315" src=" https://www.youtube.com/embed/O_GWbkXIqEY?si=4KI068N1LN2k422F" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<h3 id="How-HTML-Work"><a href="#How-HTML-Work" class="headerlink" title="How HTML Work"></a>How HTML Work</h3><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=PORRrz3Y8Vc&amp;list=PLo3w8EB99pqLEopnunz-dOOBJ8t-Wgt2g&amp;index=2">How HTML(Hyper Text Markup Language) Work?</a> HTML 提供了一个标准（告诉 browser）用<strong>特定标签</strong>来描述一些纯文本，这些标签就对应特定的文本渲染方式。</p>
+<blockquote>
+<p>[!quota]+<br>HTML is a descriptive language that allow us to tell a web browser how to handle text content. HTML 是一个描述性语言，允许告知网页浏览器如何去处理这些文本内容并进行对应的渲染。</p>
+</blockquote>
+<p>更具体一点可以说以下面这个例子来说：</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20240131110224.png" alt="image.png"></p>
+<blockquote>
+<p>[!Quota]+<br>HTML 不是一门编程语言，而是一种用于定义内容结构的标记语言。HTML 由一系列的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Element">元素</a>组成，这些元素可以用来包围不同部分的内容，使其以某种方式呈现或者工作。一对<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Tag">标签</a>可以为一段文字或者一张图片添加超链接，将文字设置为斜体，改变字号，等等。</p>
+</blockquote>
+<p><strong>HTML 标签</strong>：</p>
+<ul>
+<li>用 <code>&lt;&gt;</code> 包裹<strong>标签名称</strong>这里是 p -&gt; <code>&lt;p&gt;</code>，</li>
+<li>可以在其之上通过更多的<strong>属性</strong>来提供更多的信息 <code>&lt;p lang=&#39;en&#39;&gt;</code> ，这里的 lang 为<strong>属性名称</strong>，‘en’为<strong>属性值</strong>，值得一提的是 <strong>class 属性</strong>可以为元素提供一个<strong>标识名称</strong>，用于后续 css 中为元素定义各种样式。</li>
+<li>将<strong>标签和对应的结束标签</strong>将文本段落，即<strong>内容</strong>，包围起来，就形成了<strong>HTML 元素</strong>（段落）：<code>&lt;p&gt; some text &lt;/p&gt;</code></li>
+<li>通过<strong>嵌套组合各种元素</strong>，就可以创建一个 HTML 文档了。</li>
+</ul>
+<p>基础的架构如下 ：</p>
+<ul>
+<li><code>&lt;html&gt; &lt;/html&gt;</code> 包裹文件中 HTMl 的部分（文件中可以包含其他的 css，js 等内容）</li>
+<li><code>&lt;!DOCTYPE html&gt;</code>  <!-- 告诉 Browser 这是一个标准的 HTML 文档 --></li>
+<li>如 <code>head</code> <code>body</code> <code>title</code> 之类的元素/标签的制定由 W3C(world wide web consortium) 确定和维护，可以在 MDN web 文档中查看所有 Tag 的文档，相对基本文档更加易于理解。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>  <span class="hljs-comment">&lt;!-- 告诉Browser这是一个标准的HTML文档 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span> My cat have not eat yet.<br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span> My cat is <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>very<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> cute <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>HyperText 只是一个花哨的词语，意味着 HTML 可以创建一个到另一个 HTML 文件的连接，类似超链接，实现页面的跳转。</p>
+<p>页面的跳转对应的为 a 元素，可以通过如下的超文本实现页面跳转功能（也就是超链接）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">herf</span>=<span class="hljs-string">&quot; https://aikenh.cn/&quot;</span>&gt;</span>Homepage<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>总结一下，也就是 HTML 是为了 Browser 理解文本的一种语言，通过 W3C 指定的各种标签/元素规则来理解&amp;实现 Browser 对页面的渲染。</p>
+<h3 id="How-CSS-work"><a href="#How-CSS-work" class="headerlink" title="How CSS work"></a>How CSS work</h3><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Y02yI1OfZjI&amp;list=PLo3w8EB99pqLEopnunz-dOOBJ8t-Wgt2g&amp;index=3">What’s CSS &amp; How it Style the web pages</a>? CSS 也是一种描述性语言，但描述的不是文本的“语义”，而是对每一种 HTML 元素的外观和感觉进行描述，例如描述 <code>&lt;head&gt;content&lt;/head&gt;</code> Head,strong 这类元素应该如何呈现，就像是一种 HTML 的化妆（样式补充）</p>
+<blockquote>
+<p>CSS (Cascading Style Sheets) 层叠样式表</p>
+</blockquote>
+<p>CSS 描述的是文本的 Presentation 表现形式，而 HTML 描述的是文本的 Semantics 语义（将表现从 HTML 分离出来避免最终页面代码混杂导致的混乱）。</p>
+<p><strong>How it works?</strong> 通常使用 CSS 有三种方法：</p>
+<ul>
+<li>（尽量避免，缺乏灵活性且难以维护）在 HTML 标记中使用 style 属性如 <code>&lt;strong style=&quot;...&quot;&gt;</code></li>
+<li>（只适用于单个 HTML 文档，通常网站由多个 HTML 组成）将 CSS 声明添加到 HTML 文档中，用 <code>&lt;style&gt; &lt;/style&gt;</code> 包围，上述代码中用 <code>&lt;html&gt;&lt;/html&gt;</code> 标签将 HTML 的代码块包裹起来就是为了和其他类型的代码区分。</li>
+<li>（首选）创建单独的 CSS 文件，然后在多个 HTML 中连接特定的样式表，从而维持一致的样式特征，如：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">herf</span>=<span class="hljs-string">&quot;style.css&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+<p><strong>How to defined CSS？</strong> Starts with selector to indicate which HTML element we want to style. Then using {} to defind all the property.</p>
+<p>例如我们定义上述提到的 strong 和 head 的样式就可以按照下面的方式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">strong</span> &#123;<br>	<span class="hljs-attribute">color</span>: red;<br>	<span class="hljs-attribute">display</span>: flex;<br>&#125;<br><br>head &#123;<br>	<span class="hljs-attribute">align-items</span>: center;<br>	<span class="hljs-attribute">display</span>: flex;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>CSS 有 300 多个属性，可以定义任何方式的页面，最好<strong>了解常见</strong>的一些属性，属性的组合常常出乎你的意料，</p>
+<p><strong>CSS 的另一个重要特性就是 Cascading 级联</strong>，通过不同的 Selector（类似过滤器） 可以指定不同类型的元素进行样式处理（渲染），也就是说通过 selector 的特性，一个元素可以按照某种顺序被多种样式渲染（CSS 定义了一组规则）需要的话可以在 MDN 查看，在开发者模式中也可以看到顺序：</p>
+<blockquote>
+<p>允许覆盖和组合</p>
+</blockquote>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20240129000141.png" alt="image.png"></p>
+<p>CSS 声明一种外观和渲染形式，后续通过选择器将这些 Style 应用到各个 HTML 元素上（在同个元素上可能会出现样式的覆盖或者堆叠的情况），实现对整个页面的渲染。</p>
+<h3 id="How-JavaScript-Works"><a href="#How-JavaScript-Works" class="headerlink" title="How JavaScript Works"></a>How JavaScript Works</h3><p><strong>JavsScript</strong> is the Progamming language at the heart of the modern web.</p>
+<p>实际上 JavaScript 可以完全分成两个不同的分支（flavors）：</p>
+<ol>
+<li><strong>JaveScript inside the browser</strong>：用于修改 HTML、网络请求、数据处理和渲染等用于Web</li>
+<li><strong>JavaScript on the server</strong>：(Nodejs)计算机控制和管理，进程和文件处理等，更接近一个普通的编程语言。</li>
+</ol>
+<p>两者存在许多独立的有用的库，除了语法，两者在应用和实际编写上重叠的地方很少，该视频后续主要介绍的是 Browser 中的 JS 。</p>
+<p>CSS &amp; HTML 一样，可以</p>
+<ul>
+<li>直接在 HTML 中使用 <code>&lt;script&gt;&lt;/script&gt;</code> 元素来包裹 JS 的代码块</li>
+<li>独立写在一个 js 文件中，并在 html 代码中使用 <code>&lt;script src=&quot;myScript.js&quot;&gt;</code> 将其连接到 HTML 中</li>
+</ul>
+<p>JS 和其他语言不一样的特点为，其自带<strong>原生的异步处理机制</strong>，可以对设定好的事件及时做出反应（触发），如下面的代码当窗口的 load 被触发了，就会执行{}中的代码，实现及时对事件做出反应。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js">windows.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;load&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br><br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>这种机制对用户交互界面原生的友好，如点击，加载完成等浏览器抛出事件，然后使用 JS 及时的对特定的事件做出反应。</p>
+<h2 id="What’s-SVG"><a href="#What’s-SVG" class="headerlink" title="What’s SVG"></a>What’s SVG</h2><blockquote>
+<p><strong>Scalable Vector Graphics</strong> is the only vector image format for the web. 可缩放的矢量图形是网络上唯一的矢量图形。</p>
+</blockquote>
+<p>图片有两种主要的格式：位图&amp;矢量图；位图是简单的定义每个像素点的颜色行程的图片，web 中最常见的位图格式是 JPEG，PNG，GIF。矢量图则是一组渲染图像的函数，用这些函数来定义图像。两种图像的适用范围不同：</p>
+<ul>
+<li>位图用于更为细节的图像，如照片，具体的描述每个图片的像素点。</li>
+<li>矢量图则更适用于，需要使用<strong>不同尺寸缩放</strong>的不太详细的图像，例如图标，因此对于 web 具备的多种分辨率场景具有无可比拟的优势。</li>
+</ul>
+<p>矢量图还具有一些其他的特性：1. 它是一种用标签编写的文本格式，就想 HTML 一样；2.可以用 CSS 进行样式设计；3. 他可以使用 JavaScript 编写脚本来实现一些变化。（绘制或者创建 SVG 需要很好的数学 or 很好的 SVG 绘图软件）</p>
+<blockquote>
+<p>Inskape, Illustrator, Sketch 是最常见的用于绘制 SVG 的软件 （2019）<br>or JS 库：snap.svg, Bonsai, D3.js</p>
+</blockquote>
+<h2 id="How-web-browsers-works"><a href="#How-web-browsers-works" class="headerlink" title="How web browsers works"></a>How web browsers works</h2><p><strong>web browser are mixing things together in order to display web.</strong> 接下来分析一下 Web Browser 需要具备什么能力来支撑这样的功能呢？</p>
+<p>首先，Web Browser 需要获取(html)文件，因此实际上：</p>
+<ul>
+<li>最根本的一点就是其通过 HTTP/HTTPs 协议来完成网络连接，实现对文件的 C(Create) R(Read) U(Update) D(Delete)；</li>
+<li>此外还可以建立双向的定向通信服务通道，和特定的服务器建立双向连接（WebSockets）</li>
+<li>创建 Peer to peer 连接等。</li>
+</ul>
+<p>其次，需要<strong>理解和执行和渲染</strong>不同的语言，字体、图像、视频、文档等。<br>第三，需要具备交互式功能，可以实现文本选择，点击，滚动等。<br>第四，需要提供一些缓存存储功能，能够存储部分数据<br>第五，加密和安全管理功能，避免恶意入侵。</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20240129152217.png" alt="image.png"></p>
+<p>由于页面是动态的，必须按照一定的刷新频率来对页面进行重绘，以实现预期的显示效果。</p>
+<h2 id="How-WWW-works"><a href="#How-WWW-works" class="headerlink" title="How WWW works"></a>How WWW works</h2><blockquote>
+<p>[!quota]+ this part is from mdn</p>
+</blockquote>
+<ul>
+<li><strong>互联网</strong>：好比地球上纵横交错的道路。</li>
+<li><strong>网络连接</strong>：道路通到了村子路口。从此，村子里的苹果就可以运出去卖了。</li>
+<li><strong>TCP/IP</strong>：为了将村里的苹果能规范有效的运卖出去而不出问题，村长作出如下规定：“用规格刚好 20 cm <em> 20 cm </em> 20 cm 的泡沫箱来装，之后外面又用相应规格的纸箱包裹上，最后打上透明胶”。并且要求，对方收到时，一定要外包装完好，不然就会补发。而且还给对方发了一张发货单，明确说明了，苹果有多少，是用什么方法包装的，只有货和发货单对上了，对方才会确认收货。</li>
+<li><strong>DNS</strong>：突然一天，郭德纲想吃苹果，就跟于谦说，“我听说盘溪新村（域名）的苹果好，要他们那个套餐一选项啊！”，于谦一听，得，也不知道盘溪新村在哪，打开地图查（DNS）吧，一查，好嘛，江苏省苏州市（IP 地址），于是于谦去了苏州，找了村子，告诉村长，要套餐一，要用顺丰快递，并且留下了北京德云社的地址。</li>
+<li><strong>HTTP</strong>：过了几天，德云社的人一看，有快递来了，来了这么一句，“只收‘顺丰’，拒收其他快递”。司机忙说，“是顺丰，是顺丰”，这才对上暗号，德云社的人收下了货。</li>
+<li><strong>组成文件</strong>：送来的货可不止一车，而且也不止一种苹果，这车是红富士，那车黄富士的。<ul>
+<li><strong>代码</strong>：有点像，村长事先安排的说明书，让司机到了地方，如何卸车，货放到什么位置，而德云社的看说明书，知道什么样的苹果放到什么位置上，什么样苹果如何食用最佳，等等。</li>
+<li><strong>资源</strong>：不同种类的苹果。</li>
+</ul>
+</li>
+</ul>
+<p>更”专业”一些的写法为：</p>
+<ul>
+<li><strong>网络连接</strong>: 允许你在互联网上发送和接受数据。</li>
+<li><strong>TCP/IP</strong>: 传输控制协议和因特网互连协议是定义数据如何传输的通信协议，对传输的数据进行打包和封装。</li>
+<li><strong>DNS</strong>: 域名系统服务器像是一本网站通讯录。当你在浏览器内输入一个网址时，浏览器获取网页之前将会查看域名系统。浏览器需要找到存放你想要的网页的服务器，才能发送 HTTP 请求到正确的地方。</li>
+<li><strong>HTTP</strong>: 超文本传输协议是一个定义客户端和服务器间交流的语言的协议（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Protocol">protocol</a> ），定义传输的方式。</li>
+<li><strong>组成文件</strong>: 一个网页由许多文件组成，就像商店里不同的商品一样。这些文件有两种类型：<ul>
+<li><strong>代码</strong> : 网页大体由 HTML、CSS、JavaScript 组成，不过你会在后面看到不同的技术。</li>
+<li><strong>资源</strong> : 这是其他组成网页的东西的集合，比如图像、音乐、视频、Word 文档、PDF 文件。<h2 id="FI"><a href="#FI" class="headerlink" title="FI"></a>FI</h2></li>
+</ul>
+</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>LearnWeb00-Web入门</p><p><a href="http://aikenh.cn/cn/LearnWeb00-Web入门/">http://aikenh.cn/cn/LearnWeb00-Web入门/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2024-01-28</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2024-03-04</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Web/">Web, </a><a class="link-muted" rel="tag" href="/tags/HTML/">HTML, </a><a class="link-muted" rel="tag" href="/tags/CSS/">CSS, </a><a class="link-muted" rel="tag" href="/tags/JS/">JS </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/LearnWeb01-DevPipeline/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">LearnWeb01-DevPipeline</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/pwsh_BgTask/"><span class="level-item">Windows Powershell 01 后台任务</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/LearnWeb00-Web%E5%85%A5%E9%97%A8/';
+            this.page.identifier = 'cn/LearnWeb00-Web入门/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">154</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">46</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">103</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Be-Ready-准备以及基础了解"><span class="level-left"><span class="level-item">1</span><span class="level-item">Be Ready 准备以及基础了解</span></span></a></li><li><a class="level is-mobile" href="#What’s-WEB"><span class="level-left"><span class="level-item">2</span><span class="level-item">What’s WEB</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#How-HTML-Work"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">How HTML Work</span></span></a></li><li><a class="level is-mobile" href="#How-CSS-work"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">How CSS work</span></span></a></li><li><a class="level is-mobile" href="#How-JavaScript-Works"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">How JavaScript Works</span></span></a></li></ul></li><li><a class="level is-mobile" href="#What’s-SVG"><span class="level-left"><span class="level-item">3</span><span class="level-item">What’s SVG</span></span></a></li><li><a class="level is-mobile" href="#How-web-browsers-works"><span class="level-left"><span class="level-item">4</span><span class="level-item">How web browsers works</span></span></a></li><li><a class="level is-mobile" href="#How-WWW-works"><span class="level-left"><span class="level-item">5</span><span class="level-item">How WWW works</span></span></a></li><li><a class="level is-mobile" href="#FI"><span class="level-left"><span class="level-item">6</span><span class="level-item">FI</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb16-Web%E5%AE%9E%E6%88%9801-%E9%A6%96%E9%A1%B5%E8%AE%BE%E8%AE%A1/"><img src="/img/header_img/lml_bg17.jpg" alt="LearnWeb15-Web实战01-首页设计"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-17T00:28:28.000Z">2024-02-17</time></p><p class="title"><a href="/cn/LearnWeb16-Web%E5%AE%9E%E6%88%9801-%E9%A6%96%E9%A1%B5%E8%AE%BE%E8%AE%A1/">LearnWeb15-Web实战01-首页设计</a></p><p class="categories"><a href="/categories/Web/">Web</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb15-CSS09-%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/"><img src="/img/header_img/lml_bg16.jpg" alt="LearnWeb15-CSS09-媒体查询与响应式设计"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-08T09:53:55.000Z">2024-02-08</time></p><p class="title"><a href="/cn/LearnWeb15-CSS09-%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/">LearnWeb15-CSS09-媒体查询与响应式设计</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/CSS/">CSS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb14-CSS08-CSS%E5%B8%83%E5%B1%80/"><img src="/img/header_img/lml_bg15.jpg" alt="LearnWeb14-CSS08-CSS布局"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-07T09:09:44.000Z">2024-02-07</time></p><p class="title"><a href="/cn/LearnWeb14-CSS08-CSS%E5%B8%83%E5%B1%80/">LearnWeb14-CSS08-CSS布局</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/CSS/">CSS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb13-CSS07-CSS%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"><img src="/img/header_img/lml_bg14.jpg" alt="LearnWeb13-CSS07-CSS开发流程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-07T07:54:33.000Z">2024-02-07</time></p><p class="title"><a href="/cn/LearnWeb13-CSS07-CSS%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">LearnWeb13-CSS07-CSS开发流程</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/CSS/">CSS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb12-CSS06-%E8%A1%A8%E6%A0%BC%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86/"><img src="/img/header_img/lml_bg13.jpg" alt="LearnWeb12-CSS06-表格样式处理"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-07T07:06:05.000Z">2024-02-07</time></p><p class="title"><a href="/cn/LearnWeb12-CSS06-%E8%A1%A8%E6%A0%BC%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86/">LearnWeb12-CSS06-表格样式处理</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/CSS/">CSS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

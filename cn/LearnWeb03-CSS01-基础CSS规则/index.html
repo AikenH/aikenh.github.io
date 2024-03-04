@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>LearnWeb03-CSS01-基础CSS规则 - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="[!summary]+在前文 web 入门中已经简单介绍了 CSS 是如何起作用，如何与 HTML 进行相互合作的，本篇主要简单介绍如何编写 CSS 文件中的各种样式。  ref: mdn css入门 | MDN css属性大全 在本文及后续的尝试中，都使用单独 CSS 文件外挂的格式，该种格式的结构会更清晰，即将下述代码放入 HTML 文件的 Head 部分。 1&amp;lt;link rel&amp;#x3D;&amp;amp;q"><meta property="og:type" content="blog"><meta property="og:title" content="LearnWeb03-CSS01-基础CSS规则"><meta property="og:url" content="http://aikenh.cn/cn/LearnWeb03-CSS01-%E5%9F%BA%E7%A1%80CSS%E8%A7%84%E5%88%99/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="[!summary]+在前文 web 入门中已经简单介绍了 CSS 是如何起作用，如何与 HTML 进行相互合作的，本篇主要简单介绍如何编写 CSS 文件中的各种样式。  ref: mdn css入门 | MDN css属性大全 在本文及后续的尝试中，都使用单独 CSS 文件外挂的格式，该种格式的结构会更清晰，即将下述代码放入 HTML 文件的 Head 部分。 1&amp;lt;link rel&amp;#x3D;&amp;amp;q"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg4.jpg"><meta property="article:published_time" content="2024-01-31T07:58:10.000Z"><meta property="article:modified_time" content="2024-03-04T08:45:37.958Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Web"><meta property="article:tag" content="CSS"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg4.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/LearnWeb03-CSS01-%E5%9F%BA%E7%A1%80CSS%E8%A7%84%E5%88%99/"},"headline":"LearnWeb03-CSS01-基础CSS规则","image":["http://aikenh.cn/img/header_img/lml_bg4.jpg"],"datePublished":"2024-01-31T07:58:10.000Z","dateModified":"2024-03-04T08:45:37.958Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"[!summary]+在前文 web 入门中已经简单介绍了 CSS 是如何起作用，如何与 HTML 进行相互合作的，本篇主要简单介绍如何编写 CSS 文件中的各种样式。  ref: mdn css入门 | MDN css属性大全 在本文及后续的尝试中，都使用单独 CSS 文件外挂的格式，该种格式的结构会更清晰，即将下述代码放入 HTML 文件的 Head 部分。 1&lt;link rel&#x3D;&amp;q"}</script><link rel="canonical" href="http://aikenh.cn/cn/LearnWeb03-CSS01-%E5%9F%BA%E7%A1%80CSS%E8%A7%84%E5%88%99/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg4.jpg" alt="LearnWeb03-CSS01-基础CSS规则"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>LearnWeb03-CSS01-基础CSS规则</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2024-01-31T07:58:10.000Z" title="2024-01-31T07:58:10.000Z">2024-01-31</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-03-04T08:45:37.958Z" title="2024/3/4 16:45:37">2024-03-04</time></span><span class="level-item"><a class="link-muted" href="/categories/Web/">Web</a><span> / </span><a class="link-muted" href="/categories/Web/CSS/">CSS</a></span><span class="level-item">14 minutes read (About 2121 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><blockquote>
+<p>[!summary]+<br>在前文 web 入门中已经简单介绍了 CSS 是如何起作用，如何与 HTML 进行相互合作的，本篇主要简单介绍如何编写 CSS 文件中的各种样式。</p>
+</blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics">mdn css入门</a> | <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference">MDN css属性大全</a></p>
+<p>在本文及后续的尝试中，都使用单独 CSS 文件外挂的格式，该种格式的结构会更清晰，即将下述代码放入 HTML 文件的 Head 部分。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;styles/style.css&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+<p>href 部分需要替换为自己实际存放 css 文件的地址即可，此外也简单重复一下剩下的两种使用 CSS 的方式：内部样式表和内联样式表</p>
+<ul>
+<li><strong>内部样式表</strong>即在 HTML 的 Head 部分添加 <code>&lt;style&gt;your css code&lt;/style&gt;</code> 将 CSS 代码都包裹起来</li>
+<li><strong>内联样式表</strong>即在特定元素中定义 style 属性，<code>&lt;p style=&quot;your css code&quot;&gt;</code> 在 style 属性中填充需要的 CSS 代码。</li>
+</ul>
+<p>接下来进入正文，讲解 css 部分的组成和编写规则。</p>
+<h2 id="Pattern-基础范式"><a href="#Pattern-基础范式" class="headerlink" title="Pattern 基础范式"></a>Pattern 基础范式</h2><blockquote>
+<p>The Principle to Write Css.</p>
+</blockquote>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20240131161211.png" alt="image.png"></p>
+<p>这是一个最基本的 CSS 结构，更为专业的名称是 <strong>CSS 规则集</strong>（简称为规则），其组成分成一下几个部分：</p>
+<ul>
+<li><strong>选择器 Selector</strong>：类似表格中的筛选，筛选这个规则使用的范围，针对 Class、ID、Tag 等不同类型有不同的选择器写法</li>
+<li><strong>属性 Property</strong>: 选择要修改的属性，如颜色，大小，位置灯多重类型。</li>
+<li><strong>属性值 Property value</strong>: 各种对应属性的取值，如具体的哪个颜色，字体多大等。</li>
+<li><strong>声明 Declaration</strong>：由属性和属性值组成的一条单独的规则，指定一种特定的样式。</li>
+</ul>
+<p>上述结构称为规则<strong>集</strong>，因为其可以同时包含多个规则（即声明），编写时有以下约定：</p>
+<ul>
+<li>每个规则使用 <code>;</code> 作为结尾的分割</li>
+<li>同一个规则集的规则需要编写在 <code>&#123;&#125;</code> 之中</li>
+<li>属性和属性值为 K-V 对，声明时使用 <code>:</code> 作为分割符，且属性和值均不区分大小写</li>
+</ul>
+<h2 id="注释方法"><a href="#注释方法" class="headerlink" title="注释方法"></a>注释方法</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/*</span><br><span class="hljs-comment">all between those two symbol is comment.</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+<span id="more"></span> 
+<h2 id="选择器使用基础"><a href="#选择器使用基础" class="headerlink" title="选择器使用基础"></a>选择器使用基础</h2><p>该部分主要介绍如何使用选择器选中、多选不同的元素，更好更灵活的使用选择器来构建出各种不同的效果。</p>
+<h3 id="不同类型选择器定义"><a href="#不同类型选择器定义" class="headerlink" title="不同类型选择器定义"></a>不同类型选择器定义</h3><p>除了使用标签名称进行选择，大多数时候会希望使用更加 specific 的 Class 等去选择需要渲染的内容，才能使得风格更加多样可定制。下面列出一些常见的选择器定义方法，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors">更多的还是参阅MDN</a></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>选择器名称</th>
+<th>选择的内容</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>元素选择器（也称作标签或类型选择器）</td>
+<td>所有指定类型的 HTML 元素</td>
+<td><code>p</code>  <br>选择 <code>&lt;p&gt;</code></td>
+</tr>
+<tr>
+<td>ID 选择器</td>
+<td>具有特定 ID 的元素。单一 HTML 页面中，每个 ID 只对应一个元素，一个元素只对应一个 ID</td>
+<td><code>#my-id</code>  <br>选择 <code>&lt;p id=&quot;my-id&quot;&gt;</code> 或 <code>&lt;a id=&quot;my-id&quot;&gt;</code></td>
+</tr>
+<tr>
+<td>类选择器</td>
+<td>具有特定类的元素。单一页面中，一个类可以有多个实例</td>
+<td><code>.my-class</code>  <br>选择 <code>&lt;p class=&quot;my-class&quot;&gt;</code> 和 <code>&lt;a class=&quot;my-class&quot;&gt;</code></td>
+</tr>
+<tr>
+<td>属性选择器</td>
+<td>拥有特定属性的元素</td>
+<td><code>img[src]</code>  <br>选择 <code>&lt;img src=&quot;myimage.png&quot;&gt;</code> 但不是 <code>&lt;img&gt;</code></td>
+</tr>
+<tr>
+<td>伪类选择器</td>
+<td>特定状态下的特定元素（比如鼠标指针悬停于链接之上）</td>
+<td><code>a:hover</code>  <br>选择仅在鼠标指针悬停在链接上时的 <code>&lt;a&gt;</code> 元素</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="引入字体文件"><a href="#引入字体文件" class="headerlink" title="引入字体文件"></a>引入<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Styling_text/Web_fonts">字体文件</a></h2><p>如果需要修改/导入字体文件，可以类似导入 css 文件一般，导入字体文件，一般有两种方式，一种是导入在线字体（<strong>不推荐</strong>，访问 google 字体库时可能会导致用户的 IP 泄漏），或者导入本地字体（推荐）。</p>
+<p>导入字体的例子如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css?family=Open+Sans<span class="hljs-string">&quot; /&gt;</span><br></code></pre></td></tr></table></figure>
+<p>然后在 CSS 文件中全局/局部定义字体，这里给一个全局定义的例子，后面可以通过局部的规则对其进行覆盖：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">html</span> &#123;<br>	font_family: <span class="hljs-string">&quot;Open Sans&quot;</span>, sans-serif <span class="hljs-comment">/* 这应该是从Google Fonts能得到的其余输出*/</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>获取字体的手段：<a target="_blank" rel="noopener" href="https://developers.google.com/fonts">GoogleFonts</a>，Github，推荐将字体下载到本地之后再进行挂载，或者使用安全的 <a target="_blank" rel="noopener" href="https://web.mit.edu/jmorzins/www/fonts.html">web通用字体</a>如：Arial、Times New Roman、Courier New。</p>
+<p>导入本地字体的指引可以参考 <a target="_blank" rel="noopener" href="https://www.iware.com.tw/qa-508.html">css 字体嵌入方法</a>，实际上没有导入在线字体方便，需要考虑加载时间，导入支持各种浏览器的字体，优先加载用户本地字体等。</p>
+<h2 id="CSS-的一切皆盒子"><a href="#CSS-的一切皆盒子" class="headerlink" title="CSS 的一切皆盒子"></a>CSS 的一切皆盒子</h2><blockquote>
+<p>COPY FROM MDN</p>
+</blockquote>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20240131170500.png" alt="image.png"></p>
+<p>CSS 布局主要是基于盒子模型。在你的页面上占用空间的每个盒子都有类似的属性：</p>
+<ul>
+<li><code>padding</code>（内边距）：是指内容周围的空间。在下面的例子中，它是段落文本周围的空间。</li>
+<li><code>border</code>（边框）：是紧接着内边距的线。</li>
+<li><code>margin</code>（外边距）：是围绕元素边界外侧的空间。</li>
+</ul>
+<p>创建一个这样的文本块还会需要用到一下的这些规则集：</p>
+<ul>
+<li><code>width</code>：元素的宽度</li>
+<li><code>background-color</code>：元素内容和内边距底下的颜色</li>
+<li><code>color</code>：元素内容（通常是文本）的颜色</li>
+<li><code>text-shadow</code>：为元素内的文本设置阴影</li>
+<li><code>display</code>：设置元素的显示模式</li>
+</ul>
+<p>设置整个 <code>&lt;body&gt;</code> 内容块的实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">body</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">600px</span>;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#ff9500</span>;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">20px</span> <span class="hljs-number">20px</span> <span class="hljs-number">20px</span>;<br>  <span class="hljs-attribute">border</span>: <span class="hljs-number">5px</span> solid black;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>width 限制了整个 body 的宽度一直为 600 个像素</li>
+<li><code>margin: 0 auto;</code> 当你在 <code>margin</code> 或 <code>padding</code> 这样的属性上设置两个值时，第一个值影响元素的上下方向（在这个例子中设置为 <code>0</code>）；第二个值影响左右方向。(这里，<code>auto</code> 是一个特殊的值，它将可用的水平空间平均分配给左和右）。如 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin#%E8%AF%AD%E6%B3%95">Margin 语法</a>中所记载的那样，你也可以使用一个、两个、三个或四个值</li>
+<li><code>padding: 0 20px 20px 20px;</code> 我们给内边距设置了四个值来让内容四周产生一点空间。这一次我们不设置上方的内边距，设置右边，下方，左边的内边距为 20 像素。值以上、右、下、左的顺序排列。与 <code>margin</code> 一样，你也可以像 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding#%E8%AF%AD%E6%B3%95">Padding 语法</a>中所记载的那样，使用一个、两个、三个或四个值。</li>
+<li><code>border: 5px solid black;</code> 这是为边框的宽度、样式和颜色设置的值。在本例中，它是一个在主体的所有侧面的 5 像素宽的纯黑色边框。</li>
+</ul>
+<p>默认的标题样式并不美观，可以按照以下方式做一些简单的改善：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span> &#123;<br>  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#00539f</span>;<br>  <span class="hljs-attribute">text-shadow</span>: <span class="hljs-number">3px</span> <span class="hljs-number">3px</span> <span class="hljs-number">1px</span> black;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>padding：标题的顶部和底部内边距设置为 20 像素。</li>
+<li>text-shadow：<ul>
+<li>第一个像素值设置阴影与文本的<strong>水平偏移量</strong>：它横移的距离。</li>
+<li>第二个像素值设置阴影与文本的<strong>垂直偏移量</strong>：它向下移动的距离。</li>
+<li>第三个像素值设置阴影的<strong>模糊半径</strong>。一个更大的值会产生一个更模糊的阴影。</li>
+<li>第四个值设置阴影的基色。</li>
+</ul>
+</li>
+</ul>
+<p>最后，我们把<strong>图像居中</strong>来使页面更美观。可以复用 body 的 <code>margin: 0 auto</code>，但有一些差异，需要额外的设置来使 CSS 发挥作用。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/body"><code>&lt;body&gt;</code></a> 元素是<strong>块级</strong>元素，意味着它占据了页面的空间并且能够赋予外边距和其他改变间距的值。而图片是<strong>行级</strong>元素，不具备块级元素的一些功能。所以为了使图像有外边距，我们必须使用 <code>display: block</code> 给予其块级行为。</p>
+<blockquote>
+<p>[!callout]+<br> <strong>备注：</strong> 以上说明假定所选图片小于页面宽度（600 像素）。更大的图片会溢出 body 并占据页面的其他位置。要解决这个问题，可以： 1）使用<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Raster_graphics_editor">图片编辑器</a> 来减小图片宽度； 2）用 CSS 限制图片大小，即减小 <code>&lt;img&gt;</code> 元素 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/width"><code>width</code></a> 属性的值。</p>
+<p>[!callout]+<br> <strong>备注：</strong> 如果你暂时不能理解 <code>display: block</code> 和块级元素与行级元素的差别也没关系；随着你对 CSS 学习的深入，你将明白这个问题。<code>display</code> 属性的更多信息请查看 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/display">display 属性参考页面</a>。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">img</span> &#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;<br>    <span class="hljs-attribute">align-self</span>: center;<br>    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;<br>    <span class="hljs-attribute">display</span>: block;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="Example-最终效果"><a href="#Example-最终效果" class="headerlink" title="Example 最终效果"></a>Example 最终效果</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">html</span> &#123;<br>    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">&quot;Open Sans&quot;</span>, sans-serif;<br>    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;<br>&#125;<br><br><span class="hljs-comment">/* h1 &#123;</span><br><span class="hljs-comment">    font-size: 50px;</span><br><span class="hljs-comment">    text-align: center;</span><br><span class="hljs-comment">  &#125; */</span><br><br><span class="hljs-selector-tag">h1</span> &#123;<br>    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<br>    <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-attribute">color</span>: <span class="hljs-number">#00539f</span>;<br>    <span class="hljs-attribute">text-shadow</span>: <span class="hljs-number">3px</span> <span class="hljs-number">3px</span> <span class="hljs-number">1px</span> black;<br>&#125;<br>  <br>  <br><span class="hljs-selector-tag">p</span>,<span class="hljs-selector-tag">li</span> &#123;<br><span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;<br><span class="hljs-attribute">line-height</span>: <span class="hljs-number">2</span>;<br><span class="hljs-attribute">letter-spacing</span>: <span class="hljs-number">1px</span>;<br>&#125;<br><br><span class="hljs-selector-tag">html</span> &#123;<br>    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#2050b8</span>;<br>&#125;<br><br><span class="hljs-selector-tag">body</span> &#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">600px</span>;<br>    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;<br>    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#ff9500</span>;<br>    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">20px</span> <span class="hljs-number">20px</span> <span class="hljs-number">20px</span>;<br>    <span class="hljs-attribute">border</span>: <span class="hljs-number">5px</span> solid black;<br>&#125;<br> <br><span class="hljs-selector-tag">img</span> &#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;<br>    <span class="hljs-attribute">align-self</span>: center;<br>    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;<br>    <span class="hljs-attribute">display</span>: block;<br>&#125;<br>  <br></code></pre></td></tr></table></figure>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20240131172103.png" alt="image.png"></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>LearnWeb03-CSS01-基础CSS规则</p><p><a href="http://aikenh.cn/cn/LearnWeb03-CSS01-基础CSS规则/">http://aikenh.cn/cn/LearnWeb03-CSS01-基础CSS规则/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2024-01-31</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2024-03-04</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Web/">Web, </a><a class="link-muted" rel="tag" href="/tags/CSS/">CSS </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/LearnWeb04-JS01-%E5%9F%BA%E7%A1%80webJS%E7%BC%96%E5%86%99/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">LearnWeb04-JS01-基础webJS编写</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/LearnWeb02-HTML01-%E5%9F%BA%E7%A1%80%E7%9A%84%E6%A0%87%E7%AD%BE/"><span class="level-item">LearnWeb02-HTML01-基础的标签</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/LearnWeb03-CSS01-%E5%9F%BA%E7%A1%80CSS%E8%A7%84%E5%88%99/';
+            this.page.identifier = 'cn/LearnWeb03-CSS01-基础CSS规则/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">154</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">46</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">103</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Pattern-基础范式"><span class="level-left"><span class="level-item">1</span><span class="level-item">Pattern 基础范式</span></span></a></li><li><a class="level is-mobile" href="#注释方法"><span class="level-left"><span class="level-item">2</span><span class="level-item">注释方法</span></span></a></li><li><a class="level is-mobile" href="#选择器使用基础"><span class="level-left"><span class="level-item">3</span><span class="level-item">选择器使用基础</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#不同类型选择器定义"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">不同类型选择器定义</span></span></a></li></ul></li><li><a class="level is-mobile" href="#引入字体文件"><span class="level-left"><span class="level-item">4</span><span class="level-item">引入字体文件</span></span></a></li><li><a class="level is-mobile" href="#CSS-的一切皆盒子"><span class="level-left"><span class="level-item">5</span><span class="level-item">CSS 的一切皆盒子</span></span></a></li><li><a class="level is-mobile" href="#Example-最终效果"><span class="level-left"><span class="level-item">6</span><span class="level-item">Example 最终效果</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb16-Web%E5%AE%9E%E6%88%9801-%E9%A6%96%E9%A1%B5%E8%AE%BE%E8%AE%A1/"><img src="/img/header_img/lml_bg17.jpg" alt="LearnWeb15-Web实战01-首页设计"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-17T00:28:28.000Z">2024-02-17</time></p><p class="title"><a href="/cn/LearnWeb16-Web%E5%AE%9E%E6%88%9801-%E9%A6%96%E9%A1%B5%E8%AE%BE%E8%AE%A1/">LearnWeb15-Web实战01-首页设计</a></p><p class="categories"><a href="/categories/Web/">Web</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb15-CSS09-%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/"><img src="/img/header_img/lml_bg16.jpg" alt="LearnWeb15-CSS09-媒体查询与响应式设计"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-08T09:53:55.000Z">2024-02-08</time></p><p class="title"><a href="/cn/LearnWeb15-CSS09-%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/">LearnWeb15-CSS09-媒体查询与响应式设计</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/CSS/">CSS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb14-CSS08-CSS%E5%B8%83%E5%B1%80/"><img src="/img/header_img/lml_bg15.jpg" alt="LearnWeb14-CSS08-CSS布局"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-07T09:09:44.000Z">2024-02-07</time></p><p class="title"><a href="/cn/LearnWeb14-CSS08-CSS%E5%B8%83%E5%B1%80/">LearnWeb14-CSS08-CSS布局</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/CSS/">CSS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb13-CSS07-CSS%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"><img src="/img/header_img/lml_bg14.jpg" alt="LearnWeb13-CSS07-CSS开发流程"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-07T07:54:33.000Z">2024-02-07</time></p><p class="title"><a href="/cn/LearnWeb13-CSS07-CSS%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">LearnWeb13-CSS07-CSS开发流程</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/CSS/">CSS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb12-CSS06-%E8%A1%A8%E6%A0%BC%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86/"><img src="/img/header_img/lml_bg13.jpg" alt="LearnWeb12-CSS06-表格样式处理"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-02-07T07:06:05.000Z">2024-02-07</time></p><p class="title"><a href="/cn/LearnWeb12-CSS06-%E8%A1%A8%E6%A0%BC%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86/">LearnWeb12-CSS06-表格样式处理</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/CSS/">CSS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

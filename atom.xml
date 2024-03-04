@@ -6,7 +6,7 @@
   <link href="http://aikenh.cn/atom.xml" rel="self"/>
   
   <link href="http://aikenh.cn/"/>
-  <updated>2024-01-28T08:53:32.048Z</updated>
+  <updated>2024-03-04T08:45:53.409Z</updated>
   <id>http://aikenh.cn/</id>
   
   <author>
@@ -17,11 +17,678 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>LearnWeb15-Web实战01-首页设计</title>
+    <link href="http://aikenh.cn/cn/LearnWeb16-Web%E5%AE%9E%E6%88%9801-%E9%A6%96%E9%A1%B5%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://aikenh.cn/cn/LearnWeb16-Web%E5%AE%9E%E6%88%9801-%E9%A6%96%E9%A1%B5%E8%AE%BE%E8%AE%A1/</id>
+    <published>2024-02-17T00:28:28.000Z</published>
+    <updated>2024-03-04T08:45:53.409Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;设计个人首页作为 HTML 和 CSS 的实战，主要设计以下的几个部分，导航栏，侧边栏，logo，页脚，背景，以及一个简单的个人介绍页面，首先不考虑使用框架和库，仅对整体流程做熟悉，使用纯 HTML 和 CSS 进行基础实现。后续考虑使用框架和组件库进行重写。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.checklist.design/&quot;&gt;CheckList for Web Design&lt;/a&gt; : Using this website to checkout those element u missed in your design. Prepare for those elements. Get Ready and Start.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20240219134111.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Nav-Bar-页眉的导航栏设计&quot;&gt;&lt;a href=&quot;#Nav-Bar-页眉的导航栏设计&quot; class=&quot;headerlink&quot; title=&quot;Nav-Bar 页眉的导航栏设计&quot;&gt;&lt;/a&gt;Nav-Bar 页眉的导航栏设计&lt;/h2&gt;&lt;h3 id=&quot;Buger-下拉菜单-侧边菜单&quot;&gt;&lt;a href=&quot;#Buger-下拉菜单-侧边菜单&quot; class=&quot;headerlink&quot; title=&quot;Buger 下拉菜单(侧边菜单)&quot;&gt;&lt;/a&gt;Buger 下拉菜单(侧边菜单)&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://alvarotrigo.com/blog/hamburger-menu-css/&quot;&gt;https://alvarotrigo.com/blog/hamburger-menu-css/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;flex-布局设计&quot;&gt;&lt;a href=&quot;#flex-布局设计&quot; class=&quot;headerlink&quot; title=&quot;flex 布局设计&quot;&gt;&lt;/a&gt;flex 布局设计&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20240221035525.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;使用 html css 进行布局时，如果计划使用 flex 等布局，避免无谓的划分子集的 div 等 box，避免多余的额外对齐工作，原型和草稿确认布局是很重要的。例如上述的导航栏，分成左右两个 div 即可，如果将搜索框等独立出来，在后续对齐和确认间距的时候会多出很多麻烦。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以缩减为仅使用一个 div，使用 flex 的布局技巧来使得元素一半左对齐一半右对齐即可，下面时具体说明。可以参考文献 1 的《使用自动的外边距在主轴上对齐》章节。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果希望让 flex 子元素靠右显示，可以在子元素中定义 &lt;code&gt;margin-left: auto;&lt;/code&gt; (auto 也可使用其他数值单位替代)，参考 &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_flexible_box_layout/Aligning_items_in_a_flex_container&quot;&gt;👍MDN弹性盒子容器中的对齐方式&lt;/a&gt; |  &lt;a href=&quot;http://m.tnblog.net/notebook/article/details/7906&quot;&gt;flex子元素靠右&lt;/a&gt; | &lt;a href=&quot;https://blog.51cto.com/mouday/4373479&quot;&gt;Flex的最后一个元素靠右&lt;/a&gt; | &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Glossary/Flexbox&quot;&gt;Flexbox&lt;/a&gt; &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;align-items 如果没有设置正确的话，所有的元素会按照撑满 flex 容器的高度去对齐。&lt;/li&gt;
+&lt;li&gt;使用 margin:auto 可以实现元素的居中&lt;/li&gt;
+&lt;li&gt;使用 align-self 可以实现单个 flex 子项的不同对齐方式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可能接着阅读更多布局相关的资料，加深对布局的认识，以及正确选择合适的布局：&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook&quot;&gt;Mdn Layout Cookbook&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/tags/HTML/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+    <category term="JS" scheme="http://aikenh.cn/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb15-CSS09-媒体查询与响应式设计</title>
+    <link href="http://aikenh.cn/cn/LearnWeb15-CSS09-%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://aikenh.cn/cn/LearnWeb15-CSS09-%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/</id>
+    <published>2024-02-08T09:53:55.000Z</published>
+    <updated>2024-03-04T08:45:53.407Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Responsive_Design&quot;&gt;响应式设计的历史和思路：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/categories/Web/CSS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb14-CSS08-CSS布局</title>
+    <link href="http://aikenh.cn/cn/LearnWeb14-CSS08-CSS%E5%B8%83%E5%B1%80/"/>
+    <id>http://aikenh.cn/cn/LearnWeb14-CSS08-CSS%E5%B8%83%E5%B1%80/</id>
+    <published>2024-02-07T09:09:44.000Z</published>
+    <updated>2024-03-04T08:45:53.405Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;这里 CSS 的布局指的是通过控制元素的属性：宽度，高度，块（不同类型），内联等来实现在 HTML 的基础上对整体页面的布局进行调整。将其排布在页面上。&lt;/p&gt;
+&lt;p&gt;CSS 页面布局技术允许我们拾取网页中的元素，并且控制它们相对正常布局流、周边元素、父容器或者主视口/窗口的位置。在这个模块中将涉及更多关于页面&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_mode&quot;&gt;布局技术&lt;/a&gt;的细节：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;布局模式介绍&quot;&gt;&lt;a href=&quot;#布局模式介绍&quot; class=&quot;headerlink&quot; title=&quot;布局模式介绍&quot;&gt;&lt;/a&gt;布局模式介绍&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Normal_Flow&quot;&gt;&lt;strong&gt;正常布局流&lt;/strong&gt;&lt;/a&gt;：指的是不对页面进行任何布局控制的时候，浏览器默认的 HTML 布局方式，实际上就是按照源码中的先后次序依次出现，在 HTML 布局的过程中，最为重要的就是元素的块和内联两种布局方式。这里需要注意的就是，块的方向和元素的书写方向的关系。&lt;/p&gt;
+&lt;p&gt;而当我们希望使用 CSS 来改变正常的布局形式的时候，通常会使用以下的一些属性，或者说布局技术，来覆盖掉默认的 HTML 布局行为。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/display&quot;&gt;&lt;code&gt;display&lt;/code&gt;&lt;/a&gt;&lt;/strong&gt; 属性：改变元素在 HTML 中的渲染形式，如 &lt;code&gt;block&lt;/code&gt; &lt;code&gt;inline&lt;/code&gt; &lt;code&gt;inline-block&lt;/code&gt; 还有 CSS 引入的 &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Grids&quot;&gt;CSS Grid&lt;/a&gt; 和 &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Flexbox&quot;&gt;Flexbox&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/float&quot;&gt;&lt;code&gt;float&lt;/code&gt;&lt;/a&gt;&lt;/strong&gt; 属性：使用 float 属性能改变块级元素换行的特性，实现类似换行的效果，其值指定其他元素围绕块级元素的哪一边。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/position&quot;&gt;&lt;code&gt;position&lt;/code&gt;&lt;/a&gt;&lt;/strong&gt; 属性：利用 position 来设置盒子在盒子中的位置，在嵌套的情况下就可以产生多样的排布&lt;/li&gt;
+&lt;li&gt;表格布局：表格的布局方式可以用在非表格内容上，可以使用&lt;code&gt;display: table&lt;/code&gt;和相关属性在非表元素上使用&lt;/li&gt;
+&lt;li&gt;多列布局： &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_multicol_layout&quot;&gt;Multi-column layout&lt;/a&gt; 属性可以让块按列布局，比如报纸的内容就是一列一列排布的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在讨论布局时，&lt;code&gt;display&lt;/code&gt; 最多用到的属性为 &lt;code&gt;flex&lt;/code&gt; 和 &lt;code&gt;grid&lt;/code&gt; 属性，利用这两个属性值来改变布局。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/categories/Web/CSS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb13-CSS07-CSS开发流程</title>
+    <link href="http://aikenh.cn/cn/LearnWeb13-CSS07-CSS%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"/>
+    <id>http://aikenh.cn/cn/LearnWeb13-CSS07-CSS%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/</id>
+    <published>2024-02-07T07:54:33.000Z</published>
+    <updated>2024-03-04T08:45:51.136Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;这一章节主要是涵盖开发 css 的各部分，有一些需要掌握的技能的 TODO 还有一些代码风格之类的东西&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;TODO&quot;&gt;&lt;a href=&quot;#TODO&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/categories/Web/CSS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb12-CSS06-表格样式处理</title>
+    <link href="http://aikenh.cn/cn/LearnWeb12-CSS06-%E8%A1%A8%E6%A0%BC%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86/"/>
+    <id>http://aikenh.cn/cn/LearnWeb12-CSS06-%E8%A1%A8%E6%A0%BC%E6%A0%B7%E5%BC%8F%E5%A4%84%E7%90%86/</id>
+    <published>2024-02-07T07:06:05.000Z</published>
+    <updated>2024-03-04T08:45:48.727Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;表格的部分主要还是要实操，&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/categories/Web/CSS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb11-CSS05-部分常见样式设置</title>
+    <link href="http://aikenh.cn/cn/LearnWeb11-CSS05-%E9%83%A8%E5%88%86%E5%B8%B8%E8%A7%81%E6%A0%B7%E5%BC%8F%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://aikenh.cn/cn/LearnWeb11-CSS05-%E9%83%A8%E5%88%86%E5%B8%B8%E8%A7%81%E6%A0%B7%E5%BC%8F%E8%AE%BE%E7%BD%AE/</id>
+    <published>2024-02-06T08:24:17.000Z</published>
+    <updated>2024-03-04T08:45:47.113Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;该篇章主要收集一些常见的样式设置的参考页和一些需要记住的重要设置内容，由于不可能记住所有的属性和设置，善用查询可能才是唯一的王道。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;CSS-中的值与单位&quot;&gt;&lt;a href=&quot;#CSS-中的值与单位&quot; class=&quot;headerlink&quot; title=&quot;CSS 中的值与单位&quot;&gt;&lt;/a&gt;CSS 中的值与单位&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Values_and_units&quot;&gt;CSS 中的值与单位&lt;/a&gt; 这里介绍常见的一些值和单位，有一些新的可能会有所缺失，但是大部分都有了，这里可以列举几个常见但是之前不理解的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;em&lt;/code&gt; 相对字体大小&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vw&lt;/code&gt; 视窗宽度，值为百分比的含义&lt;/li&gt;
+&lt;li&gt;百分比：与父辈容器的百分比&lt;/li&gt;
+&lt;li&gt;rgba 或者 rgb 的第四个值代表透明度，十六进制想设置透明度的话，就在后面再加两位 16 进制表示透明度的百分比。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里倒是提示我们需要有个比较好的取色器或者像 vscode 中的色盘来编写 css，颜色搭配网站在 css 中也是很重要的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/categories/Web/CSS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb10-CSS04-盒子模型</title>
+    <link href="http://aikenh.cn/cn/LearnWeb10-CSS04-%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://aikenh.cn/cn/LearnWeb10-CSS04-%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/</id>
+    <published>2024-02-06T07:08:50.000Z</published>
+    <updated>2024-03-04T08:45:46.256Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;HTML 和 CSS 中，所有的元素都是基于一个个的 Box 去渲染的，理解盒子模型的设计，才能知道如何进行布局，从而使的页面按照希望的样子呈现，该定义实际上和 HTML 的块级元素和内联元素使完全相对应的。需要注意两者之间的关联性。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;块级盒子-Block-Box-和内联盒子-Inline-Box&quot;&gt;&lt;a href=&quot;#块级盒子-Block-Box-和内联盒子-Inline-Box&quot; class=&quot;headerlink&quot; title=&quot;块级盒子(Block Box)和内联盒子(Inline Box)&quot;&gt;&lt;/a&gt;块级盒子(Block Box)和内联盒子(Inline Box)&lt;/h2&gt;&lt;p&gt;块级盒子和 HTML 中的块级元素使相互对应的，例如 &lt;code&gt;h&lt;/code&gt; 和 &lt;code&gt;p&lt;/code&gt; 有以下的特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;与其他元素之间会换行&lt;/li&gt;
+&lt;li&gt;因为换行，在内联的方向上（也就是行）会占据所有可用空间，即绝大多数情况下和父容器一样宽。&lt;/li&gt;
+&lt;li&gt;width 和 height 属性均可发挥总用&lt;/li&gt;
+&lt;li&gt;内边距（padding）, 外边距（margin）和边框（border）会将其他元素从当前盒子周围“推开”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;内联盒子和 HTML 中的内联元素相互对应，例如 &lt;code&gt;span&lt;/code&gt;, &lt;code&gt;em&lt;/code&gt;, &lt;code&gt;strong&lt;/code&gt; 等，有以下的特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不会换行&lt;/li&gt;
+&lt;li&gt;width 和 height 属性不起作用&lt;/li&gt;
+&lt;li&gt;垂直方向的内边距、外边距以及边框会被应用但是不会把其他处于 &lt;code&gt;inline&lt;/code&gt; 状态的盒子推开。&lt;/li&gt;
+&lt;li&gt;水平方向的内边距、外边距以及边框会被应用且会把其他处于 &lt;code&gt;inline&lt;/code&gt; 状态的盒子推开。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果希望切换元素的内联或者块级属性，可以通过对盒子的 display 属性设置进行切换，对应的属性值为 &lt;code&gt;inline&lt;/code&gt; 和 &lt;code&gt;block&lt;/code&gt;，而更有趣的，如果我们希望不换行，但是内联中的 &lt;code&gt;width&lt;/code&gt; 和 &lt;code&gt;height&lt;/code&gt; 属性起到作用，可以使用 &lt;code&gt;inline-box&lt;/code&gt; 属性。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Inline-box 属性在导航栏/链接元素中很常见，我们通过增大内容区域来使得链接存在更大的命中区域，同时不影响别的元素的呈现。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在这里还会看到片一个十分常见的盒子属性 &lt;code&gt;flex&lt;/code&gt; 其通常会将外部的显示类型转换为 block，但是内部的显示类型设置为 flex，对其内部的各个子元素，都将转换为 flex 元素，并基于 flex 即&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Flexbox&quot;&gt;弹性盒子的规则&lt;/a&gt;进行布局，可以生成更灵活的界面，这个后面在排版部分针对性的了解，这里简单介绍如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;flex 会将内部的元素默认沿着行的方向均分切成几个 box，但是具体的切分可以根据后续的属性进行定义。&lt;/li&gt;
+&lt;li&gt;如果希望 flex 的外部为内联的，则使用 inline-flex 属性。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/categories/Web/CSS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb09-CSS03-层叠层</title>
+    <link href="http://aikenh.cn/cn/LearnWeb09-CSS03-%E5%B1%82%E5%8F%A0%E5%B1%82/"/>
+    <id>http://aikenh.cn/cn/LearnWeb09-CSS03-%E5%B1%82%E5%8F%A0%E5%B1%82/</id>
+    <published>2024-02-06T02:48:11.000Z</published>
+    <updated>2024-03-04T08:45:44.669Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;本章节是额外对于优先级的补充章节，在使用上可能会没有明显的感知，但是从概念上理解 CSS 的优先级和后续复杂项目的开发中还是起到了比较大的作用，该章节介绍层叠层的概念，在原先的优先级判定上添加了层的概念。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;层叠概念回顾&quot;&gt;&lt;a href=&quot;#层叠概念回顾&quot; class=&quot;headerlink&quot; title=&quot;层叠概念回顾&quot;&gt;&lt;/a&gt;层叠概念回顾&lt;/h2&gt;&lt;p&gt;该 Section 内容完全摘录自 MDN CSS 教程，也算是对于整体重要性和优先级的一个很好的总结。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;相关声明&lt;/strong&gt;：找到所有具有匹配每个元素的选择器的声明代码块。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重要性&lt;/strong&gt;：根据规则是普通还是重要对规则进行排序。重要的样式是指设置了 &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/important&quot; title=&quot;Currently only available in English (US)&quot;&gt;&lt;code&gt;!important&lt;/code&gt; (en-US)&lt;/a&gt; 标志的样式。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;来源&lt;/strong&gt;：在两个按重要性划分的分组内，按作者、用户或用户代理这几个来源对规则进行排序。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;层&lt;/strong&gt;：在六个按重要性和来源划分的分组内，按层叠层进行排序。普通声明的层顺序是从创建的第一个到最后一个，然后是未分层的普通样式。对于重要的样式，这个顺序是反转的，但保持未分层的重要样式优先权最低。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优先级&lt;/strong&gt;：对于来源层中优先权相同的竞争样式，按&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/Specificity&quot;&gt;优先级&lt;/a&gt;对声明进行排序。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;出现顺序&lt;/strong&gt;：当两个来源层的优先权相同的选择器具有相同的优先级时，最后声明的具有最高优先级的选择器的属性值获胜。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;CSS 渲染过程中会逐步往下选择，如果在中间已经决出了胜负就不会继续往下，例如对一个元素在每个来源中只有一个定义，那么在来源层就可以决出胜负，无需往下了，而若获胜的来源中有多个层定义了同个属性，那么就会对比各个层的优先级，诸如此类。&lt;/p&gt;
+&lt;p&gt;其他的部分前文已经基本提到了，接下来补充来源和层的两个概念。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;![note]+&lt;br&gt;三个来源中的：’用户代理’指的是浏览器，用户指的是网站访问者，作者指的是网站开发者，浏览器内部将来自这三个来源的样式表进行来源的排序。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;来源的优先级排序&quot;&gt;&lt;a href=&quot;#来源的优先级排序&quot; class=&quot;headerlink&quot; title=&quot;来源的优先级排序&quot;&gt;&lt;/a&gt;来源的优先级排序&lt;/h3&gt;&lt;p&gt;有三种&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade#origin_types&quot;&gt;层叠来源类型&lt;/a&gt;：用户代理样式表、用户样式表和作者样式表。浏览器根据来源和重要性将每个声明分为六个来源分组。有八个优先权级别：六个来源分组、正在过渡的属性和正在动画的属性。优先权的顺序是从具有最低优先权的普通用户代理样式，到当前应用的动画中的样式，到具有最高优先权的重要用户代理样式，再到正在过渡的样式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用户代理普通样式&lt;/li&gt;
+&lt;li&gt;用户普通样式&lt;/li&gt;
+&lt;li&gt;作者普通样式&lt;/li&gt;
+&lt;li&gt;正在动画的样式&lt;/li&gt;
+&lt;li&gt;作者重要样式&lt;/li&gt;
+&lt;li&gt;用户重要样式&lt;/li&gt;
+&lt;li&gt;用户代理重要样式&lt;/li&gt;
+&lt;li&gt;正在过渡的样式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用 &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/style&quot;&gt;&lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt;&lt;/a&gt; 元素直接在元素上声明的样式是作者样式。不包括动画和过渡样式，用户代理普通样式具有最低优先权；用户代理重要样式具有最高优先权。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/categories/Web/CSS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb08-CSS02-CSS入门</title>
+    <link href="http://aikenh.cn/cn/LearnWeb08-CSS02-CSS%E5%85%A5%E9%97%A8/"/>
+    <id>http://aikenh.cn/cn/LearnWeb08-CSS02-CSS%E5%85%A5%E9%97%A8/</id>
+    <published>2024-02-04T09:05:12.000Z</published>
+    <updated>2024-03-04T08:45:44.576Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!note]+&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;你永远无法记住所有的 CSS 属性，善用参考资料：&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference&quot;&gt;MDN CSS reference&lt;/a&gt; 和 GPT&lt;/li&gt;
+&lt;li&gt;善用浏览器的开发者面板在页面上及时编辑 CSS。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;CSS-运行逻辑&quot;&gt;&lt;a href=&quot;#CSS-运行逻辑&quot; class=&quot;headerlink&quot; title=&quot;CSS 运行逻辑&quot;&gt;&lt;/a&gt;CSS 运行逻辑&lt;/h2&gt;&lt;p&gt;前面在 &lt;a href=&quot;LearnWeb00-Web入门.md&quot;&gt;LearnWeb00-Web入门&lt;/a&gt; 中简单提及了浏览器以及 CSS 起了什么作用，这里则是对于 CSS 是如何具体参与进页面的渲染的讲解，包括早该知道的 DOM 的定义也会在这里介绍，是 &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/CSS/First_steps/How_CSS_works&quot;&gt;CSS 是如何运行&lt;/a&gt;的读书笔记。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20240205140358.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;浏览器获取了 HTML 之后：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;会拉取其所依赖的所有 CSS，JS 和静态资源（Parser HTML）&lt;/li&gt;
+&lt;li&gt;解析 HTML 代码，根据其中的 Tag、Class、ID 和相互之间的关系将 HTML 解析成 DOM ，每个元素作为其中的一个节点放进相对应的桶中。（元素桶、ID 桶之类）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;紧接着，在拉取完 CSS 之后，浏览器开始解析 CSS，基于 CSS 中的选择器找到每个样式所属的 DOM 节点，并将其添加进去。&lt;/p&gt;
+&lt;p&gt;最后基于最终的 DOM(Document Object Model) 渲染出完整的页面，这里对 DOM 进行一个简单的解释：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一个 DOM 有一个树形结构，标记语言中的每一个元素、属性以及每一段文字都对应着结构树中的一个节点（Node/DOM 或 DOM node）。节点由节点本身和其他 DOM 节点的关系定义，有些节点有父节点，有些节点有兄弟节点（同级节点）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;此外浏览器在渲染过程中如果遇到了位置的 CSS 会直接跳过相应的 CSS ，然后渲染下一个规则。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/categories/Web/CSS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb07-HTML04-表格基础</title>
+    <link href="http://aikenh.cn/cn/LearnWeb07-HTML04-%E8%A1%A8%E6%A0%BC%E5%9F%BA%E7%A1%80/"/>
+    <id>http://aikenh.cn/cn/LearnWeb07-HTML04-%E8%A1%A8%E6%A0%BC%E5%9F%BA%E7%A1%80/</id>
+    <published>2024-02-04T08:30:09.000Z</published>
+    <updated>2024-03-04T08:45:42.990Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;HTML 中需要使用 CSS 进行样式组合才能得到一个阅读体验较好的表格，目前还是先专注在 HTML 的部分，后面到 CSS 部分的时候再合起来一起看。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;本文主要是参考 &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/categories/Web/HTML/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/tags/HTML/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb06-HTML03-多媒体元素</title>
+    <link href="http://aikenh.cn/cn/LearnWeb06-HTML03-%E5%A4%9A%E5%AA%92%E4%BD%93%E5%85%83%E7%B4%A0/"/>
+    <id>http://aikenh.cn/cn/LearnWeb06-HTML03-%E5%A4%9A%E5%AA%92%E4%BD%93%E5%85%83%E7%B4%A0/</id>
+    <published>2024-02-03T01:51:08.000Z</published>
+    <updated>2024-03-04T08:45:41.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;接下来主要探讨 HTML 中的多媒体元素，图片、视频、音频以及 iframe 等等。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;图片元素-Image&quot;&gt;&lt;a href=&quot;#图片元素-Image&quot; class=&quot;headerlink&quot; title=&quot;图片元素 Image&quot;&gt;&lt;/a&gt;图片元素 Image&lt;/h2&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs html&quot;&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&amp;lt;img_url or location&amp;gt;&amp;quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;src&lt;/code&gt;：最基本的图片元素仅需一个 &lt;strong&gt;src&lt;/strong&gt; 属性来指向图片资源，这样就可以将图片导入页面中，其中关于 Location 这里有一个 SEO Tips(Google Recommand)：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本地存储推荐存储于 &lt;code&gt;images&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;图片的命名更加具备描述性。&lt;/li&gt;
+&lt;li&gt;不要将自己的 SRC 属性指向他人网页上的照片（这种行为为”盗链”）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如图像元素和视频元素这类嵌入的元素，有时候也被成为&lt;strong&gt;替换元素&lt;/strong&gt;：元素的内容和原始尺寸由外部资源所定义，而非元素本身。（可以使用属性或者 CSS 进行控制）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;alt&lt;/code&gt;：alt 为了视障，节省带宽，浏览器支持问题等原因设置的代替图片出现的描述性文本，推荐根据图片内容进行编写：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;装饰需求&lt;/code&gt;: 使用空的 &lt;code&gt;alt=&amp;quot;&amp;quot;&lt;/code&gt; 避免输出多余信息，同时推荐将装饰性图片在 CSS 文件中定义而非 html，下文会详细讲解 CSS 设置装饰图片&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;内容需求&lt;/code&gt;：如果正文中没有描述，则 alt 对图片进行描述，否则设置为空。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;width&lt;/code&gt; 与 &lt;code&gt;height&lt;/code&gt; ：上文中提到图片的 size 由外部资源决定，单位了适应页面的大小，可以使用 img 标签中的 width 和 height 属性来实现对图片的缩放，同时也会&lt;strong&gt;在页面尚未加载完成时预留空间，避免页面结构混乱&lt;/strong&gt;。（因此无需缩放也建议，获取图片的 size 写入属性。）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;title&lt;/code&gt;：类似超链接中的 title 属性，可以给照片添加悬停提示，当空间不够时可以通过这种方式来添加部分信息，但不推荐。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;figure&lt;/code&gt; 与 &lt;code&gt;figcaption&lt;/code&gt;：创建一个容器（box），可以为图片在图片下方添加说明，像论文中的那种，对于无障碍用户来说起到和 alt 一样的作用。&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs html&quot;&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;figure&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;	&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;src&lt;/span&gt;= &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;https://the-network-photo&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;alt&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;title&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;key img&amp;quot;&lt;/span&gt;, &lt;span class=&quot;hljs-attr&quot;&gt;width&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;400&amp;quot;&lt;/span&gt;, &lt;span class=&quot;hljs-attr&quot;&gt;height&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;200&amp;quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;	&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;figcaption&lt;/span&gt;&amp;gt;&lt;/span&gt;通过为网络添加一个低纬嵌入来实现用最小的空间代价控制网路行为&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;figcaption&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;figure&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;figure 中可以存放几张图片、一段代码、音视频、方程、或者任何其他的内容，而不只是单张照片，类似的补充说明的场景都可以使用 figure 元素呈现。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/categories/Web/HTML/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/tags/HTML/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb05-HTML02-要素察觉</title>
+    <link href="http://aikenh.cn/cn/LearnWeb05-HTML02-%E8%A6%81%E7%B4%A0%E5%AF%9F%E8%A7%89/"/>
+    <id>http://aikenh.cn/cn/LearnWeb05-HTML02-%E8%A6%81%E7%B4%A0%E5%AF%9F%E8%A7%89/</id>
+    <published>2024-02-02T06:09:15.000Z</published>
+    <updated>2024-03-04T08:45:39.497Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;本章节在 HTML01 的基础上加深对于一些基础概念，标签等的认知，还是以 HTML 编写的基础知识为主。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;块级元素和内联元素&quot;&gt;&lt;a href=&quot;#块级元素和内联元素&quot; class=&quot;headerlink&quot; title=&quot;块级元素和内联元素&quot;&gt;&lt;/a&gt;块级元素和内联元素&lt;/h2&gt;&lt;p&gt;块级元素和内联元素就像 Markdown 的内联代码和代码块两种写法，一个需要另起一行且会占据行，下一个元素必须另起一行，如 &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; 段落等。而内联元素就是可以嵌入行内，内联元素前后都无需换行，一般如强调，高亮，超链接一类。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;正是由于这种结构，&lt;strong&gt;块级元素&lt;/strong&gt;在使用的时候除了内容，往往还承担着&lt;strong&gt;网页的结构&lt;/strong&gt;相关的工作，如页眉，页脚, 列表，导航栏等等；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;块级元素&lt;/strong&gt;不会嵌套在内联元素中，但是可能嵌套在另一个块级元素中。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内联元素&lt;/strong&gt;则通常在块级元素中和文本一起使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;需要注意的是这类元素分类是过时的，HTML 定义了更加详细具体的分类，为了便于理解暂时使用旧的定义来做简单的区分。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;布尔属性&quot;&gt;&lt;a href=&quot;#布尔属性&quot; class=&quot;headerlink&quot; title=&quot;布尔属性&quot;&gt;&lt;/a&gt;布尔属性&lt;/h2&gt;&lt;p&gt;前文提到过，属性通常以 k-v 键值对的形式呈现，但是有部分属性是没有值的，其 key 通常与值有着相同的含义，如 &lt;code&gt;disabled&lt;/code&gt;，该布尔属性本身就代表着禁用，例如输入框 &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; 禁用就会阻止用户的输入。&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs html&quot;&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;disabled&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样就会创建一个无法输入的输入框，通常会以灰色呈现，type 则限制了输入框的输入类型。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/categories/Web/HTML/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/tags/HTML/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb04-JS01-基础webJS编写</title>
+    <link href="http://aikenh.cn/cn/LearnWeb04-JS01-%E5%9F%BA%E7%A1%80webJS%E7%BC%96%E5%86%99/"/>
+    <id>http://aikenh.cn/cn/LearnWeb04-JS01-%E5%9F%BA%E7%A1%80webJS%E7%BC%96%E5%86%99/</id>
+    <published>2024-01-31T13:42:46.000Z</published>
+    <updated>2024-03-04T08:45:38.778Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;JS 除了 WEB 在现代还有很多 NodeJS 的应用也会使用 JS，这里只介绍 web 相关的 JS 代码编写的部分。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;ref:&lt;/strong&gt; &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics&quot;&gt;mdn JS 快速入门&lt;/a&gt; | 《数据结构与算法 JavaScript 描述》&lt;/p&gt;
+&lt;h2 id=&quot;Intro&quot;&gt;&lt;a href=&quot;#Intro&quot; class=&quot;headerlink&quot; title=&quot;Intro&quot;&gt;&lt;/a&gt;Intro&lt;/h2&gt;&lt;p&gt;JavaScript 是一门完备的动态编程语言，可以借由诸多开发者编写的大量工具，为网站提供动态交互的特性（结合浏览器应用程序接口 API）主要用到的包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;浏览器应用程序接口（API）&lt;/strong&gt;：浏览器内置的 API 提供了丰富的功能，比如：动态创建 HTML 和设置 CSS 样式、从用户的摄像头采集处理视频流、生成 3D 图像与音频样本等等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第三方 API&lt;/strong&gt;：让开发者可以在自己的站点中整合其他内容提供者（Twitter、Facebook 等）提供的功能。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第三方框架和库&lt;/strong&gt;：用来快速构建网站和应用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;HTML-引入-JS-代码&quot;&gt;&lt;a href=&quot;#HTML-引入-JS-代码&quot; class=&quot;headerlink&quot; title=&quot;HTML 引入 JS 代码&quot;&gt;&lt;/a&gt;HTML 引入 JS 代码&lt;/h3&gt;&lt;p&gt;为了使得代码更清晰且好组织，本文依然使用引入外部 JS 的办法进行代码结构组织，HTML 中引入相关 JS 的方法和 CSS 的方法类似但略有不同。具体代码如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs html&quot;&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;scripts/main.js&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;defer&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这一段代码可以加在 Head 部分，其中的 defer 属性，及 deferred 延迟，是为了让元素都加载完成后再加载 JS 部分代码，否则最好将 JS 的引入放在 &lt;a href=&quot;https://www.freecodecamp.org/chinese/news/link-javascript-to-html-with-the-src/&quot;&gt;HTML 快要结束的部分&lt;/a&gt;（&lt;code&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; 的前一行）。避免 JS 元素对 HTML 提前进行修改导致 HTML 加载失效。&lt;/p&gt;
+&lt;p&gt;参考资料：&lt;a href=&quot;https://juejin.cn/post/6992371218481414152&quot;&gt;async-defer&lt;/a&gt; | &lt;a href=&quot;https://realdennis.medium.com/html-script-%E4%B8%ADdefer%E8%B7%9Fasync%E6%98%AF%E4%BB%80%E9%BA%BC-1166ee88d18&quot;&gt;Medium&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="JS" scheme="http://aikenh.cn/categories/Web/JS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="JS" scheme="http://aikenh.cn/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb03-CSS01-基础CSS规则</title>
+    <link href="http://aikenh.cn/cn/LearnWeb03-CSS01-%E5%9F%BA%E7%A1%80CSS%E8%A7%84%E5%88%99/"/>
+    <id>http://aikenh.cn/cn/LearnWeb03-CSS01-%E5%9F%BA%E7%A1%80CSS%E8%A7%84%E5%88%99/</id>
+    <published>2024-01-31T07:58:10.000Z</published>
+    <updated>2024-03-04T08:45:37.958Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;在前文 web 入门中已经简单介绍了 CSS 是如何起作用，如何与 HTML 进行相互合作的，本篇主要简单介绍如何编写 CSS 文件中的各种样式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ref: &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics&quot;&gt;mdn css入门&lt;/a&gt; | &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference&quot;&gt;MDN css属性大全&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本文及后续的尝试中，都使用单独 CSS 文件外挂的格式，该种格式的结构会更清晰，即将下述代码放入 HTML 文件的 Head 部分。&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs html&quot;&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;rel&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;styles/style.css&amp;quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;href 部分需要替换为自己实际存放 css 文件的地址即可，此外也简单重复一下剩下的两种使用 CSS 的方式：内部样式表和内联样式表&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;内部样式表&lt;/strong&gt;即在 HTML 的 Head 部分添加 &lt;code&gt;&amp;lt;style&amp;gt;your css code&amp;lt;/style&amp;gt;&lt;/code&gt; 将 CSS 代码都包裹起来&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内联样式表&lt;/strong&gt;即在特定元素中定义 style 属性，&lt;code&gt;&amp;lt;p style=&amp;quot;your css code&amp;quot;&amp;gt;&lt;/code&gt; 在 style 属性中填充需要的 CSS 代码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;接下来进入正文，讲解 css 部分的组成和编写规则。&lt;/p&gt;
+&lt;h2 id=&quot;Pattern-基础范式&quot;&gt;&lt;a href=&quot;#Pattern-基础范式&quot; class=&quot;headerlink&quot; title=&quot;Pattern 基础范式&quot;&gt;&lt;/a&gt;Pattern 基础范式&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;The Principle to Write Css.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20240131161211.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;这是一个最基本的 CSS 结构，更为专业的名称是 &lt;strong&gt;CSS 规则集&lt;/strong&gt;（简称为规则），其组成分成一下几个部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;选择器 Selector&lt;/strong&gt;：类似表格中的筛选，筛选这个规则使用的范围，针对 Class、ID、Tag 等不同类型有不同的选择器写法&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;属性 Property&lt;/strong&gt;: 选择要修改的属性，如颜色，大小，位置灯多重类型。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;属性值 Property value&lt;/strong&gt;: 各种对应属性的取值，如具体的哪个颜色，字体多大等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;声明 Declaration&lt;/strong&gt;：由属性和属性值组成的一条单独的规则，指定一种特定的样式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;上述结构称为规则&lt;strong&gt;集&lt;/strong&gt;，因为其可以同时包含多个规则（即声明），编写时有以下约定：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每个规则使用 &lt;code&gt;;&lt;/code&gt; 作为结尾的分割&lt;/li&gt;
+&lt;li&gt;同一个规则集的规则需要编写在 &lt;code&gt;&amp;#123;&amp;#125;&lt;/code&gt; 之中&lt;/li&gt;
+&lt;li&gt;属性和属性值为 K-V 对，声明时使用 &lt;code&gt;:&lt;/code&gt; 作为分割符，且属性和值均不区分大小写&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;注释方法&quot;&gt;&lt;a href=&quot;#注释方法&quot; class=&quot;headerlink&quot; title=&quot;注释方法&quot;&gt;&lt;/a&gt;注释方法&lt;/h2&gt;&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs css&quot;&gt;&lt;span class=&quot;hljs-comment&quot;&gt;/*&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-comment&quot;&gt;all between those two symbol is comment.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-comment&quot;&gt;*/&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/categories/Web/CSS/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb02-HTML01-基础的标签</title>
+    <link href="http://aikenh.cn/cn/LearnWeb02-HTML01-%E5%9F%BA%E7%A1%80%E7%9A%84%E6%A0%87%E7%AD%BE/"/>
+    <id>http://aikenh.cn/cn/LearnWeb02-HTML01-%E5%9F%BA%E7%A1%80%E7%9A%84%E6%A0%87%E7%AD%BE/</id>
+    <published>2024-01-31T07:00:58.000Z</published>
+    <updated>2024-03-04T08:45:36.522Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!Intro]+&lt;br&gt;在 Web 入门，How HTML Work 部分已经简单介绍过，HTML 是一种定义内容结构的标记语言，通过一系列标记（确定其表现形式）和对应内容组成的元素，嵌套，排列，构成完整的页面。本文主要是整理和熟悉一下基础的标记元素&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20240131110224.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;REF: &lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/HTML_basics&quot;&gt;HTML 入门&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;从上述图像可以看到一个基本的 HTML 元素的构成，元素的 Tag 可以包含属性，&lt;strong&gt;多个属性之间用空格隔开&lt;/strong&gt;，Class 属性可以为元素标识名称，进而为其指定 Style 等。&lt;/p&gt;
+&lt;p&gt;属性通常为 K-V 键值对，attr=”value” 的形式呈现，这里引号可以是单或者双，甚至可以没有，但是没有引号有时候会导致问题，所以建议保持使用引号的风格去编写。&lt;/p&gt;
+&lt;h2 id=&quot;Head-Overview-部分&quot;&gt;&lt;a href=&quot;#Head-Overview-部分&quot; class=&quot;headerlink&quot; title=&quot;Head/Overview 部分&quot;&gt;&lt;/a&gt;Head/Overview 部分&lt;/h2&gt;&lt;p&gt;参考网站中的范例如下，一个基本的 HTML 文件有以下这些可以注意的地方：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs html&quot;&gt;&lt;span class=&quot;hljs-meta&quot;&gt;&amp;lt;!doctype &lt;span class=&quot;hljs-keyword&quot;&gt;html&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;lang&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;en-US&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;head&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;charset&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;viewport&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;width=device-width&amp;quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;title&lt;/span&gt;&amp;gt;&lt;/span&gt;My test page&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;title&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;head&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;images/firefox-icon.png&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;alt&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;My test image&amp;quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;html&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; 就如 cpp 中的 head 文件，定义一些不用于向用户显示的内容，给浏览器的关键词，字符集声明，页面描述等内容&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;&lt;/code&gt; 定义文档使用的字符串编码类型，utf-8 支持世界上大部分语言的渲染，避免因为中文等出现乱码的情况。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width&amp;quot;&amp;gt;&lt;/code&gt; 视口元素，可以确保页面以视口宽度进行渲染，避免移动端浏览器上因页面过宽导致缩放。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt; 对当前网页的描述和注解，显示在标签栏中，以及收藏时显示的文字&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 部分则是包含网站的全部需要显示的内容。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/categories/Web/HTML/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/tags/HTML/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb01-DevPipeline</title>
+    <link href="http://aikenh.cn/cn/LearnWeb01-DevPipeline/"/>
+    <id>http://aikenh.cn/cn/LearnWeb01-DevPipeline/</id>
+    <published>2024-01-30T02:40:23.000Z</published>
+    <updated>2024-03-04T08:45:35.741Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;Familiar with the pipeline of how to build a website, how to organize the files, etc…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Start-Design&quot;&gt;&lt;a href=&quot;#Start-Design&quot; class=&quot;headerlink&quot; title=&quot;Start Design&quot;&gt;&lt;/a&gt;Start Design&lt;/h2&gt;&lt;p&gt;开始设计一个网站的时候，可以从以下三个方面入手来启动整个开发设计过程：网站的主题-&amp;gt;基础的一些内容-&amp;gt;整体的外观设计（草稿）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20240130115132.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;更具体一些：确定完要制作的网页，可以绘制草图有一个粗浅的整体效果，然后指定文本、图像、色彩、字体等资源，就可以开始制作了。&lt;/p&gt;
+&lt;h2 id=&quot;File-Structure&quot;&gt;&lt;a href=&quot;#File-Structure&quot; class=&quot;headerlink&quot; title=&quot;File Structure&quot;&gt;&lt;/a&gt;File Structure&lt;/h2&gt;&lt;p&gt;关于项目中的文件命名，需要注意的是以下的三点，建议养成这样的规范去建立网页文件夹。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;建议使用完全小写来命名文件&lt;/strong&gt;，webserver 是大小写敏感的，所以复杂的大小写关系容易导致访问不到文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;尽量不要使用空格&lt;/strong&gt;，空格可能会破坏链接被视为两个文件等，如果没有被区分很多服务器也需要使用 %20 对空格进行替换&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;尽量使用连字符代替下划线进行文件命名&lt;/strong&gt;，google 搜索引擎将连字符作为单词的分割符，而不会识别下划线&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;而文件存储结构部分，通常而言，有以下的关键文件和文件夹结构，在很多场景下也会将 image 等文件夹放到 static 文件夹中。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;index.html&lt;/li&gt;
+&lt;li&gt;styles: 存放 css 文件&lt;/li&gt;
+&lt;li&gt;images: 存放图片等媒体资源文件&lt;/li&gt;
+&lt;li&gt;scripts: 存放 js 等脚本代码文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;资源的文件路径一般而言以 html 为 Basepath，然后根据上下级关系确认索引地址即可。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/tags/HTML/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+    <category term="JS" scheme="http://aikenh.cn/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LearnWeb00-Web入门</title>
+    <link href="http://aikenh.cn/cn/LearnWeb00-Web%E5%85%A5%E9%97%A8/"/>
+    <id>http://aikenh.cn/cn/LearnWeb00-Web%E5%85%A5%E9%97%A8/</id>
+    <published>2024-01-28T13:25:30.000Z</published>
+    <updated>2024-03-04T08:45:34.179Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[!summary]+&lt;br&gt;Web 前端开发者路线学习，基本的目的是能够为自己想做的项目搭建前端界面，从 web 开始再到各个移动设备的前端 UI，基于 Mdn 课程，Roadmap 具体项目逐步推进对各个知识点的学习。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;根据下面的课程、Roadmap、搭建自己的知识架构，在搭建过程中结合具体的项目，包括自己部署的界面去逐步实践，完善和熟悉整个知识体系和技术栈，并通过和现代 AI 辅助工具的合作，建立自己独立的前端开发流。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://metisy.cool/library/library/46/series/398/manga/1714?incognitoMode=false&quot;&gt;Roadmap For Beginner&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://metisy.cool/library/library/46/series/397/pdf/1712?incognitoMode=false&quot;&gt;Roadmap For All&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Learn/Front-end_web_developer&quot;&gt;Mdn Web Tutor&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Be-Ready-准备以及基础了解&quot;&gt;&lt;a href=&quot;#Be-Ready-准备以及基础了解&quot; class=&quot;headerlink&quot; title=&quot;Be Ready 准备以及基础了解&quot;&gt;&lt;/a&gt;Be Ready 准备以及基础了解&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20240128213825.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基础：开发环境准备、页面设计、文件架构规划（由于网站需要包含多种代码、文本、素材、因此如何组织文件是相当重要的）&lt;/li&gt;
+&lt;li&gt;语言：HTML 、CSS、JS 三驾马车为一个网页必不可少的要素，通过结合各自不同的功能来实现多样化的页面设计。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;What’s-WEB&quot;&gt;&lt;a href=&quot;#What’s-WEB&quot; class=&quot;headerlink&quot; title=&quot;What’s WEB&quot;&gt;&lt;/a&gt;What’s WEB&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=O_GWbkXIqEY&amp;amp;list=PLo3w8EB99pqLEopnunz-dOOBJ8t-Wgt2g&amp;amp;index=1&quot;&gt;What’s WEB?&lt;/a&gt; 通过 URL 统一资源定位符向服务器请求 HTML，HTML 通过包含的信息告诉 Browse 需要额外的信息来呈现该页面，因此基于 HTML 提供的信息 web browser 继续请求资源、CSS、JS 等文件，并将这些文件按照 HTML 的描述进行组合最终呈现完整的页面。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/categories/Web/"/>
+    
+    
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
+    <category term="HTML" scheme="http://aikenh.cn/tags/HTML/"/>
+    
+    <category term="CSS" scheme="http://aikenh.cn/tags/CSS/"/>
+    
+    <category term="JS" scheme="http://aikenh.cn/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Windows Powershell 01 后台任务</title>
     <link href="http://aikenh.cn/cn/pwsh_BgTask/"/>
     <id>http://aikenh.cn/cn/pwsh_BgTask/</id>
     <published>2024-01-28T07:44:25.000Z</published>
-    <updated>2024-01-28T08:53:32.048Z</updated>
+    <updated>2024-01-28T08:53:32.000Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -55,7 +722,7 @@
     <link href="http://aikenh.cn/cn/StableDiffusionWebUI%E9%89%B4%E6%9D%83%E8%AE%BE%E8%AE%A1/"/>
     <id>http://aikenh.cn/cn/StableDiffusionWebUI%E9%89%B4%E6%9D%83%E8%AE%BE%E8%AE%A1/</id>
     <published>2024-01-27T07:42:36.000Z</published>
-    <updated>2024-01-28T08:45:06.836Z</updated>
+    <updated>2024-01-28T08:45:06.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;[&amp;gt; [!summary]+&lt;/p&gt;
@@ -91,11 +758,11 @@
     <category term="AIGC" scheme="http://aikenh.cn/categories/Machine-Learning/AIGC/"/>
     
     
+    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
+    
     <category term="AI" scheme="http://aikenh.cn/tags/AI/"/>
     
     <category term="AIGC" scheme="http://aikenh.cn/tags/AIGC/"/>
-    
-    <category term="Web" scheme="http://aikenh.cn/tags/Web/"/>
     
     <category term="Flask" scheme="http://aikenh.cn/tags/Flask/"/>
     
@@ -106,7 +773,7 @@
     <link href="http://aikenh.cn/cn/BackupToolsForHomeServer/"/>
     <id>http://aikenh.cn/cn/BackupToolsForHomeServer/</id>
     <published>2023-12-29T00:04:06.000Z</published>
-    <updated>2024-01-28T08:45:06.815Z</updated>
+    <updated>2024-01-28T08:45:06.000Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -237,7 +904,7 @@
     <link href="http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/"/>
     <id>http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/</id>
     <published>2023-12-20T00:24:36.000Z</published>
-    <updated>2024-01-28T08:45:06.825Z</updated>
+    <updated>2024-01-28T08:45:06.000Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -273,7 +940,7 @@
     <link href="http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/"/>
     <id>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/</id>
     <published>2023-11-11T04:08:37.000Z</published>
-    <updated>2023-11-13T11:27:42.784Z</updated>
+    <updated>2023-11-13T11:27:42.000Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;禁止屏幕休眠显示作为-Dashboard-显示&quot;&gt;&lt;a href=&quot;#禁止屏幕休眠显示作为-Dashboard-显示&quot; class=&quot;headerlink&quot; title=&quot;禁止屏幕休眠显示作为 Dashboard 显示&quot;&gt;&lt;/a&gt;禁止屏幕休眠显示作为 Dashboard 显示&lt;/h2&gt;&lt;blockquote&gt;
@@ -307,7 +974,7 @@
     <link href="http://aikenh.cn/cn/emby_localhost_crack_by_nginx/"/>
     <id>http://aikenh.cn/cn/emby_localhost_crack_by_nginx/</id>
     <published>2023-11-10T06:05:15.000Z</published>
-    <updated>2024-01-28T08:45:06.795Z</updated>
+    <updated>2024-01-28T08:45:06.000Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Intro-问题描述&quot;&gt;&lt;a href=&quot;#Intro-问题描述&quot; class=&quot;headerlink&quot; title=&quot;Intro 问题描述&quot;&gt;&lt;/a&gt;Intro 问题描述&lt;/h2&gt;&lt;p&gt;以 emby 为例，学习如何对这种自托管的服务，请求验证网站的软件进行破解，破解的整体思路分为以下的两类：&lt;/p&gt;
@@ -352,7 +1019,7 @@
     <link href="http://aikenh.cn/cn/deploy_server_byipv6_03_ddnsgo/"/>
     <id>http://aikenh.cn/cn/deploy_server_byipv6_03_ddnsgo/</id>
     <published>2023-11-07T05:40:13.000Z</published>
-    <updated>2023-11-08T00:45:33.507Z</updated>
+    <updated>2023-11-08T00:45:33.000Z</updated>
     
     
       
@@ -384,7 +1051,7 @@
     <link href="http://aikenh.cn/cn/deploy_server_byipv6_02_nginx/"/>
     <id>http://aikenh.cn/cn/deploy_server_byipv6_02_nginx/</id>
     <published>2023-11-06T12:49:16.000Z</published>
-    <updated>2023-11-13T00:56:55.123Z</updated>
+    <updated>2023-11-13T00:56:55.000Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -432,7 +1099,7 @@
     <link href="http://aikenh.cn/cn/Windows%E7%AB%AF%E5%8F%A3%E5%BC%82%E5%B8%B8%E5%8D%A0%E7%94%A8/"/>
     <id>http://aikenh.cn/cn/Windows%E7%AB%AF%E5%8F%A3%E5%BC%82%E5%B8%B8%E5%8D%A0%E7%94%A8/</id>
     <published>2023-11-05T15:46:54.000Z</published>
-    <updated>2023-11-06T00:40:21.320Z</updated>
+    <updated>2023-11-06T00:40:21.000Z</updated>
     
     
       
@@ -461,7 +1128,7 @@
     <link href="http://aikenh.cn/cn/deploy_server_byipv6/"/>
     <id>http://aikenh.cn/cn/deploy_server_byipv6/</id>
     <published>2023-11-05T11:23:17.000Z</published>
-    <updated>2024-01-28T08:45:06.805Z</updated>
+    <updated>2024-01-28T08:45:06.000Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -549,7 +1216,7 @@
     <link href="http://aikenh.cn/cn/Flashcard_template/"/>
     <id>http://aikenh.cn/cn/Flashcard_template/</id>
     <published>2023-10-27T16:39:59.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.600Z</updated>
     
     
     <summary type="html">&lt;p&gt;该文作为基础的闪念卡片的使用说明，介绍几种闪念卡片定义的方式，便于后续查阅，参考：&lt;/p&gt;
@@ -583,7 +1250,7 @@
     <link href="http://aikenh.cn/cn/vsocde_regexp/"/>
     <id>http://aikenh.cn/cn/vsocde_regexp/</id>
     <published>2023-10-19T08:53:03.000Z</published>
-    <updated>2023-10-31T00:30:46.713Z</updated>
+    <updated>2023-10-31T00:30:46.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;本篇简单介绍一些 VsCode 进行文本替换和查找的一些特殊的正则，该文会随着自己的使用来逐步记录，目前主要内容如下：&lt;/p&gt;
@@ -616,7 +1283,7 @@
     <link href="http://aikenh.cn/cn/GoMetis00_INTRO/"/>
     <id>http://aikenh.cn/cn/GoMetis00_INTRO/</id>
     <published>2023-10-08T09:58:57.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.571Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -633,7 +1300,7 @@
     <link href="http://aikenh.cn/cn/TaskPhoto00_Xs20_Recipes/"/>
     <id>http://aikenh.cn/cn/TaskPhoto00_Xs20_Recipes/</id>
     <published>2023-10-04T16:41:43.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.586Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -652,7 +1319,7 @@
     <link href="http://aikenh.cn/cn/HomeAssistant_Init/"/>
     <id>http://aikenh.cn/cn/HomeAssistant_Init/</id>
     <published>2023-08-12T09:24:50.000Z</published>
-    <updated>2023-11-13T00:57:03.221Z</updated>
+    <updated>2023-11-13T00:57:03.000Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -698,7 +1365,7 @@
     <link href="http://aikenh.cn/cn/LinuxCLI_Download/"/>
     <id>http://aikenh.cn/cn/LinuxCLI_Download/</id>
     <published>2023-07-07T14:10:52.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.584Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -736,7 +1403,7 @@
     <link href="http://aikenh.cn/cn/NumpyConcatenate%E5%8A%A0%E9%80%9F/"/>
     <id>http://aikenh.cn/cn/NumpyConcatenate%E5%8A%A0%E9%80%9F/</id>
     <published>2023-07-02T02:52:26.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.602Z</updated>
     
     
       
@@ -766,7 +1433,7 @@
     <link href="http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     <id>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
     <published>2023-07-02T02:30:11.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.583Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -810,7 +1477,7 @@
     <link href="http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%83/"/>
     <id>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%83/</id>
     <published>2023-06-27T23:28:27.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.596Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -851,7 +1518,7 @@
     <link href="http://aikenh.cn/cn/%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BB%A3%E7%90%86%E5%85%B1%E4%BA%AB/"/>
     <id>http://aikenh.cn/cn/%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BB%A3%E7%90%86%E5%85%B1%E4%BA%AB/</id>
     <published>2023-06-22T02:41:25.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.600Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -888,7 +1555,7 @@
     <link href="http://aikenh.cn/cn/Docker01_linux/"/>
     <id>http://aikenh.cn/cn/Docker01_linux/</id>
     <published>2023-06-22T01:25:29.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.601Z</updated>
     
     
     <summary type="html">&lt;p&gt;不同于 Docker 在 Windows 端借助 Desktop 可视化进行安装和配置，Linux 端没有默认的 Desktop 界面，因此会额外安装 portainer 作为我们 docker 的 Dashboard.&lt;/p&gt;
@@ -919,7 +1586,7 @@
     <link href="http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E5%88%9D%E6%8E%A2/"/>
     <id>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E5%88%9D%E6%8E%A2/</id>
     <published>2023-06-20T14:38:15.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.576Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -963,7 +1630,7 @@
     <link href="http://aikenh.cn/cn/LinuxZellij/"/>
     <id>http://aikenh.cn/cn/LinuxZellij/</id>
     <published>2023-05-20T08:40:19.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.621Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -998,7 +1665,7 @@
     <link href="http://aikenh.cn/cn/StableDIffusionTraining/"/>
     <id>http://aikenh.cn/cn/StableDIffusionTraining/</id>
     <published>2023-05-06T15:43:41.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.626Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1056,7 +1723,7 @@
     <link href="http://aikenh.cn/cn/Immich_backup/"/>
     <id>http://aikenh.cn/cn/Immich_backup/</id>
     <published>2023-05-01T01:12:04.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.606Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1096,7 +1763,7 @@
     <link href="http://aikenh.cn/cn/alist_potplayer/"/>
     <id>http://aikenh.cn/cn/alist_potplayer/</id>
     <published>2023-04-30T14:42:58.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.572Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1152,7 +1819,7 @@
     <link href="http://aikenh.cn/cn/StableDiffusionPrompt/"/>
     <id>http://aikenh.cn/cn/StableDiffusionPrompt/</id>
     <published>2023-04-26T13:22:38.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.577Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1190,7 +1857,7 @@
     <link href="http://aikenh.cn/cn/StableDiffusionControlNet/"/>
     <id>http://aikenh.cn/cn/StableDiffusionControlNet/</id>
     <published>2023-04-26T13:19:41.000Z</published>
-    <updated>2023-10-31T00:27:54.293Z</updated>
+    <updated>2023-10-31T00:27:54.000Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1221,7 +1888,7 @@
     <link href="http://aikenh.cn/cn/Stable%20Diffusion%20%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"/>
     <id>http://aikenh.cn/cn/Stable%20Diffusion%20%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</id>
     <published>2023-04-26T03:03:56.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.582Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1256,7 +1923,7 @@
     <link href="http://aikenh.cn/cn/WindowsCudaCudnn/"/>
     <id>http://aikenh.cn/cn/WindowsCudaCudnn/</id>
     <published>2023-04-24T01:50:01.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.604Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1288,7 +1955,7 @@
     <link href="http://aikenh.cn/cn/Stable%20Diffusion/"/>
     <id>http://aikenh.cn/cn/Stable%20Diffusion/</id>
     <published>2023-04-19T08:00:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.591Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1340,7 +2007,7 @@
     <link href="http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BAwk/"/>
     <id>http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BAwk/</id>
     <published>2023-04-18T08:00:07.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.607Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1376,7 +2043,7 @@
     <link href="http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BSed/"/>
     <id>http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BSed/</id>
     <published>2023-04-15T15:22:56.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.625Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1410,7 +2077,7 @@
     <link href="http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BGrep/"/>
     <id>http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BGrep/</id>
     <published>2023-04-12T05:22:58.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.574Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1441,7 +2108,7 @@
     <link href="http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8B%E6%AD%A3%E5%88%99/"/>
     <id>http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8B%E6%AD%A3%E5%88%99/</id>
     <published>2023-04-11T14:57:40.000Z</published>
-    <updated>2023-10-31T00:11:27.327Z</updated>
+    <updated>2023-10-31T00:11:27.000Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -1474,7 +2141,7 @@
     <link href="http://aikenh.cn/cn/NAT%E7%A9%BF%E9%80%8F/"/>
     <id>http://aikenh.cn/cn/NAT%E7%A9%BF%E9%80%8F/</id>
     <published>2023-04-04T06:40:12.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.600Z</updated>
     
     
     <summary type="html">&lt;p&gt;本文简要介绍对内网穿透技术、对内网穿透技术的需求以及介绍一些用于”个人”进行内网穿透的工具和使用。&lt;/p&gt;
@@ -1510,7 +2177,7 @@
     <link href="http://aikenh.cn/cn/macos_bash_config/"/>
     <id>http://aikenh.cn/cn/macos_bash_config/</id>
     <published>2023-04-02T11:28:48.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.573Z</updated>
     
     
     <summary type="html">&lt;p&gt;Mac 的 Terminal 和 Ubuntu 的操作上较为相似，都是 Unix 的吧，但是要注意一下安全和软件管理库。&lt;/p&gt;
@@ -1546,7 +2213,7 @@
     <link href="http://aikenh.cn/cn/devops/"/>
     <id>http://aikenh.cn/cn/devops/</id>
     <published>2023-03-25T01:55:32.000Z</published>
-    <updated>2023-10-31T00:05:06.430Z</updated>
+    <updated>2023-10-31T00:05:06.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;在一个庞大的组织架构中，CI/CD 和 Devops 的概念是避不开的，了解它的工作原理和概念能帮助我们更好的与他人进行协作。&lt;/p&gt;
@@ -1582,7 +2249,7 @@
     <link href="http://aikenh.cn/cn/Custom_Icarus/"/>
     <id>http://aikenh.cn/cn/Custom_Icarus/</id>
     <published>2023-03-11T15:46:37.000Z</published>
-    <updated>2023-10-31T00:04:15.107Z</updated>
+    <updated>2023-10-31T00:04:15.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;本文的博客页面基于 &lt;a href=&quot;[Hexo](https://hexo.io/zh-cn/&quot;&gt;Hexo&lt;/a&gt;)+&lt;a href=&quot;https://ppoffice.github.io/&quot;&gt;Icarus&lt;/a&gt; 主题搭建，在使用过程中对该主题做了一些简单的配置，以适应自己的需求。这里介绍一下自己粗浅的方案。&lt;/p&gt;
@@ -1612,7 +2279,7 @@
     <link href="http://aikenh.cn/cn/CountMinSketch/"/>
     <id>http://aikenh.cn/cn/CountMinSketch/</id>
     <published>2023-03-10T05:12:20.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.596Z</updated>
     
     
     <summary type="html">&lt;p&gt;本文介绍计算大规模数据流中的元素出现频次的方法 CMS，以及其简单改进Count-Mean-Min-Sketch&lt;/p&gt;
@@ -1636,7 +2303,7 @@
     <link href="http://aikenh.cn/cn/python_pack_manager/"/>
     <id>http://aikenh.cn/cn/python_pack_manager/</id>
     <published>2023-03-06T03:27:52.000Z</published>
-    <updated>2023-10-31T00:19:29.301Z</updated>
+    <updated>2023-10-31T00:19:29.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aikenhong 的旧笔记翻新完善 1.0&lt;/p&gt;
@@ -1669,7 +2336,7 @@
     <link href="http://aikenh.cn/cn/powershell/"/>
     <id>http://aikenh.cn/cn/powershell/</id>
     <published>2023-03-05T01:59:40.000Z</published>
-    <updated>2024-01-28T08:45:06.846Z</updated>
+    <updated>2024-01-28T08:45:06.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;Update:@20230214&lt;/p&gt;
@@ -1698,7 +2365,7 @@
     <link href="http://aikenh.cn/cn/Shell/"/>
     <id>http://aikenh.cn/cn/Shell/</id>
     <published>2023-01-25T14:04:15.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.624Z</updated>
     
     
     <summary type="html">&lt;p&gt;整理脚本编写的一些最基本语法，包括参数传递，赋值，循环等基本语句，方便后续的脚本编写和改动。&lt;/p&gt;
@@ -1734,7 +2401,7 @@
     <link href="http://aikenh.cn/cn/DualSystemUbuntu/"/>
     <id>http://aikenh.cn/cn/DualSystemUbuntu/</id>
     <published>2023-01-22T08:25:27.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.595Z</updated>
     
     
     <summary type="html">&lt;p&gt;该文介绍基于 Windows11 系统的双系统安装和删除，安装的双系统选择 Ubuntu（开发还是比较推荐使用 WSL2 即可）&lt;/p&gt;
@@ -1763,7 +2430,7 @@
     <link href="http://aikenh.cn/cn/GithubProfile/"/>
     <id>http://aikenh.cn/cn/GithubProfile/</id>
     <published>2023-01-21T13:25:24.000Z</published>
-    <updated>2023-10-31T00:07:26.396Z</updated>
+    <updated>2023-10-31T00:07:26.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;&lt;/p&gt;
@@ -1784,7 +2451,7 @@
     <link href="http://aikenh.cn/cn/Nodes/"/>
     <id>http://aikenh.cn/cn/Nodes/</id>
     <published>2022-10-09T05:33:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.595Z</updated>
     
     
     <summary type="html">&lt;p&gt;@AikenH 2022 Node-JS-Chapter1 &lt;/p&gt;
@@ -1809,7 +2476,7 @@
     <link href="http://aikenh.cn/cn/custom_web/"/>
     <id>http://aikenh.cn/cn/custom_web/</id>
     <published>2022-10-02T10:00:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.592Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -1832,7 +2499,7 @@
     <link href="http://aikenh.cn/cn/Vue%20Chapter1/"/>
     <id>http://aikenh.cn/cn/Vue%20Chapter1/</id>
     <published>2022-09-14T02:34:08.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.570Z</updated>
     
     
     <summary type="html">&lt;p&gt;基本Vue语法规则学习笔记，方便我们去自定义和看懂别人的网页代码。&lt;/p&gt;
@@ -1864,7 +2531,7 @@
     <link href="http://aikenh.cn/cn/MacOs/"/>
     <id>http://aikenh.cn/cn/MacOs/</id>
     <published>2022-09-09T16:00:00.000Z</published>
-    <updated>2023-10-31T00:12:04.629Z</updated>
+    <updated>2023-10-31T00:12:04.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;配置一台全新的 MacOs（M1）用于日常使用和编程开发，这里总结一下自己体验比较好的 APP 和开发工具。Let‘s Go&lt;/p&gt;
@@ -1904,7 +2571,7 @@
     <link href="http://aikenh.cn/cn/linux2/"/>
     <id>http://aikenh.cn/cn/linux2/</id>
     <published>2022-09-04T13:30:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.605Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aiken 2022 &lt;/p&gt;
@@ -1936,7 +2603,7 @@
     <link href="http://aikenh.cn/cn/vimscript_5minus/"/>
     <id>http://aikenh.cn/cn/vimscript_5minus/</id>
     <published>2022-08-30T16:00:00.000Z</published>
-    <updated>2023-10-31T00:29:04.045Z</updated>
+    <updated>2023-10-31T00:29:04.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;学习 vimscript 理解原生 vim 的配置方法，Reference：&lt;/p&gt;
@@ -1963,7 +2630,7 @@
     <link href="http://aikenh.cn/cn/Unittest/"/>
     <id>http://aikenh.cn/cn/Unittest/</id>
     <published>2022-08-12T12:37:00.000Z</published>
-    <updated>2023-10-31T00:28:34.831Z</updated>
+    <updated>2023-10-31T00:28:34.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;该文章将介绍 Python 中的单元测试之 Unittest 模块，及其在 VsCode 中的集成和使用，主要参考的链接有以下的三个：&lt;/p&gt;
@@ -1993,7 +2660,7 @@
     <link href="http://aikenh.cn/cn/SQL5/"/>
     <id>http://aikenh.cn/cn/SQL5/</id>
     <published>2022-08-05T09:30:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.568Z</updated>
     
     
     <summary type="html">&lt;p&gt;廖雪峰的SQL教程的学习笔记&lt;/p&gt;
@@ -2022,7 +2689,7 @@
     <link href="http://aikenh.cn/cn/SQL4/"/>
     <id>http://aikenh.cn/cn/SQL4/</id>
     <published>2022-08-05T07:20:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.577Z</updated>
     
     
     <summary type="html">&lt;p&gt;基本操作无非就是增删改查，查询在上一章Select已经学习完毕，而剩下的增、删、改对应的关键词分别是：&lt;/p&gt;
@@ -2064,7 +2731,7 @@
     <link href="http://aikenh.cn/cn/SQL3/"/>
     <id>http://aikenh.cn/cn/SQL3/</id>
     <published>2022-08-04T06:40:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.606Z</updated>
     
     
     <summary type="html">&lt;p&gt;该章节介绍SQL中的查询命令，根据&lt;a href=&quot;https://www.liaoxuefeng.com/wiki/1177760294764384/1179610888796448&quot;&gt;廖雪峰网站&lt;/a&gt;进行一步步的测试和学习即可。&lt;/p&gt;
@@ -2103,7 +2770,7 @@
     <link href="http://aikenh.cn/cn/SQL2/"/>
     <id>http://aikenh.cn/cn/SQL2/</id>
     <published>2022-08-03T02:17:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.624Z</updated>
     
     
     <summary type="html">&lt;p&gt;本章节从MySQL的安装到基础使用，&lt;strong&gt;MySQL&lt;/strong&gt;本身只是一个SQL接口，它内部还包含多种数据引擎，常用的包括：&lt;/p&gt;
@@ -2134,7 +2801,7 @@
     <link href="http://aikenh.cn/cn/SQL1/"/>
     <id>http://aikenh.cn/cn/SQL1/</id>
     <published>2022-08-02T03:17:04.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.573Z</updated>
     
     
     <summary type="html">&lt;p&gt;SQL相关参考资料：尊重一下&lt;a href=&quot;https://www.runoob.com/sql/sql-tutorial.html&quot;&gt;菜鸟教程&lt;/a&gt; ，该教程中的文档相对简练和入门，&lt;a href=&quot;https://www.w3school.com.cn/sql/sql_intro.asp&quot;&gt;W3School&lt;/a&gt;的资料好像就是菜鸟教程的；其次，&lt;a href=&quot;https://www.liaoxuefeng.com/wiki/1177760294764384&quot;&gt;廖雪峰&lt;/a&gt;的SQL教程网站，也应该比较适合入门，对比后选择一个进行学习。&lt;/p&gt;
@@ -2165,7 +2832,7 @@
     <link href="http://aikenh.cn/cn/%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B1%E4%BA%AB/"/>
     <id>http://aikenh.cn/cn/%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B1%E4%BA%AB/</id>
     <published>2022-07-31T15:43:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.621Z</updated>
     
     
     <summary type="html">&lt;p&gt;在同一个局域网（像是链接同一个wifi的环境）中，设置共享的文件夹或者磁盘，可提升文件分享的效率和速度，特别适用于与女朋友合租、与兄弟合租的情景。&lt;/p&gt;</summary>
@@ -2188,7 +2855,7 @@
     <link href="http://aikenh.cn/cn/WindowsTerminal/"/>
     <id>http://aikenh.cn/cn/WindowsTerminal/</id>
     <published>2022-07-30T02:03:26.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.603Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Config-Windows-Terminal-in-Win11&quot;&gt;&lt;a href=&quot;#Config-Windows-Terminal-in-Win11&quot; class=&quot;headerlink&quot; title=&quot;Config Windows Terminal in Win11&quot;&gt;&lt;/a&gt;Config Windows Terminal in Win11&lt;/h2&gt;&lt;h3 id=&quot;Install-安装&quot;&gt;&lt;a href=&quot;#Install-安装&quot; class=&quot;headerlink&quot; title=&quot;Install 安装&quot;&gt;&lt;/a&gt;Install 安装&lt;/h3&gt;&lt;p&gt;windows terminal 在 win11 已经自带，无需安装，如果需要安装的话在 Microsoft Store 下载即可，默认的 terminal 在中文环境中可能要搜索 windows 终端。&lt;/p&gt;
@@ -2209,7 +2876,7 @@
     <link href="http://aikenh.cn/cn/NAS/"/>
     <id>http://aikenh.cn/cn/NAS/</id>
     <published>2022-07-27T15:30:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.578Z</updated>
     
     
     <summary type="html">&lt;p&gt;“NAS本质上就是一个可以开启文件共享的具有大存储的系统：无论是Windows，Linux或其他一切可基于诸如SMB、Internet提供文件共享或访问功能的系统都可以作为NAS的系统使用。”&lt;/p&gt;
@@ -2283,7 +2950,7 @@
     <link href="http://aikenh.cn/cn/MarkovJunior/"/>
     <id>http://aikenh.cn/cn/MarkovJunior/</id>
     <published>2022-07-10T03:26:00.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.605Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Reference: &lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MzIxODg1OTk1MA==&amp;amp;mid=2247513354&amp;amp;idx=1&amp;amp;sn=28b5492cc0a86b04f0a0b975bf42568c&amp;amp;ascene=56&amp;amp;devicetype=iOS15.5&amp;amp;version=1800172f&amp;amp;nettype=WIFI&amp;amp;abtest_cookie=AAACAA%3D%3D&amp;amp;lang=zh_CN&amp;amp;fontScale=100&amp;amp;exportkey=ARSr9kinLTM%2B6fr7WYBKF%2FM%3D&amp;amp;pass_ticket=gK4kcTE5wfRRXzd0FMTJlg9zBNGh%2BZ5VoWQkUbqSJXykXGIdMXasyLJgUxII1IDt&amp;amp;wx_header=3&quot;&gt;Jack Cui&lt;/a&gt; | &lt;a href=&quot;https://github.com/mxgmn/MarkovJunior&quot;&gt;Github-Markov Junior&lt;/a&gt; | &lt;a href=&quot;https://github.com/mxgmn/MarkovJunior&quot;&gt;Wiki Markov algorithm&lt;/a&gt;&lt;/p&gt;
@@ -2314,7 +2981,7 @@
     <link href="http://aikenh.cn/cn/WFC%E7%AE%97%E6%B3%95/"/>
     <id>http://aikenh.cn/cn/WFC%E7%AE%97%E6%B3%95/</id>
     <published>2022-07-10T01:42:50.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.603Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Reference: &lt;a href=&quot;https://github.com/mxgmn/WaveFunctionCollapse&quot;&gt;Github-Mxgmn&lt;/a&gt; | &lt;a href=&quot;https://zhuanlan.zhihu.com/p/66416593&quot;&gt;zhihu&lt;/a&gt;&lt;/p&gt;
@@ -2339,7 +3006,7 @@
     <link href="http://aikenh.cn/cn/Z_Jumper/"/>
     <id>http://aikenh.cn/cn/Z_Jumper/</id>
     <published>2022-05-20T13:22:53.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.595Z</updated>
     
     
     <summary type="html">&lt;p&gt;Star this &lt;a href=&quot;https://github.com/rupa/z&quot;&gt;Project&lt;/a&gt; in Github after u decide to use it.&lt;/p&gt;
@@ -2367,7 +3034,7 @@
     <link href="http://aikenh.cn/cn/Hexo_Write/"/>
     <id>http://aikenh.cn/cn/Hexo_Write/</id>
     <published>2022-04-13T15:29:10.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.604Z</updated>
     
     
     <summary type="html">&lt;p&gt;Hexo和Gitee一致，都是由Markdown文件为基础，构建的博客，编写Markdown本身无需多言，由于Hexo并非笔者的首选笔记管理方式，故而再其他地方构建和编写文件是常态，该Blog主要是利用其他工具来方便Hexo博文的编写（Header）&lt;/p&gt;
@@ -2400,7 +3067,7 @@
     <link href="http://aikenh.cn/cn/Latex_testing/"/>
     <id>http://aikenh.cn/cn/Latex_testing/</id>
     <published>2022-04-13T08:50:53.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.581Z</updated>
     
     
     <summary type="html">&lt;p&gt;该文档主要目的是用于测试Latex语法对应前端的渲染能力，主要用于测试Hexo站点是否能正常渲染Latex。&lt;/p&gt;
@@ -2435,7 +3102,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/Hexo_Build/"/>
     <id>http://aikenh.cn/cn/Hexo_Build/</id>
     <published>2022-04-12T03:16:30.000Z</published>
-    <updated>2023-10-31T00:08:00.185Z</updated>
+    <updated>2023-10-31T00:08:00.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;该文档用以，记录自己（外行）利用Hexo建立Blog的过程，将原本用Gitbook构建的笔记转移到Hexo中，同时购买域名并部署其上。网页部署于&lt;a href=&quot;AikenH.cn&quot;&gt;Github Page&lt;/a&gt;。以Live my Live主题为例。&lt;/p&gt;
@@ -2470,7 +3137,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/VimOperation/"/>
     <id>http://aikenh.cn/cn/VimOperation/</id>
     <published>2022-04-07T06:15:25.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.592Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;strong&gt;Chose Your Dotfile to start the vim&lt;/strong&gt;&lt;/p&gt;
@@ -2501,7 +3168,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/PicBed/"/>
     <id>http://aikenh.cn/cn/PicBed/</id>
     <published>2022-03-27T01:19:23.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.583Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aiken 2020 first write，2021 modify&lt;/p&gt;
@@ -2540,7 +3207,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/FineTune/"/>
     <id>http://aikenh.cn/cn/FineTune/</id>
     <published>2022-02-08T06:31:37.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.581Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Langs: python, torch&lt;br&gt;@reference: d2l-pytorch，&lt;a href=&quot;https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html&quot;&gt;transfer_torch&lt;/a&gt;&lt;/p&gt;
@@ -2575,7 +3242,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/Git_Manual1/"/>
     <id>http://aikenh.cn/cn/Git_Manual1/</id>
     <published>2022-02-01T04:19:34.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.586Z</updated>
     
     
     <summary type="html">&lt;p&gt;参考文献：&lt;a href=&quot;https://juejin.cn/post/7131713973572861966&quot;&gt;稀土掘金&lt;/a&gt; | ProGit2&lt;/p&gt;
@@ -2607,7 +3274,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/Transfer-Sync-Files/"/>
     <id>http://aikenh.cn/cn/Transfer-Sync-Files/</id>
     <published>2022-01-16T19:11:41.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.575Z</updated>
     
     
     <summary type="html">&lt;p&gt;@aikenhong 2022&lt;/p&gt;
@@ -2645,7 +3312,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/IL-Collection/"/>
     <id>http://aikenh.cn/cn/IL-Collection/</id>
     <published>2022-01-03T17:38:04.000Z</published>
-    <updated>2023-10-31T00:08:31.637Z</updated>
+    <updated>2023-10-31T00:08:31.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;@AikenHong 2022&lt;/p&gt;
@@ -2685,7 +3352,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/IL-WYZ/"/>
     <id>http://aikenh.cn/cn/IL-WYZ/</id>
     <published>2022-01-03T02:41:56.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.598Z</updated>
     
     
     <summary type="html">&lt;p&gt;: hammer: 王耀智&lt;/p&gt;
@@ -2721,7 +3388,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/LT-Collection/"/>
     <id>http://aikenh.cn/cn/LT-Collection/</id>
     <published>2021-12-22T06:36:16.000Z</published>
-    <updated>2023-10-31T00:11:54.338Z</updated>
+    <updated>2023-10-31T00:11:54.000Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;LT-Collections&quot;&gt;&lt;a href=&quot;#LT-Collections&quot; class=&quot;headerlink&quot; title=&quot;LT-Collections&quot;&gt;&lt;/a&gt;LT-Collections&lt;/h1&gt;&lt;p&gt;@AikenHong 2021&lt;/p&gt;
@@ -2755,7 +3422,7 @@ f(x)=
     <link href="http://aikenh.cn/cn/Loss-NCE/"/>
     <id>http://aikenh.cn/cn/Loss-NCE/</id>
     <published>2021-12-22T05:39:55.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.580Z</updated>
     
     
     <summary type="html">&lt;p&gt;@AikenHong 2021&lt;/p&gt;
@@ -2790,7 +3457,7 @@ L_{contrast} = &#92;mathbb{E}[-&#92;log&#92;frac{e^{f_x^T f_y/T}}{e^{f_x^T f_y/T
     <link href="http://aikenh.cn/cn/Loss-SmoothSharpen/"/>
     <id>http://aikenh.cn/cn/Loss-SmoothSharpen/</id>
     <published>2021-12-16T19:35:27.000Z</published>
-    <updated>2023-10-31T00:11:42.791Z</updated>
+    <updated>2023-10-31T00:11:42.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;@AikenHong 2021&lt;br&gt;@topic&lt;/p&gt;
@@ -2830,7 +3497,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/NerualNetworkTraining/"/>
     <id>http://aikenh.cn/cn/NerualNetworkTraining/</id>
     <published>2021-12-16T00:34:44.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.600Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aiken 2020，&lt;/p&gt;
@@ -2889,7 +3556,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/PyTorch/"/>
     <id>http://aikenh.cn/cn/PyTorch/</id>
     <published>2021-12-15T00:00:57.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.579Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;Basic-Part基础设定部分&quot;&gt;&lt;a href=&quot;#Basic-Part基础设定部分&quot; class=&quot;headerlink&quot; title=&quot;Basic Part基础设定部分&quot;&gt;&lt;/a&gt;Basic Part基础设定部分&lt;/h1&gt;&lt;p&gt;@AikenH 2020 + 2021&lt;/p&gt;
@@ -2914,7 +3581,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/Loss-WhyZero/"/>
     <id>http://aikenh.cn/cn/Loss-WhyZero/</id>
     <published>2021-12-10T00:24:46.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.597Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;Loss-Why-Zero-Loss？&quot;&gt;&lt;a href=&quot;#Loss-Why-Zero-Loss？&quot; class=&quot;headerlink&quot; title=&quot;Loss :Why Zero Loss？&quot;&gt;&lt;/a&gt;Loss :Why Zero Loss？&lt;/h1&gt;&lt;p&gt;@Comments: ICML2020 《Do We Need Zero Training Loss After Achieving Zero Training Error》&lt;/p&gt;
@@ -2947,7 +3614,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/SortTrick/"/>
     <id>http://aikenh.cn/cn/SortTrick/</id>
     <published>2021-12-06T09:05:03.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.603Z</updated>
     
     
     <summary type="html">&lt;p&gt;记录各种排序操作，暂时不补充最基础的排序方式和理论，只记录排序算法的拓展应用。&lt;/p&gt;
@@ -2976,7 +3643,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/UniFramework/"/>
     <id>http://aikenh.cn/cn/UniFramework/</id>
     <published>2021-12-03T17:43:30.000Z</published>
-    <updated>2023-10-31T00:28:20.614Z</updated>
+    <updated>2023-10-31T00:28:20.000Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -2997,7 +3664,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/Hungarian/"/>
     <id>http://aikenh.cn/cn/Hungarian/</id>
     <published>2021-12-02T16:29:37.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.599Z</updated>
     
     
     <summary type="html">&lt;p&gt;@AikenHong 2021&lt;br&gt;@Code: &lt;strong&gt;Scipy&lt;/strong&gt;（repo）&lt;br&gt;@Reference:  &lt;a href=&quot;https://zhuanlan.zhihu.com/p/62981901&quot;&gt;匈牙利算法&amp;amp;KM算法&lt;/a&gt;&lt;/p&gt;
@@ -3031,7 +3698,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/Cpp/"/>
     <id>http://aikenh.cn/cn/Cpp/</id>
     <published>2021-11-29T05:12:17.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.609Z</updated>
     
     
     <summary type="html">&lt;p&gt;this notebook is based on Cherno‘s Video Class in &lt;a href=&quot;https://www.youtube.com/watch?v=wXBcwHwIt_I&amp;amp;list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&amp;amp;index=62&amp;amp;ab_channel=TheCherno&quot;&gt;YouTube&lt;/a&gt;；if there is sth get confused，I can &lt;strong&gt;recheck&lt;/strong&gt; the video which talk about it, or &lt;strong&gt;just google it&lt;/strong&gt;.&lt;/p&gt;
@@ -3056,7 +3723,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/FSL-Collection/"/>
     <id>http://aikenh.cn/cn/FSL-Collection/</id>
     <published>2021-11-29T05:12:05.000Z</published>
-    <updated>2023-10-31T00:06:15.654Z</updated>
+    <updated>2023-10-31T00:06:15.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;@aikenhong 2020&lt;br&gt;@h.aiken.970@gmail.com&lt;/p&gt;
@@ -3092,7 +3759,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/"/>
     <id>http://aikenh.cn/cn/FSL%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94/</id>
     <published>2021-11-29T05:12:05.000Z</published>
-    <updated>2023-10-31T00:06:43.838Z</updated>
+    <updated>2023-10-31T00:06:43.000Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -3115,7 +3782,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/IL-MgSvF/"/>
     <id>http://aikenh.cn/cn/IL-MgSvF/</id>
     <published>2021-11-29T05:12:05.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.584Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Author &amp;amp; Paper：&lt;a href=&quot;https://arxiv.org/pdf/2006.15524.pdf&quot;&gt;Arxiv&lt;/a&gt;&lt;br&gt;@Note：Aikenhong 2021/11/12&lt;/p&gt;
@@ -3149,7 +3816,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/SSL-MoCov3/"/>
     <id>http://aikenh.cn/cn/SSL-MoCov3/</id>
     <published>2021-11-29T05:12:05.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.568Z</updated>
     
     
       
@@ -3175,7 +3842,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/Markup_Langs/"/>
     <id>http://aikenh.cn/cn/Markup_Langs/</id>
     <published>2021-11-28T03:16:10.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.567Z</updated>
     
     
     <summary type="html">&lt;p&gt;对于各种形式的标记文档（markup）和数据集的处理进行一个整合，还有一些python中的相关模块（比比如glob，后续可能会迁移到别的文档中），主要包括：yaml，json，csv，xml，这些可拓展的标记语言.&lt;/p&gt;
@@ -3212,7 +3879,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/CPP%E8%A6%81%E7%82%B9%E8%BE%A8%E6%9E%90%E4%B8%8E%E8%A1%A5%E5%85%85/"/>
     <id>http://aikenh.cn/cn/CPP%E8%A6%81%E7%82%B9%E8%BE%A8%E6%9E%90%E4%B8%8E%E8%A1%A5%E5%85%85/</id>
     <published>2021-11-27T22:24:23.000Z</published>
-    <updated>2023-10-31T00:03:52.543Z</updated>
+    <updated>2023-10-31T00:03:52.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;主要介绍一些常用数据类型的一些method，区别还有一些特殊的定义；&lt;/p&gt;
@@ -3242,7 +3909,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/PythonTips/"/>
     <id>http://aikenh.cn/cn/PythonTips/</id>
     <published>2021-11-27T22:24:23.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.624Z</updated>
     
     
     <summary type="html">&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;/images/logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -3278,7 +3945,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/Linux/"/>
     <id>http://aikenh.cn/cn/Linux/</id>
     <published>2021-11-27T22:24:21.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.594Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;学习资源汇总&quot;&gt;&lt;a href=&quot;#学习资源汇总&quot; class=&quot;headerlink&quot; title=&quot;学习资源汇总&quot;&gt;&lt;/a&gt;学习资源汇总&lt;/h2&gt;&lt;p&gt;manual：&lt;a href=&quot;https://www.runoob.com/w3cnote/linux-common-command-2.html&quot;&gt;菜鸟Shell&lt;/a&gt; | &lt;a href=&quot;https://www.explainshell.com/explain/1/ps&quot;&gt;ExplainShell&lt;/a&gt;&lt;/p&gt;
@@ -3307,7 +3974,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/DataAugmentation/"/>
     <id>http://aikenh.cn/cn/DataAugmentation/</id>
     <published>2021-11-27T22:24:20.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.607Z</updated>
     
     
     <summary type="html">&lt;p&gt;intergrate with those augmentation method.&lt;/p&gt;
@@ -3348,7 +4015,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/MLFlow/"/>
     <id>http://aikenh.cn/cn/MLFlow/</id>
     <published>2021-11-27T22:24:19.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.601Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;MLFlow-机器学习系统的使用&quot;&gt;&lt;a href=&quot;#MLFlow-机器学习系统的使用&quot; class=&quot;headerlink&quot; title=&quot;MLFlow 机器学习系统的使用&quot;&gt;&lt;/a&gt;MLFlow 机器学习系统的使用&lt;/h1&gt;&lt;p&gt;@Aiken 2020&lt;/p&gt;
@@ -3385,7 +4052,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/HardTask/"/>
     <id>http://aikenh.cn/cn/HardTask/</id>
     <published>2021-11-27T22:24:17.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.572Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;Trick：Hard-Task&quot;&gt;&lt;a href=&quot;#Trick：Hard-Task&quot; class=&quot;headerlink&quot; title=&quot;Trick：Hard Task&quot;&gt;&lt;/a&gt;Trick：Hard Task&lt;/h1&gt;&lt;p&gt;思路来源于Meta-Tranfer-Learning，基本思路是在Meta-Learning的每一次Meta-Test的时候，会从预训练错误率比较高的Task中再次采样，增加那些task的训练次数。也就是难题多做的策略。&lt;/p&gt;
@@ -3415,7 +4082,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/%E5%B9%B6%E8%A1%8C%E8%AE%AD%E7%BB%83%E7%9A%84%E7%90%86%E8%A7%A3/"/>
     <id>http://aikenh.cn/cn/%E5%B9%B6%E8%A1%8C%E8%AE%AD%E7%BB%83%E7%9A%84%E7%90%86%E8%A7%A3/</id>
     <published>2021-11-27T18:20:31.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.580Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;a href=&quot;https://lilianweng.github.io/lil-log/2021/09/24/train-large-neural-networks.html&quot;&gt;How to Train Really Large Models on Many GPUs? (lilianweng.github.io)&lt;/a&gt;&lt;/p&gt;
@@ -3437,7 +4104,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/MIM-V-simMIM/"/>
     <id>http://aikenh.cn/cn/MIM-V-simMIM/</id>
     <published>2021-11-22T22:38:19.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.622Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Author： MSRA Zhenda Xie&lt;br&gt;@Source：&lt;a href=&quot;arxiv.org/abs/2111.09886&quot;&gt;Arxiv&lt;/a&gt;， &lt;a href=&quot;https://github.com/microsoft/SimMIM&quot;&gt;Code TBP&lt;/a&gt;，&lt;a href=&quot;https://mp.weixin.qq.com/s/4YVYM9lPYghtZFhyOGnERw&quot;&gt;Blog_CVer&lt;/a&gt;&lt;br&gt;@Read：AikenHong 2021.11.22&lt;/p&gt;
@@ -3474,7 +4141,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/Transformer/"/>
     <id>http://aikenh.cn/cn/Transformer/</id>
     <published>2021-11-22T22:38:19.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.570Z</updated>
     
     
     <summary type="html">&lt;p&gt;@aikenhong 2021   &lt;/p&gt;
@@ -3512,7 +4179,7 @@ p_i = &#92;left&#92;{
     <link href="http://aikenh.cn/cn/MIM-V-iBOT/"/>
     <id>http://aikenh.cn/cn/MIM-V-iBOT/</id>
     <published>2021-11-17T22:35:52.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.572Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Read: AikenHong 2021&lt;/p&gt;
@@ -3548,7 +4215,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/MIM-V-MAE/"/>
     <id>http://aikenh.cn/cn/MIM-V-MAE/</id>
     <published>2021-11-15T04:25:45.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.583Z</updated>
     
     
       
@@ -3576,7 +4243,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/OWL-survey/"/>
     <id>http://aikenh.cn/cn/OWL-survey/</id>
     <published>2021-11-12T01:40:46.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.593Z</updated>
     
     
     <summary type="html">&lt;p&gt;@AikenHong2021 OWL&lt;/p&gt;
@@ -3616,7 +4283,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/fluent_python/"/>
     <id>http://aikenh.cn/cn/fluent_python/</id>
     <published>2021-11-06T04:53:47.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.568Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Chapter-1-数据模型&quot;&gt;&lt;a href=&quot;#Chapter-1-数据模型&quot; class=&quot;headerlink&quot; title=&quot;Chapter 1 数据模型&quot;&gt;&lt;/a&gt;Chapter 1 数据模型&lt;/h2&gt;&lt;h3 id=&quot;Se1-magic-method&quot;&gt;&lt;a href=&quot;#Se1-magic-method&quot; class=&quot;headerlink&quot; title=&quot;Se1 magic method&quot;&gt;&lt;/a&gt;Se1 magic method&lt;/h3&gt;&lt;p&gt;数据模型在这里的定义是对python框架的描述,他规范了python构建模块的接口；这些接口对应解释器中对一些特殊句法(常用句法)的激活和使用.本章节的核心就在于对这些特殊句法的理解和使用.&lt;br&gt;特殊方法带来的一些主要交互场景:&lt;/p&gt;
@@ -3661,7 +4328,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Python/"/>
     <id>http://aikenh.cn/cn/Python/</id>
     <published>2021-10-27T06:19:13.000Z</published>
-    <updated>2023-10-31T00:19:06.458Z</updated>
+    <updated>2023-10-31T00:19:06.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;个人的《Python Cookbook》 &amp;amp;&amp;amp; 《Fluent Python》阅读笔记。&lt;/p&gt;
@@ -3700,7 +4367,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/VSCode/"/>
     <id>http://aikenh.cn/cn/VSCode/</id>
     <published>2021-10-27T06:19:13.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.610Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Debug&quot;&gt;&lt;a href=&quot;#Debug&quot; class=&quot;headerlink&quot; title=&quot;Debug&quot;&gt;&lt;/a&gt;Debug&lt;/h2&gt;&lt;p&gt;配置Launch.json 能够帮助我们更好的进行debug的操作，有一些比较特别的文件名和相关编码。 &lt;/p&gt;
@@ -3728,7 +4395,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Vimtutor/"/>
     <id>http://aikenh.cn/cn/Vimtutor/</id>
     <published>2021-10-13T17:58:22.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.566Z</updated>
     
     
     <summary type="html">&lt;p&gt;this is the Note record the vimtutor (the basic usage of vim.)&lt;br&gt;@Aiken 2021&lt;/p&gt;
@@ -3774,7 +4441,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Spacevim/"/>
     <id>http://aikenh.cn/cn/Spacevim/</id>
     <published>2021-10-09T04:15:41.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.591Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aiken 2021 this file is use to record how to config out vim’ by spacevim.&lt;br&gt;I’ll write this doc with three Parts:&lt;/p&gt;
@@ -3823,7 +4490,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/SS_OD_SoftTeacher/"/>
     <id>http://aikenh.cn/cn/SS_OD_SoftTeacher/</id>
     <published>2021-10-08T18:30:08.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.576Z</updated>
     
     
     <summary type="html">&lt;p&gt;@ Article: ICML from Microsoft &amp;amp; Huazhong Keda&lt;br&gt;@ Code: &lt;a href=&quot;https://github.com/microsoft/SoftTeacher&quot;&gt;Github&lt;/a&gt;&lt;br&gt;@ Noteby: Aikenhong&lt;br&gt;@ Time: 20210914&lt;/p&gt;
@@ -3859,7 +4526,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/VimConfig/"/>
     <id>http://aikenh.cn/cn/VimConfig/</id>
     <published>2021-10-07T23:45:42.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.599Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aikenhong 2021&lt;/p&gt;
@@ -3894,7 +4561,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/VimConfigDf/"/>
     <id>http://aikenh.cn/cn/VimConfigDf/</id>
     <published>2021-10-07T07:00:42.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.583Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -3932,7 +4599,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/StyleGAN/"/>
     <id>http://aikenh.cn/cn/StyleGAN/</id>
     <published>2021-10-03T05:16:40.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.594Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;StyleGAN-V1&quot;&gt;&lt;a href=&quot;#StyleGAN-V1&quot; class=&quot;headerlink&quot; title=&quot;StyleGAN V1&quot;&gt;&lt;/a&gt;StyleGAN V1&lt;/h1&gt;&lt;p&gt;@AikenHong 2020 10.8&lt;/p&gt;
@@ -3970,7 +4637,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/YOLOv4/"/>
     <id>http://aikenh.cn/cn/YOLOv4/</id>
     <published>2021-10-03T05:16:40.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.580Z</updated>
     
     
     <summary type="html">&lt;p&gt;@AikenHong 20200726&lt;/p&gt;
@@ -4002,7 +4669,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/OW-OD/"/>
     <id>http://aikenh.cn/cn/OW-OD/</id>
     <published>2021-09-28T05:44:20.000Z</published>
-    <updated>2023-10-31T00:18:24.865Z</updated>
+    <updated>2023-10-31T00:18:24.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aiken 2021 &lt;/p&gt;
@@ -4039,7 +4706,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Attention/"/>
     <id>http://aikenh.cn/cn/Attention/</id>
     <published>2021-09-27T21:34:22.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.605Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aiken 2020.9.16&lt;/p&gt;
@@ -4061,7 +4728,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/EfficientNet/"/>
     <id>http://aikenh.cn/cn/EfficientNet/</id>
     <published>2021-09-27T21:34:22.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.608Z</updated>
     
     
     <summary type="html">&lt;p&gt;Tags: Paper&lt;br&gt;URL1: &lt;a href=&quot;https://arxiv.org/pdf/1905.11946.pdf&quot;&gt;https://arxiv.org/pdf/1905.11946.pdf&lt;/a&gt;&lt;br&gt;URL2: &lt;a href=&quot;https://arxiv.org/pdf/2104.00298.pdf&quot;&gt;https://arxiv.org/pdf/2104.00298.pdf&lt;/a&gt;&lt;/p&gt;
@@ -4093,7 +4760,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Astar/"/>
     <id>http://aikenh.cn/cn/Astar/</id>
     <published>2021-09-27T21:34:21.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.569Z</updated>
     
     
     <summary type="html">&lt;p&gt;A* 是一种在平面图形上计算最优路径的方法，通常用来做 2D 游戏的最短寻路，该算法是一种 Dijkstra 算法的变体，使用启发式的策略来提高算法的搜索效率。&lt;/p&gt;
@@ -4120,7 +4787,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Docker/"/>
     <id>http://aikenh.cn/cn/Docker/</id>
     <published>2021-09-27T21:34:21.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.609Z</updated>
     
     
     <summary type="html">&lt;p&gt;基于 WSL2 对于 Docker 的适配，本文介绍 Windows 下利用 WSL2 对 Docker 的安装和部署，对于 WSL2 的安装可以参考上篇文章： &lt;a href=&quot;https://aikenh.cn/cn/WSL2/&quot;&gt;Windows Configuration01 WSL2 - AikenH Blogs&lt;/a&gt;&lt;/p&gt;
@@ -4150,7 +4817,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/GoogleColab/"/>
     <id>http://aikenh.cn/cn/GoogleColab/</id>
     <published>2021-09-27T21:34:21.000Z</published>
-    <updated>2023-10-31T00:07:40.907Z</updated>
+    <updated>2023-10-31T00:07:40.000Z</updated>
     
     
       
@@ -4178,7 +4845,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/WSL2/"/>
     <id>http://aikenh.cn/cn/WSL2/</id>
     <published>2021-09-27T18:17:39.000Z</published>
-    <updated>2023-11-12T02:44:11.690Z</updated>
+    <updated>2023-11-12T02:44:11.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;WSL（Windows Subsystem Linux） 将 Linux 环境部署在 Windows 中，Linux 环境在补全了 Windows 开发上的不足之外（Bash 等），还有以下的几个特性极大的便利开发和日常使用，因此强烈推荐启用并安装。&lt;/p&gt;
@@ -4219,7 +4886,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Windows/"/>
     <id>http://aikenh.cn/cn/Windows/</id>
     <published>2021-09-27T18:16:26.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.591Z</updated>
     
     
     <summary type="html">&lt;p&gt;@AikenHong 2020&lt;/p&gt;
@@ -4468,7 +5135,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Gitbook/"/>
     <id>http://aikenh.cn/cn/Gitbook/</id>
     <published>2021-09-26T07:36:25.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.590Z</updated>
     
     
     <summary type="html">&lt;p&gt;Gitbook命令行工具，基于Markdown编写文档，后续基于Github发布该Blog&lt;/p&gt;
@@ -4506,7 +5173,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/RL-DouZero/"/>
     <id>http://aikenh.cn/cn/RL-DouZero/</id>
     <published>2021-07-06T05:51:48.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.576Z</updated>
     
     
     <summary type="html">&lt;p&gt;Desc: GAME, RL&lt;br&gt;Finished?: Yes&lt;br&gt;Tags: Paper&lt;br&gt;URL1: &lt;a href=&quot;https://arxiv.org/abs/2106.06135&quot;&gt;https://arxiv.org/abs/2106.06135&lt;/a&gt;&lt;br&gt;URL2: &lt;a href=&quot;https://github.com/kwai/DouZero&quot;&gt;https://github.com/kwai/DouZero&lt;/a&gt;&lt;br&gt;URL3: &lt;a href=&quot;https://github.com/datamllab/rlcard-showdown）&quot;&gt;https://github.com/datamllab/rlcard-showdown）&lt;/a&gt;&lt;/p&gt;
@@ -4536,7 +5203,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/IntView_%E7%AC%94%E8%AF%95%E9%A2%98%E5%9E%8B%E5%92%8C%E6%A1%86%E6%9E%B6%E6%80%BB%E7%BB%93/"/>
     <id>http://aikenh.cn/cn/IntView_%E7%AC%94%E8%AF%95%E9%A2%98%E5%9E%8B%E5%92%8C%E6%A1%86%E6%9E%B6%E6%80%BB%E7%BB%93/</id>
     <published>2021-06-29T02:18:47.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.598Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -4561,7 +5228,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Pooling/"/>
     <id>http://aikenh.cn/cn/Pooling/</id>
     <published>2021-06-23T05:48:56.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.607Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;DownSampling：Pooling的全面调研&quot;&gt;&lt;a href=&quot;#DownSampling：Pooling的全面调研&quot; class=&quot;headerlink&quot; title=&quot;DownSampling：Pooling的全面调研&quot;&gt;&lt;/a&gt;DownSampling：Pooling的全面调研&lt;/h1&gt;&lt;p&gt;@Aiken 2021 笔记摘录：&lt;/p&gt;
@@ -4598,7 +5265,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/OW-openmix/"/>
     <id>http://aikenh.cn/cn/OW-openmix/</id>
     <published>2021-06-23T05:45:50.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.580Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aiken 2021 究极万恶的撞车论文&lt;/p&gt;
@@ -4625,7 +5292,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/RL-Reward_is_enough/"/>
     <id>http://aikenh.cn/cn/RL-Reward_is_enough/</id>
     <published>2021-06-06T05:53:36.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.579Z</updated>
     
     
       
@@ -4654,7 +5321,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/RL-MobaAI_Tencent/"/>
     <id>http://aikenh.cn/cn/RL-MobaAI_Tencent/</id>
     <published>2021-05-30T05:52:42.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.595Z</updated>
     
     
     <summary type="html">&lt;p&gt;Created by: Aiken H&lt;br&gt;Desc: GAME, RL&lt;br&gt;Finished?: Yes&lt;br&gt;Tags: Paper&lt;/p&gt;
@@ -4692,7 +5359,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/RL-C1/"/>
     <id>http://aikenh.cn/cn/RL-C1/</id>
     <published>2021-05-23T05:50:06.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.602Z</updated>
     
     
     <summary type="html">&lt;p&gt;Created by: Aiken H&lt;br&gt;Detail: survey&lt;br&gt;Finished?: No&lt;br&gt;Tags: Paper&lt;br&gt;URL1: &lt;a href=&quot;https://www.cnblogs.com/pinard/category/1254674.html&quot;&gt;https://www.cnblogs.com/pinard/category/1254674.html&lt;/a&gt;&lt;br&gt;URL2: &lt;a href=&quot;https://github.com/ljpzzz/machinelearning&quot;&gt;https://github.com/ljpzzz/machinelearning&lt;/a&gt;&lt;br&gt;URL3: &lt;a href=&quot;https://datawhalechina.github.io/easy-rl/#/&quot;&gt;https://datawhalechina.github.io/easy-rl/#/&lt;/a&gt;&lt;/p&gt;
@@ -4717,7 +5384,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/IntView_%E9%9D%A2%E8%AF%95%E8%A1%A5%E5%85%85/"/>
     <id>http://aikenh.cn/cn/IntView_%E9%9D%A2%E8%AF%95%E8%A1%A5%E5%85%85/</id>
     <published>2021-04-22T17:43:43.000Z</published>
-    <updated>2023-10-31T00:10:03.251Z</updated>
+    <updated>2023-10-31T00:10:03.000Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -4738,7 +5405,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Involution/"/>
     <id>http://aikenh.cn/cn/Involution/</id>
     <published>2021-04-08T05:12:15.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.610Z</updated>
     
     
     <summary type="html">&lt;p&gt;@Aiken 2021-4-8&lt;/p&gt;
@@ -4776,7 +5443,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/KnowledgeEvolution/"/>
     <id>http://aikenh.cn/cn/KnowledgeEvolution/</id>
     <published>2021-04-06T21:34:22.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.625Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;Knowledge-Evolution-in-Neural-Networks&quot;&gt;&lt;a href=&quot;#Knowledge-Evolution-in-Neural-Networks&quot; class=&quot;headerlink&quot; title=&quot;Knowledge Evolution in Neural Networks&quot;&gt;&lt;/a&gt;Knowledge Evolution in Neural Networks&lt;/h1&gt;&lt;p&gt;@Aiken 2021.4.7  &lt;/p&gt;
@@ -4814,7 +5481,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/IntView_%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/"/>
     <id>http://aikenh.cn/cn/IntView_%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/</id>
     <published>2021-02-22T17:45:04.000Z</published>
-    <updated>2023-10-31T00:09:32.447Z</updated>
+    <updated>2023-10-31T00:09:32.000Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -4839,7 +5506,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/SSH/"/>
     <id>http://aikenh.cn/cn/SSH/</id>
     <published>2021-02-21T17:45:43.000Z</published>
-    <updated>2023-10-31T00:27:12.057Z</updated>
+    <updated>2023-10-31T00:27:12.000Z</updated>
     
     
     <summary type="html">&lt;p&gt;主要介绍ssh服务在以下的几个方面（windows，linux）的使用情况：远程服务器连接（22），git&amp;amp;github（gitee），vscode免密登录。&lt;/p&gt;
@@ -4870,7 +5537,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/Facial_expression_and_Emotion/"/>
     <id>http://aikenh.cn/cn/Facial_expression_and_Emotion/</id>
     <published>2020-12-16T09:08:26.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.569Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;疑似&quot;&gt;&lt;a href=&quot;#疑似&quot; class=&quot;headerlink&quot; title=&quot;疑似&quot;&gt;&lt;/a&gt;疑似&lt;/h2&gt;&lt;ol&gt;
@@ -4916,7 +5583,7 @@ L_{MIM} = - &#92;sum_{i=1}^Nm_i *P_{&#92;theta^`}^{patch}(&#92;mu_i)^TlogP_{&#92
     <link href="http://aikenh.cn/cn/GANs/"/>
     <id>http://aikenh.cn/cn/GANs/</id>
     <published>2020-10-18T23:47:36.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.602Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;fGAN-对GAN理论的深度理解&quot;&gt;&lt;a href=&quot;#fGAN-对GAN理论的深度理解&quot; class=&quot;headerlink&quot; title=&quot;fGAN 对GAN理论的深度理解&quot;&gt;&lt;/a&gt;fGAN 对GAN理论的深度理解&lt;/h1&gt;&lt;p&gt;@Aiken 2021 onenote部分的拓展编写，到时候拷过去，整合在一起。&lt;/p&gt;
@@ -4950,7 +5617,7 @@ f(&#92;int q(x) &#92;frac{p(x)}{q(x)} dx) = f(1) = 0&lt;/script&gt;&lt;p&gt;显�
     <link href="http://aikenh.cn/cn/Markdown/"/>
     <id>http://aikenh.cn/cn/Markdown/</id>
     <published>2020-04-17T18:21:22.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.572Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;strong&gt;参考资料&lt;/strong&gt;：&lt;/p&gt;
@@ -5013,7 +5680,7 @@ f(&#92;int q(x) &#92;frac{p(x)}{q(x)} dx) = f(1) = 0&lt;/script&gt;&lt;p&gt;显�
     <link href="http://aikenh.cn/cn/Hyper_Resolution/"/>
     <id>http://aikenh.cn/cn/Hyper_Resolution/</id>
     <published>2020-03-06T06:55:02.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.586Z</updated>
     
     
     <summary type="html">&lt;p&gt;说明：重点针对&lt;strong&gt;超分辨率&lt;/strong&gt;技术  &lt;/p&gt;
@@ -5087,7 +5754,7 @@ f(&#92;int q(x) &#92;frac{p(x)}{q(x)} dx) = f(1) = 0&lt;/script&gt;&lt;p&gt;显�
     <link href="http://aikenh.cn/cn/ImageCaptionRequirement/"/>
     <id>http://aikenh.cn/cn/ImageCaptionRequirement/</id>
     <published>2020-01-13T18:13:25.000Z</published>
-    <updated>2023-10-31T00:09:04.023Z</updated>
+    <updated>2023-10-31T00:09:04.000Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Goals：&quot;&gt;&lt;a href=&quot;#Goals：&quot; class=&quot;headerlink&quot; title=&quot;Goals：&quot;&gt;&lt;/a&gt;Goals：&lt;/h2&gt;&lt;p&gt;1.数据量要求&lt;br&gt;2.标注的标准&lt;br&gt;3.标注的手段  &lt;/p&gt;
@@ -5124,7 +5791,7 @@ f(&#92;int q(x) &#92;frac{p(x)}{q(x)} dx) = f(1) = 0&lt;/script&gt;&lt;p&gt;显�
     <link href="http://aikenh.cn/cn/Emotion_dataset/"/>
     <id>http://aikenh.cn/cn/Emotion_dataset/</id>
     <published>2019-10-14T13:34:54.000Z</published>
-    <updated>2023-10-30T09:27:38.000Z</updated>
+    <updated>2023-10-30T09:27:38.610Z</updated>
     
     
     <summary type="html">&lt;p&gt;根据这次需要搜集的表情的数据集，整理一下搜索数据集的网站和思路等&lt;/p&gt;
