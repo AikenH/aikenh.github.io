@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://aikenh.cn/cn/LearnWeb17-JS02-Intro/</loc>
+    <lastmod>2024-04-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/</loc>
+    <lastmod>2024-04-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/</loc>
+    <lastmod>2024-04-30</lastmod>
+  </url>
+  <url>
     <loc>http://aikenh.cn/cn/%E5%AE%9A%E6%8A%95%E5%8D%81%E5%B9%B4%E8%B4%A2%E5%8A%A1%E8%87%AA%E7%94%B1%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2024-03-18</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/LearnWeb14-CSS08-CSS%E5%B8%83%E5%B1%80/</loc>
+    <loc>http://aikenh.cn/cn/LearnWeb16-Web%E5%AE%9E%E6%88%9801-%E9%A6%96%E9%A1%B5%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2024-03-04</lastmod>
   </url>
   <url>
@@ -13,7 +25,7 @@
     <lastmod>2024-03-04</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/LearnWeb16-Web%E5%AE%9E%E6%88%9801-%E9%A6%96%E9%A1%B5%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>http://aikenh.cn/cn/LearnWeb14-CSS08-CSS%E5%B8%83%E5%B1%80/</loc>
     <lastmod>2024-03-04</lastmod>
   </url>
   <url>
@@ -33,11 +45,11 @@
     <lastmod>2024-03-04</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/LearnWeb08-CSS02-CSS%E5%85%A5%E9%97%A8/</loc>
+    <loc>http://aikenh.cn/cn/LearnWeb09-CSS03-%E5%B1%82%E5%8F%A0%E5%B1%82/</loc>
     <lastmod>2024-03-04</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/LearnWeb09-CSS03-%E5%B1%82%E5%8F%A0%E5%B1%82/</loc>
+    <loc>http://aikenh.cn/cn/LearnWeb08-CSS02-CSS%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2024-03-04</lastmod>
   </url>
   <url>
@@ -77,19 +89,11 @@
     <lastmod>2024-01-28</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/powershell/</loc>
+    <loc>http://aikenh.cn/cn/BackupToolsForHomeServer/</loc>
     <lastmod>2024-01-28</lastmod>
   </url>
   <url>
     <loc>http://aikenh.cn/cn/StableDiffusionWebUI%E9%89%B4%E6%9D%83%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2024-01-28</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2024-01-28</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/BackupToolsForHomeServer/</loc>
     <lastmod>2024-01-28</lastmod>
   </url>
   <url>
@@ -98,6 +102,14 @@
   </url>
   <url>
     <loc>http://aikenh.cn/cn/emby_localhost_crack_by_nginx/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/powershell/</loc>
+    <lastmod>2024-01-28</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/</loc>
     <lastmod>2024-01-28</lastmod>
   </url>
   <url>
@@ -225,99 +237,7 @@
     <lastmod>2023-10-31</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/Astar/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Attention/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/DataAugmentation/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/CountMinSketch/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Docker/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Docker01_linux/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/DualSystemUbuntu/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Emotion_dataset/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/EfficientNet/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Facial_expression_and_Emotion/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Cpp/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/FineTune/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Flashcard_template/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/GANs/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/GoMetis00_INTRO/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Git_Manual1/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Gitbook/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/HardTask/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Hexo_Write/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Hyper_Resolution/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/IL-WYZ/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Hungarian/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/IL-MgSvF/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Immich_backup/</loc>
+    <loc>http://aikenh.cn/cn/StableDIffusionTraining/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
@@ -325,131 +245,7 @@
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/IntView_%E7%AC%94%E8%AF%95%E9%A2%98%E5%9E%8B%E5%92%8C%E6%A1%86%E6%9E%B6%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Involution/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Latex_testing/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Linux/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BGrep/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/LinuxCLI_Download/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/LinuxZellij/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BAwk/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
     <loc>http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BSed/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Loss-WhyZero/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/MIM-V-MAE/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/MIM-V-iBOT/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/MLFlow/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Loss-NCE/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Markdown/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/MarkovJunior/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Markup_Langs/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/MIM-V-simMIM/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/NerualNetworkTraining/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/NAS/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/NumpyConcatenate%E5%8A%A0%E9%80%9F/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/NAT%E7%A9%BF%E9%80%8F/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/OWL-survey/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/PicBed/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/OW-openmix/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Nodes/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Pooling/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/PyTorch/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/RL-DouZero/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/RL-MobaAI_Tencent/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/RL-C1/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/RL-Reward_is_enough/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
@@ -457,39 +253,7 @@
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/SQL1/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/SQL4/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
     <loc>http://aikenh.cn/cn/SQL2/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/SQL3/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/SQL5/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/SortTrick/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Spacevim/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/SSL-MoCov3/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Stable%20Diffusion/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
@@ -497,111 +261,11 @@
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/SS_OD_SoftTeacher/</loc>
+    <loc>http://aikenh.cn/cn/MIM-V-simMIM/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/StableDIffusionTraining/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Stable%20Diffusion%20%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/StyleGAN/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/StableDiffusionPrompt/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/TaskPhoto00_Xs20_Recipes/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Transfer-Sync-Files/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/VSCode/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Transformer/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/VimConfig/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/VimConfigDf/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Vimtutor/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Vue%20Chapter1/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/VimOperation/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/WFC%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Windows/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/WindowsCudaCudnn/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/YOLOv4/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/WindowsTerminal/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Z_Jumper/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/custom_web/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/alist_potplayer/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/linux2/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/fluent_python/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/macos_bash_config/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/%E5%B9%B6%E8%A1%8C%E8%AE%AD%E7%BB%83%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BB%A3%E7%90%86%E5%85%B1%E4%BA%AB/</loc>
+    <loc>http://aikenh.cn/cn/LinuxZellij/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
@@ -609,7 +273,139 @@
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
-    <loc>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E5%88%9D%E6%8E%A2/</loc>
+    <loc>http://aikenh.cn/cn/Emotion_dataset/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Involution/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/VSCode/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Cpp/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Docker/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/EfficientNet/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/DataAugmentation/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BAwk/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Pooling/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Immich_backup/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/SQL3/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Attention/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/MarkovJunior/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/linux2/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Hexo_Write/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/WindowsCudaCudnn/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/SortTrick/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/WFC%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/WindowsTerminal/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/GANs/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/NumpyConcatenate%E5%8A%A0%E9%80%9F/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/RL-C1/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Docker01_linux/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/MLFlow/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Flashcard_template/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/NAT%E7%A9%BF%E9%80%8F/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/NerualNetworkTraining/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/%E5%B1%80%E5%9F%9F%E7%BD%91%E4%BB%A3%E7%90%86%E5%85%B1%E4%BA%AB/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Hungarian/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/VimConfig/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/IL-WYZ/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/IntView_%E7%AC%94%E8%AF%95%E9%A2%98%E5%9E%8B%E5%92%8C%E6%A1%86%E6%9E%B6%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Loss-WhyZero/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/CountMinSketch/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
@@ -617,7 +413,223 @@
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
+    <loc>http://aikenh.cn/cn/DualSystemUbuntu/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Nodes/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/RL-MobaAI_Tencent/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Z_Jumper/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Linux/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/StyleGAN/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/OWL-survey/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/VimOperation/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/custom_web/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Spacevim/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Stable%20Diffusion/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Windows/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Gitbook/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Git_Manual1/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Hyper_Resolution/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/TaskPhoto00_Xs20_Recipes/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/IL-MgSvF/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/LinuxCLI_Download/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/MIM-V-MAE/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/PicBed/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/VimConfigDf/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
     <loc>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Stable%20Diffusion%20%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/FineTune/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Latex_testing/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Loss-NCE/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/OW-openmix/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/YOLOv4/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/%E5%B9%B6%E8%A1%8C%E8%AE%AD%E7%BB%83%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/PyTorch/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/RL-Reward_is_enough/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/NAS/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/SQL4/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/StableDiffusionPrompt/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/RL-DouZero/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/SS_OD_SoftTeacher/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%85%A5%E9%97%A8%E5%88%9D%E6%8E%A2/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Transfer-Sync-Files/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Linux%E4%B8%89%E5%89%91%E5%AE%A2%E4%B9%8BGrep/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/SQL1/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/macos_bash_config/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/HardTask/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/MIM-V-iBOT/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Markdown/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/alist_potplayer/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/GoMetis00_INTRO/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Transformer/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Vue%20Chapter1/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Astar/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Facial_expression_and_Emotion/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/SQL5/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/SSL-MoCov3/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/fluent_python/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Markup_Langs/</loc>
+    <lastmod>2023-10-30</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Vimtutor/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
 </urlset> 
