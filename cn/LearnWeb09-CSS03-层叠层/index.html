@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>LearnWeb09-CSS03-层叠层 - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="[!summary]+本章节是额外对于优先级的补充章节，在使用上可能会没有明显的感知，但是从概念上理解 CSS 的优先级和后续复杂项目的开发中还是起到了比较大的作用，该章节介绍层叠层的概念，在原先的优先级判定上添加了层的概念。  层叠概念回顾该 Section 内容完全摘录自 MDN CSS 教程，也算是对于整体重要性和优先级的一个很好的总结。  相关声明：找到所有具有匹配每个元素的选择器的声明"><meta property="og:type" content="blog"><meta property="og:title" content="LearnWeb09-CSS03-层叠层"><meta property="og:url" content="http://aikenh.cn/cn/LearnWeb09-CSS03-%E5%B1%82%E5%8F%A0%E5%B1%82/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="[!summary]+本章节是额外对于优先级的补充章节，在使用上可能会没有明显的感知，但是从概念上理解 CSS 的优先级和后续复杂项目的开发中还是起到了比较大的作用，该章节介绍层叠层的概念，在原先的优先级判定上添加了层的概念。  层叠概念回顾该 Section 内容完全摘录自 MDN CSS 教程，也算是对于整体重要性和优先级的一个很好的总结。  相关声明：找到所有具有匹配每个元素的选择器的声明"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg10.jpg"><meta property="article:published_time" content="2024-02-06T02:48:11.000Z"><meta property="article:modified_time" content="2024-03-04T08:45:44.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Web"><meta property="article:tag" content="CSS"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg10.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/LearnWeb09-CSS03-%E5%B1%82%E5%8F%A0%E5%B1%82/"},"headline":"LearnWeb09-CSS03-层叠层","image":["http://aikenh.cn/img/header_img/lml_bg10.jpg"],"datePublished":"2024-02-06T02:48:11.000Z","dateModified":"2024-03-04T08:45:44.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"[!summary]+本章节是额外对于优先级的补充章节，在使用上可能会没有明显的感知，但是从概念上理解 CSS 的优先级和后续复杂项目的开发中还是起到了比较大的作用，该章节介绍层叠层的概念，在原先的优先级判定上添加了层的概念。  层叠概念回顾该 Section 内容完全摘录自 MDN CSS 教程，也算是对于整体重要性和优先级的一个很好的总结。  相关声明：找到所有具有匹配每个元素的选择器的声明"}</script><link rel="canonical" href="http://aikenh.cn/cn/LearnWeb09-CSS03-%E5%B1%82%E5%8F%A0%E5%B1%82/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg10.jpg" alt="LearnWeb09-CSS03-层叠层"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>LearnWeb09-CSS03-层叠层</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2024-02-06T02:48:11.000Z" title="2024-02-06T02:48:11.000Z">2024-02-06</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-03-04T08:45:44.000Z" title="2024/3/4 16:45:44">2024-03-04</time></span><span class="level-item"><a class="link-muted" href="/categories/Web/">Web</a><span> / </span><a class="link-muted" href="/categories/Web/CSS/">CSS</a></span><span class="level-item">19 minutes read (About 2829 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><blockquote>
+<p>[!summary]+<br>本章节是额外对于优先级的补充章节，在使用上可能会没有明显的感知，但是从概念上理解 CSS 的优先级和后续复杂项目的开发中还是起到了比较大的作用，该章节介绍层叠层的概念，在原先的优先级判定上添加了层的概念。</p>
+</blockquote>
+<h2 id="层叠概念回顾"><a href="#层叠概念回顾" class="headerlink" title="层叠概念回顾"></a>层叠概念回顾</h2><p>该 Section 内容完全摘录自 MDN CSS 教程，也算是对于整体重要性和优先级的一个很好的总结。</p>
+<ol>
+<li><strong>相关声明</strong>：找到所有具有匹配每个元素的选择器的声明代码块。</li>
+<li><strong>重要性</strong>：根据规则是普通还是重要对规则进行排序。重要的样式是指设置了 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/important" title="Currently only available in English (US)"><code>!important</code> (en-US)</a> 标志的样式。</li>
+<li><strong>来源</strong>：在两个按重要性划分的分组内，按作者、用户或用户代理这几个来源对规则进行排序。</li>
+<li><strong>层</strong>：在六个按重要性和来源划分的分组内，按层叠层进行排序。普通声明的层顺序是从创建的第一个到最后一个，然后是未分层的普通样式。对于重要的样式，这个顺序是反转的，但保持未分层的重要样式优先权最低。</li>
+<li><strong>优先级</strong>：对于来源层中优先权相同的竞争样式，按<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Specificity">优先级</a>对声明进行排序。</li>
+<li><strong>出现顺序</strong>：当两个来源层的优先权相同的选择器具有相同的优先级时，最后声明的具有最高优先级的选择器的属性值获胜。</li>
+</ol>
+<p>CSS 渲染过程中会逐步往下选择，如果在中间已经决出了胜负就不会继续往下，例如对一个元素在每个来源中只有一个定义，那么在来源层就可以决出胜负，无需往下了，而若获胜的来源中有多个层定义了同个属性，那么就会对比各个层的优先级，诸如此类。</p>
+<p>其他的部分前文已经基本提到了，接下来补充来源和层的两个概念。</p>
+<blockquote>
+<p>![note]+<br>三个来源中的：’用户代理’指的是浏览器，用户指的是网站访问者，作者指的是网站开发者，浏览器内部将来自这三个来源的样式表进行来源的排序。</p>
+</blockquote>
+<h3 id="来源的优先级排序"><a href="#来源的优先级排序" class="headerlink" title="来源的优先级排序"></a>来源的优先级排序</h3><p>有三种<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade#origin_types">层叠来源类型</a>：用户代理样式表、用户样式表和作者样式表。浏览器根据来源和重要性将每个声明分为六个来源分组。有八个优先权级别：六个来源分组、正在过渡的属性和正在动画的属性。优先权的顺序是从具有最低优先权的普通用户代理样式，到当前应用的动画中的样式，到具有最高优先权的重要用户代理样式，再到正在过渡的样式：</p>
+<ol>
+<li>用户代理普通样式</li>
+<li>用户普通样式</li>
+<li>作者普通样式</li>
+<li>正在动画的样式</li>
+<li>作者重要样式</li>
+<li>用户重要样式</li>
+<li>用户代理重要样式</li>
+<li>正在过渡的样式</li>
+</ol>
+<p>用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/style"><code>&lt;style&gt;</code></a> 元素直接在元素上声明的样式是作者样式。不包括动画和过渡样式，用户代理普通样式具有最低优先权；用户代理重要样式具有最高优先权。</p>
+<span id="more"></span> 
+<h3 id="层叠层的概念和作用"><a href="#层叠层的概念和作用" class="headerlink" title="层叠层的概念和作用"></a>层叠层的概念和作用</h3><p><strong>概念:</strong> 结合上述两个 section 的内容，我认为层叠层实际上就是引入一个 <code>layer</code> 的概念，在编写 CSS 的时候将规则放到不同的层中，用来更加方便的区分优先级，就想一层一层的给网页刷上样式一样，越往后的优先级默认越高；其中仅有一个例外就是限定了 <code>!important</code> 的规则，他就像是一个占位符，预先确定了某个元素的样式，基于该规则进行”拓展”，因此其越早出现优先级越高。</p>
+<p><strong>作用:</strong></p>
+<ul>
+<li>通过这种方式便于多人同时开发时的协作，复杂项目时的持续开发和维护等，也以一种类似分桶的方式便于 Debug 样式的问题，使得 CSS 的逻辑更加清晰。</li>
+<li>层叠层中还允许创建嵌套层，例如每个人使用的组件库不同时，可以各自将组件库嵌入自己的层中，消除组件库的定义与其他人的样式冲突，同时也确保开发过程中能够方便的使用和调整组件库而无需考虑优先级。</li>
+</ul>
+<p>因此具体使用的时候，我们可以使用嵌套层的方式，将默认样式、第三方组件、主题等等首先嵌入层中，然后在开始继续的开发，这样在处理优先级的时候我们就无需考虑也无需解决跨层的冲突。</p>
+<h2 id="层叠层使用"><a href="#层叠层使用" class="headerlink" title="层叠层使用"></a>层叠层使用</h2><ul>
+<li>使用 <code>@layer</code> 声明 at 规则，使用 <code>@layer</code> 后跟一个或者多个层的名称来声明层，这将创建一个没有任何样式的具名层；</li>
+<li>使用 <code>@layer</code> 块 at 规则，在快中的所有样式都将添加到一个命名或者未命名的层中</li>
+<li>使用具有 <code>layer</code> 关键字或 <code>layer()</code> 函数的 <code>@import</code> 规则，将导入文件的内容分配到该层中。</li>
+</ul>
+<p>在尚未初始化具有相同名称的层的情况下，这三种方法中的任何一种都会创建一个层。如果在 <code>@layer</code> at 规则或带有 <code>layer()</code> 的 <code>@import</code> 中没有提供层名称，则将创建一个新的匿名层。</p>
+<p>1-2 的区别实际上就是先声明或者带初始值声明，例如以下的 cpp 代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 第一种</span><br>std::vector&lt;<span class="hljs-type">int</span>&gt; a_arr;<br>a_arr.<span class="hljs-built_in">push_back</span>(&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>&#125;);<br><span class="hljs-comment">// 第二种</span><br>std::vector&lt;<span class="hljs-type">int</span>&gt; a_arr = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;;<br></code></pre></td></tr></table></figure>
+<p><strong>备注：</strong> 层的优先顺序是它们创建的顺序。不在层中的样式，或者称为“未分层样式”，会层叠到最终的隐式标签中。</p>
+<h3 id="使用-layer-声明-at-规则"><a href="#使用-layer-声明-at-规则" class="headerlink" title="使用 @layer 声明 at 规则"></a>使用 <code>@layer</code> 声明 at 规则</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@layer</span> theme, components, default;<br></code></pre></td></tr></table></figure>
+<p>通常在 CSS 的第一行进行层的声明，避免有些规则漏掉导致没办法使用层完全控制样式的优先级，上述层的出现顺序即是声明的顺序，可以看到我们是先刷了一层主题，再往上刷组件，刷默认值，最后剩下的是我们最后自定义和调整的内容（未添加到具体名称里的会自动添加到匿名层中，且最后定义）。</p>
+<p>此外需要注意的是，如果上述三个层并非放在最上方，而且有一些层已经被定义了，那么被定义的层在这里不会再次声明，而只会被忽略，剩下的层将添加在已有的层之后，所以推荐还是在最前面定义。</p>
+<h3 id="使用-layer-块-at-规则添加具体的样式"><a href="#使用-layer-块-at-规则添加具体的样式" class="headerlink" title="使用 @layer 块 at 规则添加具体的样式"></a>使用 <code>@layer</code> 块 at 规则添加具体的样式</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@layer</span> theme&#123;<br>	<span class="hljs-selector-tag">main</span> &#123;<br>		<span class="hljs-attribute">display</span>: grid;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>使用块 at 规则可以：创建层并将块内的样式初始化添加进该层。如果没有指定 theme 名称的话，则会创建匿名层，每次未命名都会创建一个新的匿名层，而不是共用同个匿名层，这些匿名层也没办法往里面添加样式了。</p>
+<h3 id="使用媒体查询来创建层"><a href="#使用媒体查询来创建层" class="headerlink" title="使用媒体查询来创建层"></a>使用媒体查询来创建层</h3><p>同样考虑到不同的设备尺寸，让我们通过媒体查询来决定是否定义某些层，这样也可以用来做页面的响应式设计，在不同的设备上生效不同的层即可，具体的代码范例如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">50em</span>) &#123;<br>  <span class="hljs-keyword">@layer</span> site;<br>&#125;<br><br><span class="hljs-keyword">@layer</span> page &#123;<br>  <span class="hljs-selector-tag">h1</span> &#123;<br>    <span class="hljs-attribute">text-decoration</span>: overline;<br>    <span class="hljs-attribute">color</span>: red;<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">@layer</span> site &#123;<br>  <span class="hljs-selector-tag">h1</span> &#123;<br>    <span class="hljs-attribute">text-decoration</span>: underline;<br>    <span class="hljs-attribute">color</span>: green;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这样在宽屏上，事先定义的则是 site，否则为 page，这样就会使得样式发生变化，从而实现页面的响应式设计。</p>
+<h3 id="使用-import-将样式表导入层"><a href="#使用-import-将样式表导入层" class="headerlink" title="使用 @import 将样式表导入层"></a>使用 <code>@import</code> 将样式表导入层</h3><blockquote>
+<p>这一部分直接节选自 MDN，描述得很清楚了。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@import"><code>@import</code></a> 规则允许用户直接从其他样式表导入样式规则到 CSS 文件或 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/style"><code>&lt;style&gt;</code></a> 元素中。</p>
+<p>导入样式表时，必须在样式表或 <code>&lt;style&gt;</code> 块中的任何 CSS 样式之前定义 <code>@import</code> 语句。<code>@import</code> 语句必须出现在最前面，在任何样式之前，但可以在创建一个或多个层而不向这些层分配任何样式的 <code>@layer</code> 规则之后（<code>@import</code> 也可以在 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@charset"><code>@charset</code></a> 规则之后）。</p>
+<p>你可以将样式表导入具名层、嵌套具名层或匿名层。以下层分别将样式表导入 <code>components</code> 层、<code>components</code> 层中的嵌套 <code>dialog</code> 层和一个未命名层：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;components-lib.css&quot;</span>) layer(components);<br><span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;dialog.css&quot;</span>) layer(components.dialog);<br><span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;marketing.css&quot;</span>) layer();<br></code></pre></td></tr></table></figure>
+<p>这里注意层的嵌套使用的是 <code>.</code> 符号，无论是命名，引用，添加样式表到该嵌套层，都使用的这个符号，使用 import 导入的嵌套层会默认在该层的末尾，吧    但是在同层中，非嵌套的样式会优先于普通嵌套的样式，嵌套层之间的优先级则基于顺序决定。</p>
+<p>你可以将多个 CSS 文件导入到单个层中。以下声明将两个单独的文件导入到单个 <code>social</code> 层中：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@import</span> url(comments.css) layer(social);<br><span class="hljs-keyword">@import</span> url(sm-icons.css) layer(social);<br></code></pre></td></tr></table></figure>
+<p>你可以使用<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_media_queries/Using_media_queries">媒体查询</a>和<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_conditional_rules/Using_feature_queries">特性查询</a>根据特定条件导入样式并创建层。以下将样式表导入到 <code>international</code> 层，但前提是浏览器支持 <code>display: ruby</code>，而且被导入的文件取决于屏幕的宽度。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;ruby-narrow.css&quot;</span>) layer(international) supports(<span class="hljs-attribute">display</span>: ruby) <span class="hljs-keyword">and</span><br>  (<span class="hljs-attribute">width</span> &lt; <span class="hljs-number">32rem</span>);<br><span class="hljs-keyword">@import</span> url(<span class="hljs-string">&quot;ruby-wide.css&quot;</span>) layer(international) supports(<span class="hljs-attribute">display</span>: ruby) <span class="hljs-keyword">and</span><br>  (<span class="hljs-attribute">width</span> &gt;= <span class="hljs-number">32rem</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="层的优先级"><a href="#层的优先级" class="headerlink" title="层的优先级"></a>层的优先级</h3><p>整体判断优先级的逻辑和之前整理的是一致的，这里就简单给一下 MDN 中提到的总结。</p>
+<ul>
+<li>层的优先权顺序是创建层的顺序。</li>
+<li>一旦创建，就无法更改层顺序。</li>
+<li>普通样式的层优先权是创建层的顺序。</li>
+<li>未分层普通样式优先于有层普通样式。</li>
+<li>重要样式的层优先权被反转，早期创建的层具有优先权。</li>
+<li>所有有层的重要样式都优先于未分层的重要（和普通）样式。</li>
+<li>普通内联样式优先于所有普通样式，无论是否分层。</li>
+<li>重要内联样式优先于所有其他样式，正在过渡的样式除外。</li>
+<li>作者样式无法覆盖重要内联样式（过渡除外，但这是临时的）</li>
+</ul>
+<p>嵌套层的层叠优先权顺序与常规层类似，但包含在层内。优先权顺序基于嵌套层创建的顺序。<strong>层中的非嵌套样式优先于嵌套的普通样式</strong>，对于重要样式则相反。嵌套层之间的优先级权重并不重要，但它在嵌套层内的冲突样式中确实很重要。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>LearnWeb09-CSS03-层叠层</p><p><a href="http://aikenh.cn/cn/LearnWeb09-CSS03-层叠层/">http://aikenh.cn/cn/LearnWeb09-CSS03-层叠层/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2024-02-06</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2024-03-04</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Web/">Web, </a><a class="link-muted" rel="tag" href="/tags/CSS/">CSS </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/LearnWeb10-CSS04-%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">LearnWeb10-CSS04-盒子模型</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/LearnWeb08-CSS02-CSS%E5%85%A5%E9%97%A8/"><span class="level-item">LearnWeb08-CSS02-CSS入门</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/LearnWeb09-CSS03-%E5%B1%82%E5%8F%A0%E5%B1%82/';
+            this.page.identifier = 'cn/LearnWeb09-CSS03-层叠层/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#层叠概念回顾"><span class="level-left"><span class="level-item">1</span><span class="level-item">层叠概念回顾</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#来源的优先级排序"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">来源的优先级排序</span></span></a></li><li><a class="level is-mobile" href="#层叠层的概念和作用"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">层叠层的概念和作用</span></span></a></li></ul></li><li><a class="level is-mobile" href="#层叠层使用"><span class="level-left"><span class="level-item">2</span><span class="level-item">层叠层使用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#使用-layer-声明-at-规则"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">使用 @layer 声明 at 规则</span></span></a></li><li><a class="level is-mobile" href="#使用-layer-块-at-规则添加具体的样式"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">使用 @layer 块 at 规则添加具体的样式</span></span></a></li><li><a class="level is-mobile" href="#使用媒体查询来创建层"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">使用媒体查询来创建层</span></span></a></li><li><a class="level is-mobile" href="#使用-import-将样式表导入层"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">使用 @import 将样式表导入层</span></span></a></li><li><a class="level is-mobile" href="#层的优先级"><span class="level-left"><span class="level-item">2.5</span><span class="level-item">层的优先级</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

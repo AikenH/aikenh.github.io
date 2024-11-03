@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>AIGC05 Stable Diffusion Model Training - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="该章节主要介绍 Stable-Diffusion 中模型的训练，考虑到硬件条件的限制，实际上这里介绍的训练，都是针对大模型的各种微调技术（Lora，Dreambooth，HyperNetwork, …），这里会以 LoRA 模型的训练为主。  参考文献：  AIGC教程：Stable Diffusion精进，如何训练特定画风LoRA模型？ | 游戏大观 | GameLook.com.cn sta"><meta property="og:type" content="blog"><meta property="og:title" content="AIGC05 Stable Diffusion Model Training"><meta property="og:url" content="http://aikenh.cn/cn/StableDIffusionTraining/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="该章节主要介绍 Stable-Diffusion 中模型的训练，考虑到硬件条件的限制，实际上这里介绍的训练，都是针对大模型的各种微调技术（Lora，Dreambooth，HyperNetwork, …），这里会以 LoRA 模型的训练为主。  参考文献：  AIGC教程：Stable Diffusion精进，如何训练特定画风LoRA模型？ | 游戏大观 | GameLook.com.cn sta"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg39.jpg"><meta property="article:published_time" content="2023-05-06T15:43:41.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="AI"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg39.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/StableDIffusionTraining/"},"headline":"AIGC05 Stable Diffusion Model Training","image":["http://aikenh.cn/img/header_img/lml_bg39.jpg"],"datePublished":"2023-05-06T15:43:41.000Z","dateModified":"2023-10-30T09:27:38.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"该章节主要介绍 Stable-Diffusion 中模型的训练，考虑到硬件条件的限制，实际上这里介绍的训练，都是针对大模型的各种微调技术（Lora，Dreambooth，HyperNetwork, …），这里会以 LoRA 模型的训练为主。  参考文献：  AIGC教程：Stable Diffusion精进，如何训练特定画风LoRA模型？ | 游戏大观 | GameLook.com.cn sta"}</script><link rel="canonical" href="http://aikenh.cn/cn/StableDIffusionTraining/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg39.jpg" alt="AIGC05 Stable Diffusion Model Training"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>AIGC05 Stable Diffusion Model Training</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2023-05-06T15:43:41.000Z" title="2023-05-06T15:43:41.000Z">2023-05-06</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.000Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Machine-Learning/">Machine Learning</a><span> / </span><a class="link-muted" href="/categories/Machine-Learning/AIGC/">AIGC</a></span><span class="level-item">23 minutes read (About 3421 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><blockquote>
+<p>该章节主要介绍 Stable-Diffusion 中模型的训练，考虑到硬件条件的限制，实际上这里介绍的训练，都是针对大模型的各种微调技术（Lora，Dreambooth，HyperNetwork, …），这里会以 LoRA 模型的训练为主。</p>
+</blockquote>
+<p>参考文献：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.gamelook.com.cn/2023/04/514936">AIGC教程：Stable Diffusion精进，如何训练特定画风LoRA模型？ | 游戏大观 | GameLook.com.cn</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangiqngpei557/p/17301360.html">stable diffusion打造自己专属的LORA模型 - 王清培 - 博客园 (cnblogs.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/kohya-ss/sd-scripts/blob/main/train_README-zh.md">sd-scripts/train_README-zh.md at main · kohya-ss/sd-scripts · GitHub</a></li>
+</ul>
+<h2 id="Train-LoRA"><a href="#Train-LoRA" class="headerlink" title="Train LoRA"></a>Train LoRA</h2><blockquote>
+<p>LoRA 的优势就是其模型更小，且更加模块化；也就是说其的训练成本和要求都更低，同时使用代价小，可以作为某种风格插件或者角色插件来使用。</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://huggingface.co/blog/zh/lora">使用 LoRA 进行 Stable Diffusion 的高效参数微调 (huggingface.co)</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.09685">[2106.09685] LoRA: Low-Rank Adaptation of Large Language Models (arxiv.org)</a></li>
+</ul>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20230706171541.png" alt="image.png"></p>
+<p>其中蓝色的是预训练好的源网络，而橙色的是新加的网络，通过控制 R 的宽度（文章主要论证了大模型的参数可能存在较低维度的秩，因此可以使用较小的 R 来对大模型的参数造成有效的影响），可以有效的减少需要训练的网络的 Size。</p>
+<h3 id="事前准备"><a href="#事前准备" class="headerlink" title="事前准备"></a>事前准备</h3><blockquote>
+<p>这里只介绍本地训练，训练也可以在 Colab Notebook 等在线训练集群中进行，这里就不进行介绍了</p>
+</blockquote>
+<ol>
+<li>WebUI + 想训练的基础 SD 模型</li>
+<li><code>.txt</code> 带说明的文本文件</li>
+<li>Training Repo（<a target="_blank" rel="noopener" href="https://github.com/kohya-ss/sd-scripts">sd-script</a>、<a target="_blank" rel="noopener" href="https://github.com/Akegarasu/lora-scripts">lora-script</a>）</li>
+<li>数据集准备（准备好训练图像）</li>
+</ol>
+<h3 id="训练包准备"><a href="#训练包准备" class="headerlink" title="训练包准备"></a>训练包准备</h3><p>这里我们使用 lora-script 来进行模型训练，lora-script 实际上是 sd-script 之外在包了一层，新增了一些可视化的功能和一些其他的脚本，让 sd-script 更加易用，它调用 sd 中的脚本来实现训练，但是封装了一些注释和整理，此外还支持的 tensorboard 可视化。</p>
+<blockquote>
+<p>sd-script 本身包含了训练 lora、dreambooth、text-embedding、UNet、Text Encoder、图像生成、模型转换等多种功能。lora-script 还是主要专注于 LoRA 训练</p>
+</blockquote>
+<p>查看 repo 也能知道 lora-script 中包含了 sd-script，所以我们部署的时候只需</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> --recurse-submodules https://github.com/Akegarasu/lora-scripts<br></code></pre></td></tr></table></figure>
+<p>即可将需要的库安装下来，然后安装环境和相关以来只需要执行 <code>.\install.ps1</code> 即可（该脚本有 cn 版本，但是可能会出现问题），其会安装 sd-scripts 和 lora-scripts 需要的库。具体的可以参考相关 repo（sd-script 详细说明，lora-script 有简化版说明）。</p>
+<blockquote>
+<p>安装的时候可能会出现虚拟环境未激活的问题，我们可以提前在改目录执行一次 python -m venv venv 一次即可。</p>
+</blockquote>
+<p>Finish.<br><span id="more"></span></p>
+<h3 id="数据集准备"><a href="#数据集准备" class="headerlink" title="数据集准备"></a>数据集准备</h3><blockquote>
+<p>准备数据集的时候，要根据当前的设备显存对图片进行预处理，避免图片的分辨率过大，导致显存爆了，这里可以使用微软自己的 Powertoys 对文件进行批量 resize。</p>
+</blockquote>
+<p><strong>数据需求：</strong> </p>
+<ul>
+<li>如果希望有<strong>更好的泛化性</strong>，训练素材中应该包含各种：角度、表情、光线。<ul>
+<li>如果是角色的话，建议尽可能的手机正面，侧面，背面，头像特写，</li>
+<li>画风素材可以多一点</li>
+<li>可以考虑扣白底： <a target="_blank" rel="noopener" href="https://pickwant.com/home">https://pickwant.com/home</a></li>
+</ul>
+</li>
+<li>简单预处理：调整分辨率（64 的倍数），裁剪。</li>
+<li>数据量：如果是角色训练集在 20~50 左右足够，但是重要的是训练数据和训练轮次之间需要根据可视化做一个协调，避免过拟合（有时候可能也允许过拟合，取决于使用的场景）或者欠拟合的情况发生，原则上讲数据数量和轮次是正相关的关系。</li>
+</ul>
+<p>预处理之<strong>生成图像描述</strong>：图像描述实际上是作为训练的标签存在，而显然，我们需要自动生成描述，如果还记得之前的文档，图生图功能中有<strong>反向推演提示词</strong>的方法，同样我们也会用该 Deepbooru 方法去生成标签，webui 中提供了一个专门的入口：</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230507164237.png" alt="image.png"></p>
+<p>在 resize 完成后，我们执行改生成图像描述的方法，指定好原图像位置和预处理之后的文件夹名字位置即可。</p>
+<ul>
+<li>预处理之后的文件夹会包含原图和对应生成的描述 txt 文件。</li>
+<li>生成的描述文件可以 check 一下进行手动修改，错误的标签可能会引导出错误的训练方向。</li>
+<li>为了便于 LoRA 的后续描述生成相同的效果，可以删除部分不必要的标签，令重要的标签和效果的相关度提高，并覆盖部分细节标签，可以理解成把一系列标签打包成一个标签。</li>
+</ul>
+<p><strong>训练数据就位：</strong> 将训练数据转移到 <code>&lt;...&gt;/lora-scripts/train/</code> 中，如果没有该 train 目录就创建一个，单次的训练数据放在一个文件夹中，例如 <code>&lt;..&gt;/train/train_1_person/</code></p>
+<p><strong>正则化数据准备</strong>(option)：在 train 中新建一个 reg 文件夹，用于正则化训练，命名和此次训练的文件夹名相同，例如：<code>&lt;..&gt;/train/reg/train_1_person/</code>，在其中放的数据和训练数据应该是同类的不同对象。</p>
+<blockquote>
+<p>正则化的作用通常是避免模型过拟合，对模型添加额外的约束。例如我们训练一个猫，正则文件夹里应该同样存放猫（别的猫）的照片。</p>
+</blockquote>
+<p><strong>基础模型就位</strong>：将训练用到的基础模型复制到 <code>&lt;...&gt;/lora-scripts/sd-models/</code> 中，lora 是针对基础模型的注入（额外的 FC），对原模型进行部分的调整。</p>
+<p><strong>注意事项：</strong> 避免文件名重复，使用相同的文件后缀能够避免文件名重复的问题。</p>
+<h3 id="训练脚本编辑"><a href="#训练脚本编辑" class="headerlink" title="训练脚本编辑"></a>训练脚本编辑</h3><p>better read: <a target="_blank" rel="noopener" href="https://github.com/kohya-ss/sd-scripts/blob/main/train_network_README-zh.md">sd-scripts/train_network_README-zh.md at main · kohya-ss/sd-scripts (github.com)</a> </p>
+<p>接下来就是编辑训练脚本中的基础设置，lora-scripts 中的注释已经非常详细的写好了每个参数的含义，这里就介绍一些可能需要或者常用的参数设置：</p>
+<p>训练相关的一些设置如下</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230507170822.png" alt="image.png"></p>
+<ul>
+<li><code>save_every_n_epochs</code> 会决定我们最终获得几个模型，这里也可以设置一下。</li>
+<li><code>reg_data_dir</code> 设置正则化的目录，为空为默认不启用。</li>
+<li>… 其他的看看注释</li>
+</ul>
+<p>还有一些输出相关的设置，包括输出模型的目录和名称，名称最好修改，避免一直都是默认的错误覆盖了：</p>
+<blockquote>
+<p>目录最好用 10_\<EN\> 或者纯数字的目录，然后路径填写的时候只填写到上级目录，比如说数据存放在 <code>&lt;...&gt;/train/10_ron</code>，那么脚本中就填写到 <code>./train</code>，正则化目录同理。</p>
+</blockquote>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230507171041.png" alt="image.png"></p>
+<p>其他参数设置简单推荐：</p>
+<ul>
+<li>unet_lr 一般=lr</li>
+<li>lr_scheduler: <code>constant_with_warmup</code> 用的蛮多</li>
+<li>优化器：<ul>
+<li>use_lion 目前最好的，但是有正则化素材最好别开</li>
+</ul>
+</li>
+</ul>
+<p>编辑完成后直接执行该 <code>ps1</code> 脚本即可。</p>
+<blockquote>
+<p>脚本运行过程中可能会出现 nomodule named triton 的错误，可能是由于 windows 不支持该模块导致的，但是不影响最后的生成。</p>
+</blockquote>
+<h3 id="LoRA-模型测试和选择"><a href="#LoRA-模型测试和选择" class="headerlink" title="LoRA 模型测试和选择"></a>LoRA 模型测试和选择</h3><p>将模型导入 <code>/extensions/sd-webui-additional-networks/models/lora</code> 中，然后利用之前介绍过的 scripts 的 xyzplot 功能，分别测试和对比各个模型的效果，选择其中效果好的保留。</p>
+<h3 id="成品展示-amp-简单心得"><a href="#成品展示-amp-简单心得" class="headerlink" title="成品展示 &amp; 简单心得"></a>成品展示 &amp; 简单心得</h3><blockquote>
+<p>用我家猫小荣的 10-14 张照片训练出来了小荣的 Lora 模型（DreamBooth）也训了一下，但是显存（3070）不太够。</p>
+</blockquote>
+<p>训练 Lora 中使用了如下的参数配置：</p>
+<ul>
+<li>Clilloutmix 作为底层模型</li>
+<li>使用训练 DreamBooth 中生成的 700 张猫的图片作为正则化数据集</li>
+<li>BatchSize=2，Lr=e-4, Lion, Cosine_with_restarts, Max_train_epoch=10</li>
+</ul>
+<p>此外，由于图片少（一致性太强）训练轮次多，应该是有些过拟合，Lora 调用时只能在 3 以下，不然难以和原图区分，可以对训练轮次和图片数量做一下调整。</p>
+<p>训练的时候打标签除了自动生成的，最好还是主动去修改，各种细节剖开来，描述好姿势，颜色，背景，表情等，后面学到的模型对各个部分进行修改的化比较方便区分，避免全都耦合在一起。</p>
+<p>此外标签中要给特定的对象一个特定的标签，方便我们产出该指定效果（或者角色）。</p>
+<div class="justified-gallery">
+<img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/00009-3706840146.png" alt="00009-3706840146.png">
+<img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/00021-1903439770.png" alt="00021-1903439770.png">
+<img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/00031-4141742147.png" alt="00031-4141742147.png">
+<img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/00034-1003575578.png" alt="00034-1003575578.png">
+<img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/00000-4244496505.png" alt="00000-4244496505.png">
+<img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/00021-3282103832.png" alt="00021-3282103832.png">
+<img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/00024-4215830362.png" alt="00024-4215830362.png">
+<img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/00056-533810957.png" alt="00056-533810957.png">
+<img src=" https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/00001-2335627500.png" alt="00001-2335627500.png">
+</div>
+
+<h2 id="Dreambooth"><a href="#Dreambooth" class="headerlink" title="Dreambooth"></a>Dreambooth</h2><blockquote>
+<p>DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation。<br>这种训练方式旨在微调 diffusion model 使其生成的图像专注于某个 object，具体可以看下面的示例图</p>
+</blockquote>
+<p>相关资源链接： <a target="_blank" rel="noopener" href="https://github.com/d8ahazard/sd_dreambooth_extension">webui训练插件</a> | <a target="_blank" rel="noopener" href="https://github.com/google/dreambooth">offical repo</a> | <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2208.12242">Paper</a> | <a target="_blank" rel="noopener" href="https://juejin.cn/post/7219968440760582205">Dreambooth原理与实践</a> </p>
+<blockquote>
+<p>如果需要深入了解实现原理的可以查看官方论文和对应的 repo 内容。</p>
+</blockquote>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20230511172006.png" alt="image.png"></p>
+<p>其具备以下的优势：</p>
+<ul>
+<li>仅需要同一个<strong>主体（动物，模型，等）</strong> 的少量图片即可（3 到 5 张可以，但是越多越好）</li>
+<li>可以基于该主体生成各种图片</li>
+</ul>
+<blockquote>
+<p>针对该场景考虑将训练数据扣成白底可能也会使得生成的效果更好。</p>
+</blockquote>
+<p>具体的训练的详细介绍，可以参考训练插件页面的说明进行尝试，这里简单介绍一下工作流程：</p>
+<p><strong>A. 模型创建</strong>：Dreambooth tab -&gt; “Create Model” sub-tab -&gt; 确定一个新的模型名称 -&gt;选择本地的模型 / HF(model URL &amp; token) -&gt; 确定后源 ckpt 会暂时存储在 <code>models\dreambooth\MODELNAME\working</code> -&gt; 点击 Create</p>
+<p><strong>B. 参数设置</strong>：Settings tab -&gt; 是否使用 LoRA、BatchSize、Epochs 、学习率等等的设置都是基本的参数就不在介绍 </p>
+<blockquote>
+<p>设置(settings)中的 <code>performance wizard (WIP)</code> 中可以查看建议的参数。</p>
+</blockquote>
+<p><strong>C. Concepts 设置</strong>：主要有两个类别：数据路径 + （class + prompt）</p>
+<ul>
+<li>数据路径不在赘述</li>
+<li>Prompt 指的是我们的目标样本应该用什么提示词</li>
+<li>Class 填入的是与目标同类但是不同个体的样本，避免过拟合</li>
+</ul>
+<p><strong>D. Saving 设置</strong>： 主要是设置我们各种模型的保存策略，类似步长之类的。</p>
+<p><strong>E. Generate 设置</strong>：生成过程中的调整</p>
+<p>设置完成后开始训练即可，可以看训练中的 loss 和模型训练过程中生成的图片，AFK，训练完成后就可以看到训练好的 CKPT 了。</p>
+<h2 id="Textual-Inversion"><a href="#Textual-Inversion" class="headerlink" title="Textual Inversion"></a>Textual Inversion</h2><p>相关资源链接：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2208.01618">论文</a> | <a target="_blank" rel="noopener" href="https://github.com/rinongal/textual_inversion">官方代码</a> | <a target="_blank" rel="noopener" href="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Textual-Inversion">webui说明</a> | <a target="_blank" rel="noopener" href="https://textual-inversion.github.io/">textual-inversion.github.io</a></p>
+<blockquote>
+<p>其全称为 An Image is Worth One Word: Personalizing Text-to-Image Generation using Textual Inversion</p>
+</blockquote>
+<p><strong>Textual Inversion</strong>： 功能和其名字相互对应，反转 Text2Img 的过程，Img2Text 地建立图像与指定文本（Prompt）的关联。也就是说，当我们希望输入特定的 Prompt 能稳定的产生某个效果的时候，可以利用 Textual Inversion 技术来对模型进行改造，使得该特定的 prompt 能取得特定效果。</p>
+<p>实际上该技术也能取得和 Dreambooth 类似的效果，具体可以看论文和例子，这里也只简单介绍一下训练和使用。</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230512085236.png" alt="image.png"></p>
+<p><strong>A. 创建 Word Embedding</strong>（指定 Prompt）：</p>
+<p>在 Train 标签页下创建 Embedding 页面，name 指定一个关键字（prompt），该 prompt 代表我们后续要训练出来的概念，创建完成后，就可以在 <code>/&lt;...&gt;/stable-diffusion-webui/embeddings</code> 路径下看到我们创建的 pt 文件</p>
+<p><strong>B.数据预处理</strong>：同 Lora 介绍的预处理图像，准备好训练数据</p>
+<p><strong>C.参数设置</strong>：</p>
+<ul>
+<li>Train-&gt; Train 页面中，只训练 Embedding，所以 Hypernetwork 的地方放空。</li>
+<li>填写的基本学习率等参数就不再赘述，</li>
+<li><strong>填写</strong>：数据集目录、Log 目录等即可</li>
+<li>“Prompt template”需要注意下, 提供了几种可选的训练模式:<ul>
+<li>style_filewords.txt: 表示训练画风</li>
+<li>subject_filewords.txt: 表示训练人物或物体</li>
+</ul>
+</li>
+</ul>
+<p><strong>D.选择训练 Embedding</strong>：即可开始训练</p>
+<p><strong>E.使用</strong>：放在 <code>/&lt;...&gt;/stable-diffusion-webui/embeddings</code> 中，在相关生成过程中，填写 Prompt 的时候像 easynagetive 启用即可。</p>
+<h2 id="HyperNetworks"><a href="#HyperNetworks" class="headerlink" title="HyperNetworks"></a>HyperNetworks</h2><p><a target="_blank" rel="noopener" href="https://blog.novelai.net/novelai-improvements-on-stable-diffusion-e10d38db82ac">NovelAI Improvements on Stable Diffusion | by NovelAI | Medium</a> </p>
+<blockquote>
+<p>Hypernetwork 是一种微调技术（by Novel AI ），它是一个<strong>小型附加神经网络</strong>附加在 Stable Diffusion 模型上以修改其风格，这种方式和当时的论文并不一致，当时的 HyperNetwork 是通过修改权重来进行调整，NovelAI 中使用到的则是添加一个小型的线性附加网络。</p>
+</blockquote>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/20230706170343.png" alt="image.png"></p>
+<p>具体而言，其插入到噪声预测器 UNet 的交叉注意力模块中，（通常情况下是一个简单的神经网络：具有 dropout 和激活函数的全连接线性网络）通过插入两个转换 key 和 query 向量的网络来劫持交叉注意力模块。</p>
+<p>其训练过程与 Text Inversion 几乎一致，这里就不在赘述，只描述部分不同：</p>
+<ul>
+<li>创建模型的时候在 Train/Create Hypernetwork 选项卡</li>
+<li>训练的时候选择 train hypernetwork</li>
+<li>使用时存放的目录（应该也可以存放在 Addition Network 的文件夹中）为： <code>stable_difusion\stable-diffusion-webui\models\hypernetworks</code> 像 Lora 一样启用即可。</li>
+</ul>
+<h2 id="FI"><a href="#FI" class="headerlink" title="FI"></a>FI</h2><p>stable diffusion 的介绍暂时就到这边了，原理相关的东西就先不介绍了，以后如果有必要的话，或者谁有需求的话可以联系我更新。</p>
+<ul>
+<li>[x] 通过训练小荣来给出一个详细的参数设置（Dreambooth 和 Lora 和 TextInversion）</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>AIGC05 Stable Diffusion Model Training</p><p><a href="http://aikenh.cn/cn/StableDIffusionTraining/">http://aikenh.cn/cn/StableDIffusionTraining/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-05-06</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/AI/">AI </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/LinuxZellij/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Terminal multiplexer Zellij</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/Immich_backup/"><span class="level-item">Docker-App 1 Backup Photos by Immich</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/StableDIffusionTraining/';
+            this.page.identifier = 'cn/StableDIffusionTraining/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Train-LoRA"><span class="level-left"><span class="level-item">1</span><span class="level-item">Train LoRA</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#事前准备"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">事前准备</span></span></a></li><li><a class="level is-mobile" href="#训练包准备"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">训练包准备</span></span></a></li><li><a class="level is-mobile" href="#数据集准备"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">数据集准备</span></span></a></li><li><a class="level is-mobile" href="#训练脚本编辑"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">训练脚本编辑</span></span></a></li><li><a class="level is-mobile" href="#LoRA-模型测试和选择"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">LoRA 模型测试和选择</span></span></a></li><li><a class="level is-mobile" href="#成品展示-amp-简单心得"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">成品展示 &amp; 简单心得</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Dreambooth"><span class="level-left"><span class="level-item">2</span><span class="level-item">Dreambooth</span></span></a></li><li><a class="level is-mobile" href="#Textual-Inversion"><span class="level-left"><span class="level-item">3</span><span class="level-item">Textual Inversion</span></span></a></li><li><a class="level is-mobile" href="#HyperNetworks"><span class="level-left"><span class="level-item">4</span><span class="level-item">HyperNetworks</span></span></a></li><li><a class="level is-mobile" href="#FI"><span class="level-left"><span class="level-item">5</span><span class="level-item">FI</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

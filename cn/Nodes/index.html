@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Nodejs、yarn、npm关系辨析 - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="@AikenH 2022 Node-JS-Chapter1  参考：包管理工具npm、yarn以及nvm简介及简单使用 Concept 概念对 Node，NPM，JS，Yarn，NVM 的概念和作用进行一个辨析和介绍，了解各自的含义和职责，进而理解我们使用的到底是什么，环境怎么管理，怎么自定义和进行改动等。"><meta property="og:type" content="blog"><meta property="og:title" content="Nodejs、yarn、npm关系辨析"><meta property="og:url" content="http://aikenh.cn/cn/Nodes/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="@AikenH 2022 Node-JS-Chapter1  参考：包管理工具npm、yarn以及nvm简介及简单使用 Concept 概念对 Node，NPM，JS，Yarn，NVM 的概念和作用进行一个辨析和介绍，了解各自的含义和职责，进而理解我们使用的到底是什么，环境怎么管理，怎么自定义和进行改动等。"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg19.jpg"><meta property="article:published_time" content="2022-10-09T05:33:00.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="JS"><meta property="article:tag" content="Node"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg19.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/Nodes/"},"headline":"Nodejs、yarn、npm关系辨析","image":["http://aikenh.cn/img/header_img/lml_bg19.jpg"],"datePublished":"2022-10-09T05:33:00.000Z","dateModified":"2023-10-30T09:27:38.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"@AikenH 2022 Node-JS-Chapter1  参考：包管理工具npm、yarn以及nvm简介及简单使用 Concept 概念对 Node，NPM，JS，Yarn，NVM 的概念和作用进行一个辨析和介绍，了解各自的含义和职责，进而理解我们使用的到底是什么，环境怎么管理，怎么自定义和进行改动等。"}</script><link rel="canonical" href="http://aikenh.cn/cn/Nodes/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg19.jpg" alt="Nodejs、yarn、npm关系辨析"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>Nodejs、yarn、npm关系辨析</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2022-10-09T05:33:00.000Z" title="2022-10-09T05:33:00.000Z">2022-10-09</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.000Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Langs/">Langs</a><span> / </span><a class="link-muted" href="/categories/Langs/Nodejs/">Nodejs</a></span><span class="level-item">12 minutes read (About 1866 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><p>@AikenH 2022 Node-JS-Chapter1 </p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Newbie___/article/details/104759861">包管理工具npm、yarn以及nvm简介及简单使用</a></p>
+<h2 id="Concept-概念"><a href="#Concept-概念" class="headerlink" title="Concept 概念"></a>Concept 概念</h2><p>对 Node，NPM，JS，Yarn，NVM 的概念和作用进行一个辨析和介绍，了解各自的含义和职责，进而理解我们使用的到底是什么，环境怎么管理，怎么自定义和进行改动等。</p>
+<span id="more"></span>
+<ul>
+<li><p><strong>JS</strong>在1995年诞生，Nodejs在2009年诞生，在此之前JS只能在浏览器中使用（google开发的chrome的V8引擎），NodeJS（第三方作者想直接在计算机运行JS，让其脱离浏览器）相当于提供的一个JS的运行环境，用来支持JS的执行，也就是JS的一个runtime system。</p>
+<blockquote>
+<p>由此，JS除了web前端编程，又可以支持后台开发、GUI开发、APP开发和CLI工具开发</p>
+</blockquote>
+</li>
+<li><p><strong>Nodejs</strong>和JS的概念已经在上述清楚了，这里说一下nodejs组成：</p>
+<ul>
+<li>V8引擎将JS编译成机器码，提高运行速度；</li>
+<li>本地模块：使用C/C++实现的一些高性能开源库；</li>
+<li>标准库：封装C/C++的一些本地模块的接口，转换为JS接口，就是Nodejs的标准库，其良好的设计也赋予Nodejs强大的生命力；</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/">NPM</a>是随NodeJS一起安装的包管理工具（提供下载，版本校验，兼容性校验等功能），就像 pip、conda帮助Nodejs管理并解决本地部署的问题。</p>
+<ul>
+<li>允许下载别人写好的第三方包到本地使用；</li>
+<li>允许下载安装别人编写的命令行程序；</li>
+<li>允许上传包或命令行程序给别人使用；</li>
+</ul>
+</li>
+<li><p><strong>Yarn</strong>：由Facebook、Google、Exponent 和Tilde联合推出的JS包管理工具，和NPM就像是pip和conda的关系，其仍然使用NPM的registry，不过提供了全新的CLI来进行管理（也就是管理包的代码和逻辑有区别）</p>
+</li>
+<li><p><strong>NVM</strong>：Conda的另一个功能，在同个电脑上管理多个Node版本；</p>
+</li>
+<li><p><strong>CLI</strong>（Command-line-interface），相当于没有UI界面的命令行程序；</p>
+</li>
+<li><strong>Cnpm</strong>：为了解决国内链接Npm registry的困难，淘宝自己的npm镜像（不过现在没啥用了好像）；</li>
+</ul>
+<h3 id="Runtime"><a href="#Runtime" class="headerlink" title="Runtime"></a>Runtime</h3><p><strong>什么是runtime</strong>：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20607178">运行时（runtime）是什么意思</a>、<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Runtime_system">Runtime system - Wikipedia</a>、<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/9338.html">Node.js是什么？运行时是什么</a></p>
+<p><strong>runtime</strong>主要有几种类型：</p>
+<ol>
+<li>「程序运行的时候」，即程序生命周期的一个阶段。也就是运行阶段。</li>
+<li><p>「运行时库」，支撑应用级语言（c，c++，Rust）的一些正常功能的lib，对部分“标准指令”进行包装，（标准库）优雅的映射到汇编。<strong>也就是程序运行的时候</strong>所需要依赖的库。<br><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/mac/image-20221018135959777.png" alt="image-20221018135959777"></p>
+</li>
+<li><p>「运行时系统」某门语言的宿主环境：Node.js是一个JavaScript的运行时。运行时系统主要是一些高级语言的概念，可以理解成一个更大、更全的运行时库，低级语言由于强指定类型等原因，可直接直译成机器码，而依赖于编译的语言，就需要一个运行时系统来实现语言的运行。</p>
+<blockquote>
+<p>JAVA运行时是JRE（Java Runtime Environment），C#运行时是CLR，他们都需要在OS上单独安装，借由他们来执行相应语言的程序（编译出的字节码），而对于JS来说，JS引擎不带IO支持的虚拟机，因此需要浏览器和Node这样的「JS运行时」才能让他控制文件、网络、图形等。</p>
+</blockquote>
+<p>典型的高级语言的「运行时系统」需要如下的组件：</p>
+<ul>
+<li><p>一个解释执行字节码的虚拟机，多半得带个垃圾回收器。</p>
+</li>
+<li><p>如果语言是源码解释执行，那么需要一个编译器前端做词法分析和语法分析。</p>
+</li>
+<li><p>如果运行时支持 JIT 优化，那么还得藏着个编译器后端（动态生成<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=机器码&amp;search_source=Entity&amp;hybrid_search_source=Entity&amp;hybrid_search_extra={&quot;sourceType&quot;%3A&quot;answer&quot;%2C&quot;sourceId&quot;%3A2133648600}">机器码</a>）。</p>
+</li>
+<li><p>IO 相关能力，比如 Node.js 的 <code>fs.readFile</code> 之类。</p>
+</li>
+</ul>
+<p>已经相当于一个复杂的基础软件系统了。</p>
+<p><strong>总结：</strong>运行时就是，类似一些编好的dll、标准库、解释器等，支持JS运行的组件和工具的合集，被统称为运行时。</p>
+</li>
+</ol>
+<h2 id="Nodejs-amp-NPM"><a href="#Nodejs-amp-NPM" class="headerlink" title="Nodejs &amp; NPM"></a>Nodejs &amp; NPM</h2><h3 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h3><p>安装：windows 直接去 <a target="_blank" rel="noopener" href="https://nodejs.org/en/download">nodejs</a> -&gt; <a target="_blank" rel="noopener" href="https://github.com/nodesource/distributions">nodesource/distributions: NodeSource</a> 官网下载安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># debian(ubuntu)</span><br><span class="hljs-comment"># 首先更新NOdejs的软件源，基于上述提供的网站中获取指定连接和更新方式。</span><br>curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -<br><br><span class="hljs-comment"># 接着使用apt命令下载nodejs 和 npm</span><br>sudo apt-get install npm, nodejs<br><span class="hljs-comment"># 可能还需要安装一些c++依赖</span><br>sudo apt install build-essential -y<br><br><span class="hljs-comment"># macos </span><br>brew install node<br><br><span class="hljs-comment"># 查看版本</span><br>npm -v <br>node -V<br></code></pre></td></tr></table></figure>
+<p>更新npm版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo npm install npm -g<br></code></pre></td></tr></table></figure>
+<p>NPM设置代理registry地址，使用国内镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org<br><span class="hljs-comment"># 使用下面的命令进行检查</span><br>npm config get registry<br></code></pre></td></tr></table></figure>
+<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install &lt;package&gt; <span class="hljs-comment"># 本地安装</span><br>npm install &lt;package&gt; -g <span class="hljs-comment"># 全局安装 </span><br><span class="hljs-comment"># npm i 为 install的简写</span><br><br><span class="hljs-comment"># 卸载模块</span><br>npm uninstall &lt;package&gt;<br>npm <span class="hljs-built_in">ls</span> <span class="hljs-comment"># 查看是否卸载成功,或者去/node_modules目录check</span><br><br><span class="hljs-comment"># 搜索模块</span><br>npm search &lt;package&gt;<br><br><span class="hljs-comment"># 更新模块</span><br>npm update &lt;package&gt;<br></code></pre></td></tr></table></figure>
+<p>node重新安装依赖包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">rm</span> -rv node_modules <span class="hljs-comment"># del those files we downlaods</span><br><span class="hljs-built_in">rm</span> package-lock.json <span class="hljs-comment"># del the install info </span><br>npm cache clear --force<br>npm install<br></code></pre></td></tr></table></figure>
+<p><strong>npm 设置代理</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">npm config set proxy=http://127.0.0.1:8890<br><span class="hljs-meta prompt_"># </span><span class="language-bash">取消</span><br>npm config delete proxy<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看</span><br>npm config list<br></code></pre></td></tr></table></figure>
+<h3 id="Package-json"><a href="#Package-json" class="headerlink" title="Package.json"></a>Package.json</h3><p>npm将每个使用npm的工程都看成一个包，包的信息是通过<code>package.json</code>配置文件来描述的，可以手动创建，但是大多数时候是使用<code>npm init</code>创建（可以创建一个看看默认值）</p>
+<p><strong>package-lock.json</strong> 锁定具体版本</p>
+<p>npm在安装包的时候，会记录安装包时候准确的依赖项（包含版本信息），若我们保留了该文件，在安装的时候会根据上面的准确版本进行安装，最大程度的避免了差异。</p>
+<p>package.json文件最重要的作用，是记录当前工程的依赖</p>
+<ul>
+<li>dependencies：生产环境的依赖包</li>
+<li>devDependencies：仅开发环境的依赖包</li>
+</ul>
+<p>配置好依赖后，使用下面的命令即可安装依赖</p>
+<ul>
+<li>本地安装所有依赖 安装所有依赖 dependencies + devDependencies</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i<br></code></pre></td></tr></table></figure>
+<p><strong>Install</strong>的时候添加参数，可将包添加到依赖项的package.json中</p>
+<ul>
+<li>安装依赖到生产环境</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i &lt;package&gt;<br>npm i --save &lt;package&gt;<br>npm i -S &lt;package&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>安装依赖到开发环境</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i --save-dev &lt;package&gt;<br>npm i -D &lt;package&gt;<br></code></pre></td></tr></table></figure>
+<h3 id="NPM中包的安装路径"><a href="#NPM中包的安装路径" class="headerlink" title="NPM中包的安装路径"></a>NPM中包的安装路径</h3><p>节选自参考链接<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1834667">Link</a></p>
+<ol>
+<li>本地安装 <code>npm install</code> 安装到当前路径的node_modules中</li>
+<li>全局安装添加<code>-g</code>参数</li>
+</ol>
+<p>全局文件的安装地址在: <code>npm root -g</code>  | <code>npm config get prefix</code></p>
+<h2 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h2><p><a target="_blank" rel="noopener" href="https://yarnpkg.com/cli/install">YARN</a> 相比NPM有以下的优点，但是npm6之后，npm和yarn非常接近，所以后续很多从yarn转回npm的</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs txt">- 使用扁平的目录结构<br>- 并行下载<br>- 使用本地缓存<br>- 控制台仅输出关键信息<br>- yarn-lock记录确切依赖<br>- 增加了某些功能强大的命令<br>- 让既有的命令更加语义化<br>- 安装的CLI工具可以使用yarn直接启动<br>- 将全局安装的目录当成普通的工程，生成package.json文件，便于全局安装移植<br></code></pre></td></tr></table></figure>
+<h3 id="安装yarn"><a href="#安装yarn" class="headerlink" title="安装yarn"></a>安装yarn</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g yarn<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yarn --version<br></code></pre></td></tr></table></figure>
+<h3 id="package管理"><a href="#package管理" class="headerlink" title="package管理"></a>package管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">yarn install &lt;package&gt;<br>yarn remove &lt;package&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="NVM"><a href="#NVM" class="headerlink" title="NVM"></a>NVM</h2><p><a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">NVM</a>用来管理node版本，便于适应多个node环境，在之间进行切换。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvm -v <span class="hljs-comment"># 查看版本</span><br>nvm list <span class="hljs-comment"># 查看node版本号</span><br>nvm use &lt;version&gt; <span class="hljs-comment"># 使用指定版本号的node</span><br>nvm install &lt;version&gt; <span class="hljs-comment"># 下载指定版本的node</span><br>nvm uninstall &lt;version&gt; <span class="hljs-comment"># 卸载指定版本的node</span><br></code></pre></td></tr></table></figure>
+<p>设置淘宝镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvm node_mirror https://npm.taobao.org/mirrors/node/<br>nvm npm_mirror https://npm.taobao.org/mirrors/npm/<br></code></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Nodejs、yarn、npm关系辨析</p><p><a href="http://aikenh.cn/cn/Nodes/">http://aikenh.cn/cn/Nodes/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-10-09</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/JS/">JS, </a><a class="link-muted" rel="tag" href="/tags/Node/">Node </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/GithubProfile/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Github Profile 个人主页</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/custom_web/"><span class="level-item">基于Vue和Django的前后端开发实践</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/Nodes/';
+            this.page.identifier = 'cn/Nodes/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Concept-概念"><span class="level-left"><span class="level-item">1</span><span class="level-item">Concept 概念</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Runtime"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">Runtime</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Nodejs-amp-NPM"><span class="level-left"><span class="level-item">2</span><span class="level-item">Nodejs &amp; NPM</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装和配置"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">安装和配置</span></span></a></li><li><a class="level is-mobile" href="#常用操作"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">常用操作</span></span></a></li><li><a class="level is-mobile" href="#Package-json"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">Package.json</span></span></a></li><li><a class="level is-mobile" href="#NPM中包的安装路径"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">NPM中包的安装路径</span></span></a></li></ul></li><li><a class="level is-mobile" href="#YARN"><span class="level-left"><span class="level-item">3</span><span class="level-item">YARN</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装yarn"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">安装yarn</span></span></a></li><li><a class="level is-mobile" href="#package管理"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">package管理</span></span></a></li></ul></li><li><a class="level is-mobile" href="#NVM"><span class="level-left"><span class="level-item">4</span><span class="level-item">NVM</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

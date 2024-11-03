@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Pooling - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="DownSampling：Pooling的全面调研@Aiken 2021 笔记摘录： 深度神经网络中的池化方法：全面调研（1989-2020） - 知乎 ；相同论文的简单中文Version 16页综述，共计67篇参考文献。网络千奇百怪，但基础元素却大致相同！本文全面调研了1989至2020年一些著名且有用的池化方法，并主要对20种池化方法进行了详细介绍（这些方法，你都知道么？） 注1：文末附【计算"><meta property="og:type" content="blog"><meta property="og:title" content="Pooling"><meta property="og:url" content="http://aikenh.cn/cn/Pooling/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="DownSampling：Pooling的全面调研@Aiken 2021 笔记摘录： 深度神经网络中的池化方法：全面调研（1989-2020） - 知乎 ；相同论文的简单中文Version 16页综述，共计67篇参考文献。网络千奇百怪，但基础元素却大致相同！本文全面调研了1989至2020年一些著名且有用的池化方法，并主要对20种池化方法进行了详细介绍（这些方法，你都知道么？） 注1：文末附【计算"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg14.jpg"><meta property="article:published_time" content="2021-06-23T05:48:56.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Machine Learning"><meta property="article:tag" content="Survey"><meta property="article:tag" content="Pooling"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg14.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/Pooling/"},"headline":"Pooling","image":["http://aikenh.cn/img/header_img/lml_bg14.jpg"],"datePublished":"2021-06-23T05:48:56.000Z","dateModified":"2023-10-30T09:27:38.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"DownSampling：Pooling的全面调研@Aiken 2021 笔记摘录： 深度神经网络中的池化方法：全面调研（1989-2020） - 知乎 ；相同论文的简单中文Version 16页综述，共计67篇参考文献。网络千奇百怪，但基础元素却大致相同！本文全面调研了1989至2020年一些著名且有用的池化方法，并主要对20种池化方法进行了详细介绍（这些方法，你都知道么？） 注1：文末附【计算"}</script><link rel="canonical" href="http://aikenh.cn/cn/Pooling/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg14.jpg" alt="Pooling"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>Pooling</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2021-06-23T05:48:56.000Z" title="2021-06-23T05:48:56.000Z">2021-06-23</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.000Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Machine-Learning/">Machine Learning</a></span><span class="level-item">17 minutes read (About 2493 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><h1 id="DownSampling：Pooling的全面调研"><a href="#DownSampling：Pooling的全面调研" class="headerlink" title="DownSampling：Pooling的全面调研"></a>DownSampling：Pooling的全面调研</h1><p>@Aiken 2021 笔记摘录：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/341820742">深度神经网络中的池化方法：全面调研（1989-2020） - 知乎</a> ；<a target="_blank" rel="noopener" href="https://www.sohu.com/a/442710521_823210">相同论文的简单中文Version</a></p>
+<p>16页综述，共计67篇参考文献。网络千奇百怪，但基础元素却大致相同！本文全面调研了1989至2020年一些著名且有用的池化方法，并主要对20种池化方法进行了详细介绍（这些方法，你都知道么？） 注1：文末附【计算机视…</p>
+<p>来自 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/341820742">https://zhuanlan.zhihu.com/p/341820742</a></p>
+<p>原文：《Pooling Methods in Deep Neural Networks, a Review》</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112216409">整合2</a></p>
+<h2 id="池化的根本目的（Motivation）"><a href="#池化的根本目的（Motivation）" class="headerlink" title="池化的根本目的（Motivation）"></a>池化的根本目的（Motivation）</h2><p>卷积神经网络是DNN的一种特殊类型，它由几个卷积层组成，每个卷积层后都有一个激活函数和一个池化层。</p>
+<p>池化层是重要的层，它对来自上一层的特征图执行下采样，并生成具有简化分辨率的新feature maps 。该层<strong>极大地减小了输入的空间尺寸</strong>。 它有两个主要目的。 首先是减少参数或权重的数量，从而减少计算成本。 第二是控制网络的过拟合。</p>
+<ul>
+<li>池化可以增加网络对于平移（旋转，伸缩）的不变性，提升网络的泛化能力。</li>
+<li>增大感受野；</li>
+<li>降低优化难度和参数数目，</li>
+</ul>
+<p>理想的池化方法应仅提取有用的信息，并丢弃无关的细节。</p>
+<p><strong>特征不变性、特征降维、在一定程度上防止过拟合，更方便优化</strong></p>
+<span id="more"></span>
+<h2 id="主流的池化方法"><a href="#主流的池化方法" class="headerlink" title="主流的池化方法"></a>主流的池化方法</h2><h3 id="Average-Pooling-平均池化"><a href="#Average-Pooling-平均池化" class="headerlink" title="Average Pooling 平均池化"></a>Average Pooling 平均池化</h3><p>没啥好说的，就是每个block取一个均值。如下图所示：更关注全局特征</p>
+<h3 id="Max-Pooling-最大值池化"><a href="#Max-Pooling-最大值池化" class="headerlink" title="Max Pooling 最大值池化"></a>Max Pooling 最大值池化</h3><p>更关注重要的局部特征</p>
+<p><img src="https://raw.githubusercontent.com/AikenH/md-image/master/img/image-20210219153154458.png" alt="https://raw.githubusercontent.com/AikenH/md-image/master/img/image-20210219153154458.png"></p>
+<p>image-20210219153154458</p>
+<h3 id="Mixed-pooling"><a href="#Mixed-pooling" class="headerlink" title="Mixed pooling"></a>Mixed pooling</h3><p>在max、average pooling中进行随机选择，来组合pooling</p>
+<h3 id="L-p-pooling"><a href="#L-p-pooling" class="headerlink" title="L_p pooling"></a>L_p pooling</h3><p>作者声称这个泛化能力比Max Pooling要好，输入的平均值权重（也就是和分之一）来进行，算是推广的公式。</p>
+<script type="math/tex; mode=display">
+s_j = (\\frac{1}{|R_j|}\\sum_{i \\in R_j}{a_i^p})^{1/p}</script><h3 id="Stochastic-Pooling"><a href="#Stochastic-Pooling" class="headerlink" title="Stochastic Pooling"></a>Stochastic Pooling</h3><p>feature_map中的元素按照其概率值大小随机选择，元素被选中的概率与数值大小正相关，这就是正则化操作了。</p>
+<p><img src="https://raw.githubusercontent.com/AikenH/md-image/master/img/image-20210219160011182.png" alt="https://raw.githubusercontent.com/AikenH/md-image/master/img/image-20210219160011182.png"></p>
+<p>image-20210219160011182</p>
+<h3 id="Spatial-Pyramid-Pooling-（SPP）"><a href="#Spatial-Pyramid-Pooling-（SPP）" class="headerlink" title="Spatial Pyramid Pooling （SPP）"></a>Spatial Pyramid Pooling （SPP）</h3><p>SPPNet在RCNN之后提出的，用于解决重复卷积计算和固定输出的问题，具体的方法是：在Feature_Map中通过Selective Search获得窗口然后输入CNN中。</p>
+<p>这个池化方法实际上就是多个空间池化的组合，对不同的输出尺度采用不同的划窗大小和步长<strong>来确保输出的尺度相同</strong>，同时能够融合多种尺度特征，提供更丰富的语意信息，常用于：</p>
+<ul>
+<li>多尺度训练</li>
+<li>目标检测中的RPN</li>
+</ul>
+<p>实际上也就是（全图pooling一次，全图分成2<em>2块Pooling，全图分成4</em>4块以后 做Pooling，然后就是固定尺寸的了，前面的输出是256-d 然后就是（4+16+1）* 256 最后的特征</p>
+<p><img src="https://raw.githubusercontent.com/AikenH/md-image/master/img/image-20210219160238878.png" alt="https://raw.githubusercontent.com/AikenH/md-image/master/img/image-20210219160238878.png"></p>
+<p>image-20210219160238878</p>
+<h3 id="YOLO-v3-变体"><a href="#YOLO-v3-变体" class="headerlink" title="YOLO v3 变体"></a>YOLO v3 变体</h3><p>在YOLO v3中，有一个网络结构中的yolo-v3-spp比原本的准确率更高，具体的cfg如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">### SPP ###<br>[maxpool]<br>stride=1<br>size=5<br><br>[route]<br>layers=-2<br><br>[maxpool]<br>stride=1<br>size=9<br><br>[route]<br>layers=-4<br><br>[maxpool]<br>stride=1<br>size=13<br><br>[route]<br>layers=-1,-3,-5,-6<br><br>### End SPP ###<br><br></code></pre></td></tr></table></figure>
+<p>这里的SPP是原本的SPPNet的变体，通过多个Kernel Size的maxpool 将最终得到的feature map进行concate，得到新的特征组合：</p>
+<h3 id="SPP有效的原因分析"><a href="#SPP有效的原因分析" class="headerlink" title="SPP有效的原因分析"></a>SPP有效的原因分析</h3><ol>
+<li>从感受野角度来讲，之前计算感受野的时候可以明显发现，maxpool的操作对感受野的影响非常大，其中主要取决于kernel size大小。在SPP中，使用了kernel size非常大的maxpool会极大提高模型的感受野，笔者没有详细计算过darknet53这个backbone的感受野，在COCO上有效很可能是因为backbone的感受野还不够大。</li>
+<li><p>第二个角度是从Attention的角度考虑，这一点启发自CSDN@小楞（链接在参考文献中），他在文章中这样讲：</p>
+<blockquote>
+<p>出现检测效果提升的原因：通过spp模块实现局部特征和全局特征（所以空间金字塔池化结构的最大的池化核要尽可能的接近等于需要池化的featherMap的大小）的featherMap级别的融合，丰富最终特征图的表达能力，从而提高MAP。</p>
+</blockquote>
+</li>
+<li><p>Attention机制很多都是为了解决远距离依赖问题，通过使用kernel size接近特征图的size可以以比较小的计算代价解决这个问题。另外就是如果使用了SPP模块，就没有必要在SPP后继续使用其他空间注意力模块比如SK block，因为他们作用相似，可能会有一定冗余。</p>
+</li>
+</ol>
+<h3 id="Region-of-Interest-Pooling-（ROI-Pooling）"><a href="#Region-of-Interest-Pooling-（ROI-Pooling）" class="headerlink" title="Region of Interest Pooling （ROI Pooling）"></a>Region of Interest Pooling （ROI Pooling）</h3><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u011436429/article/details/80279536">原理以及代码实现</a>；<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/59692298">Some Detail 以及Align的改进</a>；<a target="_blank" rel="noopener" href="https://www.sohu.com/a/414474326_823210">Best One</a></p>
+<p>对于ROI pooling 的讲解首先要从目标检测的框架出发，帮助理解，</p>
+<p>目标检测分为两步：</p>
+<ol>
+<li>region proposal：输入image，找到所有可能的object的位置（bounding box），也就是ROI，在这过程中可能用到滑窗和selective search。</li>
+<li>final classification：确定上阶段的每个region proposal是否是目标类别，或者背景</li>
+</ol>
+<p>这样的框架<strong>存在问题：</strong></p>
+<ul>
+<li>大量的ROI要进行计算，就很难实时监测，也无法做到E2E</li>
+</ul>
+<p>使用ROI Pooling进行简化，<strong>输入和作用</strong>如下：</p>
+<ul>
+<li>从多个具有卷积核池化的深度网络中获得固定大小的Feature-Map；<br>对不同尺寸的ROI进行处理，能得到统一的尺寸。</li>
+<li>一个表示所有ROI的N*5的尺寸，N是数目，5维度分别是Index，左上角坐标，右下角坐标</li>
+</ul>
+<p>具体实现的操作：</p>
+<ol>
+<li>根据输入image，将ROI映射到feature map对应位置；</li>
+<li>将映射后的区域划分为相同大小的sections（sections数量与输出的维度相同）；</li>
+<li>对每个sections进行max pooling操作；</li>
+</ol>
+<p>这样我们就可以从不同大小的方框得到固定大小的相应 的feature maps。值得一提的是，输出的feature maps的大小不取决于ROI和卷积feature maps大小。ROI pooling 最大的好处就在于极大地提高了处理速度。</p>
+<p>下图大黑框是对应的ROI，输出最后的要求是2*2，基于下面的划分再进行maxpooling即可。</p>
+<h3 id="ROI-Align的改进"><a href="#ROI-Align的改进" class="headerlink" title="ROI Align的改进"></a>ROI Align的改进</h3><p>ROI pooling在映射的时候出现小数，这是第一次量化，在每个roi中选取多少个采样点进行max pooling也会出现小数。这样的处理可能会丢失数据，降低了模型的精度</p>
+<p>ROI Align并不需要对两步量化中产生的浮点数坐标的像素值都进行计算，而是设计了一套优雅的流程。如图2，其中虚线代表的是一个feature map，实线代表的是一个roi(在这个例子中，一个roi是分成了2*2个bins)，实心点代表的是采样点，每个bin中有4个采样点。我们通过双线性插值的方法根据采样点周围的四个点计算每一个采样点的值，然后对着四个采样点执行最大池化操作得到当前bin的像素值。</p>
+<p><strong>RoI Align做法：</strong>假定采样点数为4，即表示，对于每个2.97 x 2.97的bin，<strong>平分四份小矩形，每一份取其中心点位置，而中心点位置的像素，采用双线性插值法进行计算</strong>，这样就会得到四个小数坐标点的像素值。</p>
+<p>实际上就是用双线性插值来取代了ROI Pooling的量化过程。</p>
+<h2 id="新颖特殊的池化方法"><a href="#新颖特殊的池化方法" class="headerlink" title="新颖特殊的池化方法"></a>新颖特殊的池化方法</h2><p>这一部分的池化方法存在着一些特殊的特性，在实际需要的时候再进行仔细的研究，但是可以将大体的特征简单的描述一下，方便后续寻找。</p>
+<h3 id="中值池化"><a href="#中值池化" class="headerlink" title="中值池化"></a>中值池化</h3><p>与中值滤波特别类似，但是用的特别少，中值池化也具有学习边缘和纹理结构的特性，抗噪声能力比较强。</p>
+<h3 id="组合池化"><a href="#组合池化" class="headerlink" title="组合池化"></a>组合池化</h3><p>就是将max 和 average concate或者add起来。</p>
+<h3 id="Multi-scale-order-less-Pooling-MOP池化"><a href="#Multi-scale-order-less-Pooling-MOP池化" class="headerlink" title="Multi-scale order-less Pooling MOP池化"></a>Multi-scale order-less Pooling MOP池化</h3><p>基于多尺度的池化方式，提升了卷积网络的不变性同时没有破坏卷积网络的可鉴别性，分布从全局与局部池化中提取特征，图示与说明如下：</p>
+<h3 id="NetVLAD-Pooling"><a href="#NetVLAD-Pooling" class="headerlink" title="NetVLAD Pooling"></a>NetVLAD Pooling</h3><p>NetVLAD是论文《NetVLAD: CNN Architecture for Weakly Supervised Place Recognition》提出的一个局部特征聚合的方法。</p>
+<h3 id="双线性池化"><a href="#双线性池化" class="headerlink" title="双线性池化"></a>双线性池化</h3><p>Bilinear Pooling是在《Bilinear CNN Models for Fine-grained Visual Recognition》被提出的，主要用在细粒度分类网络中。双线性池化主要用于特征融合，对于同一个样本提取得到的特征x和特征y, 通过双线性池化来融合两个特征(外积)，进而提高模型分类的能力。</p>
+<h3 id="UnPooling上采样操作"><a href="#UnPooling上采样操作" class="headerlink" title="UnPooling上采样操作"></a>UnPooling上采样操作</h3><p>1.在Pooling（一般是Max Pooling）时，保存最大值的位置。</p>
+<p>2.中间经历若干网络层的运算。</p>
+<p>3.上采样阶段，利用第1步保存的Max Location，重建下一层的feature map。</p>
+<blockquote>
+<p><strong>UnPooling不完全是Pooling的逆运算</strong>，Pooling之后的feature map，要经过若干运算，才会进行UnPooling操作；对于非Max Location的地方以零填充。然而这样并不能完全还原信息。</p>
+</blockquote>
+<h3 id="光谱池化"><a href="#光谱池化" class="headerlink" title="光谱池化"></a>光谱池化</h3><p>图像池化不光发生在空间域，<strong>还可以通过DFT变换，在频域空间实现池化</strong>，一个使用光谱池化最大池化的例子如下：</p>
+<h3 id="基于排名的均值池化"><a href="#基于排名的均值池化" class="headerlink" title="基于排名的均值池化"></a>基于排名的均值池化</h3><p><strong>Rank-based Average Pooling</strong></p>
+<p>这种池化方式的好处事可以克服最大池化与均值池化方式的不足</p>
+<script type="math/tex; mode=display">
+S_j = \\frac{1}{t}\\sum_{i\\in R_{j,r_i<t}} a_i</script><h3 id="基于权重的池化"><a href="#基于权重的池化" class="headerlink" title="基于权重的池化"></a>基于权重的池化</h3><h3 id="Edge-aware-Pyramid-Pooling"><a href="#Edge-aware-Pyramid-Pooling" class="headerlink" title="Edge-aware Pyramid Pooling"></a>Edge-aware Pyramid Pooling</h3><p><a href="Pooling%20b5b6c37730b54ff89114750889d54aec/Survey_NIPS%20%E4%B8%AD%E5%9B%BD%E9%A2%84%E8%AE%B2%E4%BC%9A%20md%20a89f987a08854a2c9c2fb44213136246.md">Survey_NIPS 中国预讲会.md</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Pooling</p><p><a href="http://aikenh.cn/cn/Pooling/">http://aikenh.cn/cn/Pooling/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-06-23</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Machine-Learning/">Machine Learning, </a><a class="link-muted" rel="tag" href="/tags/Survey/">Survey, </a><a class="link-muted" rel="tag" href="/tags/Pooling/">Pooling </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/IntView_%E7%AC%94%E8%AF%95%E9%A2%98%E5%9E%8B%E5%92%8C%E6%A1%86%E6%9E%B6%E6%80%BB%E7%BB%93/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Leetcode 题型和框架代码总结</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/OW-openmix/"><span class="level-item">OW-openmix</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/Pooling/';
+            this.page.identifier = 'cn/Pooling/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#DownSampling：Pooling的全面调研"><span class="level-left"><span class="level-item">1</span><span class="level-item">DownSampling：Pooling的全面调研</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#池化的根本目的（Motivation）"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">池化的根本目的（Motivation）</span></span></a></li><li><a class="level is-mobile" href="#主流的池化方法"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">主流的池化方法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Average-Pooling-平均池化"><span class="level-left"><span class="level-item">1.2.1</span><span class="level-item">Average Pooling 平均池化</span></span></a></li><li><a class="level is-mobile" href="#Max-Pooling-最大值池化"><span class="level-left"><span class="level-item">1.2.2</span><span class="level-item">Max Pooling 最大值池化</span></span></a></li><li><a class="level is-mobile" href="#Mixed-pooling"><span class="level-left"><span class="level-item">1.2.3</span><span class="level-item">Mixed pooling</span></span></a></li><li><a class="level is-mobile" href="#L-p-pooling"><span class="level-left"><span class="level-item">1.2.4</span><span class="level-item">L_p pooling</span></span></a></li><li><a class="level is-mobile" href="#Stochastic-Pooling"><span class="level-left"><span class="level-item">1.2.5</span><span class="level-item">Stochastic Pooling</span></span></a></li><li><a class="level is-mobile" href="#Spatial-Pyramid-Pooling-（SPP）"><span class="level-left"><span class="level-item">1.2.6</span><span class="level-item">Spatial Pyramid Pooling （SPP）</span></span></a></li><li><a class="level is-mobile" href="#YOLO-v3-变体"><span class="level-left"><span class="level-item">1.2.7</span><span class="level-item">YOLO v3 变体</span></span></a></li><li><a class="level is-mobile" href="#SPP有效的原因分析"><span class="level-left"><span class="level-item">1.2.8</span><span class="level-item">SPP有效的原因分析</span></span></a></li><li><a class="level is-mobile" href="#Region-of-Interest-Pooling-（ROI-Pooling）"><span class="level-left"><span class="level-item">1.2.9</span><span class="level-item">Region of Interest Pooling （ROI Pooling）</span></span></a></li><li><a class="level is-mobile" href="#ROI-Align的改进"><span class="level-left"><span class="level-item">1.2.10</span><span class="level-item">ROI Align的改进</span></span></a></li></ul></li><li><a class="level is-mobile" href="#新颖特殊的池化方法"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">新颖特殊的池化方法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#中值池化"><span class="level-left"><span class="level-item">1.3.1</span><span class="level-item">中值池化</span></span></a></li><li><a class="level is-mobile" href="#组合池化"><span class="level-left"><span class="level-item">1.3.2</span><span class="level-item">组合池化</span></span></a></li><li><a class="level is-mobile" href="#Multi-scale-order-less-Pooling-MOP池化"><span class="level-left"><span class="level-item">1.3.3</span><span class="level-item">Multi-scale order-less Pooling MOP池化</span></span></a></li><li><a class="level is-mobile" href="#NetVLAD-Pooling"><span class="level-left"><span class="level-item">1.3.4</span><span class="level-item">NetVLAD Pooling</span></span></a></li><li><a class="level is-mobile" href="#双线性池化"><span class="level-left"><span class="level-item">1.3.5</span><span class="level-item">双线性池化</span></span></a></li><li><a class="level is-mobile" href="#UnPooling上采样操作"><span class="level-left"><span class="level-item">1.3.6</span><span class="level-item">UnPooling上采样操作</span></span></a></li><li><a class="level is-mobile" href="#光谱池化"><span class="level-left"><span class="level-item">1.3.7</span><span class="level-item">光谱池化</span></span></a></li><li><a class="level is-mobile" href="#基于排名的均值池化"><span class="level-left"><span class="level-item">1.3.8</span><span class="level-item">基于排名的均值池化</span></span></a></li><li><a class="level is-mobile" href="#基于权重的池化"><span class="level-left"><span class="level-item">1.3.9</span><span class="level-item">基于权重的池化</span></span></a></li><li><a class="level is-mobile" href="#Edge-aware-Pyramid-Pooling"><span class="level-left"><span class="level-item">1.3.10</span><span class="level-item">Edge-aware Pyramid Pooling</span></span></a></li></ul></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Windows App01 Potplayer &amp; Alist - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="本篇主要介绍一下播放器 PotPlayer 的设置以及结合 Alist&amp;amp;小雅 alist 的使用，这样就可以直接在播放器访问本地网盘上的内容，便于使用和观看。  Alist DeployAlist 作为一个网盘管理中心，可以将各大网盘中的资源进行统一管理，同时支持视频的 webdav 播放，这里推荐的安装方式是使用 Docker-Compose 进行安装，根据自己的情况来选择对应的挂载和"><meta property="og:type" content="blog"><meta property="og:title" content="Windows App01 Potplayer &amp; Alist"><meta property="og:url" content="http://aikenh.cn/cn/alist_potplayer/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="本篇主要介绍一下播放器 PotPlayer 的设置以及结合 Alist&amp;amp;小雅 alist 的使用，这样就可以直接在播放器访问本地网盘上的内容，便于使用和观看。  Alist DeployAlist 作为一个网盘管理中心，可以将各大网盘中的资源进行统一管理，同时支持视频的 webdav 播放，这里推荐的安装方式是使用 Docker-Compose 进行安装，根据自己的情况来选择对应的挂载和"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg14.jpg"><meta property="article:published_time" content="2023-04-30T14:42:58.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Docker"><meta property="article:tag" content="Windows"><meta property="article:tag" content="Iptv"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg14.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/alist_potplayer/"},"headline":"Windows App01 Potplayer & Alist","image":["http://aikenh.cn/img/header_img/lml_bg14.jpg"],"datePublished":"2023-04-30T14:42:58.000Z","dateModified":"2023-10-30T09:27:38.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"本篇主要介绍一下播放器 PotPlayer 的设置以及结合 Alist&amp;小雅 alist 的使用，这样就可以直接在播放器访问本地网盘上的内容，便于使用和观看。  Alist DeployAlist 作为一个网盘管理中心，可以将各大网盘中的资源进行统一管理，同时支持视频的 webdav 播放，这里推荐的安装方式是使用 Docker-Compose 进行安装，根据自己的情况来选择对应的挂载和"}</script><link rel="canonical" href="http://aikenh.cn/cn/alist_potplayer/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg14.jpg" alt="Windows App01 Potplayer &amp; Alist"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>Windows App01 Potplayer &amp; Alist</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2023-04-30T14:42:58.000Z" title="2023-04-30T14:42:58.000Z">2023-04-30</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.000Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Windows/">Windows</a><span> / </span><a class="link-muted" href="/categories/Windows/APPs/">APPs</a></span><span class="level-item">12 minutes read (About 1860 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><blockquote>
+<p>本篇主要介绍一下播放器 PotPlayer 的设置以及结合 Alist&amp;小雅 alist 的使用，这样就可以直接在播放器访问本地网盘上的内容，便于使用和观看。</p>
+</blockquote>
+<h2 id="Alist-Deploy"><a href="#Alist-Deploy" class="headerlink" title="Alist Deploy"></a>Alist Deploy</h2><p>Alist 作为一个网盘管理中心，可以将各大网盘中的资源进行统一管理，同时支持视频的 webdav 播放，这里推荐的安装方式是使用 Docker-Compose 进行安装，根据自己的情况来选择对应的挂载和安装目录。</p>
+<p>由于官方的文档已经事无巨细，这里就不在赘述如何安装和配置 alist 的各个网盘挂载，详情参见：<a target="_blank" rel="noopener" href="https://alist.nn.ci/">Home | AList Docs (nn.ci)</a></p>
+<p>安装完并<strong>启动 Alist 服务</strong>即可，记住自己的<strong>端口</strong>和设置的<strong>账号密码</strong>。</p>
+<h3 id="Aria2离线下载支持"><a href="#Aria2离线下载支持" class="headerlink" title="Aria2离线下载支持"></a>Aria2离线下载支持</h3><p>该部分介绍如何通过 docker 为 Alist 添加 Aria2 作为离线下载服务，以及一些常见的问题解决方法。</p>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://p3terx.com/archives/docker-aria2-pro.html">aria2-pro</a> |  <a target="_blank" rel="noopener" href="https://github.com/P3TERX/Aria2-Pro-Docker/blob/master/docker-compose.yml">aira2-pro-github</a> |  <a target="_blank" rel="noopener" href="https://yiwangmeng.com/aria2-status-page-to-prompt-the-solution-of">aria2认证失败</a> </p>
+<p>这里介绍使用 docker-compose 安装 aria2的方法，并将 docker 版本的 aria2和 alist 结合起来使用，在基于 docker 安装之前，我们先准备几个文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> &lt;your-path-2-aria2&gt; &amp;&amp; <span class="hljs-built_in">mkdir</span> aria2-config &amp;&amp; <span class="hljs-built_in">chmod</span> 777 aria2-config<br><span class="hljs-built_in">mkdir</span> aria2-downloads &amp;&amp; <span class="hljs-built_in">chmod</span> 777 aria2-downloads<br></code></pre></td></tr></table></figure>
+<p>其中 downloads 目录是我们用来下载文件的目录，我们也可以使用挂载的目录或者共享的目录来存储下载的文件；然后我们准备一下 alist 中用于离线下载的目录，<strong>该目录需要在 alist 的 docker 和 aria2的 docker 中都将该 volume 挂载到同一个地方</strong>。</p>
+<p>本文将 aria2的队名目录挂载到 alist 的对应目录中，对应的 alist 的 compose 文件有</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230709161919.png" alt="image.png"></p>
+<p>而 aria2的 compose 文件则有：</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230709161956.png" alt="image.png"></p>
+<p>再将该目录的权限改成777，<code>chmod 777 &lt;this-dir&gt;</code> 之后即可再 alist 中离线下载成功，而且该下载文件会在指定的网盘中上传，当上传完成时会删除临时文件，不占用本地磁盘空间。</p>
+<p>完整的 Compose 文件可以参考 <a target="_blank" rel="noopener" href="https://github.com/P3TERX/Aria2-Pro-Docker/blob/master/docker-compose.yml">Aria2-Pro-Docker/docker-compose.yml at master · P3TERX/Aria2-Pro-Docker · GitHub</a> 官方的配置进行安装，我个人的 compose 文件则会上传到<a target="_blank" rel="noopener" href="https://github.com/AikenH/aikenh-DockerComposeYML">AikenH/aikenh-DockerComposeYML (github.com)</a>中。</p>
+<p><strong>Aria2Ng 界面认证失败</strong>的问题，是因为我们再 compose 中设置了密码之后，要在该界面的设置中设置密码后才能正常认证。</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230709162444.png" alt="image.png"></p>
+<p>密码需要到如下地方设置：</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230709162537.png" alt="image.png"></p>
+<p>设置完成后应该就不会有认证失败的提示了。</p>
+<p><strong>alist 设置 Aria2失败</strong>，由于使用的 docker 部署的 aria2，这里不能使用 localhost，要使用对应的 ip 来设置该服务，如下图所示</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230709162724.png" alt="image.png"></p>
+<p>完成这些设置后应该就可以正常使用了，但是由于现在都是网盘场景更多，所以离线下载的可能使用场景也有限，而且通过测试发现，如果完全装在树莓派上的话，可能会对系统的性能造成一定的负担。</p>
+<h2 id="Xiaoya-Deploy"><a href="#Xiaoya-Deploy" class="headerlink" title="Xiaoya Deploy"></a>Xiaoya Deploy</h2><blockquote>
+<p>Xiaoya 是基于 Alist 做改版的个人资源站，里面涵盖了大量的影视资源，并在不断的更新，通过在本地挂载 xiaoya 我们也可以用来通过 webdav 在播放器中直接选择视频进行播放，大多数情况下都免去了找资源的痛苦。</p>
+</blockquote>
+<p>官方网站：<a target="_blank" rel="noopener" href="http://alist.xiaoya.pro/">主页 | 小雅的分类 Alist (xiaoya.pro)</a></p>
+<p>拥有了 Docker 环境后，就可以基于 xiaoya 提供的脚本实现一键拉取镜像和启动 Docker，默认的端口是 5678，安装指令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo bash -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -s http://docker.xiaoya.pro/update_new.sh)</span>&quot;</span><br></code></pre></td></tr></table></figure>
+<p>安装过程中会需要填入如下内容：token、open_token、转存目录的 folder id，具体和后续更新参考<a target="_blank" rel="noopener" href="https://xiaoyaliu.notion.site/xiaoya-docker-69404af849504fa5bcf9f2dd5ecaa75f">配置页</a>，（跟随安装引导界面进行安装即可。）<br><span id="more"></span></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>对应文件</th>
+<th>获取方式</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>/etc/xiaoya/mytoken.Txt</td>
+<td><a target="_blank" rel="noopener" href="https://aliyuntoken.vercel.app/">link 1</a> <a target="_blank" rel="noopener" href="https://alist.nn.ci/zh/guide/drivers/aliyundrive.html">link 2</a></td>
+<td></td>
+</tr>
+<tr>
+<td>open token</td>
+<td>/etc/xiaoya/myopentoken.Txt</td>
+<td><a target="_blank" rel="noopener" href="https://alist.nn.ci/zh/guide/drivers/aliyundrive_open.html">https://alist.nn.ci/zh/guide/drivers/aliyundrive_open.html</a></td>
+<td></td>
+</tr>
+<tr>
+<td>转存目录的 folder id</td>
+<td>/etc/xiaoya/temp_transfer_folder_id.Txt</td>
+<td>在阿里网盘网页版上创建一个转存目录，比如“temp”，然后点击目录，浏览器显示的 URL <a target="_blank" rel="noopener" href="https://www.aliyundrive.com/drive/folder/640xxxxxxxxxxxxxxca8a">https://www.aliyundrive.com/drive/folder/640xxxxxxxxxxxxxxca8a</a> 最后一串就是</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>安装完成后确保服务启动正常，该部分的准备即结束，但是该端口我们还是要记住，因为在大量资源中搜索的时候还是得<strong>借助网页版中的搜索功能</strong>。</p>
+<p>安装完成后后续使用 Potplayer 挂载 Dav 时，账号密码为：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs txt">guest<br>guest_Api789<br></code></pre></td></tr></table></figure>
+<h2 id="PotPlayer-设置"><a href="#PotPlayer-设置" class="headerlink" title="PotPlayer 设置"></a>PotPlayer 设置</h2><blockquote>
+<p>支持 WebDav 的免费视频播放器，同时也支持音乐播放，录频截图等功能，虽然支持 Iptv 源，但是实际上很多频道都比较卡，所以不是很推荐（也可能是我没找到好用的源，如果有的话感谢分享。）</p>
+</blockquote>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/163458215">Potplayer全面设置教程</a>，最后配置完的设置和对应的皮肤文件我会到处到我的 dotfile 仓库。</p>
+<h3 id="基础设置"><a href="#基础设置" class="headerlink" title="基础设置"></a>基础设置</h3><p>具体的设置和皮肤下载路径如下：</p>
+<ul>
+<li><strong>下载</strong>：<a target="_blank" rel="noopener" href="https://www.deviantart.com/search?q=potplayer">Search ‘potplayer’ on DeviantArt</a></li>
+<li><strong>基本</strong> -&gt; 皮肤/配色 -&gt; 打开皮肤文件夹 -&gt; 进阶皮肤 -&gt; 启用 Direct3D 渲染。</li>
+<li><strong>播放</strong> -&gt; 打开多线程，旋转，标题，记忆位置，隐蔽指针，进度条显示缩略图，以及设置是否循环播放。<ul>
+<li>时间跨度 -&gt; 设置一下方向键快进的时间</li>
+<li>列表 -&gt; 显示缩略图和两行信息，按文件路径排序并全部对齐</li>
+<li>宽高比 -&gt; 缩放时保持宽高比</li>
+</ul>
+</li>
+<li><strong>字幕</strong> -&gt; 画面底部、自动重载被修改的字幕<ul>
+<li>可以通过播放时右键 -&gt; 实时字幕翻译 -&gt; 使用</li>
+<li>详细的设置在：选项 -&gt; 拓展功能 -&gt; 实时字母翻译</li>
+</ul>
+</li>
+<li>滤镜相关的我这里不懂就不设置</li>
+<li><strong>声音</strong> -&gt; 最大音量调整到 200</li>
+</ul>
+<p>效果展示如下：</p>
+<div class="justified-gallery">
+<img src=" https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230501003002.png">
+<img src=" https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230501003054.png">
+<img src=" https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230501003504.png">
+</div>
+
+
+<h3 id="Webdav-挂载-Alist-和小雅"><a href="#Webdav-挂载-Alist-和小雅" class="headerlink" title="Webdav 挂载 Alist 和小雅"></a>Webdav 挂载 Alist 和小雅</h3><p>播放列表中新建专辑，按照下图的方式进行填写，其中端口就是你 Alist 或者小雅在本地部署的端口，IP 如果是本地部署的话就按下列的方式填写，否则就填写提供的 IP，用户名和密码使用自己设置的用户密码即可（小雅的话可以参考默认账号和密码）</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20230501003740.png" alt="image.png"></p>
+<p>至此，PotPlayer 和对应的 Alist 列表就挂载成功了，可以畅爽实现本地看剧了。</p>
+<h3 id="Iptv-列表"><a href="#Iptv-列表" class="headerlink" title="Iptv 列表"></a>Iptv 列表</h3><p>虽然不推荐使用 Iptv 因为大多数源是真的卡，看起来要么卡，要么不够高清，要么找一个频道找半天，确实是不是很想费心折腾这块，也不建议，但是还是简单介绍。</p>
+<p>使用的话就将下载的 iptv 源文件拖入播放列表即可，下面有几个 iptv 源的地址：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/iptv-org/iptv">iptv-org/iptv: Collection of publicly available IPTV channels from all over the world (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/imDazui/Tvlist-awesome-m3u-m3u8">imDazui/Tvlist-awesome-m3u-m3u8: 直播源相关资源汇总</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.xn--9kq250g.fun/index.php/iptv%E7%9B%B4%E6%92%AD%E6%BA%90/%E6%AF%8F%E5%A4%A9%E6%9B%B4%E6%96%B0%EF%BC%9A%E4%B8%AD%E5%9B%BD%E7%94%B5%E8%A7%86iptv%E7%9B%B4%E6%92%AD%E6%BA%90-m3u-1080p%E5%85%8D%E8%B4%B9%E9%AB%98%E6%B8%85%E7%89%88-2023%E5%B9%B41%E6%9C%881/">每天更新：中国电视IPTV直播源.m3u</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fanmingming/live">fanmingming/live: ✯ 一个国内可直连的直播源分享项目 ✯ 🔕 永久免费 直连访问 完整开源 不含广告 完善的台标 直播源支持IPv4/IPv6双栈访问 🔕 (github.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.foodieguide.com/iptvsearch/">电视直播源搜索｜最新东森多线路直播源分享 (foodieguide.com)</a></li>
+</ul>
+<p>使用前可以使用 iptv-checker 来检查源的可用性，然后过滤掉一些不可用的源。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Windows App01 Potplayer &amp; Alist</p><p><a href="http://aikenh.cn/cn/alist_potplayer/">http://aikenh.cn/cn/alist_potplayer/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-04-30</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Docker/">Docker, </a><a class="link-muted" rel="tag" href="/tags/Windows/">Windows, </a><a class="link-muted" rel="tag" href="/tags/Iptv/">Iptv </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/Immich_backup/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Docker-App 1 Backup Photos by Immich</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/StableDiffusionPrompt/"><span class="level-item">AIGC04 Stable Diffusion Write Prompt Better</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/alist_potplayer/';
+            this.page.identifier = 'cn/alist_potplayer/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Alist-Deploy"><span class="level-left"><span class="level-item">1</span><span class="level-item">Alist Deploy</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Aria2离线下载支持"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">Aria2离线下载支持</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Xiaoya-Deploy"><span class="level-left"><span class="level-item">2</span><span class="level-item">Xiaoya Deploy</span></span></a></li><li><a class="level is-mobile" href="#PotPlayer-设置"><span class="level-left"><span class="level-item">3</span><span class="level-item">PotPlayer 设置</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基础设置"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">基础设置</span></span></a></li><li><a class="level is-mobile" href="#Webdav-挂载-Alist-和小雅"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">Webdav 挂载 Alist 和小雅</span></span></a></li><li><a class="level is-mobile" href="#Iptv-列表"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">Iptv 列表</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

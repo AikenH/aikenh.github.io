@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>RL-DouZero - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Desc: GAME, RLFinished?: YesTags: PaperURL1: https:&amp;#x2F;&amp;#x2F;arxiv.org&amp;#x2F;abs&amp;#x2F;2106.06135URL2: https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;kwai&amp;#x2F;DouZeroURL3: https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;datamllab&amp;#x2F;rlcard-showdown） 使用蒙特卡洛方法进行自我对弈不断更新预测模型的方法，这实际上也是普通"><meta property="og:type" content="blog"><meta property="og:title" content="RL-DouZero"><meta property="og:url" content="http://aikenh.cn/cn/RL-DouZero/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="Desc: GAME, RLFinished?: YesTags: PaperURL1: https:&amp;#x2F;&amp;#x2F;arxiv.org&amp;#x2F;abs&amp;#x2F;2106.06135URL2: https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;kwai&amp;#x2F;DouZeroURL3: https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;datamllab&amp;#x2F;rlcard-showdown） 使用蒙特卡洛方法进行自我对弈不断更新预测模型的方法，这实际上也是普通"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg23.jpg"><meta property="article:published_time" content="2021-07-06T05:51:48.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Machine Learning"><meta property="article:tag" content="Reinforcement learning"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg23.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/RL-DouZero/"},"headline":"RL-DouZero","image":["http://aikenh.cn/img/header_img/lml_bg23.jpg"],"datePublished":"2021-07-06T05:51:48.000Z","dateModified":"2023-10-30T09:27:38.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"Desc: GAME, RLFinished?: YesTags: PaperURL1: https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2106.06135URL2: https:&#x2F;&#x2F;github.com&#x2F;kwai&#x2F;DouZeroURL3: https:&#x2F;&#x2F;github.com&#x2F;datamllab&#x2F;rlcard-showdown） 使用蒙特卡洛方法进行自我对弈不断更新预测模型的方法，这实际上也是普通"}</script><link rel="canonical" href="http://aikenh.cn/cn/RL-DouZero/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg23.jpg" alt="RL-DouZero"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>RL-DouZero</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2021-07-06T05:51:48.000Z" title="2021-07-06T05:51:48.000Z">2021-07-06</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.000Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Machine-Learning/">Machine Learning</a></span><span class="level-item">9 minutes read (About 1337 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><p>Desc: GAME, RL<br>Finished?: Yes<br>Tags: Paper<br>URL1: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.06135">https://arxiv.org/abs/2106.06135</a><br>URL2: <a target="_blank" rel="noopener" href="https://github.com/kwai/DouZero">https://github.com/kwai/DouZero</a><br>URL3: <a target="_blank" rel="noopener" href="https://github.com/datamllab/rlcard-showdown）">https://github.com/datamllab/rlcard-showdown）</a></p>
+<p>使用蒙特卡洛方法进行自我对弈不断更新预测模型的方法，这实际上也是普通人对于强化学习如何在self-play中实现自我更新的最基础的想法把：<br>自我对弈（记录动作序列）- 用最终的胜负（价值）更新网络。</p>
+<h2 id="算法的设计和思路"><a href="#算法的设计和思路" class="headerlink" title="算法的设计和思路"></a>算法的设计和思路</h2><p>算法的目标是学习一个价值网路。网络的输入是当前状态和一个动作，输出是在当前状态做这个动作的期望收益（比如胜率）。简单来说，价值网络在每一步计算出哪种牌型赢的概率最大，然后选择最有可能赢的牌型。蒙特卡罗方法不断重复以下步骤来优化价值网络：</p>
+<ul>
+<li>用价值网络生成一场对局</li>
+<li>记录下该对局中所有的状态、动作和最后的收益（胜率）</li>
+<li>将每一对状态和动作作为网络输入，收益作为网络输出，用梯度下降对价值网络进行一次更新</li>
+</ul>
+<p>其实，所谓的蒙特卡罗方法就是一种随机模拟，即通过不断的重复实验来估计真实价值。</p>
+<p>如下图所示，斗零采用一个价值神经网络，其输入是状态和动作，输出是价值。首先，过去的出牌用 LSTM 神经网络进行编码。然后 LSTM 的输出以及其他的表征被送入了 6 层全连接网络，最后输出价值。<br><span id="more"></span></p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/img/20210911211016" alt="img"></p>
+<p>系统训练的主要瓶颈在于模拟数据的生成，因为每一步出牌都要对神经网络做一次前向传播。斗零采用多演员（actor）的架构，在单个 GPU 服务器上，用了 45 个演员同时产生数据，最终数据被汇集到一个中央训练器进行训练。比较有趣的是，斗零并不需要太多的计算资源，仅仅需要一个普通的四卡 GPU 服务器就能达到不错的效果。这可以让大多数实验室轻松基于作者的代码做更多的尝试。</p>
+<p>该方法的设计和实现上听起来都挺简单的，可以找个时间自己测试一下，玩一玩这个东西，对于我来说，看看他们怎么用这个lstm去进行历史编码的，以及在对transformer了解后，看看如何用transformer去替代这样的lstm是我这边的研究重点。</p>
+<h2 id="蒙特卡洛方法存在的问题"><a href="#蒙特卡洛方法存在的问题" class="headerlink" title="蒙特卡洛方法存在的问题"></a>蒙特卡洛方法存在的问题</h2><p>蒙特卡罗方法在强化学习领域中被大多数研究者忽视。学界普遍认为蒙特卡罗方法存在两个缺点：</p>
+<ol>
+<li><p>蒙特卡罗方法不能处理不完整的状态序列</p>
+</li>
+<li><p>蒙特卡罗方法有很大的方差，导致采样效率很低。</p>
+</li>
+</ol>
+<p>但是斗地主中，可以产生转正的状态序列，同时很容易通过并行来采集大量的样本降低方差，主要是实现上简单，但是可能也是需要大量的数据把。</p>
+<h2 id="蒙特卡洛方法在该任务上存在的优势"><a href="#蒙特卡洛方法在该任务上存在的优势" class="headerlink" title="蒙特卡洛方法在该任务上存在的优势"></a>蒙特卡洛方法在该任务上存在的优势</h2><ul>
+<li>很容易对动作进行编码。斗地主的动作与动作之前是有内在联系的。以三带一为例：如果智能体打出 KKK 带 3，并因为带牌带得好得到了奖励，那么其他的牌型的价值，例如 JJJ 带 3，也能得到一定的提高。这是由于神经网络对相似的输入会预测出相似的输出。动作编码对处理斗地主庞大而复杂的动作空间非常有帮助。智能体即使没有见过某个动作，也能通过其他动作对价值作出估计。</li>
+<li>不受过度估计（over-estimation）的影响。最常用的基于价值的强化学习方法是 DQN。但众所周知，DQN 会受过度估计的影响，即 DQN 会倾向于将价值估计得偏高，并且这个问题在动作空间很大时会尤为明显。不同于 DQN，蒙特卡罗方法直接估计价值，因此不受过度估计影响。这一点在斗地主庞大的动作空间中非常适用。</li>
+<li>蒙特卡罗方法在稀疏奖励的情况下可能具备一定优势。在斗地主中，奖励是稀疏的，玩家需要打完整场游戏才能知道输赢。DQN 的方法通过下一个状态的价值估计当前状态的价值。这意味着奖励需要一点一点地从最后一个状态向前传播，这可能导致 DQN 更慢收敛。与之相反，蒙特卡罗方法直接预测最后一个状态的奖励，不受稀疏奖励的影响。</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/6EkEMkuer7wRVBSpWnIuJQ">快手开源斗地主AI，入选ICML，能否干得过「冠军」柯洁？</a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.06135">DouZero: Mastering DouDizhu with Self-Play Deep Reinforcement Learning</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/kwai/DouZero">GitHub - kwai/DouZero: [ICML 2021] DouZero: Mastering DouDizhu with Self-Play Deep Reinforcement Learning | 斗地主AI</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>RL-DouZero</p><p><a href="http://aikenh.cn/cn/RL-DouZero/">http://aikenh.cn/cn/RL-DouZero/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-07-06</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Machine-Learning/">Machine Learning, </a><a class="link-muted" rel="tag" href="/tags/Reinforcement-learning/">Reinforcement learning </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/Gitbook/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Build Gitbook</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/IntView_%E7%AC%94%E8%AF%95%E9%A2%98%E5%9E%8B%E5%92%8C%E6%A1%86%E6%9E%B6%E6%80%BB%E7%BB%93/"><span class="level-item">Leetcode 题型和框架代码总结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/RL-DouZero/';
+            this.page.identifier = 'cn/RL-DouZero/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#算法的设计和思路"><span class="level-left"><span class="level-item">1</span><span class="level-item">算法的设计和思路</span></span></a></li><li><a class="level is-mobile" href="#蒙特卡洛方法存在的问题"><span class="level-left"><span class="level-item">2</span><span class="level-item">蒙特卡洛方法存在的问题</span></span></a></li><li><a class="level is-mobile" href="#蒙特卡洛方法在该任务上存在的优势"><span class="level-left"><span class="level-item">3</span><span class="level-item">蒙特卡洛方法在该任务上存在的优势</span></span></a></li><li><a class="level is-mobile" href="#Reference"><span class="level-left"><span class="level-item">4</span><span class="level-item">Reference</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

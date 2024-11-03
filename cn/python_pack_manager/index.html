@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Python00 Conda 与 Pip - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="@Aikenhong 的旧笔记翻新完善 1.0 Python 的灵活和广泛应用场景来自于众多的第三方库，由于强大的可拓展性和众多的库，使得 Python 的使用简单灵活，且应用面极广。 但是不同库之间的相互依赖关系，对版本的不同要求等等因素，使得”环境配置”成为了开发者闻之变色的一词，对一个新的库和项目环境的配置尝尝会花去大量的时间，这可能也是 Docker、Venv（虚拟环境）必须存在的原因之一"><meta property="og:type" content="blog"><meta property="og:title" content="Python00 Conda 与 Pip"><meta property="og:url" content="http://aikenh.cn/cn/python_pack_manager/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="@Aikenhong 的旧笔记翻新完善 1.0 Python 的灵活和广泛应用场景来自于众多的第三方库，由于强大的可拓展性和众多的库，使得 Python 的使用简单灵活，且应用面极广。 但是不同库之间的相互依赖关系，对版本的不同要求等等因素，使得”环境配置”成为了开发者闻之变色的一词，对一个新的库和项目环境的配置尝尝会花去大量的时间，这可能也是 Docker、Venv（虚拟环境）必须存在的原因之一"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg26.jpg"><meta property="article:published_time" content="2023-03-06T03:27:52.000Z"><meta property="article:modified_time" content="2023-10-31T00:19:29.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Python"><meta property="article:tag" content="Conda"><meta property="article:tag" content="Pip"><meta property="article:tag" content="Env"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg26.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/python_pack_manager/"},"headline":"Python00 Conda 与 Pip","image":["http://aikenh.cn/img/header_img/lml_bg26.jpg"],"datePublished":"2023-03-06T03:27:52.000Z","dateModified":"2023-10-31T00:19:29.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"@Aikenhong 的旧笔记翻新完善 1.0 Python 的灵活和广泛应用场景来自于众多的第三方库，由于强大的可拓展性和众多的库，使得 Python 的使用简单灵活，且应用面极广。 但是不同库之间的相互依赖关系，对版本的不同要求等等因素，使得”环境配置”成为了开发者闻之变色的一词，对一个新的库和项目环境的配置尝尝会花去大量的时间，这可能也是 Docker、Venv（虚拟环境）必须存在的原因之一"}</script><link rel="canonical" href="http://aikenh.cn/cn/python_pack_manager/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg26.jpg" alt="Python00 Conda 与 Pip"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>Python00 Conda 与 Pip</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2023-03-06T03:27:52.000Z" title="2023-03-06T03:27:52.000Z">2023-03-06</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-31T00:19:29.000Z" title="2023/10/31 08:19:29">2023-10-31</time></span><span class="level-item"><a class="link-muted" href="/categories/Langs/">Langs</a><span> / </span><a class="link-muted" href="/categories/Langs/Python/">Python</a></span><span class="level-item">13 minutes read (About 1956 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><p>@Aikenhong 的旧笔记翻新完善 1.0</p>
+<p>Python 的灵活和广泛应用场景来自于众多的第三方库，由于强大的可拓展性和众多的库，使得 Python 的使用简单灵活，且应用面极广。</p>
+<p>但是不同库之间的相互依赖关系，对版本的不同要求等等因素，使得”环境配置”成为了开发者闻之变色的一词，对一个新的库和项目环境的配置尝尝会花去大量的时间，这可能也是 Docker、Venv（虚拟环境）必须存在的原因之一。</p>
+<blockquote>
+<p>这里不对 Docker 及其相关技术，进行说明，会另开章节进行学习。</p>
+</blockquote>
+<p>才疏学浅的本菜鸡希望从 python 开发者避不开的 conda 和 pip 出发介绍一下关于库安装的一些事情，以及这两个 CLI 的关系。<br><span id="more"></span></p>
+<h2 id="Anaconda-MiniConda-和-Conda"><a href="#Anaconda-MiniConda-和-Conda" class="headerlink" title="Anaconda MiniConda 和 Conda"></a>Anaconda MiniConda 和 Conda</h2><p>anaconda 是一个针对数据科学的 Python 发行版，其包含了一下三个方面的内容：</p>
+<ul>
+<li>完整的 python，ipython</li>
+<li>numpy、Script 等常用的数据科学库</li>
+<li>包管理器 Conda 和 pip</li>
+</ul>
+<blockquote>
+<p>软件发行版是在系统上提前编译和配置好的软件包集合， 装好了后就可以直接用</p>
+</blockquote>
+<p>miniconda 是 conda 的发行版，其包含了 conda 本体和其所需的所有环境，安装了 miniconda 后就可以正常使用 conda，由于其不包含 python 和诸多第三方包，所以会比 anaconda 纯净得多，我们可以基于其从零开始搭建一个完整的环境。</p>
+<p>而 conda 只是一个包（lib、package）和环境（env）的管理工具，其用于自动安装，升级，（也可分析包之间的相互依赖关系）的工具。</p>
+<h2 id="Conda-和-Pip-的关联和区别"><a href="#Conda-和-Pip-的关联和区别" class="headerlink" title="Conda 和 Pip 的关联和区别"></a>Conda 和 Pip 的关联和区别</h2><p><strong>conda</strong> 是通用（语言无关且跨平台）的包管理器，它发源于 python 的 pydata 社区，但他不仅适用于 python 包的管理，还适用于任何语言写的包和依赖，但是我们应该大多数时候只用来做 python 管理。</p>
+<ul>
+<li>其只能在 conda 环境中安装包，但是可以安装各种语言和各种类型的包。</li>
+</ul>
+<p><strong>pip</strong>（pip install package） 是 python 官方认证的 python 包通用管理器，只能管理 python 包，安装发布于 python package index（pypi）上的所有包，均由 python 官方管理。</p>
+<ul>
+<li>其支持所有平台，但是只能安装 python 包</li>
+</ul>
+<p>接下来从一些重要的特性来讲述两者的区别和联系。</p>
+<h3 id="虚拟环境支持对比"><a href="#虚拟环境支持对比" class="headerlink" title="虚拟环境支持对比"></a>虚拟环境支持对比</h3><p>上述提到，我们希望有一个纯净的开发环境，在配置环境的时候出现诸多冲突，例如：</p>
+<blockquote>
+<p>PackageA 需要 PackageC&gt;3.11，而 PackageB 需要 PackageC&lt;3.10 导致运行起来冲突，或者无法安装的情况。</p>
+</blockquote>
+<p>因此我们希望能将每个开发环境隔离起来，项目 A、B、C 有分离的 python 版本和对应的一些 python 库。（这里我把环境简单的理解为 python+python 安装的所有 Package ）</p>
+<p>而通过 pip 和 conda 都能在不同程度上，实现以上的需求，conda 原生支持虚拟环境管理，pip 则是需要借助 venv 或者 virtualenv 库来支持。参考：[pip 与 conda 的区别] ( <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/379321816">https://zhuanlan.zhihu.com/p/379321816</a> )</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>CLI</th>
+<th>Python 版本独立</th>
+<th>Python 依赖（lib）独立</th>
+<th>非 Python 的其他依赖管理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conda</td>
+<td>y</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Pip+vir*</td>
+<td>n</td>
+<td>y</td>
+<td>y</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>python 版本独立的意思是，不同环境之间是不是可以安装不同的 python，pip 只能将依赖分离，而对应的 python 都是同一个。</p>
+</blockquote>
+<p>可以看出在于包管理上，conda 还是更具优势，主要是因为其本身不需要依赖于某个既有的 python，不需要和该 Python 建立连接，没有沾亲带故的就更铁面无私嘛。具体可以参考上面的链接。</p>
+<h3 id="包管理逻辑对比"><a href="#包管理逻辑对比" class="headerlink" title="包管理逻辑对比"></a>包管理逻辑对比</h3><p>基于上述说明，开发一个 python 项目，我们可以优先创建一个虚拟环境，再在其中安装需要的依赖，这样能保证每一个环境的纯净，也能减少一些不必要的麻烦，也就是说，创建完环境的下一步，就是需要安装和管理每个环境中的包了。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>CLI</th>
+<th>Source</th>
+<th>依赖校验</th>
+<th>是否需要换源加速/代理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conda</td>
+<td>Anaconda &amp; Cloud</td>
+<td>auto(且支持非 python 的依赖)</td>
+<td>狗头</td>
+</tr>
+<tr>
+<td>Pip</td>
+<td>Pypi</td>
+<td>自动检查、手动选择是否</td>
+<td>狗头</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>从上述简单的对比可以看出，两者安装 package 的源不同，这样有以下的两个影响：</p>
+<ol>
+<li>Conda 最好是添加一些常用的 Channel，添加其软件来源，方便使用 conda 进行包的安装；</li>
+<li>即使倾向于使用 conda 做管理，还是会在开发中遇到需要混用 pip 的场景（蛮多） ，那么这样是否会有影响呢？下面我们从两个管理器的安装逻辑来说（结合虚拟环境）：</li>
+</ol>
+<p><strong>conda 安装包的逻辑</strong>是这样的：</p>
+<p>基于 <code>conda install &lt;pkg&gt;</code> 安装的库都会放在 Anaconda 的 Pkgs 目录下统一存储，例如 windows 就是 <code>E:\anaconda\pkgs\&lt;pkg&gt;</code> ，通过这样的方式，当新的环境中需要一个某个环境中<strong>已经安装过的包</strong>的时候，就只需要把对应的文件复制到到新环境的 <code>lib\python&lt;*&gt;\site-packages</code> 目录中即可，无需重复下载。</p>
+<blockquote>
+<p>anaconda 中会对每个环境创建一个新的目录。而该环境的的库就是存在 <code>、env\&lt;env-name&gt;\lib\pythonxxx\site-packages</code> 路径下。</p>
+</blockquote>
+<p><strong>pip 安装包的逻辑</strong>是这样的：</p>
+<p>基于 <code>pip install &lt;pkg&gt;</code> 安装的库会放在对应的就会放在 <code>xxx\pythonxxx\site-packages</code> 中。</p>
+<p><strong>综上所述</strong>，（正常）混用的话基本上是没有影响的，还是能保证我们的环境进行分离，这是因为：</p>
+<ul>
+<li>当 conda 切换虚拟环境的时候，对应的 pip 也会进行切换，这样通过 pip 安装的包也会仅安装在当前环境的目录中，和 conda 进行安装是一致的</li>
+</ul>
+<p><strong>同时两者之间还有这样的交互关系：</strong></p>
+<ul>
+<li><code>conda list</code>  列出的包中，build 项目为 pypi 的即为 pip 安装的包。</li>
+<li>卸载的时候两者是一致的： <code>conda uninstall &lt;pkg&gt;</code> 和 <code>pip uninstall &lt;pkg&gt;</code> 都只是讲当前环境中的库删除了，不会删除 conda 的 pkg 目录中的备份，如果要清空该已下载库，通过 <code>conda clean -h</code> 实现</li>
+</ul>
+<p>（need check）（<strong>not recommand</strong>）理解了这样的安装关系后，我们也可以知道如何为一个环境手动安装一个 package 了，在 pypi 上下载压缩包后，解压到对应的目录中，执行以下命令即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">python setup.py install<br></code></pre></td></tr></table></figure>
+<p>网络问题的话建议换源，还是不要手动安装。</p>
+<h2 id="其他相关资料"><a href="#其他相关资料" class="headerlink" title="其他相关资料"></a>其他相关资料</h2><h3 id="windows-conda-路径问题"><a href="#windows-conda-路径问题" class="headerlink" title="windows conda 路径问题"></a>windows conda 路径问题</h3><ol>
+<li>在 windows 上安装 anaconda 之前，如果原本有 python，建议是删掉该 python 避免带来不必要的路径问题。</li>
+<li>windows 上如果出现输入 python 跳转 win 商店的话，八成是系统路径中的问题，可以将 winstore 的路径往后挪。</li>
+</ol>
+<h3 id="pip-和-pip3"><a href="#pip-和-pip3" class="headerlink" title="pip 和 pip3"></a>pip 和 pip3</h3><ul>
+<li>python2 只能用 pip</li>
+<li>python3 都可以用，如果仅有 python3，那么两者等价</li>
+<li>如果装了 python2 和 python3，那么默认 pip 给 python2 用，pip3 给 python3 用，功能一样。</li>
+<li>虚拟环境中，若只存在一个 python 版本，可以认为在用系统中 pip 和 pip3 命令都是相同的</li>
+</ul>
+<h3 id="pip-删除所有安装的包"><a href="#pip-删除所有安装的包" class="headerlink" title="pip 删除所有安装的包"></a>pip 删除所有安装的包</h3><p><a target="_blank" rel="noopener" href="https://www.qiniu.com/qfans/qnso-11248073">删除pip安装的所有软件包的最简单方法是什么？ (qiniu.com)</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Python00 Conda 与 Pip</p><p><a href="http://aikenh.cn/cn/python_pack_manager/">http://aikenh.cn/cn/python_pack_manager/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-03-06</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-31</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Python/">Python, </a><a class="link-muted" rel="tag" href="/tags/Conda/">Conda, </a><a class="link-muted" rel="tag" href="/tags/Pip/">Pip, </a><a class="link-muted" rel="tag" href="/tags/Env/">Env </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/CountMinSketch/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Count_Min Sketch算法</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/powershell/"><span class="level-item">Windows Powershell 00 Install and Config</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/python_pack_manager/';
+            this.page.identifier = 'cn/python_pack_manager/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Anaconda-MiniConda-和-Conda"><span class="level-left"><span class="level-item">1</span><span class="level-item">Anaconda MiniConda 和 Conda</span></span></a></li><li><a class="level is-mobile" href="#Conda-和-Pip-的关联和区别"><span class="level-left"><span class="level-item">2</span><span class="level-item">Conda 和 Pip 的关联和区别</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#虚拟环境支持对比"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">虚拟环境支持对比</span></span></a></li><li><a class="level is-mobile" href="#包管理逻辑对比"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">包管理逻辑对比</span></span></a></li></ul></li><li><a class="level is-mobile" href="#其他相关资料"><span class="level-left"><span class="level-item">3</span><span class="level-item">其他相关资料</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#windows-conda-路径问题"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">windows conda 路径问题</span></span></a></li><li><a class="level is-mobile" href="#pip-和-pip3"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">pip 和 pip3</span></span></a></li><li><a class="level is-mobile" href="#pip-删除所有安装的包"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">pip 删除所有安装的包</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

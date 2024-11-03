@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Loss-Smooth(Sharpen) - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="@AikenHong 2021@topic  smooth label (inception v2) when does label smoothing help (nips 2019)  sharpen in semi-supervised in the future  offical code github  不是一个通用的方法，在很多的任务上反而会导致掉点的现象，可以简单分析一下，汲取一下思"><meta property="og:type" content="blog"><meta property="og:title" content="Loss-Smooth(Sharpen)"><meta property="og:url" content="http://aikenh.cn/cn/Loss-SmoothSharpen/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="@AikenHong 2021@topic  smooth label (inception v2) when does label smoothing help (nips 2019)  sharpen in semi-supervised in the future  offical code github  不是一个通用的方法，在很多的任务上反而会导致掉点的现象，可以简单分析一下，汲取一下思"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg37.jpg"><meta property="article:published_time" content="2021-12-16T19:35:27.000Z"><meta property="article:modified_time" content="2023-10-31T00:11:42.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Machine Learning"><meta property="article:tag" content="Loss"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg37.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/Loss-SmoothSharpen/"},"headline":"Loss-Smooth(Sharpen)","image":["http://aikenh.cn/img/header_img/lml_bg37.jpg"],"datePublished":"2021-12-16T19:35:27.000Z","dateModified":"2023-10-31T00:11:42.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"@AikenHong 2021@topic  smooth label (inception v2) when does label smoothing help (nips 2019)  sharpen in semi-supervised in the future  offical code github  不是一个通用的方法，在很多的任务上反而会导致掉点的现象，可以简单分析一下，汲取一下思"}</script><link rel="canonical" href="http://aikenh.cn/cn/Loss-SmoothSharpen/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg37.jpg" alt="Loss-Smooth(Sharpen)"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>Loss-Smooth(Sharpen)</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2021-12-16T19:35:27.000Z" title="2021-12-16T19:35:27.000Z">2021-12-17</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-31T00:11:42.000Z" title="2023/10/31 08:11:42">2023-10-31</time></span><span class="level-item"><a class="link-muted" href="/categories/Machine-Learning/">Machine Learning</a></span><span class="level-item">6 minutes read (About 974 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><p>@AikenHong 2021<br>@topic</p>
+<ul>
+<li>smooth label (inception v2)</li>
+<li>when does label smoothing help (nips 2019) </li>
+<li>sharpen in semi-supervised in the future </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/seominseok0429/label-smoothing-visualization-pytorch?utm_source=catalyzex.com">offical code github</a></li>
+</ul>
+<p>不是一个通用的方法，在很多的任务上反而会导致掉点的现象，可以简单分析一下，汲取一下思想和Sharpen做对比，在这篇文章中，我们可以结合之前的人脸对比损失来进行分析。</p>
+<h2 id="What’s-the-smooth-label"><a href="#What’s-the-smooth-label" class="headerlink" title="What’s the smooth label"></a>What’s the smooth label</h2><p>首先介绍在图像分类任务中对logits和Hard label做ce得到我们的损失，可以表现为如下的形式：</p>
+<script type="math/tex; mode=display">
+Loss = -\sum^{K}_{i=1}p_i \log(q_i)</script><p>由于我们的标签是一个hard label，实际上可以转化成一个one-hot，即</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+p_i = \left\{
+\begin{array}{c1}
+1 & i==gt \\
+0 & i!=gt \\
+\end{array} \right.
+\end{equation}</script><p>而soft label实际上做的是将 1的位置变为$1-\alpha$，其他位置设置为$\alpha/(K-1)$，然后再去求CE，</p>
+<p>Hinton论文中给出该损失对特征分布的作用测试图：<br><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/labimg/20211216194040.png" alt=""></p>
+<span id="more"></span>
+<h3 id="Pros-and-Cons"><a href="#Pros-and-Cons" class="headerlink" title="Pros and Cons"></a>Pros and Cons</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1906.02629.pdf">why does label smoothing help</a></p>
+<blockquote>
+<p>校准性：模型预测的分数能不能同时表征其置信度</p>
+</blockquote>
+<ol>
+<li>LS可以提高模型的泛化性，同时还能提高模型的校准性（model calibration）</li>
+<li>在模型蒸馏中，如果我们的teacher model是由LS训练的，Teacher的效果更好，但是Student的性能会变差，这是因为LS的作用是将相同类别的example聚类到更加紧促的cluster中，但是这也导致了，不同样本之间的相似性信息的损失，从而影响了蒸馏的效果</li>
+</ol>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/labimg/20211216202042.png" alt=""></p>
+<p>此外模型的校准性能，通常可以使用T系数来进行优化，Temprature scaling（TS）可以有效的降低ECE（expected calibration error）</p>
+<blockquote>
+<p>（TS就是在计算cross entropy之前把模型的输出除以超参T，然后再参与cross entropy的计算，比较典型的应用就是在蒸馏中对teacher模型 soft label 处理）</p>
+</blockquote>
+<h2 id="How-it-work"><a href="#How-it-work" class="headerlink" title="How it work"></a>How it work</h2><p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/labimg/20211216200856.png" alt=""></p>
+<p>从特征输出的信息来看，启用了LS（loss smooth）的特征的Feature Norm比没有启用小得多，特征空间减小的话，实际上就是降低softmax中的s值（长度，还有另一个指标是角度）</p>
+<p>==较低的s值==会有这样的几个作用：</p>
+<ul>
+<li>softmax prob的最大值降低，这样我们就可以永远在线性优化区，几乎不存在平滑区域，这样样本向中心的聚拢程度会更高</li>
+<li>s过小的话，对于人脸匹配（往往设置较大的s），为了有更宽广的判别面，使得精度更高，对应于Hard Sample（Task）也是一样的到理道理，就会起到反作用。</li>
+</ul>
+<blockquote>
+<p>Label Smoothing起到的作用实际上是抑制了feature norm，此时softmax prob永远无法达到设定的$1-\alpha/k-1$  ，loss曲面上不再存在平缓区域，处处都有较大的梯度指向各个类中心，所以特征会更加聚拢。而之所以人脸上不work，是因为我们通常会使用固定的s，此时Label Smoothing无法控制feature norm，只能控制角度，就会起到反向优化的作用</p>
+</blockquote>
+<h3 id="Feature-Norm"><a href="#Feature-Norm" class="headerlink" title="Feature Norm"></a>Feature Norm</h3><p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/labimg/20211216210444.png" alt=""></p>
+<p>BTW：对比损失可以分为alignment和uniformity部分</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/labimg/20211216204355.png" alt=""></p>
+<p>第一部分和正样例有关，第二部分仅和负样例有关，作用是远近。</p>
+<h2 id="With-the-Sharpen-Label"><a href="#With-the-Sharpen-Label" class="headerlink" title="With the Sharpen Label"></a>With the Sharpen Label</h2><p>Sharpen实际上是和Smooth相反的过程, Sharpen使用的场景可能相对较少, 比如我们希望能最小化熵损失(Like Semi-Supervised), 让输出模型的置信度更高, 或者让分界面更加分明的情况.</p>
+<script type="math/tex; mode=display">
+Sharpen(p, T)_i= \frac {p_i^{1/T}} {\sum_{j=1}^L p_i^{1/T}}</script><p>当T-&gt;0的时候,标签将趋向于ont-hot(Dirac)</p>
+<p>而当我们去做FIL任务的时候, 我们拥有的标签实际上应该是One-Hot的, 所以我们需要分析是否需要对其去做smooth, 还是说我们结合SCL的特性, 用One-Hot这种Sharpen的标签去学一个更好的分界面.</p>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p>⁉️<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/410491474">理解的是错的，从NCE角度</a><br>参考个人对NCE的理解[[Papers/Loss-NCE]]</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/302843504">可以结合里面的人脸对比损失的softmax</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qiu931110/article/details/86684241">basic</a> | <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/359792244">translate</a> | <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/110120048">better translate</a></li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Loss-Smooth(Sharpen)</p><p><a href="http://aikenh.cn/cn/Loss-SmoothSharpen/">http://aikenh.cn/cn/Loss-SmoothSharpen/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-12-17</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-31</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Machine-Learning/">Machine Learning, </a><a class="link-muted" rel="tag" href="/tags/Loss/">Loss </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/Loss-NCE/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Loss-NCE</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/NerualNetworkTraining/"><span class="level-item">Training Strategy</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/Loss-SmoothSharpen/';
+            this.page.identifier = 'cn/Loss-SmoothSharpen/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#What’s-the-smooth-label"><span class="level-left"><span class="level-item">1</span><span class="level-item">What’s the smooth label</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Pros-and-Cons"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">Pros and Cons</span></span></a></li></ul></li><li><a class="level is-mobile" href="#How-it-work"><span class="level-left"><span class="level-item">2</span><span class="level-item">How it work</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Feature-Norm"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">Feature Norm</span></span></a></li></ul></li><li><a class="level is-mobile" href="#With-the-Sharpen-Label"><span class="level-left"><span class="level-item">3</span><span class="level-item">With the Sharpen Label</span></span></a></li><li><a class="level is-mobile" href="#reference"><span class="level-left"><span class="level-item">4</span><span class="level-item">reference</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

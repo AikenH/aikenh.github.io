@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>家庭服务器整体方案 - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="[!summary]+本文主要介绍笔者的家庭服务器设计方案 V1。该方案中中涵盖影视、图像、图书&amp;amp;文献、博客、智能家居管理、密码管理服务，以及公网上内容分发的初步设计和选择的考量。  整体架构整个服务中心在设计的时候主要考虑以下的几个方面：  💻操作设备&amp;amp;系统(OS)和内容存储方案：如何经济实惠的选择合适的设备和系统 🌦️服务需求：需要搭建哪些服务，应该选择哪个服务进行自托管"><meta property="og:type" content="blog"><meta property="og:title" content="家庭服务器整体方案"><meta property="og:url" content="http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="[!summary]+本文主要介绍笔者的家庭服务器设计方案 V1。该方案中中涵盖影视、图像、图书&amp;amp;文献、博客、智能家居管理、密码管理服务，以及公网上内容分发的初步设计和选择的考量。  整体架构整个服务中心在设计的时候主要考虑以下的几个方面：  💻操作设备&amp;amp;系统(OS)和内容存储方案：如何经济实惠的选择合适的设备和系统 🌦️服务需求：需要搭建哪些服务，应该选择哪个服务进行自托管"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg15.jpg"><meta property="article:published_time" content="2023-12-20T00:24:36.000Z"><meta property="article:modified_time" content="2024-01-28T08:45:06.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="NAS"><meta property="article:tag" content="Ipv6"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg15.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/"},"headline":"家庭服务器整体方案","image":["http://aikenh.cn/img/header_img/lml_bg15.jpg"],"datePublished":"2023-12-20T00:24:36.000Z","dateModified":"2024-01-28T08:45:06.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"[!summary]+本文主要介绍笔者的家庭服务器设计方案 V1。该方案中中涵盖影视、图像、图书&amp;文献、博客、智能家居管理、密码管理服务，以及公网上内容分发的初步设计和选择的考量。  整体架构整个服务中心在设计的时候主要考虑以下的几个方面：  💻操作设备&amp;系统(OS)和内容存储方案：如何经济实惠的选择合适的设备和系统 🌦️服务需求：需要搭建哪些服务，应该选择哪个服务进行自托管"}</script><link rel="canonical" href="http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg15.jpg" alt="家庭服务器整体方案"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>家庭服务器整体方案</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2023-12-20T00:24:36.000Z" title="2023-12-20T00:24:36.000Z">2023-12-20</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-01-28T08:45:06.000Z" title="2024/1/28 16:45:06">2024-01-28</time></span><span class="level-item"><a class="link-muted" href="/categories/NAS/">NAS</a></span><span class="level-item">9 minutes read (About 1353 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><blockquote>
+<p>[!summary]+<br>本文主要介绍笔者的家庭服务器设计方案 V1。该方案中中涵盖影视、图像、图书&amp;文献、博客、智能家居管理、密码管理服务，以及公网上内容分发的初步设计和选择的考量。</p>
+</blockquote>
+<h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p>整个服务中心在设计的时候主要考虑以下的几个方面：</p>
+<ul>
+<li>💻操作设备&amp;系统(OS)和内容存储方案：如何<strong>经济实惠</strong>的选择合适的设备和系统</li>
+<li>🌦️服务需求：需要搭建<strong>哪些服务</strong>，应该选择<strong>哪个服务</strong>进行自托管</li>
+<li>🌍部署方案：如何保证在局域网+<strong>公网</strong>都能顺利且<strong>安全的访问</strong></li>
+<li>📱访问策略：各个平台上的访问方式的选择</li>
+</ul>
+<p>此外，并非所有服务都需要在公网上进行部署，这里的部分服务可以仅用于局域网，由于仅开放了 Nginx 端口，因此从公网中访问不到未分发的内容，因此，部分存储与敏感信息相关的服务可以仅保留在局域网中进行访问。</p>
+<blockquote>
+<p>[!note]+<br> 在这种情况下如果希望能够使用一致的域名访问方式，是否可以考虑使用 Nginx 鉴权限制访问 ip 为内网 ip，其他公网访问直接丢弃？</p>
+</blockquote>
+<p>初版家庭服务中心的架构图如下，(这里并非列出所有的服务组件)，该架构图中所有的应用都是为了方便日常生活中的各项活动，下面会对架构图自底向上的做一些简单的说明。</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/3070PC/20231209082421.png" alt="image.png"></p>
+<span id="more"></span>
+<h3 id="设备和存储选择"><a href="#设备和存储选择" class="headerlink" title="设备和存储选择"></a>设备和存储选择</h3><p>存储和设备的选择主要来自以下的两个需求，首先是能够用作<strong>机顶盒</strong>，其次是尽量<strong>能省则省</strong>，综合考虑上述的两个需求，树莓派+网络云盘的策略有如下的几个优势，也是选择它的原因：</p>
+<ul>
+<li>设备和存储价格相对便宜，长时间在线电费消耗也几乎可以忽略不计</li>
+<li>体积较小，作为机顶盒放置的方式较为简单</li>
+<li>云盘的转存和资源收集的速度快，且可结合小雅和 Alist 进行网盘的集成，以及线上资源的整合。</li>
+</ul>
+<p>劣势就在于非本地存储和对网络的要求相对较高一些，且在系统上需要折腾的时间会比成熟的 NAS 厂家的开箱即用要折腾一些，最后就是一些对性能要求较高的服务树莓派可能无法承担这个职责，因此这里使用自己的个人电脑用来部署一些对性能要求较高的服务。</p>
+<h3 id="服务部署策略"><a href="#服务部署策略" class="headerlink" title="服务部署策略"></a>服务部署策略</h3><p>docker 在服务部署的优势有：独立互不影响的环境和一键部署方便性，因此我们使用 docker 进行几乎所有的服务的部署，并使用 portainer 对其进行管理。</p>
+<ul>
+<li>图书&amp;漫画：使用 Kavita+Calibre（进行资源的转换和元信息的不全）+ （Zlibray&amp;漫自由）获取资源。</li>
+<li>照片：使用 Immich 满足整个家庭备份手机照片并进行统一管理的需求，可完全代替 icloud 且只需要本地磁盘。</li>
+<li>影视：使用 Alist 整合自己的网盘 + 线上的 xiaoya 的 alist 资源 + emby 做一个影视墙（可选）+ Kodi 进行电视端的播放（KORE，kodi 手机端的官方遥控器）</li>
+<li>智能家居：使用 HomeAssistant 管理各种不同品牌的智能家居设备</li>
+</ul>
+<h3 id="服务分发和服务访问"><a href="#服务分发和服务访问" class="headerlink" title="服务分发和服务访问"></a>服务分发和服务访问</h3><p>这里使用 Nginx+腾讯云进行服务的分发，并通过 DDNSgo 动态更新域名解析的 IPV6 地址，之后就可以通过域名对相应服务进行访问。</p>
+<blockquote>
+<p>可用 Caddy 这个现在的后期之秀来代替 Nginx，Nginx 也可以安装对应的可视化设置界面。</p>
+</blockquote>
+<p>上述提到的是基于 ipv6 部署到公网后的分发情况，如果没有或者不想部署公网的话就使用如 Zerotier 和 Tailscale 的内网穿透服务来实现虚拟内网 ip+端口去访问服务。</p>
+<p>在各个终端上的服务访问可以通过浏览器的<strong>保存为应用</strong>/<strong>固定到桌面</strong>，以及各自对应的官方 APP 为主要的访问手段。</p>
+<h2 id="后续计划"><a href="#后续计划" class="headerlink" title="后续计划"></a>后续计划</h2><blockquote>
+<p>[!note]+<br>这里记录后续希望进行补充的服务和设计，最终希望能够作为一个比较全面且完整的方案，覆盖到生活的方方面面，为自己和朋友的生活提供便利。</p>
+</blockquote>
+<ul>
+<li>[ ] 设计 StableDiffusionWEBui 的<strong>鉴权</strong>页面，方便部署到公网上使用，方便作图需求</li>
+<li>[ ] 现已涵盖视频图片和图书等服务，后续考虑是否有必要针对<strong>音乐</strong>添加相关页面</li>
+<li>[ ] (eval) 菜谱管理中心，收藏各个不同的平台的菜谱</li>
+<li>[ ] (eval) RSS Center 可能需要 RSS-HUB 创建自己关心的所有 RSS 源，然后通过</li>
+<li>[ ] (eval) 使用 Ghost 尝试更新自己的 Blog</li>
+<li>[ ] (eval) 更新 Homepage</li>
+<li>[ ] 更新 CodeServer，是否要在网页上部署Vscode</li>
+</ul>
+<h2 id="FI"><a href="#FI" class="headerlink" title="FI"></a>FI</h2></div><div class="article-licensing box"><div class="licensing-title"><p>家庭服务器整体方案</p><p><a href="http://aikenh.cn/cn/家庭服务器整体方案/">http://aikenh.cn/cn/家庭服务器整体方案/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-12-20</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2024-01-28</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/NAS/">NAS, </a><a class="link-muted" rel="tag" href="/tags/Ipv6/">Ipv6 </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/BackupToolsForHomeServer/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">家庭服务器的备份工具选择</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%B6%E5%BA%AD%E5%BD%B1%E9%9F%B3%E4%B8%AD%E5%BF%832/"><span class="level-item">树莓派家庭影音中心2</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%B4%E4%BD%93%E6%96%B9%E6%A1%88/';
+            this.page.identifier = 'cn/家庭服务器整体方案/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#整体架构"><span class="level-left"><span class="level-item">1</span><span class="level-item">整体架构</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#设备和存储选择"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">设备和存储选择</span></span></a></li><li><a class="level is-mobile" href="#服务部署策略"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">服务部署策略</span></span></a></li><li><a class="level is-mobile" href="#服务分发和服务访问"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">服务分发和服务访问</span></span></a></li></ul></li><li><a class="level is-mobile" href="#后续计划"><span class="level-left"><span class="level-item">2</span><span class="level-item">后续计划</span></span></a></li><li><a class="level is-mobile" href="#FI"><span class="level-left"><span class="level-item">3</span><span class="level-item">FI</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

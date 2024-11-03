@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>YOLOv4 - AikenH Blogs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Aiken Hong"><meta name="msapplication-TileImage" content="/img/pokemon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Aiken Hong"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="@AikenHong 20200726 基于YOLO v4 掌握一些CV方面训练的Trick，同时针对Typora的使用进行一个熟悉掌握。GITHUB CODE 一些相关的参考资料 ⚡️https:&amp;#x2F;&amp;#x2F;zhuanlan.zhihu.com&amp;#x2F;p&amp;#x2F;150127712 ⚡ 机器之心YOLOv4 ⚡️https:&amp;#x2F;&amp;#x2F;www.zhihu.com&amp;#x2F;question&amp;#x2F;390191723&amp;#x2F;answer&amp;#x2F;11775"><meta property="og:type" content="blog"><meta property="og:title" content="YOLOv4"><meta property="og:url" content="http://aikenh.cn/cn/YOLOv4/"><meta property="og:site_name" content="AikenH Blogs"><meta property="og:description" content="@AikenHong 20200726 基于YOLO v4 掌握一些CV方面训练的Trick，同时针对Typora的使用进行一个熟悉掌握。GITHUB CODE 一些相关的参考资料 ⚡️https:&amp;#x2F;&amp;#x2F;zhuanlan.zhihu.com&amp;#x2F;p&amp;#x2F;150127712 ⚡ 机器之心YOLOv4 ⚡️https:&amp;#x2F;&amp;#x2F;www.zhihu.com&amp;#x2F;question&amp;#x2F;390191723&amp;#x2F;answer&amp;#x2F;11775"><meta property="og:locale" content="cn"><meta property="og:image" content="http://aikenh.cn/img/header_img/lml_bg33.jpg"><meta property="article:published_time" content="2021-10-03T05:16:40.000Z"><meta property="article:modified_time" content="2023-10-30T09:27:38.000Z"><meta property="article:author" content="AikenH"><meta property="article:tag" content="Machine Learning"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://aikenh.cn/img/header_img/lml_bg33.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://aikenh.cn/cn/YOLOv4/"},"headline":"YOLOv4","image":["http://aikenh.cn/img/header_img/lml_bg33.jpg"],"datePublished":"2021-10-03T05:16:40.000Z","dateModified":"2023-10-30T09:27:38.000Z","author":{"@type":"Person","name":"AikenH"},"publisher":{"@type":"Organization","name":"AikenH Blogs","logo":{"@type":"ImageObject","url":{"text":"Aiken's Blog"}}},"description":"@AikenHong 20200726 基于YOLO v4 掌握一些CV方面训练的Trick，同时针对Typora的使用进行一个熟悉掌握。GITHUB CODE 一些相关的参考资料 ⚡️https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;150127712 ⚡ 机器之心YOLOv4 ⚡️https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;390191723&#x2F;answer&#x2F;11775"}</script><link rel="canonical" href="http://aikenh.cn/cn/YOLOv4/"><link rel="icon" href="/img/pokemon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css" title="default"><link rel="alternate stylesheet" href="/css/cyberpunk.css" title="cyberpunk"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="AikenH Blogs" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Aiken&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-lightbulb" id="night-icon"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/img/header_img/lml_bg33.jpg" alt="YOLOv4"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>YOLOv4</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2021-10-03T05:16:40.000Z" title="2021-10-03T05:16:40.000Z">2021-10-03</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-30T09:27:38.000Z" title="2023/10/30 17:27:38">2023-10-30</time></span><span class="level-item"><a class="link-muted" href="/categories/Machine-Learning/">Machine Learning</a></span><span class="level-item">11 minutes read (About 1638 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><div class="content"><p>@AikenHong 20200726</p>
+<p>基于YOLO v4 掌握一些CV方面训练的<strong>Trick</strong>，同时针对Typora的使用进行一个熟悉掌握。<a target="_blank" rel="noopener" href="https://github.com/AlexeyAB/darknet">GITHUB CODE</a></p>
+<p>一些相关的参考资料</p>
+<p>⚡️<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150127712">https://zhuanlan.zhihu.com/p/150127712</a></p>
+<p>⚡ <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650785604&amp;idx=1&amp;sn=46bd186e5291deded9f6ec1ae6a22649&amp;chksm=871a033ab06d8a2cff370a06e9e88f578a6c16a70231778ae2f997a8b30e347c6e746db10759&amp;mpshare=1&amp;scene=1&amp;srcid=0429kHitmMCPeF2JGN1XCzik&amp;sharer_sharetime=1588144165276&amp;sharer_shareid=484a4a951d2ad320314b6b56ee9a0ba8&amp;key=c53866ae67b2b8c4b46c89671357025dcdb6b895d1ebde603135230e484682a3552d924bf6126ecf72cb98361e1171f0f0381bee5bd456520dd201034c33ec48272d62ae73345cc914c2db9c6e943a10&amp;ascene=1&amp;uin=NTkyNDg4NjQw&amp;devicetype=Windows+10+x64&amp;version=62090070&amp;lang=zh_CN&amp;exportkey=ASfZUAGjes1A%2BJpXS1yNmT0%3D&amp;pass_ticket=GB56ClnZIrs5ENfLSAh4yF9tj54n041FM39bTg38LQuW%2FKDyBPyfqKLD8SDIZgE%2F">机器之心YOLOv4</a></p>
+<p>⚡️<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/390191723/answer/1177584901">https://www.zhihu.com/question/390191723/answer/1177584901</a></p>
+<p><strong>本文中一些其他的收获</strong></p>
+<p>•  其他可替代的Object Detection的SOTA算法有哪些</p>
+<p>•  BoS，BoF方法</p>
+<p>•  简直是一个Tricks的综述</p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>本文对近期再CNN上的一些Feature方法进行了尝试组合，并实现了新的SOTA，其实就是一些<strong>通用的**</strong>Trick<strong>**的组合</strong>尝试，包括</p>
+<p>•  加权残差连接（WRC）</p>
+<p>•  Cross-Stage-Partial-connection，CSP</p>
+<p>•  Cross mini-Batch Normalization，CmBN</p>
+<span id="more"></span>
+<p>•  自对抗训练（Self-adversarial-training，SAT）</p>
+<p>•  Mish 激活（Mish-activation）</p>
+<p>•  Mosaic 数据增强</p>
+<p>•  DropBlock 正则化</p>
+<p>•  CIoU 损失</p>
+<p>基于该文章我们可以了解一下这些方法的主要思路和后续的应用价值。YOLOv4 更快，更准确，只需要比较小的计算需求即可</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/img/20210930165042.png" alt="image-20210930165040810"></p>
+<h2 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h2><p>•  更快更强，从速度和准确率，以及训练需求上提升实际运用价值</p>
+<p>​    这里有一些其他的SOTA可以列一下：EfficientDet、ATSS，ASFT，CenterMask</p>
+<p>•  AP：平均准确率 FPS：每秒传输帧率嘛？</p>
+<p>主要贡献可总结如下</p>
+<ol>
+<li><p>建立了一个高效强大的目标检测模型。它使得每个人都可以使用 1080Ti 或 2080Ti 的 GPU 来训练一个快速准确的目标检测器。</p>
+</li>
+<li><p>验证了当前最优 Bag-of-Freebies 和 Bag-of-Specials 目标检测方法在检测器训练过程中的影响。</p>
+<p>Bag-of-freebies: 仅仅只增加training cost或者只改变training strategy的方法。典型例子：数据增强<br>bag-of-specials: 增加少量推理成本，但能提高准确率的<strong>插件模块（**</strong>plugin modules）和后处理方法（post-processing method）**被称为BoS。</p>
+</li>
+<li><p>修改了 SOTA 方法，使之更加高效，更适合单 GPU 训练。这些方法包括 CBN、PAN、SAM 等。</p>
+<p>PAN: Path aggregation network for instance segmentation</p>
+<p>SAM: CBAM: Convolutional block attention module</p>
+</li>
+</ol>
+<h2 id="RELATED-WORK"><a href="#RELATED-WORK" class="headerlink" title="RELATED WORK"></a>RELATED WORK</h2><p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/img/20210930165008.png" alt="image-20210930165005309"></p>
+<p><strong>基本架构</strong></p>
+<ul>
+<li><p>object detector 通常由backbone和head两部分构成，其中backbone是再imagenet上预训练的骨架</p>
+<ul>
+<li>GPU: VGG [68], ResNet [26], ResNeXt [86],or DenseNet [30]</li>
+<li>CPU: SqueezeNet [31], MobileNet[28, 66, 27, 74], or ShuffleNet [97, 53]</li>
+</ul>
+</li>
+<li><p>head则是用来预测物体类别和边界框的网络架构</p>
+<ul>
+<li>One-Stage: YOLO [61, 62, 63], SSD [50],and RetinaNet [45]</li>
+<li>Anchor-free：CenterNet [13], CornerNet [37, 38], FCOS [78], etc.</li>
+<li>Two-Stage:  R-CNN [19] series: fast R-CNN [18], faster R-CNN [64], R-FCN [9],and Libra R-CNN [58] anchor-free: Rep-Points[87]</li>
+</ul>
+</li>
+<li><p>近年来在backbone和head之间插入neck用以收集不同stage的feature-maps FPN、PAN、BiFPN、NAS-FPN、etc.</p>
+</li>
+</ul>
+<p>To sum up, an ordinary object detector is composed of several parts:</p>
+<p> <img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/img/20210930165142.png" alt="image-20210930165140911"></p>
+<p><strong>Bag-of-freebies:</strong> </p>
+<p>仅仅只增加training cost或者只改变training strategy的方法。典型例子：数据增强</p>
+<ul>
+<li>目标检测中的多种数据增强：包括对图像遮挡的处理，随机擦除和基本的数据增强，也有feature map中类似的操作</li>
+<li>解决数据存在偏差的问题：例如数据不平衡</li>
+<li>BoundingBox回归方法：MSE-》IoU，也就是一些边界回归上的损失函数，CIoU、GIoU、DIoU、MSE等</li>
+</ul>
+<p><strong>Bag of specials</strong></p>
+<p>增加少量推理成本，但能提高准确率的<strong>插件模块（plugin modules）和后处理方法（post-processing method）</strong>被称为BoS。</p>
+<p><strong>Plugin modules</strong>：例如扩大接受域，引入注意力机制，增强特征集成能力等等，</p>
+<p><strong>post-processing method</strong>：筛选预测结果的方法</p>
+<ul>
+<li><p>扩大接受域：SPP（将SPM集成到CNN中）、ASPP、RFB。</p>
+</li>
+<li><p>Attention module：</p>
+</li>
+<li><p>Channel-Wise：SE</p>
+</li>
+<li><p>Point-Wise：SAM</p>
+</li>
+<li><p>feature integration：</p>
+</li>
+</ul>
+<p><strong>将低层的物理特征集成到高层语义特征</strong></p>
+<ul>
+<li>skip connection、hyper-column</li>
+<li>FPN出现后：SFAM、ASFF、BiFPN</li>
+<li>activation function：</li>
+<li>解决softmax和sigmoid中出现的梯度消失问题：ReLU、LReLU、PReLU、ReLU6、SELU、Swish、hard-Swish、Mish</li>
+</ul>
+<p><strong>post-process：</strong></p>
+<p>–  NMS用于处理预测同一对象的一些BBox，并保留响应速度更快的BBox</p>
+<p>–  还有一些相关变体</p>
+<p>–  anchor-free的方法不需要这部分</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><ol>
+<li><p>找到最优的<strong>input network resolution</strong>，<strong>conv layer number</strong>， <strong>the parameter number(filter size2 * filters * channel / groups)</strong> <strong>以及</strong> <strong>the number of layer outputs(filters)</strong>之间的最有平衡</p>
+</li>
+<li><p>挑选能够增加感受域的额外单元（additional block），以及最佳参数聚合方法</p>
+<p>YoloV4 的基本目标是提高生产系统中神经网络的运行速度，同时为并行计算做出优化，而不是针对低计算量理论指标（BFLOP）进行优化。YoloV4 的作者提出了两种实时神经网络：</p>
+</li>
+</ol>
+<p>（Backbone）</p>
+<p>•  对于 GPU，研究者在卷积层中使用少量组（1-8 组）：CSPResNeXt50 / CSPDarknet53；</p>
+<p>•  对于 VPU，研究者使用了分组卷积（grouped-convolution），但避免使用 Squeeze-and-excitement（SE）块。具体而言，它包括以下模型：EfficientNet-lite / MixNet / GhostNet / MobileNetV3。</p>
+<p>分类器和检测器需求上的区别：</p>
+<p><strong>架构选择part1</strong></p>
+<ol>
+<li><p>CSPDarknet53&lt;-最终选择的一个较好的模型（backbone）</p>
+</li>
+<li><p>在cspdarknet52上添加了spp block，用PANet取代v3中的FPN，yolov3作为head</p>
+</li>
+</ol>
+<p><strong>架构选择part2：selection of BoF or BoS</strong></p>
+<p>CNN的优化通常有这几个方面：</p>
+<ul>
+<li>Activations: ReLU, leaky-ReLU, parametric-ReLU, ReLU6, SELU, Swish, or Mish</li>
+<li>Bounding box regression loss: MSE, IoU, GIoU,CIoU, DIoU</li>
+<li>Data augmentation: CutOut, MixUp, CutMix</li>
+<li>Regularization method: DropOut, DropPath [36], Spatial DropOut [79], or <strong>DropBlock</strong></li>
+<li>Normalization of the network activations by their mean and variance: </li>
+</ul>
+<p>Batch Normalization (BN) [32], Cross-GPU Batch Normalization (CGBN or SyncBN) [93], Filter Response Normalization (FRN) [70], or Cross-Iteration Batch Normalization (CBN) [89]</p>
+<ul>
+<li>Skip-connections: Residual connections, Weighted residual connections, Multi-input weighted residual connections, or Cross stage partial connections (CSP)</li>
+</ul>
+<p><strong>架构选择Part3</strong> ：额外的改进</p>
+<p>使得架构能够更适合在单个GPU上进行运算，设计了一些改进</p>
+<p>•  新的数据增强方法：mosaic &amp;SAT（self-Adversarial Training）</p>
+<p>•  在遗传算法中使用了最佳的超参数</p>
+<p>•  修改SAM，PAN和CmBN使得设计适合更有效的训练和检测</p>
+<p>Mosaic（马赛克）数据增强，把四张图拼成一张图来训练，变相的等价于增大了mini-batch。这是从CutMix混合两张图的基础上改进；</p>
+<p><img src="https://picture-bed-001-1310572365.cos.ap-guangzhou.myqcloud.com/imgs/img/20210930165156.png" alt="image-20210930165154939"></p>
+<hr>
+<p><strong>Mosaic数据增强</strong></p>
+<ol>
+<li><p>Self-Adversarial Training(自对抗训练)，这是在一张图上，让神经网络反向更新图像，对图像做改变扰动，然后在这个图像上训练。这个方法，是图像风格化的主要方法，让网络反向更新图像来风格化图像（对风格化感兴趣，可以看看我写的一篇介绍<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/105550915">谷歌的一个实时任意风格化的文章</a>）；对自身实行对抗攻击</p>
+</li>
+<li><p>跨最小批的归一化（Cross mini-batch Normal），在CBN的基础上改进；</p>
+</li>
+</ol>
+<p><strong>BN, CBN，CmBN的对比</strong></p>
+<ol>
+<li>修改的SAM，从SAM的逐空间的attention，到逐点的attention；</li>
+</ol>
+<p>[image: <a target="_blank" rel="noopener" href="https://pic4.zhimg.com/50/v2-440bfacec2a426272ef06e94a16837bb_hd.jpg?source=1940ef5c">https://pic4.zhimg.com/50/v2-440bfacec2a426272ef06e94a16837bb_hd.jpg?source=1940ef5c</a>]</p>
+<p><strong>SAM和修改的SAM对比图</strong></p>
+<ol>
+<li>修改的PAN，把通道从相加（add）改变为concat，改变很小；</li>
+</ol>
+<p>[image: <a target="_blank" rel="noopener" href="https://pic4.zhimg.com/50/v2-a1f0ccf10cea594c1aebcc98111c6dd5_hd.jpg?source=1940ef5c][image">https://pic4.zhimg.com/50/v2-a1f0ccf10cea594c1aebcc98111c6dd5_hd.jpg?source=1940ef5c][image</a>: <a target="_blank" rel="noopener" href="https://pic4.zhimg.com/80/v2-a1f0ccf10cea594c1aebcc98111c6dd5_720w.jpg?source=1940ef5c">https://pic4.zhimg.com/80/v2-a1f0ccf10cea594c1aebcc98111c6dd5_720w.jpg?source=1940ef5c</a>]</p>
+<p>PAN和修改的PAN</p>
+<p>最终整体架构表示：</p>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>实验中的一些参数设置和具体的表达就从文章中看吧，还有各种trick的表达效果,其实很重要，可以省下很多的研究时间。</p>
+<p>•  Influence of different features on Classifier training</p>
+<p>•  Influence of different features on Detector training</p>
+<p>•  Influence of different backbones and pretrained weightings on Detector training</p>
+<p>•  Influence of different minibatch size on Detector training</p>
+<p><strong>FAQ</strong></p>
+<p>•  reception field 的理解，以及作用</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>YOLOv4</p><p><a href="http://aikenh.cn/cn/YOLOv4/">http://aikenh.cn/cn/YOLOv4/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>AikenH</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-10-03</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-10-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Machine-Learning/">Machine Learning </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/img/alipay.jpg" alt="Alipay"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/img/wechat.jpg" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/cn/StyleGAN/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">StyleGAN</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/cn/OW-OD/"><span class="level-item">OW Object Detector</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://aikenh.cn/cn/YOLOv4/';
+            this.page.identifier = 'cn/YOLOv4/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'my-tech-blog-3' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/title.jpg" alt="AikenH"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AikenH</p><p class="is-size-6 is-block">Future Full-Stack Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">161</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">104</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/AikenH" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="ZhiHu" href="https://www.zhihu.com/people/Aiken-h"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/1788200627"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Steam" href="https://steamcommunity.com/id/AikenH/"><i class="fab fa-steam"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AikenH"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Abstract"><span class="level-left"><span class="level-item">1</span><span class="level-item">Abstract</span></span></a></li><li><a class="level is-mobile" href="#INTRODUCTION"><span class="level-left"><span class="level-item">2</span><span class="level-item">INTRODUCTION</span></span></a></li><li><a class="level is-mobile" href="#RELATED-WORK"><span class="level-left"><span class="level-item">3</span><span class="level-item">RELATED WORK</span></span></a></li><li><a class="level is-mobile" href="#Architecture"><span class="level-left"><span class="level-item">4</span><span class="level-item">Architecture</span></span></a></li><li><a class="level is-mobile" href="#Experiments"><span class="level-left"><span class="level-item">5</span><span class="level-item">Experiments</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/"><img src="/img/header_img/lml_bg0.jpg" alt="CPP_头文件互相包含"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-10-22T09:05:32.000Z">2024-10-22</time></p><p class="title"><a href="/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/">CPP_头文件互相包含</a></p><p class="categories"><a href="/categories/Langs/">Langs</a> / <a href="/categories/Langs/Cpp/">Cpp</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/"><img src="/img/header_img/lml_bg39.jpg" alt="LearnWeb21-JS06-异步JS"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T22:22:33.000Z">2024-05-01</time></p><p class="title"><a href="/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/">LearnWeb21-JS06-异步JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/"><img src="/img/header_img/lml_bg1.jpg" alt="LearnWeb20-JS05-JSON使用"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-30T06:44:51.000Z">2024-04-30</time></p><p class="title"><a href="/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/">LearnWeb20-JS05-JSON使用</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"><img src="/img/header_img/lml_bg36.jpg" alt="LearnWeb19-JS04-类与对象"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-28T08:46:21.000Z">2024-04-28</time></p><p class="title"><a href="/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">LearnWeb19-JS04-类与对象</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/"><img src="/img/header_img/lml_bg37.jpg" alt="LearnWeb18-JS03-事件"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-04-17T01:31:23.000Z">2024-04-17</time></p><p class="title"><a href="/cn/LearnWeb18-JS03-%E4%BA%8B%E4%BB%B6/">LearnWeb18-JS03-事件</a></p><p class="categories"><a href="/categories/Web/">Web</a> / <a href="/categories/Web/JS/">JS</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Aiken&#039;s Blog</a><p class="is-size-7"><span>&copy; 2024 AikenH</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_pv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span> and <span id="busuanzi_container2_site_uv"><span id="busuanzi_value_site_pv">0</span>&nbsp;visits</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
