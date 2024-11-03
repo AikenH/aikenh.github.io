@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://aikenh.cn/cn/TS1_%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BA%92%E7%9B%B8%E5%8C%85%E5%90%AB/</loc>
+    <lastmod>2024-11-03</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/Git_Manual1/</loc>
+    <lastmod>2024-11-03</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/LearnWeb21-JS06-%E5%BC%82%E6%AD%A5JS/</loc>
+    <lastmod>2024-11-03</lastmod>
+  </url>
+  <url>
+    <loc>http://aikenh.cn/cn/LearnWeb20-JS05-JSON%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2024-05-08</lastmod>
+  </url>
+  <url>
     <loc>http://aikenh.cn/cn/LearnWeb19-JS04-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/</loc>
     <lastmod>2024-04-30</lastmod>
   </url>
@@ -462,10 +478,6 @@
   </url>
   <url>
     <loc>http://aikenh.cn/cn/Gitbook/</loc>
-    <lastmod>2023-10-30</lastmod>
-  </url>
-  <url>
-    <loc>http://aikenh.cn/cn/Git_Manual1/</loc>
     <lastmod>2023-10-30</lastmod>
   </url>
   <url>
